@@ -1,0 +1,8 @@
+footer {
+    text-align: center;
+}
+
+footer a, p{
+    font-family: 'Noto Sans KR', sans-serif;
+    font-weight: 400;
+}
