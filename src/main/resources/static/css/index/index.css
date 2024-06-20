@@ -1,0 +1,159 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+@font-face {
+    font-family: 'chab';
+    src: url("../../font/index/chab.ttf") format('truetype');
+}
+
+@font-face {
+    font-family: 'omyu_pretty';
+    src: url("../../font/index/omyuPretty.ttf") format('truetype');
+}
+
+
+/* 첫번째 메인 섹션 시작 */
+#main1{
+    width: 100%;
+    height: 85vh;
+    background-color: #B6BEED;
+}
+
+#text_box{
+    position: absolute;
+    left: 9vw;
+    /*top: 20vh;*/
+    bottom: 40vh;
+    color: white;
+    text-align: center;
+}
+
+#text_box h5{
+    font-family: omyu_pretty;
+    /*font-size: 2.5vw;*/
+    font-size: clamp(5px, 2.5vw, 40px);
+}
+
+#text_box h1{
+    font-family: chab;
+
+    font-size: clamp(20px, 6vw, 90px);
+    font-weight: normal;
+}
+
+#text_box h6{
+    font-family: omyu_pretty;
+    /*font-size: 2vw;*/
+    font-size: clamp(1px, 2vw, 30px);
+    padding: 1vw;
+    width: 10vw;
+    border-radius: 3vw;
+    background-color: #9BA2D7;
+    margin: 0 auto;
+    position: relative;
+    top: 2vw;
+}
+
+#window{
+    width: 29vw;
+    max-width: 500px;
+    position: absolute;
+    bottom: 28vh;
+    right: 15vw;
+}
+
+#cat{
+    width: 27vw;
+    max-width: 500px;
+    position: absolute;
+    bottom: 5vh;
+    right: 0vw;
+}
+/* 첫번째 메인 섹션 끝 */
+
+
+/* 두번째 메인 섹션 시작 */
+#main2{
+    width: 100%;
+    height: 115vh;
+    background-color: #D7DDF7;
+}
+
+#ball{ /* 회전하는 공 */
+    width: 8vw;
+    max-width: 180px;
+    animation: rotate 2s ease-out forwards;
+    transform-origin: center; /* 회전 중심을 이미지의 중심으로 설정 */
+}
+
+#ball_box{ /* 공을 담은 상자를 왼쪽으로 이동 */
+    position: absolute;
+    bottom: 4vh;
+    right: 15vw;
+    animation: moveLeft 2s ease-out forwards;
+}
+
+#line{ /* 풀리는 실 */
+    position: absolute;
+    height: 1vw;
+    background-color: #C5C5FF;
+    left: 79vw;
+    bottom: 5vh;
+    border-radius: 2vw;
+    animation: grow 2s ease-out forwards;
+}
+
+
+@keyframes rotate {
+    0% {
+        transform: rotate(0);
+    }
+    100% {
+        transform: rotate(-270deg); /* 3번 회전 (90*3) */
+    }
+}
+
+@keyframes moveLeft {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-30vw); /* 왼쪽으로 30vw 만큼 이동*/
+    }
+}
+
+@keyframes grow {
+    0% {
+        width: 0;
+        transform: translateX(0);
+    }
+    100% {
+        width: calc(0px + 30vw); /* 너비가 30vw 만큼 늘어남 */
+        transform: translateX(-30vw); /* 왼쪽으로 30vw 만큼*/
+    }
+}
+/* 두번째 메인 섹션 끝 */
+
+/* 세번째 메인 섹션 시작 */
+#main3{
+    width: 100%;
+    height: 150vh;
+    background-color: #D7DDF7;
+    position: relative;
+}
+
+#main3 .top_deco{
+    width: 100%;
+    position: absolute;
+    top: 0;
+}
+
+#main3 .bottom_deco{
+    width: 100%;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+}
+/* 세번째 메인 섹션 끝 */
