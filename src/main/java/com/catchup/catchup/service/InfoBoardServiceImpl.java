@@ -37,4 +37,26 @@ public class InfoBoardServiceImpl implements InfoBoardService{
         return list;
     }
 
+    @Override
+    public Page<InfoBoardDTO> getNoticeList(String search, String searchtxt, String kind, Pageable pageable) {
+        SearchCondition condition = new SearchCondition();
+
+        condition.setCate(null);
+        condition.setTitle(null);
+        condition.setContent(null);
+        condition.setKind("n");
+
+        if("cate".equals(search) && search!=null && !"".equals(search)){
+            condition.setCate(searchtxt);
+        } else if("title".equals(search) && search!=null && !"".equals(search)){
+            condition.setTitle(searchtxt);
+        } else if("content".equals(search) && search!=null && !"".equals(search)){
+            condition.setContent(searchtxt);
+        }
+
+        Page<InfoBoardDTO> list = infoRepository.search(condition, pageable);
+
+        return list;
+    }
+
 }
