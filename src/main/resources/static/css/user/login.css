@@ -1,15 +1,54 @@
 .login_wrap{
-    padding-top: 50px;
+    padding-top: 150px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
 }
 
 .login_wrap ul li{
     list-style: none;
 }
 
+.login_wrap1{
+    background-color: #F4EBF3;
+    border-radius: 30px;
+    width: 450px;
+    height: 500px;
+    align-content: center;
+    box-shadow: 7px 7px 9px lightsteelblue;
+}
+
+.login_wrap1 img{
+    width: 45%;
+    margin: auto;
+    display: block;
+    padding-bottom: 50px;
+}
+
+
+.login_wrap2{
+    align-content: center;
+    background-color: #A6AED5;
+    border-radius: 30px;
+    width: 450px;
+    height: 500px;
+    box-shadow: 7px 7px 9px lightsteelblue;
+
+}
+.login_wrap2 img{
+    width: 85%;
+    margin: auto;
+    display: block;
+}
+
+
+
+
 .login_box{
     display: flex;
     flex-direction: column;
     padding-bottom: 25px;
+    align-items: center;
 }
 
 .login_title{
@@ -27,6 +66,7 @@
     border-bottom: 2px solid black;
     width: 300px;
     height: 35px;
+    background-color: transparent;
 }
 
 .login_input:focus{
@@ -36,27 +76,29 @@
 
 .login_btn{
     background-color: #A6AED5;
+    font-weight: 600;
     font-size: 1.1rem;
     border: none;
-    padding: 5px 0px;
+    padding: 7px 0px;
     margin-bottom: 10px;
     width: 300px;
     border-radius: 30px;
-}
 
+}
 .login_btn:hover{
     background-color: #9BA2D7;
 }
-
 .login_btn:active{
     background-color: #A6AED5;
 }
+
 
 .login_join_btn{
     border: none;
     background-color: transparent;
     font-size: 1rem;
     font-weight: bold;
+    border-bottom: 2px transparent solid;
 }
 
 .login_join_btn:hover{
@@ -64,4 +106,19 @@
 }
 .login_join_btn:active{
     border-bottom: none;
+}
+
+.logingogo{
+    display: flex;
+    justify-content: center;
+}
+
+.joingogo{
+    display: flex;
+    justify-content: center;
+}
+.joingogo span{
+    font-size: 0.8rem;
+    align-content: center;
+    padding-right: 10px;
 }
