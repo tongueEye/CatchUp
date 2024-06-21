@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" th:href="@{/css/user/login.css}">
+    <script th:src="@{/js/user/login.js}"></script>
+
+
+</head>
+<body>
+<div class="login_wrap">
+
+    <div class="login_wrap1">
+    <form th:action="@{'/login'}" method="post">
+        <ul>
+            <li class="login_box">
+                <span class="login_title">아이디</span>
+                <span><input type="text" class="login_input" placeholder="ID"></span>
+            </li>
+            <li class="login_box">
+                <span class="login_title">비밀번호</span>
+                <span><input type="password" class="login_input" placeholder="PASSWORD"></span>
+            </li>
+            <li>
+                <button type="submit" class="login_btn">로그인</button>
+            </li>
+            <li>
+                <span>아직 회원 아님??</span>
+                <button type="button" th:id="login_join_btn" class="login_join_btn">회원가입ㄱㄱ</button>
+            </li>
+        </ul>
+    </form>
+    </div>
+
+    <div class="login_wrap2">
+
+    </div>
+
+</div>
+</body>
+</html>

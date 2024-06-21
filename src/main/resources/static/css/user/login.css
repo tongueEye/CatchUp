@@ -1,0 +1,67 @@
+.login_wrap{
+    padding-top: 50px;
+}
+
+.login_wrap ul li{
+    list-style: none;
+}
+
+.login_box{
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 25px;
+}
+
+.login_title{
+    display: inline-block;
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 7px;
+}
+
+.login_input{
+    display: inline-block;
+    font-size: 1rem;
+    font-weight: bold;
+    border: none;
+    border-bottom: 2px solid black;
+    width: 300px;
+    height: 35px;
+}
+
+.login_input:focus{
+    border-bottom: 2px solid #9BA2D7;
+    outline: none;
+}
+
+.login_btn{
+    background-color: #A6AED5;
+    font-size: 1.1rem;
+    border: none;
+    padding: 5px 0px;
+    margin-bottom: 10px;
+    width: 300px;
+    border-radius: 30px;
+}
+
+.login_btn:hover{
+    background-color: #9BA2D7;
+}
+
+.login_btn:active{
+    background-color: #A6AED5;
+}
+
+.login_join_btn{
+    border: none;
+    background-color: transparent;
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+.login_join_btn:hover{
+    border-bottom: 2px solid #A6AED5;
+}
+.login_join_btn:active{
+    border-bottom: none;
+}

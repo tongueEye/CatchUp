@@ -1,8 +1,16 @@
 package com.catchup.catchup.domain;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotEmpty;
+import lombok.*;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 @Entity
+@Setter @Getter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+@EntityListeners(AuditingEntityListener.class)
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,4 +32,6 @@ public class User {
 
     @Column(name = "local_code")
     private String localCode;
+
+
 }
