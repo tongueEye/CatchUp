@@ -21,4 +21,9 @@ public class FreeBoard extends BoardBase {
 
     private Integer count;
     private String link;
+
+    //uid 외래키
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "uid")
+    User user;
 }
