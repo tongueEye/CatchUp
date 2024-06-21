@@ -14,6 +14,8 @@
     <div class="login_wrap1">
     <form th:action="@{'/login'}" method="post">
         <ul>
+            <img src="/img/user/catchup_logo.png" alt="logo">
+
             <li class="login_box">
                 <span class="login_title">아이디</span>
                 <span><input type="text" class="login_input" placeholder="ID"></span>
@@ -22,18 +24,20 @@
                 <span class="login_title">비밀번호</span>
                 <span><input type="password" class="login_input" placeholder="PASSWORD"></span>
             </li>
-            <li>
+            <li class="logingogo">
                 <button type="submit" class="login_btn">로그인</button>
             </li>
-            <li>
-                <span>아직 회원 아님??</span>
-                <button type="button" th:id="login_join_btn" class="login_join_btn">회원가입ㄱㄱ</button>
+            <li class="joingogo">
+                <span>아직 회원이 아니신가요?</span>
+                <button type="button" th:id="login_join_btn" class="login_join_btn">회원가입</button>
             </li>
         </ul>
     </form>
     </div>
 
     <div class="login_wrap2">
+
+            <img src="/img/user/고양.png" alt="애옹">
 
     </div>
 

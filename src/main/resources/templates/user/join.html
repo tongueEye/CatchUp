@@ -15,9 +15,9 @@
         <ul>
             <li class="join_box">
                 <span class="join_title">아이디</span>
-                <span><input type="text"th:field="*{id}" class="join_input"></span>
+                <span><input type="text"th:field="*{id}" class="join_input" name="id"></span>
                 <span><input type="button" value="중복 체크" id="idCk" class="idCk_btn"></span>
-                <!--<span><th:block th:if="${#fields.hasErrors('id')}" th:errors="*{id}"></th:block></span>-->
+                <span><th:block th:if="${#fields.hasErrors('id')}" th:errors="*{id}"></th:block></span>
             </li>
             <li class="join_box">
                 <label for="password" class="join_title">비밀번호</label>
