@@ -7,6 +7,7 @@ import java.time.LocalDateTime;
 
 @MappedSuperclass
 public abstract class BoardBase {
+  
     private String title;
     private String content;
     private String cate;
@@ -15,12 +16,7 @@ public abstract class BoardBase {
     @CreatedDate
     @Column(name = "create_date")
     private LocalDateTime createDate;
-/*    private String pic;*/
-    private String kind;
 
-    //uid 외래키
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "uid")
-    User user;
+    private String kind;
 
 }

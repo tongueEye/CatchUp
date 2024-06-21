@@ -4,22 +4,19 @@ import lombok.*;
 
 import java.time.LocalDateTime;
 
-@Getter @Setter
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class FreeBoardDTO {
-
-    private Long fid;
+public class InfoBoardDTO {
+    private Long iid;
     private String title;
+    private String content;
     private String cate;
     private String writer;
-    private String content;
     private LocalDateTime createDate;
-    private LocalDateTime updateDate;
-    private Integer count;
-    private String link;
+    private String rep_content;
     private String kind;
-    private String profile;
-
+    private Long uid;
 }
