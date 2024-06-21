@@ -15,7 +15,6 @@ public abstract class BoardBase {
     @CreatedDate
     @Column(name = "create_date")
     private LocalDateTime createDate;
-    private String pic;
     private String kind;
 
     //uid 외래키
