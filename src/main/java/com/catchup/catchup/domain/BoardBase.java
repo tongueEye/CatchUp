@@ -17,9 +17,6 @@ public abstract class BoardBase {
     private LocalDateTime createDate;
     private String kind;
 
-    //uid 외래키
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "uid")
-    User user;
+
 
 }

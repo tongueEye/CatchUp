@@ -11,4 +11,5 @@ public class SearchCondition {
     private String cate;
     private String title;
     private String content;
+    private String kind;
 }
