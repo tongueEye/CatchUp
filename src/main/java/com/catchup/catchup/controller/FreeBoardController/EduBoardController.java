@@ -25,10 +25,11 @@ public class EduBoardController {
     public String comList(
             @RequestParam(required = false, defaultValue = "") String search
             , @RequestParam(required = false, defaultValue = "") String searchTxt
+            , @RequestParam(required = false, defaultValue = "") String kind
             , @PageableDefault(size = 2, page = 0, sort = "fid", direction = Sort.Direction.ASC) Pageable pageable
             , Model model
     ){
-        Page<FreeBoardDTO> boardList = freeService.boardList(search, searchTxt, pageable);
+        Page<FreeBoardDTO> boardList = freeService.boardList(search, searchTxt, kind, pageable);
         int pageSize = 2;
         int startPage = ((int)(Math.ceil(pageable.getPageNumber()/pageSize))) *pageSize+1;
         int endPage=Math.min(startPage+ pageSize-1, boardList.getTotalPages());
@@ -50,11 +51,11 @@ public class EduBoardController {
         return "index";
     }
 
-////    @GetMapping
-////    public String comInsert() {
-////
-////        return null;
-////    }
+    @GetMapping("/write")
+    public String boardInsert(Model model) {
+            model.addAttribute("view", "freeBoard/boardInsert");
+        return "index";
+    }
 ////
 ////    @PostMapping
 ////    public String comInsertResult(FreeBoardDTO dto){

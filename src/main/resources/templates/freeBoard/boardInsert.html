@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" th:href="@{/css/summernote/summernote-lite.css}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script th:src="@{/js/summernote/summernote-lite.js}"></script>
+    <script th:src="@{/js/summernote/lang/summernote-ko-KR.js}"></script>
+
+
+</head>
+<body>
+<form method="post" th:action="@{/list}">
+    <ul>
+        <li>
+            <select id="cate">
+                <option value="news">뉴스</option>
+                <option value="elem">초등학교</option>
+                <option value="mid">중학교</option>
+                <option value="high">고등학교</option>
+                <option value="academy">학원추천</option>
+            </select>
+            <input type="text" th:name="title" th:id="title" placeholder="제목을 입력하세요.">
+        </li>
+        <li>
+            <textarea id="summernote" name="summernote"></textarea>
+        </li>
+        <li>
+            <button type="submit" id="btn"> 등록하기</button>
+        </li>
+    </ul>
+</form>
+
+<script>
+    $('#summernote').summernote({
+
+        // 에디터 크기 설정
+        height: 500,
+        // 에디터 한글 설정
+        lang: 'ko-KR',
+        // 에디터에 커서 이동 (input창의 autofocus라고 생각하시면 됩니다.)
+        toolbar: [
+            // 글자 크기 설정
+            ['fontsize', ['fontsize']],
+            // 글자 [굵게, 기울임, 밑줄, 취소 선, 지우기]
+            ['style', ['bold', 'italic', 'underline', 'strikethrough', 'clear']],
+            // 글자색 설정
+            ['color', ['color']],
+            // 표 만들기
+            ['table', ['table']],
+            // 서식 [글머리 기호, 번호매기기, 문단정렬]
+            ['para', ['ul', 'ol', 'paragraph']],
+            // 줄간격 설정
+            ['height', ['height']],
+            // 이미지 첨부
+            ['insert', ['picture']]
+        ],
+        // 추가한 글꼴
+        fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New', '맑은 고딕', '궁서', '굴림체', '굴림', '돋음체', '바탕체'],
+        // 추가한 폰트사이즈
+        fontSizes: ['8', '9', '10', '11', '12', '14', '16', '18', '20', '22', '24', '28', '30', '36', '50', '72', '96'],
+        // focus는 작성 페이지 접속시 에디터에 커서를 위치하도록 하려면 설정해주세요.
+        focus: true,
+        // callbacks은 이미지 업로드 처리입니다.
+        callbacks: {  //여기 부분이 이미지를 첨부하는 부분
+            onImageUpload:
+                function (file) {
+                    for (let i = 0; i < file.length; i++)
+                        uploadSummernoteImageFile(file[i], this);
+                }
+        }
+
+    });
+
+    function uploadSummernoteImageFile(file, editor) {
+        let formData = new FormData();
+        formData.append("multipartFiles", file);
+
+        fetch('/file/uploadFile', {
+            method: 'POST',
+            body  : formData
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Upload failed');
+                }
+                return response.json();
+            })
+            .then(data => {
+                if (data && data.length > 0) {
+                    let imageUrl = data[0];
+                    $(editor).summernote('insertImage', 'https://kdt-java5-2.s3.ap-northeast-2.amazonaws.com/' + imageUrl);
+                    console.log(data)
+                } else {
+                    alert('업로드 실패');
+                }
+            })
+            .catch(error => {
+                console.error('업로드 실패:', error);
+            });
+    }
+
+</script>
+</body>
+</html>

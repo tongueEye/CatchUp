@@ -8,7 +8,7 @@ import org.springframework.data.domain.Pageable;
 import java.util.List;
 
 public interface FreeBoardService {
-    Page<FreeBoardDTO> boardList(String search, String searchTxt, Pageable pageable);
+    Page<FreeBoardDTO> boardList(String search, String searchTxt, String kind, Pageable pageable);
 
 
     List<FreeBoardDTO> boardDetail(Long fid);

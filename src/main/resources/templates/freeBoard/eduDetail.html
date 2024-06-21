@@ -7,36 +7,44 @@
 </head>
 <body>
 
-<th:block th:each="i:${list}">
 
-<section id="comBoardDetail">
-    <ul>
-        이미지 자리
-        <li th:text="${i.profile}"></li>
-        <li th:text="${i.title}"></li>
-        <li th:text="|작성자  ${i.writer}|"></li>
-    </ul>
-    <th:block th:id="content" th:utext="${i.content}"></th:block>
-</section>
+<div id="eduDetail" th:each="i:${list}">
 
-<button type="button">추천</button>
+    <section id="eduBoardDetail">
 
-<section id="replySection">
-    <ul>
-        <li>
-            <input type="text" name="content" id="content">
-            <input type="hidden" name="fid" id="fid" th:value="${i.fid}">
-            <button type="button" id="append">댓글 추가</button>
-        </li>
-    </ul>
+        <ul id="writer_info">
+            이미지 자리
+            <li th:text="${i.profile}"></li>
+            <li th:text="${i.title}"></li>
+            <li th:text="|작성자  ${i.writer}|"></li>
+        </ul>
 
-    <ul th:id="result">
+        <section id="content">
+            <th:block th:utext="${i.content}"></th:block>
+        </section>
 
-    </ul>
+    </section>
 
-</section>
+    <button type="button" id="rec_btn">추천</button>
 
-</th:block>
+    <section id="replySection">
+
+        <ul>
+            <li>
+                <input type="text" name="rep_content" id="rep_content">
+                <input type="hidden" name="fid" id="fid" th:value="${i.fid}">
+                <button type="button" id="append">댓글 추가</button>
+            </li>
+        </ul>
+
+        <ul th:id="replyList">
+            <li>sample</li>
+        </ul>
+
+    </section>
+
+</div>
+
 
 </body>
 </html>
