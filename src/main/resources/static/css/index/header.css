@@ -16,6 +16,8 @@ header {
     font-family: omyu_pretty;
     font-size: 1.2rem;
     height: 50px;
+    overflow: hidden;
+
 }
 
 .header_img {
@@ -27,6 +29,7 @@ header {
 .header_01{
     position: relative;
     left: 10%;
+    margin-right: 30px;
 }
 
 .header_02 {
@@ -35,6 +38,8 @@ header {
     align-items: center;
     position: relative;
     right: 10%;
+    white-space: nowrap;
+    font-family: omyu_pretty;
 }
 
 a {
