@@ -17,7 +17,7 @@ public class FreeBoardDTO {
     private String content;
     private LocalDateTime createDate;
     private LocalDateTime updateDate;
-    private Integer count;
+    private Integer cnt;
     private String link;
     private String kind;
     private String profile;

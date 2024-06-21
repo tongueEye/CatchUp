@@ -7,7 +7,7 @@ ul li{
     list-style: none;
 }
 
-#edu_board {
+#eduBoard {
     display: flex;
     flex-direction: row;
 }
@@ -26,7 +26,7 @@ aside {
     width: 20%;
 }
 
-#comBoard{
+#eduBoardList{
     height: 45vh;
     position: relative;
     top: 50px;
@@ -35,12 +35,12 @@ aside {
     width: 80%;
 }
 
-#comBoard ul {
+#eduBoardList ul {
     border: 1px solid silver;
     margin: 20px;
 }
 
-#comBoard ul a:hover {
+#eduBoardList ul a:hover {
     color: #9BA2D7;
 }
 
@@ -59,7 +59,42 @@ aside {
     color: #9BA2D7;
 }
 
-#comBoardDetail{
+#eduDetail{
+    display: flex;
+    flex-direction: column;
     position: relative;
     top: 50px;
+    height: 100vh;
+    margin: 0 20vw;
+}
+
+#eduBoardDetail{
+    position: relative;
+}
+
+#writer_info{
+    border: 1px solid silver;
+}
+
+#content{
+    border: 1px solid silver;
+}
+
+#rec_btn{
+    margin: 20px 0;
+    width: 100px;
+    position: relative;
+}
+
+#replySection{
+    display: flex;
+    flex-direction: column;
+}
+
+#replySection ul{
+    list-style: none;
+}
+
+#replyList{
+    border: 1px solid silver;
 }

@@ -24,12 +24,13 @@ public class FreeBoardServiceImpl implements FreeBoardService{
     }
 
     @Override
-    public Page<FreeBoardDTO> boardList(String search, String searchTxt, Pageable pageable) {
+    public Page<FreeBoardDTO> boardList(String search, String searchTxt, String kind, Pageable pageable) {
 
         SearchCondition condition = new SearchCondition();
         condition.setTitle(null);
         condition.setContent(null);
         condition.setWriter(null);
+        condition.setKind("e");
 
         if("title".equals(search)){
             condition.setTitle(searchTxt);

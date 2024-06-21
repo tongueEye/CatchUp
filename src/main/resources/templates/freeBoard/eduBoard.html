@@ -4,19 +4,21 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <link rel="stylesheet" th:href="@{/css/freeboard/freeboard.css}">
+    <script th:src="@{/js/board/board.js}"></script>
 </head>
 <body>
 <!--사이드 메뉴-->
-<section id="edu_board">
+<section id="eduBoard">
+
     <section id="sideMenu">
         <aside>
             카테고리
             <ul>
-                <li>1</li>
-                <li>2</li>
-                <li>3</li>
-                <li>4</li>
-                <li>5</li>
+                <li>뉴스</li>
+                <li>초등학교</li>
+                <li>중학교</li>
+                <li>고등학교</li>
+                <li>학원추천</li>
             </ul>
         </aside>
         <aside>
@@ -40,8 +42,10 @@
             </ul>
         </aside>
     </section>
+
     <!--게시판 리스트-->
-    <section id="comBoard">
+    <section id="eduBoardList">
+
         <form method="get" th:action="@{/eduboard}">
             <select name="search">
                 <option value="title">제목</option>
@@ -52,33 +56,35 @@
             <button type="submit">검색</button>
         </form>
 
+        <button type="button" th:id="write_btn">글쓰기</button>
+
         <ul th:each="i:${boardList}">
             <a th:href="@{|/edudetail/${i.fid}|}">
                 <li th:text="|${i.cate}|"></li>
                 <li th:text="|${i.title}|"></li>
                 <li th:text="|작성자: ${i.writer}|"></li>
                 <li th:text="|${#dates.format(i.createDate, 'yyyy-MM-dd HH:mm')}|"></li>
-                <li th:text="|추천수: ${i.count}|"></li>
+                <li th:text="|추천수: ${i.cnt}|"></li>
             </a>
         </ul>
 
         <!-- 페이징 -->
         <div id="page">
             <th:block th:if="${startPage>1}">
-                <a th:href="@{/comboard(page=${startPage}-1,search=${search},searchTxt=${searchTxt})}" th:text="이전"></a>
+                <a th:href="@{/eduboard(page=${startPage}-1,search=${search},searchTxt=${searchTxt})}" th:text="이전"></a>
             </th:block>
 
             <th:block th:if="${startPage<=endPage}">
                 <th:block th:each="index:${#numbers.sequence(startPage, endPage)}">
                     <span th:if="${index == boardList.pageable.getPageNumber()+1}" th:text="${index}"></span>
                     <span th:if="${index != boardList.pageable.getPageNumber()+1}">
-                <a th:href="@{/comboard(page=${index},search=${search},searchTxt=${searchTxt})}" th:text="${index}"></a>
+                <a th:href="@{/eduboard(page=${index},search=${search},searchTxt=${searchTxt})}" th:text="${index}"></a>
             </span>
                 </th:block>
             </th:block>
 
             <th:block th:if="${endPage < boardList.getTotalPages()}">
-                <a th:href="@{/comboard(page=${endPage}+1,search=${search},searchTxt=${searchTxt})}" th:text="다음"></a>
+                <a th:href="@{/eduboard(page=${endPage}+1,search=${search},searchTxt=${searchTxt})}" th:text="다음"></a>
             </th:block>
         </div>
     </section>
