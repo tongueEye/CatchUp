@@ -31,4 +31,5 @@ public class FreeBoard extends BoardBase {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "uid")
     private User user;
+
 }
