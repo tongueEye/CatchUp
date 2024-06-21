@@ -1,0 +1,39 @@
+.board_box{
+    margin: 0 auto;
+    width: 80%;
+    position: relative;
+    padding: 10vw 30vw;
+    display: flex;
+    flex-direction: column;
+}
+
+.board_box ul{
+    list-style: none;
+    justify-content: space-evenly;
+}
+
+.board_box ul li{
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.content1{
+    flex-basis: 10%;
+}
+.content2{
+    flex-basis: 20%;
+}
+.content3{
+    flex-basis: 40%;
+}
+.content4{
+    flex-basis: 20%;
+}
+.content5{
+    flex-basis: 10%;
+}
+
+.board_box ul span{
+    text-align: center;
+    width: 300px;
+}

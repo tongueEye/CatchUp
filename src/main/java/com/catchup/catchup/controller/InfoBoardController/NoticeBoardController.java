@@ -1,6 +1,5 @@
 package com.catchup.catchup.controller.InfoBoardController;
 
-import com.catchup.catchup.domain.InfoBoard;
 import com.catchup.catchup.dto.InfoBoardDTO;
 import com.catchup.catchup.service.InfoBoardService;
 import lombok.RequiredArgsConstructor;
@@ -15,11 +14,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequiredArgsConstructor
-public class QnaBoardController {
+public class NoticeBoardController {
 
     private final InfoBoardService infoService;
 
-    @GetMapping("/qna")
+    @GetMapping("/notice")
     public String qnaList(
             @RequestParam(required = false, defaultValue = "") String search
             , @RequestParam(required = false, defaultValue = "") String searchtxt
@@ -28,17 +27,17 @@ public class QnaBoardController {
             , Model model
     ){
 
-        Page<InfoBoardDTO> qnaList = infoService.getQnaList(search, searchtxt, kind, pageable);
+        Page<InfoBoardDTO> noticeList = infoService.getNoticeList(search, searchtxt, kind, pageable);
         int pageSize = 5;
         int startPage = ((int) Math.ceil(pageable.getPageNumber()/pageSize))*pageSize+1;
-        int endPage = Math.min(startPage+pageSize-1, qnaList.getTotalPages());
-        model.addAttribute("qnaList", qnaList);
+        int endPage = Math.min(startPage+pageSize-1, noticeList.getTotalPages());
+        model.addAttribute("noticeList", noticeList);
         model.addAttribute("startPage", startPage);
         model.addAttribute("endPage", endPage);
         model.addAttribute("search", search);
         model.addAttribute("searchtxt", searchtxt);
 
-        model.addAttribute("view", "infoboard/qnaboard");
+        model.addAttribute("view", "infoboard/noticeboard");
         return "index";
     }
 }

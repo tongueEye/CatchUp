@@ -6,4 +6,6 @@ import org.springframework.data.domain.Pageable;
 
 public interface InfoBoardService {
     Page<InfoBoardDTO> getQnaList(String search, String searchTxt, String kind, Pageable pageable);
+
+    Page<InfoBoardDTO> getNoticeList(String search, String searchtxt, String kind, Pageable pageable);
 }
