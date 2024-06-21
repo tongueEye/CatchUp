@@ -1,15 +1,31 @@
+/*보드 시작*/
 .board_box{
     margin: 0 auto;
-    width: 80%;
+    width: 70%;
     position: relative;
-    padding: 10vw 30vw;
+    padding: 10vw;
     display: flex;
     flex-direction: column;
+}
+
+.board{
+    height: 350px;
+    background-color: white;
+    border: 3px solid #9BA2D7;
+    border-radius: 30px;
+    padding: 50px;
+    overflow: hidden;
+}
+
+.board ul li{
+    padding: 10px;
 }
 
 .board_box ul{
     list-style: none;
     justify-content: space-evenly;
+    margin: 20px 0;
+    font-size: 1.2rem;
 }
 
 .board_box ul li{
@@ -17,23 +33,119 @@
     justify-content: space-evenly;
 }
 
+#notice_wrap{
+    background-image: url("../../img/infoboard/room_bg.jpg");
+    /*background-image: url("../../img/infoboard/room_bg2.jpg");*/
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    height: 110vh;
+}
+
+
+#qna_wrap{
+    background-image: url("../../img/infoboard/room_bg.jpg");
+    /*background-image: url("../../img/infoboard/room_bg2.jpg");*/
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    height: 110vh;
+}
+/*보드 끝*/
+
+/* 검색창 시작*/
+input, select{
+    border: 2px solid #9BA2D7;
+}
+input:focus, select:focus{
+    outline: none;
+}
+
+#search_box{
+    text-align: center;
+}
+#search_box select, #search_box input{
+    padding: 7px 10px;
+    border-radius: 15px;
+}
+#search_box select{
+    text-align: center;
+    text-align-last: center;
+    position: relative;
+    top: 2px;
+}
+
+#searchtxt{
+    width: 30%;
+    min-width: 100px;
+}
+
+
+/* 검색창 끝*/
+
+
+/* 글쓰기 버튼 시작*/
+#write_btn{
+    background-color: #9BA2D7;
+    color: white;
+    border-radius: 15px;
+    padding: 5px 10px;
+    position: relative;
+    left: 87%;
+}
+/* 글쓰기 버튼 끝*/
+
+
+/*보드 필드 시작*/
 .content1{
-    flex-basis: 10%;
+    flex-basis: 5%;
+    text-align: center;
 }
 .content2{
-    flex-basis: 20%;
+    flex-basis: 15%;
+    text-align: center;
 }
 .content3{
-    flex-basis: 40%;
+    flex-basis: 45%;
+    text-align: center;
+}
+.content3_1{
+    flex-basis: 45%;
+    text-align: left;
 }
 .content4{
     flex-basis: 20%;
+    text-align: center;
 }
 .content5{
     flex-basis: 10%;
+    text-align: center;
 }
 
-.board_box ul span{
+/*보드 필드 끝*/
+
+/*페이지 박스 시작*/
+#page_box{
     text-align: center;
-    width: 300px;
+    margin: 40px;
+    color: white;
+    font-size: 1.2rem;
+    font-weight: bold;
 }
+#page_box span{
+    margin-right: 10px;
+}
+#page_box a{
+    color: white;
+}
+.selected_page{
+    color: #483F6A;
+}
+/*페이지 박스 끝*/
+
+/*푸터 커스텀 시작*/
+footer{
+    background: #483F6A;
+    color: white;
+}
+/*푸터 커스텀 끝*/

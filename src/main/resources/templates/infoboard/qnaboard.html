@@ -7,55 +7,59 @@
 </head>
 <body>
 
-<div id="wrap">
+<div id="qna_wrap">
     <div class="board_box">
-        <h1>Q&A</h1>
-        <!--검색창-->
-        <form action="/qna" method="get">
-            <input type="hidden" name="page" value=${endPage}>
-            <select name="search">
-                <option value="cate">카테고리</option>
-                <option value="title">글제목</option>
-                <option value="content">글내용</option>
-            </select>
-            <input type="text" name="searchtxt">
-            <button type="submit">검색</button>
-        </form>
+        <div class="board">
+            <h1>Q&A</h1>
 
-        <a href="#">글쓰기</a>
+            <!--검색창-->
+            <div id="search_box">
+                <form action="/qna" method="get">
+                    <input name="page" type="hidden" value=${endPage}>
+                    <select name="search">
+                        <option value="cate">카테고리</option>
+                        <option value="title">글제목</option>
+                        <option value="content">글내용</option>
+                    </select>
+                    <input id="searchtxt" name="searchtxt" type="text">
+                </form>
+            </div>
 
-        <!--글목록-->
 
-        <ul>
-            <li>
-                <span class="content1">NO</span>
-                <span class="content1">카테고리</span>
-                <span class="content1">제목</span>
-                <span class="content1">작성일자</span>
-                <span class="content1">답변</span>
-            </li>
-            <th:block th:each="item: ${qnaList}">
+            <a href="#" id="write_btn">글쓰기</a>
+
+            <!--글목록-->
+
+            <ul>
                 <li>
-                    <span class="content1" th:text="${item.iid}"></span>
-                    <span class="content2" th:text="${item.cate}"></span>
-                    <span class="content3" th:text="${item.title}"></span>
-                    <span class="content4" th:text="${#temporals.format(item.createDate,'yyyy-MM-dd HH:mm')}"></span>
-                    <span class="content5" th:text="미답변"></span>
+                    <span class="content1">NO</span>
+                    <span class="content2">카테고리</span>
+                    <span class="content3">제목</span>
+                    <span class="content4">작성일자</span>
+                    <span class="content5">답변</span>
                 </li>
-            </th:block>
-        </ul>
+                <th:block th:each="item: ${qnaList}">
+                    <li>
+                        <span class="content1" th:text="${item.iid}"></span>
+                        <span class="content2" th:text="${item.cate}"></span>
+                        <span class="content3_1" th:text="${item.title}"></span>
+                        <span class="content4" th:text="${#temporals.format(item.createDate,'yyyy-MM-dd')}"></span>
+                        <span class="content5" th:text="미답변"></span>
+                    </li>
+                </th:block>
+            </ul>
 
-
+        </div>
         <!--페이지네이션-->
-        <div>
+        <div id="page_box">
             <th:block th:if="${startPage>1}">
                 <a th:href="@{/qna(page=${startPage}-1,search=${search},searchtxt=${searchtxt})}" th:text="이전"></a>
             </th:block>
 
             <th:block th:each="index: ${#numbers.sequence(startPage, endPage)}">
-        <span th:if="${index==qnaList.pageable.getPageNumber()+1}"
-              th:text="${index}">
-        </span>
+                <span class="selected_page" th:if="${index==qnaList.pageable.getPageNumber()+1}" th:text="${index}">
+                </span>
+
                 <th:block th:if="${index!=qnaList.pageable.getPageNumber()+1}">
                     <a th:href="@{/qna(page=${index},search=${search},searchtxt=${searchtxt})}">
                         <span th:text="${index}"/>
@@ -68,8 +72,8 @@
             </th:block>
         </div>
     </div>
-
 </div>
+
 
 
 </body>
