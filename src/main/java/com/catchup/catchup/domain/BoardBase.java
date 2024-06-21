@@ -16,6 +16,7 @@ public abstract class BoardBase {
     @CreatedDate
     @Column(name = "create_date")
     private LocalDateTime createDate;
+
     private String kind;
 
 }

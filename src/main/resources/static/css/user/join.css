@@ -1,0 +1,109 @@
+.join_wrap{
+    padding-top: 50px;
+    text-align: center;
+    box-shadow: 0px 5px 5px #B6BEED;
+    min-width: 250px;
+    width: 40%;
+}
+.join_wrap ul{
+    padding: 0;
+}
+.join_wrap ul li{
+    list-style: none;
+}
+
+.join_box{
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 25px;
+    max-width: 250px;
+}
+
+.join_title{
+    display: inline-block;
+    font-size: 0.8rem;
+    font-weight: 600;
+    margin-bottom: 7px;
+}
+
+.join_input{
+    display: inline-block;
+    font-size: 1rem;
+    font-weight: bold;
+    border: none;
+    border-bottom: 2px solid black;
+    width: 80%;
+    height: 35px;
+}
+
+.join_input:focus{
+    border-bottom: 2px solid #9BA2D7;
+    outline: none;
+}
+
+/* 우편번호 찾기 */
+.find_post{
+    border: 2px solid #F4EBF3;
+    background-color: transparent;
+    border-radius: 30px;
+    font-size: 0.8rem;
+}
+.find_post:hover{
+    background-color: #F9E8F7;
+}
+.find_post:active{
+    background-color: transparent;
+}
+.juso_input{
+    display: flex;
+    flex-direction: row;
+
+}
+
+
+.juso_input3{
+    display: flex;
+    flex-direction: row;
+}
+.juso_input1, .juso_input2, .juso_input33{
+    border: none;
+    border-bottom: 2px solid black;
+    margin-right: 5px;
+}
+
+
+
+
+/* 중복체크 버튼 */
+.idCk_btn{
+    border: 2px solid #F4EBF3;
+    background-color: transparent;
+    border-radius: 30px;
+    font-size: 0.8rem;
+}
+.idCk_btn:hover{
+    background-color: #F9E8F7;
+}
+.idCk_btn:active{
+    background-color: transparent;
+}
+
+
+/* 가입하기 버튼 */
+.join_btn{
+    background-color: #F4EBF3;
+    font-size: 0.9rem;
+    border: none;
+    padding: 5px 0px;
+    margin-bottom: 10px;
+    width: 300px;
+    border-radius: 30px;
+}
+
+.join_btn:hover{
+    background-color: #F9E8F7;
+}
+
+.join_btn:active{
+    background-color: #F4EBF3;
+}

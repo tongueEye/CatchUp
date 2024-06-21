@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" th:href="@{/css/user/join.css}">
+    <script th:src="@{../js/user/join.js}"></script>
+
+</head>
+<body>
+
+<div class="join_wrap">
+
+    <form th:action="@{'/join'}" th:object="${dto}" method="post">
+        <ul>
+            <li class="join_box">
+                <span class="join_title">아이디</span>
+                <span><input type="text"th:field="*{id}" class="join_input"></span>
+                <span><input type="button" value="중복 체크" id="idCk" class="idCk_btn"></span>
+                <!--<span><th:block th:if="${#fields.hasErrors('id')}" th:errors="*{id}"></th:block></span>-->
+            </li>
+            <li class="join_box">
+                <label for="password" class="join_title">비밀번호</label>
+                <span><input type="password" id="password" th:field="*{password}" class="join_input"></span>
+            </li>
+            <li class="join_box">
+                <label for="passwordCk" class="join_title">비밀번호 확인</label>
+                <span><input type="password" id="passwordCk" th:field="*{password}" class="join_input"></span>
+            </li>
+            <li class="join_box">
+                <label for="nickname" class="join_title">닉네임</label>
+                <span><input type="text" id="nickname" th:field="*{nickname}" class="join_input"></span>
+            </li>
+<!--            <li class="join_box">
+                <label for="name" class="join_title">이름</label>
+                <span><input type="text" id="name" th:field="*{name}" class="join_input"></span>
+            </li>-->
+            <li class="join_box">
+                <label for="phone" class="join_title">전화번호</label>
+                <span><input type="text" id="phone" th:field="*{phone}" class="join_input"></span>
+            </li>
+            <li class="join_box">
+                <label class="join_title">주소</label>
+                <div class="juso_input">
+                    <input type="text" id="sample6_postcode" placeholder="우편번호" class="juso_input1">
+                    <input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기" class="find_post"><br>
+                </div>
+                <input type="text" id="sample6_address" th:field="*{addr}" placeholder="주소" class="juso_input2"><br>
+                <div class="juso_input3">
+                    <input type="text" id="sample6_detailAddress" placeholder="상세주소" class="juso_input33">
+                    <input type="text" id="sample6_extraAddress" placeholder="참고항목" class="juso_input33">
+                </div>
+            </li>
+            <li>
+                <input type="checkbox" name="agree" id="agree1">
+                [필수] 만 14세 이상이며 모두 동의합니다.
+            </li>
+            <li>
+                <button type="submit" class="join_btn">가입하기</button>
+            </li>
+
+        </ul>
+
+    </form>
+
+</div>
+
+<script th:src="@{//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js}"></script>
+<!--body 최하단에 삽입-->
+</body>
+</html>
