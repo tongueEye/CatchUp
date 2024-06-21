@@ -1,4 +1,4 @@
-package com.catchup.catchup.service;
+package com.catchup.catchup.repository;
 
 import com.catchup.catchup.dto.FreeBoardDTO;
 import com.catchup.catchup.dto.SearchCondition;
@@ -7,9 +7,8 @@ import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 
-public interface FreeBoardService {
-    Page<FreeBoardDTO> boardList(String search, String searchTxt, Pageable pageable);
+public interface FreeBoardQDSLRepository {
+    Page<FreeBoardDTO> search(SearchCondition condition, Pageable pageable);
 
-
-    List<FreeBoardDTO> boardDetail(Long fid);
+    List<FreeBoardDTO> detail(Long fid);
 }

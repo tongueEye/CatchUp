@@ -2,3 +2,64 @@
     margin: 0;
     padding: 0;
 }
+
+ul li{
+    list-style: none;
+}
+
+#edu_board {
+    display: flex;
+    flex-direction: row;
+}
+
+aside {
+    border: 1px solid silver;
+    margin: 20px 0;
+}
+
+#sideMenu{
+    height: 50vh;
+    position: relative;
+    top: 50px;
+    display: flex;
+    flex-direction: column;
+    width: 20%;
+}
+
+#comBoard{
+    height: 45vh;
+    position: relative;
+    top: 50px;
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+}
+
+#comBoard ul {
+    border: 1px solid silver;
+    margin: 20px;
+}
+
+#comBoard ul a:hover {
+    color: #9BA2D7;
+}
+
+#page{
+    justify-content: center;
+    display: flex;
+    margin: 20px 0;
+}
+
+#page a{
+    padding: 0 10px;
+
+}
+
+#page a:hover{
+    color: #9BA2D7;
+}
+
+#comBoardDetail{
+    position: relative;
+    top: 50px;
+}

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" th:href="@{/css/freeboard/freeboard.css}">
+</head>
+<body>
+
+<th:block th:each="i:${list}">
+
+<section id="comBoardDetail">
+    <ul>
+        이미지 자리
+        <li th:text="${i.profile}"></li>
+        <li th:text="${i.title}"></li>
+        <li th:text="|작성자  ${i.writer}|"></li>
+    </ul>
+    <th:block th:id="content" th:utext="${i.content}"></th:block>
+</section>
+
+<button type="button">추천</button>
+
+<section id="replySection">
+    <ul>
+        <li>
+            <input type="text" name="content" id="content">
+            <input type="hidden" name="fid" id="fid" th:value="${i.fid}">
+            <button type="button" id="append">댓글 추가</button>
+        </li>
+    </ul>
+
+    <ul th:id="result">
+
+    </ul>
+
+</section>
+
+</th:block>
+
+</body>
+</html>
