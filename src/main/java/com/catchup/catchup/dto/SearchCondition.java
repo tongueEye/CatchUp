@@ -3,13 +3,15 @@ package com.catchup.catchup.dto;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.math.BigDecimal;
-
-@Getter
-@Setter
+@Getter @Setter
 public class SearchCondition {
-    private String cate;
+
+    private String id;
+    private String name;
     private String title;
     private String content;
+    private String writer;
     private String kind;
+    private String cate;
+
 }

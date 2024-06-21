@@ -11,7 +11,15 @@ import java.time.LocalDateTime;
 public class FreeBoardDTO {
 
     private Long fid;
+    private String title;
+    private String cate;
+    private String writer;
+    private String content;
+    private LocalDateTime createDate;
     private LocalDateTime updateDate;
     private Integer count;
     private String link;
+    private String kind;
+    private String profile;
+
 }

@@ -7,6 +7,7 @@ import java.time.LocalDateTime;
 
 @MappedSuperclass
 public abstract class BoardBase {
+  
     private String title;
     private String content;
     private String cate;
@@ -16,7 +17,5 @@ public abstract class BoardBase {
     @Column(name = "create_date")
     private LocalDateTime createDate;
     private String kind;
-
-
 
 }
