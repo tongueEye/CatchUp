@@ -10,4 +10,6 @@ public interface InfoBoardService {
     Page<InfoBoardDTO> getNoticeList(String search, String searchtxt, String kind, Pageable pageable);
 
     Long insert(InfoBoardDTO dto);
+
+    InfoBoardDTO getDetail(Long iid);
 }

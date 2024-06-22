@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" th:href="@{/css/infoboard/infoboard_detail.css}">
+</head>
+<body>
+
+<div id="detail_wrap">
+    <article class="detail_box">
+
+        <section class="title_section">
+            <h1 id="field1" class="cate_col1" th:text="${dto.cate}"></h1>
+            <h4 id="field2" th:text="${dto.title}"></h4>
+        </section>
+
+        <section class="info_section">
+            <div></div>
+            <h4 th:text="${#temporals.format(dto.createDate, 'yyyy년 MM월 dd일')}"></h4>
+            <div></div>
+        </section>
+
+        <section class="info_section">
+            <div class="profile_box">
+                <div id="profile_img"></div>
+                <h4 th:text="${dto.writer}"></h4>
+            </div>
+
+            <div></div>
+        </section>
+
+        <div class="chat_box">
+            <section class="content_section" th:utext="${dto.content}">
+
+            </section>
+
+            <section class="info_section">
+                <div></div>
+                <h4 th:text="${#temporals.format(dto.createDate, 'HH:mm')}"></h4>
+            </section>
+        </div>
+
+
+        <section id="rep_box">
+            <div></div>
+            <h4 th:text="${dto.rep_content}"></h4>
+        </section>
+
+
+        <div id="rep_input_box">
+            <form>
+                <textarea cols="20" rows="3"></textarea>
+                <input id="rep_btn" type="submit" value="답변 등록">
+            </form>
+        </div>
+
+    </article>
+
+
+</div>
+
+</body>
+</html>

@@ -1,6 +1,7 @@
 package com.catchup.catchup.controller.InfoBoardController;
 
 import com.catchup.catchup.domain.InfoBoard;
+import com.catchup.catchup.dto.FreeBoardDTO;
 import com.catchup.catchup.dto.InfoBoardDTO;
 import com.catchup.catchup.dto.UserDTO;
 import com.catchup.catchup.service.InfoBoardService;
@@ -13,12 +14,11 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.Optional;
 
 @Controller
 @RequiredArgsConstructor
@@ -89,5 +89,16 @@ public class QnaBoardController {
         infoService.insert(dto);
 
         return "redirect:/qna";
+    }
+
+    @GetMapping("/qnaDetail/{iid}")
+    public String qnaDetail(
+            @PathVariable Long iid
+            , Model model
+    ){
+        InfoBoardDTO dto = infoService.getDetail(iid);
+        model.addAttribute("dto", dto);
+        model.addAttribute("view", "infoBoard/qnaDetail");
+        return "index";
     }
 }
