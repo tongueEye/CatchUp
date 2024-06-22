@@ -11,6 +11,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 @RequiredArgsConstructor
 public class InfoBoardServiceImpl implements InfoBoardService{
@@ -77,6 +79,17 @@ public class InfoBoardServiceImpl implements InfoBoardService{
         System.out.println("service_test>>>> newInfo: "+newInfo.getUser().getUid());
 
         return newInfo.getIid();
+    }
+
+    @Override
+    public InfoBoardDTO getDetail(Long iid) {
+        Optional<InfoBoard> info = infoRepository.findById(iid);
+
+        InfoBoardDTO dto = info.stream().map(
+                item->modelMapper.map(item, InfoBoardDTO.class)).findAny()
+                .orElseThrow(()->new RuntimeException()
+                );
+        return dto;
     }
 
 }
