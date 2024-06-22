@@ -1,0 +1,15 @@
+#write_box{
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    position: relative;
+}
+#write_box form{
+    position: absolute;
+    top: 50%;
+    margin-top: -200px;
+}
+
+#write_box form ul {
+    list-style: none;
+}

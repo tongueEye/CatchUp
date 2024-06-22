@@ -1,14 +1,16 @@
 package com.catchup.catchup.domain;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 @Entity
 @Table(name = "info_board")
 @EntityListeners(AuditingEntityListener.class)
 @Getter @Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class InfoBoard extends BoardBase{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

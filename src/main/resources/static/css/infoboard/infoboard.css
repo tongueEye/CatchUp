@@ -1,11 +1,21 @@
 /*보드 시작*/
+
+#qna_wrap, #notice_wrap{
+    background-image: url("../../img/infoboard/room_bg.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    height: 110vh;
+    display: flex;
+}
+
 .board_box{
     margin: 0 auto;
     width: 70%;
     position: relative;
-    padding: 10vw;
     display: flex;
     flex-direction: column;
+    justify-content: center;
 }
 
 .board{
@@ -33,24 +43,6 @@
     justify-content: space-evenly;
 }
 
-#notice_wrap{
-    background-image: url("../../img/infoboard/room_bg.jpg");
-    /*background-image: url("../../img/infoboard/room_bg2.jpg");*/
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
-    height: 110vh;
-}
-
-
-#qna_wrap{
-    background-image: url("../../img/infoboard/room_bg.jpg");
-    /*background-image: url("../../img/infoboard/room_bg2.jpg");*/
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
-    height: 110vh;
-}
 /*보드 끝*/
 
 /* 검색창 시작*/

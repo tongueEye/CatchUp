@@ -6,5 +6,7 @@ public interface UserService {
 
     Long save(UserDTO dto);
 
+    UserDTO findUserById(long uid);
+
     //boolean loginCkeck(String id, String password);
 }
