@@ -7,6 +7,8 @@ import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService{
@@ -20,6 +22,17 @@ public class UserServiceImpl implements UserService{
         User save = userRepository.save(map);
 
         return save.getUid();
+    }
+
+    @Override
+    public UserDTO findUserById(long uid) { //uid로 유저 정보 가져오기 (세션 uid로 작성자 불러올 때 사용)
+        Optional<User> user = userRepository.findById(uid);
+
+        UserDTO userDTO = user.stream().map(
+                item->modelMapper.map(item, UserDTO.class)
+        ).findAny().orElseThrow(()->new RuntimeException());
+
+        return userDTO;
     }
 
 /*    @Override
