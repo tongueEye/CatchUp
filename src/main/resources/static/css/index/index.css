@@ -10,6 +10,11 @@
     src: url("../../font/index/omyuPretty.ttf") format('truetype');
 }
 
+@font-face {
+    font-family: 'bmjua';
+    src: url("../../font/index/bmjua.ttf") format('truetype');
+}
+
 
 /* 첫번째 메인 섹션 시작 */
 #main1{
@@ -76,6 +81,7 @@
     width: 100%;
     height: 115vh;
     background-color: #D7DDF7;
+    /*overflow: hidden;*/
 }
 
 #ball{ /* 회전하는 공 */
@@ -91,17 +97,6 @@
     right: 15vw;
     animation: moveLeft 2s ease-out forwards;
 }
-
-#line{ /* 풀리는 실 */
-    position: absolute;
-    height: 1vw;
-    background-color: #C5C5FF;
-    left: 79vw;
-    bottom: 5vh;
-    border-radius: 2vw;
-    animation: grow 2s ease-out forwards;
-}
-
 
 @keyframes rotate {
     0% {
@@ -131,26 +126,288 @@
         transform: translateX(-30vw); /* 왼쪽으로 30vw 만큼*/
     }
 }
+
+/*광고 영역 시작*/
+.ad_container{
+    margin: 0 auto;
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    color: white;
+    font-weight: bolder;
+    padding: 15vh 0 20px 0;
+
+}
+.ad_container h1{
+    font-family: chab;
+    font-weight: lighter;
+    font-size: 3rem;
+}
+
+.add_box{
+    width: 70%;
+    margin: 0 auto;
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: 40px;
+    position: relative;
+    padding: 30px;
+    z-index: 2;
+}
+
+.ad_player{
+    /*
+    height: 75%;
+    width: 90%;
+    margin: 0 auto;
+    padding: 30px 0;*/
+    position:relative;
+    height:0;
+    padding-bottom:56.25%;
+}
+
+.ad_player iframe{
+    border-radius: 30px;
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+}
+
+/*광고 영역 끝*/
+
+/*데코 영역 시작*/
+
+#main2 .bottom_deco{
+    width: 100%;
+    position: absolute;
+    left: 0;
+    bottom: -100%;
+}
+
+.waves { /*실타래 파도 영역*/
+    position:relative;
+    width: 100%;
+    height:15vh;
+    margin-bottom:-7px; /*Fix for safari gap*/
+    min-height:100px;
+    max-height:150px;
+}
+
+/* 실타래 파도 Animation */
+
+.parallax > use {
+    animation: move-forever 25s cubic-bezier(.55,.5,.45,.5) infinite;
+}
+.parallax > use:nth-child(1) {
+    animation-delay: -2s;
+    animation-duration: 7s;
+}
+.parallax > use:nth-child(2) {
+    animation-delay: -3s;
+    animation-duration: 10s;
+}
+.parallax > use:nth-child(3) {
+    animation-delay: -4s;
+    animation-duration: 13s;
+}
+.parallax > use:nth-child(4) {
+    animation-delay: -5s;
+    animation-duration: 20s;
+}
+@keyframes move-forever {
+    0% {
+        transform: translate3d(-90px,0,0);
+    }
+    100% {
+        transform: translate3d(85px,0,0);
+    }
+}
+/* 실타래 파도 Shrinking for mobile*/
+@media (max-width: 768px) {
+    .waves {
+        height:40px;
+        min-height:40px;
+    }
+    .content {
+        height:30vh;
+    }
+}
+
+/*데코 영역 끝*/
+
+
 /* 두번째 메인 섹션 끝 */
+
 
 /* 세번째 메인 섹션 시작 */
 #main3{
     width: 100%;
+    height: 100vh;
+    background-color: #B6BEED;
+    position: relative;
+    display: flex;
+    flex-direction: row;
+}
+
+#main3 .left_section{
+    display: flex;
+    flex-direction: column;
+    color: white;
+    font-family: bmjua;
+    padding: 12% 0 15% 20%;
+}
+
+.left_section h2{
+    padding: 8px;
+    background: #A6AED5;
+    width: 100px;
+    text-align: center;
+    border-radius: 30px;
+    margin-bottom: 15px;
+}
+.left_section h1{
+    font-family: chab;
+    font-size: 2.5rem;
+    font-weight: lighter;
+    margin-bottom: 15px;
+}
+.left_section h3{
+    font-size: 1.8rem;
+    margin-bottom: 15px;
+}
+#img1{
+    width: 250px;
+}
+
+#main3 .right_section{
+    padding: 20% 5% 15% 5%;
+}
+
+.img_box{
+    background: white;
+    border-radius: 40px;
+    width: 300px;
+    height: 320px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.img_box>div{
+    background: lightgrey;
+    border-radius: 40px;
+    margin: 30px;
+    width: 100%;
+    height: 82%;
+}
+
+/* 세번째 메인 섹션 끝 */
+
+/* 네번째 메인 섹션 시작 */
+#main4{
+    width: 100%;
+    height: 100vh;
+    background-color: #B6BEED;
+    position: relative;
+    display: flex;
+    flex-direction: row;
+}
+
+#img2{
+    width: 250px;
+}
+
+#main4 .left_section{
+    display: flex;
+    flex-direction: column;
+    color: white;
+    font-family: bmjua;
+    padding: 12% 10% 20% 0;
+}
+
+
+#main4 .right_section{
+    padding: 18% 5% 15% 15%;
+}
+
+/* 네번째 메인 섹션 끝 */
+
+/* 다섯번째 메인 섹션 시작 */
+#main5{
+    width: 100%;
+    height: 100vh;
+    background-color: #B6BEED;
+    position: relative;
+    display: flex;
+    flex-direction: row;
+}
+#main5 .left_section{
+    display: flex;
+    flex-direction: column;
+    color: white;
+    font-family: bmjua;
+    padding: 12% 0 15% 20%;
+}
+#main5 .right_section{
+    padding: 20% 5% 15% 5%;
+}
+
+#img3{
+    width: 250px;
+}
+/* 다섯번째 메인 섹션 끝 */
+
+/* 여섯번째 메인 섹션 시작 */
+#main6{
+    width: 100%;
     height: 150vh;
     background-color: #D7DDF7;
     position: relative;
+    overflow: hidden;
 }
 
-#main3 .top_deco{
+#main6 .top_deco{
     width: 100%;
     position: absolute;
     top: 0;
 }
 
-#main3 .bottom_deco{
+#main6 .bottom_deco{
     width: 100%;
     position: absolute;
     left: 0;
     bottom: 0;
 }
+
+#text_box2{
+    padding: 5vw 0 0 0;
+}
+
+#text_box2 h1{
+    font-family: chab;
+    text-align: center;
+    color: white;
+    z-index: 2;
+    position: relative;
+    font-size: 3rem;
+    font-weight: lighter;
+}
+
+#board_kind_box{
+    display: flex;
+    justify-content: center;
+}
+
+.board_kind{
+    width: 35vw;
+    height: 25vw;
+    border-radius: 30px;
+    background: rgba(255,255,255,0.5);
+    margin: 35px 15px;
+    z-index: 2;
+    position: relative;
+}
+
 /* 세번째 메인 섹션 끝 */
