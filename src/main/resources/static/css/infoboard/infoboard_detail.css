@@ -26,9 +26,25 @@ img{ /*표시되는 이미지 최대크기 설정*/
 .title_section{
     display: flex;
     flex-direction: row;
+    justify-content: space-between;
     padding-bottom: 20px;
     margin-bottom: 20px;
     border-bottom: 2px solid mediumpurple;
+}
+
+.title_box{
+    display: flex;
+    flex-direction: row;
+
+}
+
+.btn_box{
+    position: relative;
+    top: 30px;
+}
+
+#edit_btn{
+    margin-right: 10px;
 }
 
 .info_section{
@@ -78,12 +94,14 @@ img{ /*표시되는 이미지 최대크기 설정*/
     background: #9BA2D7;
     border-radius: 60px 60px 10px 60px;
     width: 80%;
-    margin: 0 0 40px 60px;
+    margin-left: 60px;
     position: relative;
     left: 20px;
 }
 #rep_box h4{
     padding: 30px;
+    font-size: 1.5rem;
+    font-weight: normal;
 }
 
 #rep_input_box{
@@ -91,15 +109,21 @@ img{ /*표시되는 이미지 최대크기 설정*/
     margin: 0 auto;
 }
 
-#rep_input_box form{
+#rep_input_box>div{
     display: flex;
     flex-direction: row;
+    margin-top: 40px;
 }
 
 /*레이아웃 잡기 끝*/
 
 
 /*필드 디자인 시작 - 폰트사이즈, 색상*/
+
+.title_box a h1{
+    font-size: 2rem;
+    margin-right: 10px;
+}
 
 #field1{
     margin: 0 10px;
@@ -112,6 +136,18 @@ img{ /*표시되는 이미지 최대크기 설정*/
 .cate_col1{
     background-color: lightblue;
 }
+.cate_col2{
+    background-color: lightpink;
+}
+
+.cate_col3{
+    background-color: lightyellow;
+}
+
+.cate_col4{
+    background-color: lightgrey;
+}
+
 
 #field2{
     font-size: 2rem;

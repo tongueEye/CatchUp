@@ -4,6 +4,12 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <link rel="stylesheet" th:href="@{/css/infoboard/infoboard_detail.css}">
+    <script th:src="@{/js/board/qnaboard.js}"></script>
+    <script th:inline="javascript">
+        document.addEventListener('DOMContentLoaded', function () {
+            init([[${dto.iid}]]);
+        });
+    </script>
 </head>
 <body>
 
@@ -11,16 +17,29 @@
     <article class="detail_box">
 
         <section class="title_section">
-            <h1 id="field1" class="cate_col1" th:text="${dto.cate}"></h1>
-            <h4 id="field2" th:text="${dto.title}"></h4>
+            <div class="title_box">
+                <a th:href="@{/qna}"><h1 th:text="'<'"></h1></a>
+                <h1 id="field1" th:text="${dto.cate}"
+                    th:classappend="${dto.cate == '일반' ? 'cate_col1' : (dto.cate == '신고' ? 'cate_col2' : (dto.cate == '건의' ? 'cate_col3' : (dto.cate == '문의' ? 'cate_col4' : '')))}">
+                </h1>
+                <h4 id="field2" th:text="${dto.title}"></h4>
+            </div>
+
+            <div class="btn_box">
+                <a id="edit_btn" href="#">수정하기</a>
+                <a id="delete_btn" href="#">삭제하기</a>
+            </div>
+
         </section>
 
+        <!---->
         <section class="info_section">
             <div></div>
             <h4 th:text="${#temporals.format(dto.createDate, 'yyyy년 MM월 dd일')}"></h4>
             <div></div>
         </section>
 
+        <!--프로필 영역-->
         <section class="info_section">
             <div class="profile_box">
                 <div id="profile_img"></div>
@@ -30,6 +49,7 @@
             <div></div>
         </section>
 
+        <!--콘텐트 영역-->
         <div class="chat_box">
             <section class="content_section" th:utext="${dto.content}">
 
@@ -41,18 +61,17 @@
             </section>
         </div>
 
-
-        <section id="rep_box">
-            <div></div>
-            <h4 th:text="${dto.rep_content}"></h4>
+        <!--댓글 영역-->
+        <section th:id="rep_box">
         </section>
 
 
+        <!--댓글 입력창-->
         <div id="rep_input_box">
-            <form>
-                <textarea cols="20" rows="3"></textarea>
+            <div>
+                <textarea id="rep_content" cols="20" rows="3" placeholder="* 입력/수정: 글 작성 후 버튼 클릭 &#13;&#10;* 삭제: 공백 입력 후 버튼 클릭"></textarea>
                 <input id="rep_btn" type="submit" value="답변 등록">
-            </form>
+            </div>
         </div>
 
     </article>

@@ -11,6 +11,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -90,6 +92,34 @@ public class InfoBoardServiceImpl implements InfoBoardService{
                 .orElseThrow(()->new RuntimeException()
                 );
         return dto;
+    }
+
+    /*댓글 하나 가져오기*/
+    @Override
+    public List<String> getRep(Long iid) {
+
+        List<String> rep = new ArrayList<>();
+
+        Optional<InfoBoard> data = infoRepository.findById(iid);
+        InfoBoardDTO infoDTO = data.stream().map(
+                item -> modelMapper.map(item, InfoBoardDTO.class))
+                .findAny().orElseThrow(
+                        ()->new RuntimeException()
+                );
+
+        rep.add(infoDTO.getRepContent());
+        System.out.println("rep_test: "+infoDTO.getRepContent());
+        System.out.println("rep_test: "+infoDTO.getTitle());
+        return rep;
+    }
+
+    @Override
+    public InfoBoardDTO updateRep(InfoBoardDTO infoBoardDTO) {
+        InfoBoard infoBoard = infoRepository.findById(infoBoardDTO.getIid())
+                .orElseThrow(() -> new RuntimeException());
+        infoBoard.setRepContent(infoBoardDTO.getRepContent());
+        InfoBoard updatedInfoBoard = infoRepository.save(infoBoard);
+        return modelMapper.map(updatedInfoBoard, InfoBoardDTO.class);
     }
 
 }
