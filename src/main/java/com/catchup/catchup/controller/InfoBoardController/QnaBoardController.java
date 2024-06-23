@@ -82,7 +82,6 @@ public class QnaBoardController {
                 .writer(writer)
                 .kind(kind)
                 .uid(uid)
-                .rep_content("")
                 .createDate(LocalDateTime.now())
                 .build();
 
