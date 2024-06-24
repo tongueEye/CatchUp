@@ -1,6 +1,7 @@
 package com.catchup.catchup.repository;
 
 import com.catchup.catchup.dto.FreeBoardDTO;
+import com.catchup.catchup.dto.InfoBoardDTO;
 import com.catchup.catchup.dto.SearchCondition;
 import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.Tuple;
@@ -84,4 +85,28 @@ public class FreeBoardQDSLRepositoryImpl implements FreeBoardQDSLRepository {
                 .fetch();
         return detail;
     }
+
+    @Override // 채원
+    public Page<FreeBoardDTO> list(Long id, Pageable pageable) {
+        /** 마이페이지 내가 쓴 게시글 조회하기 */
+        List<FreeBoardDTO> list = queryFactory.select(Projections.fields(
+                        FreeBoardDTO.class
+                        , freeBoard.title
+                        , freeBoard.content
+                        , freeBoard.cate
+                        , freeBoard.kind
+                        , freeBoard.updateDate
+                )).from(freeBoard)
+                .join(freeBoard.user, user)
+                .where(user.uid.eq(id))
+                .fetch();
+
+        Long totalCount = queryFactory.select(freeBoard.count())
+                .from(freeBoard)
+                .where(user.uid.eq(id))
+                .fetchOne();
+
+        return new PageImpl<>(list, pageable, totalCount);
+    }
+
 }

@@ -2,6 +2,8 @@ package com.catchup.catchup.repository;
 
 import com.catchup.catchup.domain.FreeBoard;
 import com.catchup.catchup.dto.FreeBoardDTO;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
