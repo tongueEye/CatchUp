@@ -35,10 +35,26 @@ public class UserServiceImpl implements UserService{
         return userDTO;
     }
 
-/*    @Override
-    public boolean loginCkeck(String id, String password) {
-        boolean login = userRepository.findById(id);
+    @Override
+    public UserDTO loginCheck(String id) {
+        User user = userRepository.loginCheck(id);
+        UserDTO dto = new UserDTO();
 
-        return login;
-    }*/
+        if(user == null || user.getId().equals("")){
+            return dto;
+        }
+
+        dto = modelMapper.map(user, UserDTO.class);
+
+        return dto;
+    }
+
+    @Override
+    public Long idCheck(String id) {
+        Long cnt = userRepository.idCheck(id);
+
+        return cnt;
+    }
+
+
 }

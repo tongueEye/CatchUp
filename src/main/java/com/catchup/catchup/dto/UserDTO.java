@@ -17,12 +17,16 @@ public class UserDTO {
     @NotEmpty(message = "입력해")
     private String password;
 
+    @NotEmpty(message = "입력해")
     private String nickname;
 
+    @NotEmpty(message = "입력해")
     private String name;
 
+    @NotEmpty(message = "입력해")
     private String addr;
 
+    @NotEmpty(message = "입력해")
     private String phone;
 
     private String profile;

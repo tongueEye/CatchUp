@@ -1,5 +1,5 @@
 .join_wrap{
-    padding-top: 50px;
+    padding-top: 150px;
     text-align: center;
     box-shadow: 0px 5px 5px #B6BEED;
     min-width: 250px;
@@ -41,6 +41,9 @@
     outline: none;
 }
 
+
+
+
 /* 우편번호 찾기 */
 .find_post{
     border: 2px solid #F4EBF3;
@@ -59,8 +62,6 @@
     flex-direction: row;
 
 }
-
-
 .juso_input3{
     display: flex;
     flex-direction: row;
@@ -75,10 +76,18 @@
 
 
 /* 중복체크 버튼 */
+.join_idCK{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    position: relative;
+    left: 5px;
+}
+
 .idCk_btn{
     border: 2px solid #F4EBF3;
     background-color: transparent;
-    border-radius: 30px;
+    border-radius: 10px;
     font-size: 0.8rem;
 }
 .idCk_btn:hover{
@@ -87,6 +96,8 @@
 .idCk_btn:active{
     background-color: transparent;
 }
+
+
 
 
 /* 가입하기 버튼 */

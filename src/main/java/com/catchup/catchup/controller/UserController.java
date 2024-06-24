@@ -5,20 +5,23 @@ import com.catchup.catchup.service.UserService;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Repository;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.HashMap;
 
 @Controller
-@RequiredArgsConstructor
+//@RequiredArgsConstructor
 public class UserController {
 
     private UserService userService;
+    public UserController(UserService userService){
+        this.userService=userService;
+    }
 
     @GetMapping("/join")
     public String join(Model model){
@@ -27,18 +30,26 @@ public class UserController {
         return "index";
     }
 
-    @PostMapping("/join")
+    @PostMapping("/joinresult")
     public String joinResult(@Valid @ModelAttribute("dto") UserDTO dto, BindingResult bindingResult, Model model){
 
         if (bindingResult.hasErrors()){
-            return "/join";
+            model.addAttribute("view", "user/join");
+            return "index";
         } else {
             //sibal...
             Long id = userService.save(dto);
-            model.addAttribute("id", id);
-            return "/login";
+            model.addAttribute("view", "user/login");
+            return "index";
         }
+    }
 
+    @PostMapping("/IdCheck")
+    public @ResponseBody Long IdCheck(@RequestBody HashMap<String,Object> hm) {
+        String id = (String) hm.get("id");
+        System.out.println("hello......"+id);
+        Long cnt = userService.idCheck(id);
+        return cnt;
     }
 
     @GetMapping("/login")
@@ -48,14 +59,35 @@ public class UserController {
         return "index";
     }
 
-/*    @PostMapping("/loginresult")
-    public String loginResult(@RequestParam String id, @RequestParam String password, HttpSession session){
-        if (id!=null && password!=null){
-            boolean login = userService.loginCkeck(id, password);
-        }else {
+    @GetMapping("/loginalert") //로그인 실패시
+    public String loginalert(Model model){
+        model.addAttribute("view", "user/loginalert.html");
+        return "index";
+    }
 
+    @PostMapping("/loginresult")
+    public String loginResult(@RequestParam String id, @RequestParam String password, HttpSession session){
+
+        if (id!=null && password!=null){
+            UserDTO dto = userService.loginCheck(id);
+
+            boolean result = false;
+
+            if(password.equals(dto.getPassword())){
+                result = true;
+            }
+
+            if(result==true){
+                Long uid = dto.getUid();
+                session.setAttribute("sessionId", uid);
+                return "redirect:index";
+            }else {
+                return "redirect:loginalert";
+            }
+        }else {
+            return "redirect:loginalert";
         }
-    }*/
+    }
 
 
 }
