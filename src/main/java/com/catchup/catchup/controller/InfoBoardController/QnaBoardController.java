@@ -56,7 +56,7 @@ public class QnaBoardController {
         //세션 받은 후 이부분 수정해야 함.
         UserDTO userDTO = userService.findUserById(101L);
 
-        System.out.println("nickname:"+userDTO.getNickname());
+        //System.out.println("nickname:"+userDTO.getNickname());
 
         model.addAttribute("dto", new InfoBoardDTO());
         model.addAttribute("user", userDTO);
@@ -99,5 +99,59 @@ public class QnaBoardController {
         model.addAttribute("dto", dto);
         model.addAttribute("view", "infoBoard/qnaDetail");
         return "index";
+    }
+
+    @GetMapping("/qnaDelete/{iid}")
+    public String qnaDelete(
+            @PathVariable Long iid
+            , Model model
+    ){
+        Long id = infoService.delQna(iid);
+        return "redirect:/qna";
+    }
+
+    @GetMapping("/qnaUpdate/{iid}")
+    public String qnaUpdate(
+            @PathVariable Long iid
+            , Model model
+    ){
+        InfoBoardDTO infoDto = infoService.getDetail(iid);
+
+        //세션 받은 후 이부분 수정해야 함.
+        UserDTO userDTO = userService.findUserById(101L);
+
+        model.addAttribute("dto", infoDto);
+        model.addAttribute("user", userDTO);
+        model.addAttribute("view", "infoBoard/qnaUpdate");
+        return "index";
+    }
+
+    @PostMapping("/qnaUpdate/{iid}")
+    public String qnaUpdateResult(
+            @PathVariable Long iid
+            , @RequestParam(name = "cate", required = false) String cate
+            , @RequestParam(name = "title", required = false) String title
+            , @RequestParam(name = "content", required = false) String content
+            , @RequestParam(name = "writer", required = false) String writer
+            , @RequestParam(name = "kind", required = false) String kind
+            , @RequestParam(name = "uid") long uid
+
+    ) {
+
+        InfoBoardDTO dto = InfoBoardDTO.builder()
+                .cate(cate)
+                .title(title)
+                .content(content)
+                .writer(writer)
+                .kind(kind)
+                .uid(uid)
+                .createDate(LocalDateTime.now())
+                .iid(iid)
+                .build();
+
+
+        Long update_iid = infoService.updateQna(dto);
+
+        return "redirect:/qnaDetail/"+update_iid;
     }
 }

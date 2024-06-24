@@ -12,4 +12,5 @@ public interface InfoBoardQDSLRepository {
     Page<InfoBoardDTO> search(SearchCondition condition, Pageable pageable);
 
     List<InfoBoardDTO> mypageList(Long id);
+
 }
