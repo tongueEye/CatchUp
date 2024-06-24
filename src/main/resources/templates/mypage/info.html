@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Title</title>
+    <script th:src="@{../js/user/join.js}"></script>
+    <link rel="stylesheet" th:href="@{/css/mypage/mypage.css}">
+</head>
+<body>
+<div id="mypage-main">
+    <article id="profile">
+        <img id="modalOpenButton" th:src="${result.profile}">
+        <p th:text="${result.nickname}"></p>
+    </article>
+    <div id="container">
+        <nav>
+            <ul>
+                <li><a th:href="@{/mypage/home}">마이홈</a></li>
+                <li><a th:href="@{/mypage/info}">정보수정</a></li>
+                <!--<li><p th:href="@{/mypage/dd}"> 회원 관리</p></li>-->
+                <li><a th:href="@{/mypage/wlist}">작성 글 보기</a></li>
+                <li><a th:href="@{/mypage/rlist}">작성 댓글 보기</a></li>
+            </ul>
+        </nav>
+        <article id="content">
+            <div class="join_wrap">
+                <form method="post" th:href="@{/info}" >
+                    <ul>
+                        <li class="join_box">
+                            <span class="join_title">아이디</span>
+                            <span><input type="text" th:value="${dto.id}" class="join_input" name="id" readonly></span>
+                        </li>
+
+                        <li class="join_box">
+                            <label for="password" class="join_title">비밀번호</label>
+                            <span><input type="password" id="password" name="password" class="join_input"></span>
+                        </li>
+
+                        <li class="join_box">
+                            <label for="passwordCk" class="join_title">비밀번호 확인</label>
+                            <span><input type="password" id="passwordCk" name="passwordCk" class="join_input"></span>
+                        </li>
+
+                        <li class="join_box">
+                            <label for="nickname" class="join_title">닉네임</label>
+                            <span><input type="text" id="nickname" name="nickname" th:value="${dto.nickname}" class="join_input"></span>
+                        </li>
+
+                        <!--<li class="join_box">
+                            <label for="name" class="join_title">이름</label>
+                            <span><input type="text" id="name" th:value="${dto.name}" class="join_input"></span>
+                        </li>-->
+
+                        <li class="join_box">
+                            <label for="phone" class="join_title">전화번호</label>
+                            <span><input type="text" id="phone" name="phone" th:value="${dto.phone}" class="join_input"></span>
+                        </li>
+
+                        <li class="join_box">
+                            <label class="addr">주소</label>
+                            <div class="juso_input">
+                                <input type="text" id="sample6_postcode" name="addr" placeholder="우편번호" class="juso_input1">
+                                <input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기" class="find_post"><br>
+                            </div>
+                            <input type="text" id="sample6_address" name="addr" th:value="${dto.addr}" placeholder="주소" class="juso_input2"><br>
+                            <div class="juso_input3">
+                                <input type="text" id="sample6_detailAddress" name="addr" placeholder="상세주소" class="juso_input33">
+                                <input type="text" id="sample6_extraAddress" name="addr" placeholder="참고항목" class="juso_input33">
+                            </div>
+                        </li>
+                        <li>
+                            <button type="submit" class="join_btn">수정하기</button>
+                        </li>
+                    </ul>
+                </form>
+            </div>
+        </article>
+    </div>
+    <script th:src="@{//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js}"></script>
+</div>
+</body>
+</html>

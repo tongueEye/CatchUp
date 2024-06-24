@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" th:href="@{/css/mypage/mypage.css}">
+    <link rel="stylesheet" th:href="@{/css/mypage/myboard.css}">
+</head>
+<body>
+<div id="mypage-main" class="mypage-board">
+    <article id="profile">
+        <img id="modalOpenButton" th:src="${result.profile}">
+        <p th:text="${result.nickname}"></p>
+    </article>
+    <div id="container">
+        <nav>
+            <ul>
+                <li><a th:href="@{/mypage/home}">마이홈</a></li>
+                <li><a th:href="@{/mypage/info}">정보수정</a></li>
+                <!--<li><p th:href="@{/mypage/dd}"> 회원 관리</p></li>-->
+                <li><a th:href="@{/mypage/wlist}">작성 글 보기</a></li>
+                <li><a th:href="@{/mypage/rlist}">작성 댓글 보기</a></li>
+            </ul>
+        </nav>
+        <article id="content">
+            <h2>작성 글 보기</h2>
+            <ul>
+                <li class="board-list" th:each="item:${boardlist}">
+                    <!-- kind 속성 어쩌고 저쩌고 -> kind에 맞춰서 나중에 수정-->
+                    <th:block th:if="${item.kind == 'e'}">
+                        <p class="myboard-menu">교육/정보</p>
+                    </th:block>
+                    <th:block th:if="${item.kind == 'c'}">
+                        <p class="myboard-menu">일상/소통</p>
+                    </th:block>
+                    <div>
+                        <span class="myboard-cate" th:text="|(${item.cate})|"></span>
+                        <span class="myboard-title" th:text="${item.title}"></span> <br>
+                        <span> 조회수 </span>
+                        <span th:text="${#temporals.format(item.updateDate,'yy.MM.dd HH:mm')}"></span>
+                    </div>
+                </li>
+            </ul>
+        </article>
+    </div>
+</div>
+</body>
+</html>

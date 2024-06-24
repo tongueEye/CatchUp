@@ -1,0 +1,70 @@
+/* 마이페이지 공통 */
+
+@font-face {
+    font-family: 'omyu_pretty';
+    src: url("../../font/index/omyuPretty.ttf") format('truetype');
+}
+
+@font-face {
+    font-family: 'chab';
+    src: url("../../font/index/chab.ttf") format('truetype');
+}
+
+ul li {
+    list-style: none;
+}
+p, a {
+    font-family: omyu_pretty;
+    font-size: 20px;
+}
+
+#mypage-main {
+    padding-top: 100px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+/* 프로필 부분 */
+#mypage-main  #profile {
+    z-index: 2;
+}
+
+#mypage-main  #profile > img {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+}
+
+/* 전체 컨테이너 */
+#mypage-main #container {
+    border-radius: 15px;
+    margin: 0 auto;
+    background-color: #f5f5f5;
+    width: 80%;
+    padding-top: 130px;
+    padding-bottom: 30px;
+    position: relative;
+    bottom: 112px;
+}
+
+/* 전체 컨테이너 - 메뉴 */
+#mypage-main nav {
+    margin: 0 auto;
+    width: 85%;
+    background-color: #B6BEED;
+    border-radius: 15px;
+
+}
+
+#mypage-main nav ul {
+    display: flex;
+    justify-content: center;
+    padding: 18px 0;
+}
+
+#mypage-main nav ul li:not(:last-child) {
+    padding-right: 100px;
+}
+
+/* 여기까지 공통 => 시간 나면 템플릿 설정하고... 아님 걍 살자 */
