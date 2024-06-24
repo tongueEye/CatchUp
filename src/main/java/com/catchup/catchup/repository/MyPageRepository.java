@@ -11,9 +11,4 @@ import java.util.Optional;
 @Repository
 public interface MyPageRepository extends JpaRepository<User, Long>, MyPageQDSLRepository {
 
-    //되는 코드
-//    @Query("select u.profile, u.nickname from User u where u.uid = 101L")
-//    List<Object[]> getProfile();
-
-
 }

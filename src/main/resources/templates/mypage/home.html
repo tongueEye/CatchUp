@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <link rel="stylesheet" th:href="@{/css/mypage/home.css}">
+    <link rel="stylesheet" th:href="@{/css/mypage/modal.css}">
+    <link rel="stylesheet" th:href="@{/css/mypage/mypage.css}">
 </head>
 <body>
     <!-- 마이페이지 홈 -->
@@ -12,19 +14,19 @@
     받아올 것, user 정보, 급식 정보, 좋아요 리스트, 문의 내역 리스트
     세션 아직 없어서 그냥 uid 101번으로 고정 시켜놓고 코드 짬
     -->
-    <div id="mypage-main">
+    <div id="mypage-main" class="mymain">
         <article id="profile">
-            <img th:src="${result.profile}">
+            <img id="modalOpenButton" th:src="${result.profile}">
             <p th:text="${result.nickname}"></p>
         </article>
         <div id="container">
             <nav>
                 <ul>
-                    <li><p th:href="@{/mypage}">마이홈</p></li>
-                    <li><p th:href="@{/mypage/info}">정보수정</p></li>
+                    <li><a th:href="@{/mypage/home}">마이홈</a></li>
+                    <li><a th:href="@{/mypage/info}">정보수정</a></li>
                     <!--<li><p th:href="@{/mypage/dd}"> 회원 관리</p></li>-->
-                    <li><p th:href="@{/mypage}">작성 글 보기</p></li>
-                    <li><p th:href="@{/mypage}">작성 댓글 보기</p></li>
+                    <li><a th:href="@{/mypage/wlist}">작성 글 보기</a></li>
+                    <li><a th:href="@{/mypage/rlist}">작성 댓글 보기</a></li>
                 </ul>
             </nav>
             <article id="content">
@@ -44,14 +46,78 @@
                     <section class="qna article-2-content">
                         <p> 문의내역 </p>
                         <div class="article-content">
-                            내용
+                            <ul>
+                                <li class="qna-menu">
+                                    <span class="qna-content">번호</span>
+                                    <span class="qna-content">제목</span>
+                                    <span class="qna-content">처리여부</span>
+                                </li>
+                                <li th:each="item:${qna}" class="qna-list">
+                                    <!-- 구현할까 말까 => 답변 완료 안 뜬 애들은 밑으로 밀어버리고 안 된 애들만 상위에 뜨기 -->
+                                    <span class="qna-content"> - </span>
+                                    <span class="qna-content nowrap">
+                                        <a th:text="${item.title}" th:href="@{|/qnaDetail/${item.iid}|}"></a>
+                                    </span>
+                                    <span class="qna-content yes" th:if="${item.repContent != null and !item.repContent.isEmpty()}" th:text="답변완료"></span>
+                                    <span class="qna-content no" th:unless="${item.repContent != null and !item.repContent.isEmpty()}" th:text="미답변"></span>
+                                </li>
+                            </ul>
                         </div>
                     </section>
                 </div>
             </article>
-
-
         </div>
     </div>
+
+
+    <!-- 모달창 -->
+    <div id="modalContainer" class="hidden">
+        <div id="modalContent">
+            <form method="post" th:href="@{/modal}">
+                <ul>
+                    <li class="modal-li-1">
+                        <h2>프로필 이미지 변경하기</h2>
+                        <p class="modalClose">X</p>
+                    </li>
+                    <li class="modal-li-2">
+                        <p> 나를 소개하는 이미지를 넣어주세요. </p>
+                    </li>
+                    <li class="modal-li-3">
+                        <!-- 임시로 넣어둠 -->
+                        <img th:src="${result.profile}">
+                    </li>
+                    <!--<li class="modal-li-4"> 일단 닉네임 성공시키고 하기 => s3 연동해서... 가능? ㅎ
+                        <label th:for="profile">이미지</label>
+                        <input type="file" th:id="profile" th:name="profile">
+                    </li>-->
+                    <li class="modal-li-5">
+                        <label th:for="nickname">닉네임</label>
+                        <input type="text" th:id="nickname" th:name="nickname" th:value="${result.nickname}">
+                    </li>
+                    <li class="modal-li-6">
+                        <button type="submit"> 저장하기 </button>
+                        <button type="reset"> 취소하기 </button>
+                    </li>
+                </ul>
+            </form>
+        </div>
+    </div>
+
+    <!--버튼 누름 -> 파라미터 객체 만들어서 Controller로 넘기기 request.body로... update... 끝-->
+
+    <script>
+        let modalOpenButton = document.getElementById('modalOpenButton');
+        let modal = document.getElementById('modalContainer');
+        let modalCloseButton = document.querySelector('.modalClose');
+
+        modalCloseButton.addEventListener('click', () => {
+            modal.classList.add('hidden');
+        });
+
+        modalOpenButton.addEventListener('click', () => {
+            modal.classList.remove('hidden');
+        });
+
+    </script>
 </body>
 </html>

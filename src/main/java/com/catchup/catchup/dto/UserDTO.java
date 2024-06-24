@@ -25,7 +25,7 @@ public class UserDTO {
 
     private String phone;
 
-    private Text profile;
+    private String profile;
 
     private String schoolCode;
 
