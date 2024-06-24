@@ -11,6 +11,7 @@ import java.time.LocalDateTime;
 public class FreeBoardDTO {
 
     private Long fid;
+    private Long uid;
     private String title;
     private String cate;
     private String writer;
@@ -20,6 +21,13 @@ public class FreeBoardDTO {
     private Integer cnt;
     private String link;
     private String kind;
+
     private String profile;
+    private String nickname;
+
+    private Long frid;
+    private String frcontent;
+    private LocalDateTime frCreateDate;
+    private LocalDateTime frUpdateDate;
 
 }

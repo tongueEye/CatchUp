@@ -1,6 +1,7 @@
 package com.catchup.catchup.repository;
 
 import com.catchup.catchup.dto.FreeBoardDTO;
+import com.catchup.catchup.dto.RepBoardDTO;
 import com.catchup.catchup.dto.InfoBoardDTO;
 import com.catchup.catchup.dto.SearchCondition;
 import com.querydsl.core.BooleanBuilder;
@@ -13,10 +14,9 @@ import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 
-import static com.catchup.catchup.domain.QBoardBase.boardBase;
 import static com.catchup.catchup.domain.QFreeBoard.freeBoard;
+import static com.catchup.catchup.domain.QFreeRepBoard.freeRepBoard;
 import static com.catchup.catchup.domain.QUser.user;
-
 
 
 public class FreeBoardQDSLRepositoryImpl implements FreeBoardQDSLRepository {
@@ -26,7 +26,10 @@ public class FreeBoardQDSLRepositoryImpl implements FreeBoardQDSLRepository {
     public FreeBoardQDSLRepositoryImpl(JPAQueryFactory queryFactory) {
         this.queryFactory = queryFactory;
     }
-    /** 게시판 검색/전체 페이지 조회 **/
+
+    /**
+     * 게시판 검색/전체 페이지 조회
+     **/
     @Override
     public Page<FreeBoardDTO> search(SearchCondition condition, Pageable pageable) {
 
@@ -67,7 +70,9 @@ public class FreeBoardQDSLRepositoryImpl implements FreeBoardQDSLRepository {
         return new PageImpl<>(list, pageable, totalCount);
     }
 
-    /** 게시판 상세 페이지 **/
+    /**
+     * 게시판 상세 페이지
+     **/
     @Override
     public List<FreeBoardDTO> detail(Long fid) {
         List<FreeBoardDTO> detail = queryFactory.select(Projections.fields(
@@ -85,6 +90,27 @@ public class FreeBoardQDSLRepositoryImpl implements FreeBoardQDSLRepository {
                 .fetch();
         return detail;
     }
+
+
+//    @Override
+//    public List<FreeBoardDTO> repList(Long fid) {
+//        List<FreeBoardDTO> repList = queryFactory.select(Projections.fields(
+//                        FreeBoardDTO.class
+//                        , freeBoard.user.profile
+//                        , freeBoard.user.nickname
+//                        , freeRepBoard.frid
+//                        , freeRepBoard.user.uid
+//                        , freeRepBoard.frcontent
+//                        , freeRepBoard.frCreateDate
+//                        , freeRepBoard.frUpdateDate
+//                ))
+//                .from(freeBoard)
+//                .join(freeBoard.repList, freeRepBoard)
+//                .join(freeBoard.user, user)
+//                .where(freeBoard.fid.eq(fid))
+//                .fetch();
+//        return repList;
+//    }
 
     @Override // 채원
     public Page<FreeBoardDTO> list(Long id, Pageable pageable) {

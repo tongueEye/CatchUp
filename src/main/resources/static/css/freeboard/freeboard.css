@@ -27,7 +27,6 @@ aside {
 }
 
 #eduBoardList{
-    height: 45vh;
     position: relative;
     top: 50px;
     display: flex;
