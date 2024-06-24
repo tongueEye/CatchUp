@@ -26,8 +26,8 @@
             </div>
 
             <div class="btn_box">
-                <a id="edit_btn" href="#">수정하기</a>
-                <a id="delete_btn" href="#">삭제하기</a>
+                <a id="edit_btn" th:href="@{|/qnaUpdate/${dto.iid}|}">수정하기</a>
+                <a id="delete_btn" th:href="@{|/qnaDelete/${dto.iid}|}">삭제하기</a>
             </div>
 
         </section>

@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="/css/summernote/summernote-lite.css">
+    <link rel="stylesheet" href="/css/infoboard/writeform.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="/js/summernote/summernote-lite.js"></script>
+    <script src="/js/summernote/lang/summernote-ko-KR.js"></script>
+
+
+</head>
+<body>
+
+<div id="write_box">
+
+    <form method="post" th:action="@{/writeQna}">
+        <!--세션 받으면 변경해야 함-->
+        <input type="hidden" th:name="uid" th:value="${101}">
+        <input type="hidden" th:name="writer" th:value="${user.nickname}">
+
+        <!--작성폼 같이쓸거면 이부분 변경해야 함-->
+        <input type="hidden" th:name="kind" th:value="q">
+
+        <ul>
+<!--            <p th:text="${user.nickname}"></p>-->
+            <li>
+                <select th:id="cate" th:name="cate">
+                    <option th:value="일반" th:selected="일반">일반</option>
+                    <option th:value="신고">신고</option>
+                    <option th:value="건의">건의</option>
+                    <option th:value="문의">문의</option>
+                </select>
+                <input type="text" th:name="title" th:id="title" placeholder="제목을 입력하세요.">
+            </li>
+            <li>
+                <textarea id="summernote" th:name="content"></textarea>
+            </li>
+            <li>
+                <button type="submit" id="btn"> 등록하기</button>
+            </li>
+        </ul>
+    </form>
+</div>
+
+<script>
+    $('#summernote').summernote({
+        placeholder : '작성할 글 내용을 입력하세요.',
+        tabsize : 2,
+        width: 800,
+        height: 400,
+        minHeight : 300,
+        maxHeight : 300,
+        disableResizeEditor : true,
+        lang : 'ko-KR',
+        toolbar : [
+            ['style', ['style'] ],
+            ['fontsize', ['fontsize']],
+            ['font',['bold','italic','underline','strikethrough','clear']],
+            ['color',['color']],
+            ['para',['paragraph']],
+            ['height',['height']],
+            ['table',['table']],
+            ['insert',['picture','link','hr']],
+            ['view',['codeview']]],
+        fontSizes : ['8','10','12','14','16','18','20','22','24','28','30','36','50','72'],
+        lineHeights : ['0.2','0.3','0.4','0.5','0.6','0.8','1.0','1.2','1.4','1.5','2.0','3.0'],
+
+        callbacks : { // 사진 여러 개 처리하려면 1개가 아니라 for문 돌려서 처리해야 함
+            onImageUpload : function(files) {
+                for (let i = 0; i < files.length; i++) {
+                    uploadSummernoteImageFile(files[i], this);
+                }
+            },
+            onMediaDelete : function(target) {
+                deleteSummernoteImageFile(target[0].src);
+            }
+        }
+    });
+
+    function uploadSummernoteImageFile(file, editor) {
+        let formData = new FormData();
+        formData.append("multipartFiles", file);
+
+        fetch('/file/uploadImageFile', {
+            method: 'POST',
+            body: formData
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('업로드 실패');
+                }
+                return response.json();
+            })
+            .then(data => {
+                if (data && data.length > 0) {
+                    let imageUrl = data[0];
+                    $(editor).summernote('insertImage', 'https://kdt-java5-2.s3.ap-northeast-2.amazonaws.com/' + encodeURIComponent(imageUrl));
+                    console.log(data)
+                } else {
+                    alert('업로드 실패');
+                }
+            })
+            .catch(error => {
+                console.error("업로드 실패", error);
+            });
+    }
+
+    function deleteSummernoteImageFile(imageUrl) {
+        const fileName = imageUrl.split('/').pop();
+
+        fetch(`/file/deleteImageFile?fileName=${fileName}`, {
+            method: 'DELETE'
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('삭제 실패');
+                }
+                return response.text();
+            })
+            .then(data => {
+                console.log(`Deleted: ${data}`);
+            })
+            .catch(error => {
+                console.error("삭제 실패", error);
+            });
+    }
+</script>
+</body>
+</html>

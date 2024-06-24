@@ -18,4 +18,9 @@ public interface InfoBoardService {
     List<String> getRep(Long iid);
 
     InfoBoardDTO updateRep(InfoBoardDTO infoBoardDTO);
+
+    Long delQna(Long iid);
+
+
+    Long updateQna(InfoBoardDTO dto);
 }

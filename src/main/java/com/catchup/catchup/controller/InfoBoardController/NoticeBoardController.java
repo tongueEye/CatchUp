@@ -1,7 +1,9 @@
 package com.catchup.catchup.controller.InfoBoardController;
 
 import com.catchup.catchup.dto.InfoBoardDTO;
+import com.catchup.catchup.dto.UserDTO;
 import com.catchup.catchup.service.InfoBoardService;
+import com.catchup.catchup.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -17,6 +19,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class NoticeBoardController {
 
     private final InfoBoardService infoService;
+
+    private final UserService userService;
 
     @GetMapping("/notice")
     public String qnaList(
@@ -38,6 +42,21 @@ public class NoticeBoardController {
         model.addAttribute("searchtxt", searchtxt);
 
         model.addAttribute("view", "infoboard/noticeboard");
+        return "index";
+    }
+
+
+    @GetMapping("/writeNotice")
+    public String NoticeInsert(Model model) {
+
+        //세션 받은 후 이부분 수정해야 함.
+        UserDTO userDTO = userService.findUserById(101L);
+
+        //System.out.println("nickname:"+userDTO.getNickname());
+
+        model.addAttribute("dto", new InfoBoardDTO());
+        model.addAttribute("user", userDTO);
+        model.addAttribute("view", "infoboard/noticeInsert");
         return "index";
     }
 }
