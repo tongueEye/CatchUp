@@ -7,6 +7,8 @@ import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "free_board")
@@ -31,5 +33,9 @@ public class FreeBoard extends BoardBase {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "uid")
     private User user;
+
+    @OneToMany(mappedBy = "fBoard")
+    List<FreeRepBoard> repList = new ArrayList<>();
+
 
 }

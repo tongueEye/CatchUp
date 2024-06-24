@@ -4,9 +4,10 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <link rel="stylesheet" th:href="@{/css/freeboard/freeboard.css}">
+    <script th:src="@{/js/board/reply.js}"></script>
+
 </head>
 <body>
-
 
 <div id="eduDetail" th:each="i:${list}">
 
@@ -33,18 +34,23 @@
             <li>
                 <input type="text" name="rep_content" id="rep_content">
                 <input type="hidden" name="fid" id="fid" th:value="${i.fid}">
+                <input type="hidden" name="sessionId" id="sessionId" th:value="${sessionId}">
                 <button type="button" id="append">댓글 추가</button>
             </li>
         </ul>
 
         <ul th:id="replyList">
-            <li>sample</li>
         </ul>
 
     </section>
 
-</div>
+<script th:inline="javascript">
+    document.addEventListener('DOMContentLoaded', function (){
+        init([[${i.fid}]])
+    })
+</script>
 
+</div>
 
 </body>
 </html>

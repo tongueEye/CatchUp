@@ -1,6 +1,10 @@
 package com.catchup.catchup.domain;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -10,6 +14,10 @@ import java.time.LocalDateTime;
 @Entity
 @Table(name = "rep_board")
 @EntityListeners(AuditingEntityListener.class)
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Builder
 public class FreeRepBoard {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -33,5 +41,7 @@ public class FreeRepBoard {
     //fid
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "fid")
-    FreeBoard freeBoard;
+    FreeBoard fBoard;
+
+
 }
