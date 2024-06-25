@@ -25,7 +25,7 @@
 
 #text_box{
     position: absolute;
-    left: 12vw;
+    left: 10vw;
     /*top: 20vh;*/
     bottom: 40vh;
     color: white;
@@ -34,22 +34,22 @@
 
 #text_box h5{
     font-family: omyu_pretty;
-    /*font-size: 2.5vw;*/
-    font-size: clamp(5px, 2.5vw, 30px);
+    font-size: 2.5vw;
+
 }
 
 #text_box h1{
     font-family: chab;
     font-weight: lighter;
-    font-size: 5.2rem;
+    font-size: 5.5vw;
     margin-bottom: 5px;
 }
 
 #text_box a{
     font-family: omyu_pretty;
-    /* font-size: 2vw; */
-    font-size: clamp(3px, 1.2vw, 30px);
-    padding: 15px 18px;
+    font-size: 1.8vw;
+    /*font-size: clamp(3px, 1.2vw, 30px);*/
+    padding: 1vw;
     width: 10vw;
     border-radius: 3vw;
     background-color: #9BA2D7;
@@ -59,7 +59,7 @@
     color: white;
 }
 #text_box h6 {
-
+    font-size: 1.8vw;
 }
 
 #window{
