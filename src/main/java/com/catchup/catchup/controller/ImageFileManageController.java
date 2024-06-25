@@ -25,7 +25,7 @@ public class ImageFileManageController {
     @Value("${cloud.aws.s3.bucket}")
     private String bucket;
 
-    @PostMapping(value="/file/uploadImageFile", produces = "application/json")
+    @PostMapping(value="/file/uploadImageFile/{folderName}", produces = "application/json")
     @ResponseBody
     public JsonObject uploadSummernoteImageFiles(@RequestParam("files") MultipartFile[] multipartFiles) {
 

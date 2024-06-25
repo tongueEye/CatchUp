@@ -147,7 +147,7 @@ public class InfoBoardServiceImpl implements InfoBoardService{
             // S3에서 파일을 삭제
             if (imageUrl != null && !imageUrl.isEmpty()) {
                 // imageUrl에서 버킷 내 경로를 추출합니다.
-                String key = extractKeyFromUrl(imageUrl);
+                String key = extractKeyFromUrl(imageUrl, info.getKind());
                 awsService.deleteFile(key);
             }
         }
@@ -157,15 +157,29 @@ public class InfoBoardServiceImpl implements InfoBoardService{
         return iid;
     }
 
-    private String extractKeyFromUrl(String imageUrl) {
+    private String extractKeyFromUrl(String imageUrl, String boardKind) {
         // imageUrl에서 S3 버킷 내의 경로를 추출하는 코드
-        // ".com/" 이후의 부분을 추출
-        //"https://버킷명.s3.지역.amazonaws.com/경로에 저장된 이미지 이름" 일 때, 경로에 저장된 이미지 이름 추출
-        int startIndex = imageUrl.indexOf(".com/") + 5;
-        if (startIndex < 5) { // 파일이 없다면 예외 던짐
+        // "%2F" 이후의 부분을 추출
+        //"https://버킷명.s3.지역.amazonaws.com/폴더명%2F/경로에 저장된 이미지 이름" 일 때, 경로에 저장된 이미지 이름 추출
+
+        int startIndex = imageUrl.indexOf("%2F") + 3;
+
+        if (startIndex < 3) { // 파일이 없다면 예외 던짐
             throw new IllegalArgumentException("Invalid S3 URL");
         }
-        return imageUrl.substring(startIndex); //파싱한 이미지 이름값 리턴
+        //System.out.println("test0625 이미지url 추출:"+imageUrl.substring(startIndex));
+
+        String delete_file = imageUrl.substring(startIndex);
+
+        if (boardKind.equals("q")){
+            delete_file = "qna/"+imageUrl.substring(startIndex);
+        } else if (boardKind.equals("n")) {
+            delete_file = "notice/"+imageUrl.substring(startIndex);
+        }
+
+        //System.out.println("test0625 이미지url 경로:"+delete_file);
+
+        return delete_file; //파싱한 이미지 이름값 리턴
     }
 
     @Override

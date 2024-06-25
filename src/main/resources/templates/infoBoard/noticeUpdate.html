@@ -87,7 +87,7 @@
         let formData = new FormData();
         formData.append("multipartFiles", file);
 
-        fetch('/file/uploadImageFile', {
+        fetch('/file/uploadImageFile/notice', {
             method: 'POST',
             body: formData
         })
@@ -101,7 +101,7 @@
                 if (data && data.length > 0) {
                     let imageUrl = data[0];
                     $(editor).summernote('insertImage', 'https://kdt-java5-2.s3.ap-northeast-2.amazonaws.com/' + encodeURIComponent(imageUrl));
-                    uploadedImages.push(imageUrl); //이미지 업로드 시 임시 배열에 추가
+                    uploadedImages.push(imageUrl.replace('/','%2F')); //이미지 업로드 시 임시 배열에 추가 (db에 %2F로 저장되므로 변경 작업 수행)
                     console.log(data)
                 } else {
                     alert('업로드 실패');
