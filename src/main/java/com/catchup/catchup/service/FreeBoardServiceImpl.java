@@ -1,10 +1,7 @@
 package com.catchup.catchup.service;
 
 import com.amazonaws.services.kms.model.NotFoundException;
-import com.catchup.catchup.domain.FreeBoard;
-import com.catchup.catchup.domain.FreeRepBoard;
-import com.catchup.catchup.domain.Love;
-import com.catchup.catchup.domain.User;
+import com.catchup.catchup.domain.*;
 import com.catchup.catchup.dto.FreeBoardDTO;
 import com.catchup.catchup.dto.LoveDTO;
 import com.catchup.catchup.dto.RepBoardDTO;
@@ -14,7 +11,12 @@ import com.catchup.catchup.repository.FreeRepBoardRepository;
 import com.catchup.catchup.repository.LoveRepository;
 import com.catchup.catchup.repository.UserRepository;
 import com.querydsl.core.Tuple;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -25,9 +27,13 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
-@Service
+import static org.modelmapper.Converters.Collection.map;
+
 @Slf4j
+@Service
+@RequiredArgsConstructor
 public class FreeBoardServiceImpl implements FreeBoardService {
 
     private final FreeBoardRepository freeRepository;
@@ -35,16 +41,10 @@ public class FreeBoardServiceImpl implements FreeBoardService {
     private final UserRepository userRepository;
     private final LoveRepository loveRepository;
     private final ModelMapper modelMapper;
+    private final AWSService awsService;
 
-    public FreeBoardServiceImpl(FreeBoardRepository freeRepository, FreeRepBoardRepository repRepository
-            , UserRepository userRepository, LoveRepository loveRepository, ModelMapper modelMapper) {
-        this.freeRepository = freeRepository;
-        this.repRepository = repRepository;
-        this.userRepository = userRepository;
-        this.loveRepository = loveRepository;
-        this.modelMapper = modelMapper;
-    }
 
+    /** 게시판 **/
     @Override
     public Page<FreeBoardDTO> boardList(String search, String searchTxt, String kind, Pageable pageable) {
 
@@ -67,12 +67,84 @@ public class FreeBoardServiceImpl implements FreeBoardService {
         return searchList;
     }
 
+    /** 게시글 세부 **/
     @Override
-    public List<FreeBoardDTO> boardDetail(Long fid) {
-        List<FreeBoardDTO> detail = freeRepository.detail(fid);
-        return detail;
+    public FreeBoardDTO boardDetail(Long fid) {
+        Optional<FreeBoard> freeBoard = freeRepository.findById(fid);
+        FreeBoardDTO dto = modelMapper.map(freeBoard, FreeBoardDTO.class);
+        return dto;
     }
 
+    /** 게시글 작성 **/
+    @Override
+    public Long boardInsert(FreeBoardDTO dto) {
+        FreeBoard freeBoard = modelMapper.map(dto, FreeBoard.class);
+        User user = new User();
+        user.setUid(dto.getUid());
+
+        freeBoard.setUser(user);
+        FreeBoard save = freeRepository.save(freeBoard);
+
+        return save.getFid();
+    }
+
+    /** 게시글 수정 **/
+    @Override
+    @Transactional
+    public Long boardUpdate(FreeBoardDTO dto) {
+        Optional<FreeBoard> getEntityById = freeRepository.findById(dto.getFid());
+
+        FreeBoard freeBoard = getEntityById.orElseThrow(()->{
+            throw new RuntimeException("+++NO DATA+++");
+        });
+
+        freeBoard.setCate(dto.getCate());
+        freeBoard.setTitle(dto.getTitle());
+        freeBoard.setContent(dto.getContent());
+
+        return dto.getFid();
+    }
+
+    /** 게시글 삭제 **/
+    @Override
+    public Long boardDelete(Long fid) {
+        //DB에 저장된 board의 content값 string으로 가져옴
+        FreeBoard board = freeRepository.findById(fid).orElseThrow(()-> new RuntimeException());
+        String content = board.getContent();
+
+        // HTML 콘텐츠에서 이미지 URL을 추출
+        Document doc = Jsoup.parse(content);
+        Elements imgs = doc.select("img");
+
+        for (Element img : imgs) {
+            String imageUrl = img.attr("src");
+
+            // S3에서 파일을 삭제
+            if (imageUrl != null && !imageUrl.isEmpty()) {
+                // imageUrl에서 버킷 내 경로를 추출합니다.
+                String key = extractKeyFromUrl(imageUrl);
+                awsService.deleteFile(key);
+            }
+        }
+
+        //S3에서 데이터 삭제 후, DB에서 데이터 삭제
+        freeRepository.deleteById(fid);
+        return fid;
+    }
+
+    private String extractKeyFromUrl(String imageUrl) {
+        // imageUrl에서 S3 버킷 내의 경로를 추출하는 코드
+        // ".com/" 이후의 부분을 추출
+        //"https://버킷명.s3.지역.amazonaws.com/경로에 저장된 이미지 이름" 일 때, 경로에 저장된 이미지 이름 추출
+        int startIndex = imageUrl.indexOf(".com/") + 5;
+        if (startIndex < 5) { // 파일이 없다면 예외 던짐
+            throw new IllegalArgumentException("Invalid S3 URL");
+        }
+        return imageUrl.substring(startIndex); //파싱한 이미지 이름값 리턴
+    }
+
+    
+    /** 댓글 리스트 **/
     @Override
     public List<FreeBoardDTO> repList(Long fid) {
         List<Object[]> objects = freeRepository.repList(fid);
@@ -86,11 +158,10 @@ public class FreeBoardServiceImpl implements FreeBoardService {
                         .frid((Long) item[5])
                         .build()
         ).collect(Collectors.toList());
-//        QueryDSL
-//        List<FreeBoardDTO> list = freeRepository.repList(fid);
         return list;
     }
 
+    /** 댓글 작성 **/
     @Override
     public Long repInsert(RepBoardDTO dto, Long sessionId) {
 
@@ -109,12 +180,14 @@ public class FreeBoardServiceImpl implements FreeBoardService {
         return save.getFrid();
     }
 
+    /** 댓글 삭제 **/
     @Override
     public Long repDelete(Long frid) {
         repRepository.deleteById(frid);
         return frid;
     }
 
+    /** 좋아요 여부 확인 **/
     @Override
     public boolean loveCheck(LoveDTO dto) {
         log.info("uid ....{}", dto.getUid());
@@ -124,6 +197,8 @@ public class FreeBoardServiceImpl implements FreeBoardService {
         return userBoardId != null;
     }
 
+
+    /** 좋아요 추가 / 카운트 증가 **/
     @Override
     @Transactional
     public void addLove(LoveDTO dto) {
@@ -142,6 +217,7 @@ public class FreeBoardServiceImpl implements FreeBoardService {
         freeRepository.addLove(dto.getFid());
     }
 
+    /** 좋아요 삭제 / 카운트 감소 **/
     @Override
     @Transactional
     public void delLove(LoveDTO dto) {

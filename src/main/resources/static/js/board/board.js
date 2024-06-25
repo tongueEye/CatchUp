@@ -1,5 +1,5 @@
-window.onload=function (){
-    document.getElementById('write_btn').onclick=function (){
-        location.href = '/write'
+window.onload = function () {
+    document.getElementById('write_btn').onclick = function () {
+        location.href = '/writeFree'
     }
 }
