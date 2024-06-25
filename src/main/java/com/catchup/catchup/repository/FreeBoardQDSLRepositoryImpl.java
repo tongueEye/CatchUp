@@ -1,5 +1,6 @@
 package com.catchup.catchup.repository;
 
+import com.catchup.catchup.domain.Love;
 import com.catchup.catchup.dto.FreeBoardDTO;
 import com.catchup.catchup.dto.RepBoardDTO;
 import com.catchup.catchup.dto.SearchCondition;
@@ -16,6 +17,7 @@ import java.util.List;
 import static com.catchup.catchup.domain.QFreeBoard.freeBoard;
 import static com.catchup.catchup.domain.QFreeRepBoard.freeRepBoard;
 import static com.catchup.catchup.domain.QUser.user;
+import static com.querydsl.core.types.dsl.Wildcard.count;
 
 
 public class FreeBoardQDSLRepositoryImpl implements FreeBoardQDSLRepository {
@@ -90,23 +92,21 @@ public class FreeBoardQDSLRepositoryImpl implements FreeBoardQDSLRepository {
         return detail;
     }
 
-//    @Override
-//    public List<FreeBoardDTO> repList(Long fid) {
-//        List<FreeBoardDTO> repList = queryFactory.select(Projections.fields(
-//                        FreeBoardDTO.class
-//                        , freeBoard.user.profile
-//                        , freeBoard.user.nickname
-//                        , freeRepBoard.frid
-//                        , freeRepBoard.user.uid
-//                        , freeRepBoard.frcontent
-//                        , freeRepBoard.frCreateDate
-//                        , freeRepBoard.frUpdateDate
-//                ))
-//                .from(freeBoard)
-//                .join(freeBoard.repList, freeRepBoard)
-//                .join(freeBoard.user, user)
-//                .where(freeBoard.fid.eq(fid))
-//                .fetch();
-//        return repList;
-//    }
+    @Override
+    public void addLove(Long fid) {
+        queryFactory.update(freeBoard)
+                .set(freeBoard.cnt, freeBoard.cnt.add(1))
+                .where(freeBoard.fid.eq(fid))
+                .execute();
+    }
+
+    @Override
+    public void delLove(Long fid) {
+        queryFactory.update(freeBoard)
+                .set(freeBoard.cnt, freeBoard.cnt.subtract(1))
+                .where(freeBoard.fid.eq(fid))
+                .execute();
+    }
+
+
 }

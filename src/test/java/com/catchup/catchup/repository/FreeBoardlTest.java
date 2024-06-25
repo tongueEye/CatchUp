@@ -1,6 +1,11 @@
 package com.catchup.catchup.repository;
 
+import com.amazonaws.services.kms.model.NotFoundException;
+import com.catchup.catchup.domain.FreeBoard;
+import com.catchup.catchup.domain.Love;
+import com.catchup.catchup.domain.User;
 import com.catchup.catchup.dto.FreeBoardDTO;
+import com.catchup.catchup.dto.LoveDTO;
 import com.catchup.catchup.dto.RepBoardDTO;
 import com.catchup.catchup.service.FreeBoardService;
 import com.querydsl.core.Tuple;
@@ -26,6 +31,12 @@ class FreeBoardlTest {
     private FreeBoardService service;
     @Autowired
     private JPAQueryFactory queryFactory;
+    @Autowired
+    private FreeBoardRepository freeRepository;
+    @Autowired
+    private UserRepository userRepository;
+    @Autowired
+    private LoveRepository loveRepository;
 
     @Test
     public void countTest(){
@@ -97,4 +108,46 @@ class FreeBoardlTest {
 
     }
 
+    @Test
+    @Transactional
+    public void loveAddTest(){
+        User user = userRepository.findById(100L)
+                .orElseThrow(() -> new NotFoundException("Could not found fid"));
+        FreeBoard freeBoard = freeRepository.findById(22L)
+                .orElseThrow(() -> new NotFoundException("Could not found fid"));
+        if(loveRepository.findByUserAndFreeBoard(user, freeBoard).isPresent()){
+            throw new RuntimeException();
+        }
+        Love love = Love.builder()
+                .user(user)
+                .freeBoard(freeBoard)
+                .build();
+        loveRepository.save(love);
+        freeRepository.addLove(21L);
+    }
+
+    @Test
+    @Transactional
+    public void loveSubTest(){
+        User user = userRepository.findById(100L)
+                .orElseThrow(() -> new NotFoundException("Could not found fid"));
+        FreeBoard freeBoard = freeRepository.findById(21L)
+                .orElseThrow(() -> new NotFoundException("Could not found fid"));
+        Love love = (Love) loveRepository.findByUserAndFreeBoard(user, freeBoard)
+                .orElseThrow(() -> new NotFoundException("Could not found lid"));
+
+        loveRepository.delete(love);
+        freeRepository.delLove(21L);
+    }
+
+    @Test
+    public void CheckTest(){
+        LoveDTO dto = LoveDTO.builder()
+                .fid(1L)
+                .uid(100L)
+                .build();
+
+        boolean b = service.loveCheck(dto);
+        assertThat(b).isEqualTo(false);
+    }
 }
