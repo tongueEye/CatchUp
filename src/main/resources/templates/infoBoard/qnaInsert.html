@@ -16,7 +16,7 @@
 
 <div id="write_box">
 
-    <form method="post" th:action="@{/writeQna}">
+    <form id="writeForm" method="post" th:action="@{/writeQna}">
         <!--세션 받으면 변경해야 함-->
         <input type="hidden" th:name="uid" th:value="${101}">
         <input type="hidden" th:name="writer" th:value="${user.nickname}">
@@ -47,6 +47,7 @@
 
 <script>
     let uploadedImages = []; //업로드 한 이미지를 임시 보관할 배열
+    let isFormSubmitting = false; // 폼 제출 여부 플래그
 
     $('#summernote').summernote({
         placeholder : '작성할 글 내용을 입력하세요.',
@@ -132,9 +133,15 @@
     }
 
     window.addEventListener('beforeunload', function (e) { //페이지 이동 시 이벤트
-        uploadedImages.forEach(imageUrl => {
-            deleteSummernoteImageFile(imageUrl); //페이지 떠나면 기존에 업로드 했던 사진들 삭제
-        });
+        if (!isFormSubmitting) { // 폼 제출 시에는 실행하지 않음
+            uploadedImages.forEach(imageUrl => {
+                deleteSummernoteImageFile(imageUrl); //페이지 떠나면 기존에 업로드 했던 사진들 삭제
+            });
+        }
+    });
+
+    document.getElementById('writeForm').addEventListener('submit', function() {
+        isFormSubmitting = true; // 폼 제출 중임을 표시
     });
 </script>
 </body>
