@@ -20,4 +20,6 @@ public interface MyPageService {
     List<InfoBoardDTO> getQnaList(); // Qna 리스트
 
     long modifyInfo(UserDTO dto);
+
+    String updateNickname(Long id, String nickname);
 }
