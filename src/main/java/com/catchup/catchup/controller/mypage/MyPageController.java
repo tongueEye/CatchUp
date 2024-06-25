@@ -1,13 +1,17 @@
 package com.catchup.catchup.controller.mypage;
 
+import com.catchup.catchup.domain.User;
 import com.catchup.catchup.dto.*;
 import com.catchup.catchup.service.MyPageService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -18,6 +22,7 @@ import java.util.List;
 @Controller
 @RequiredArgsConstructor
 @RequestMapping("/mypage")
+@Slf4j
 public class MyPageController {
 
     private final MyPageService service;
@@ -122,7 +127,7 @@ public class MyPageController {
 
 
     /** 모달창에서 프로필 수정하기 */
-    @GetMapping("/modal")
+    /*@GetMapping("/modal")
     public String modal(Model model) {
 
         model.addAttribute("view", "mypage/home");
@@ -137,13 +142,14 @@ public class MyPageController {
             model.addAttribute("view", "mypage/home");
             return "index";
         } else {
-            // 닉네임 업데이트 로직
+            // 닉네임 업데이트 코드
             long id = service.modifyProfile(dto);
             model.addAttribute("view", "mypage/home");
             return "index";
         }
-    }
+    }*/
 
-    /** 모달창에서 학교 정보 입력하기 */
+
+
 
 }

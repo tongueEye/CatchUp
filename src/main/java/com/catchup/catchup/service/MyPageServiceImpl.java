@@ -123,6 +123,17 @@ public class MyPageServiceImpl implements MyPageService{
         return list;
     }
 
+    /** 진짜 모달창 */
+    @Override
+    public String updateNickname(Long id, String nickname) {
+        User user = repository.findById(id)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+        user.setNickname(nickname);
+
+        repository.save(user);
+        return user.getNickname();
+    }
+
 
 
 
