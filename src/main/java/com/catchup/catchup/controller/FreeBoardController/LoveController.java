@@ -18,6 +18,7 @@ public class LoveController {
     @PostMapping("/love")
     public ResponseEntity<?> insert(@RequestBody LoveDTO dto) throws Exception{
 
+        /** 좋아요 여부 확인 **/
         boolean isChecked = service.loveCheck(dto);
         log.info("boolean.....{}", isChecked);
 

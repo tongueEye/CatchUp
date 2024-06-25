@@ -1,6 +1,7 @@
 package com.catchup.catchup.domain;
 
 import jakarta.persistence.*;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.data.annotation.LastModifiedDate;
@@ -14,6 +15,7 @@ import java.util.List;
 @Table(name = "free_board")
 @EntityListeners(AuditingEntityListener.class)
 @NoArgsConstructor
+@Getter
 @Setter
 public class FreeBoard extends BoardBase {
 

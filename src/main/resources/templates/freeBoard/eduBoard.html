@@ -63,8 +63,8 @@
                 <li th:text="|${i.cate}|"></li>
                 <li th:text="|${i.title}|"></li>
                 <li th:text="|작성자: ${i.writer}|"></li>
-<!--                <li th:text="|${#dates.format(i.createDate, 'yyyy-MM-dd HH:mm')}|"></li>-->
-                <li th:text="|추천수: ${i.cnt}|"></li>
+                <li th:text="|${#temporals.format(i.createDate, 'yyyy-MM-dd')}|"></li>
+                <li th:text="|좋아요수: ${i.cnt}|"></li>
             </a>
         </ul>
 

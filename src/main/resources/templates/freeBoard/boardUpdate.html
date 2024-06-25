@@ -15,7 +15,7 @@
 <body>
 <div id="write_box">
 
-    <form id="writeForm" method="post" th:action="@{/writeFree}">
+    <form id="writeForm" method="post" th:action="@{|/boardUpdate/${dto.fid}|}">
         <!--세션 받으면 변경해야 함-->
         <input type="hidden" th:name="uid" th:value="${100}">
         <input type="hidden" th:name="writer" th:value="${user.nickname}">
