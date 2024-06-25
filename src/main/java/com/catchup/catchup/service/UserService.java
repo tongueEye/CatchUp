@@ -8,5 +8,7 @@ public interface UserService {
 
     UserDTO findUserById(long uid);
 
-    //boolean loginCkeck(String id, String password);
+    UserDTO loginCheck(String id);
+
+    Long idCheck(String id);
 }

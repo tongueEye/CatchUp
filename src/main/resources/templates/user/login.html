@@ -12,17 +12,17 @@
 <div class="login_wrap">
 
     <div class="login_wrap1">
-    <form th:action="@{'/login'}" method="post">
+    <form th:action="@{'/loginresult'}" method="post">
         <ul>
             <img src="/img/user/catchup_logo.png" alt="logo">
 
             <li class="login_box">
                 <span class="login_title">아이디</span>
-                <span><input type="text" class="login_input" placeholder="ID"></span>
+                <span><input type="text" class="login_input" th:id="id" th:name="id" placeholder="ID"></span>
             </li>
             <li class="login_box">
                 <span class="login_title">비밀번호</span>
-                <span><input type="password" class="login_input" placeholder="PASSWORD"></span>
+                <span><input type="password" class="login_input" th:id="password"  th:name="password" placeholder="PASSWORD"></span>
             </li>
             <li class="logingogo">
                 <button type="submit" class="login_btn">로그인</button>

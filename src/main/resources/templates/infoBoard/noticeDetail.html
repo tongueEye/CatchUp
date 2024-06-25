@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" th:href="@{/css/infoboard/infoboard_detail2.css}">
+</head>
+<body>
+
+<div id="detail_wrap">
+    <article class="detail_box">
+
+        <section class="title_section">
+            <div class="title_box">
+                <a th:href="@{/notice}"><h1 th:text="'<'"></h1></a>
+                <h1 id="field1" th:text="${dto.cate}"
+                    th:classappend="${dto.cate == '일반' ? 'cate_col1' : (dto.cate == '행사' ? 'cate_col2' : (dto.cate == '업무' ? 'cate_col3' : (dto.cate == '시설' ? 'cate_col4' : '')))}">
+                </h1>
+                <h4 id="field2" th:text="${dto.title}"></h4>
+            </div>
+
+            <div class="btn_box">
+                <a id="edit_btn" th:href="@{|/noticeUpdate/${dto.iid}|}">수정하기</a>
+                <a id="delete_btn" th:href="@{|/noticeDelete/${dto.iid}|}">삭제하기</a>
+            </div>
+
+        </section>
+
+        <!---->
+        <section class="info_section">
+            <div></div>
+            <h4 th:text="${#temporals.format(dto.createDate, 'yyyy년 MM월 dd일')}"></h4>
+            <div></div>
+        </section>
+
+        <!--프로필 영역-->
+        <section class="info_section">
+            <div class="profile_box">
+                <div id="profile_img"></div>
+                <h4 th:text="${dto.writer}"></h4>
+            </div>
+
+            <div></div>
+        </section>
+
+        <!--콘텐트 영역-->
+        <div class="chat_box">
+            <section class="content_section" th:utext="${dto.content}">
+
+            </section>
+
+            <section class="info_section">
+                <div></div>
+                <h4 th:text="${#temporals.format(dto.createDate, 'HH:mm')}"></h4>
+            </section>
+        </div>
+
+    </article>
+
+
+</div>
+
+</body>
+</html>

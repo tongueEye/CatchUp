@@ -18,9 +18,13 @@
             <a class="menu_tab" href="#">일상/소통</a>
             <a class="menu_tab" th:href="@{/qna}">문의하기</a>
             <a class="menu_tab" th:href="@{/notice}">공지사항</a>
-            <a class="menu_tab" href="#">마이페이지</a>
-            <a class="menu_tab" id="login_btn" th:href="@{/login}">로그인</a>
-            <!--        <a class="menu_tab" id="logout_btn" href="#">로그아웃</a>-->
+            <a class="menu_tab" th:href="@{/mypage/home}">마이페이지</a>
+
+            <!--로그인: 세션에 sessionId가 없을 때만 표시-->
+            <a class="menu_tab" id="login_btn" th:if="${session.sessionId == null}" th:href="@{/login}">로그인</a>
+
+            <!--로그아웃: 세션에 sessionId가 있을 때만 표시-->
+            <a class="menu_tab" id="logout_btn" th:unless="${session.sessionId == null}" th:href="@{/logout}">로그아웃</a>
         </span>
     </header>
 </body>

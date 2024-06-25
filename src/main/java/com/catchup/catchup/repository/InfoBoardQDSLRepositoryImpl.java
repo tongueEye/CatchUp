@@ -1,5 +1,6 @@
 package com.catchup.catchup.repository;
 
+import com.catchup.catchup.domain.InfoBoard;
 import com.catchup.catchup.dto.InfoBoardDTO;
 import com.catchup.catchup.dto.SearchCondition;
 import com.querydsl.core.BooleanBuilder;
@@ -13,6 +14,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.StringUtils;
 import static com.catchup.catchup.domain.QInfoBoard.infoBoard;
+import static com.catchup.catchup.domain.QUser.user;
 
 import java.util.List;
 
@@ -58,5 +60,20 @@ public class InfoBoardQDSLRepositoryImpl implements InfoBoardQDSLRepository{
 
         return new PageImpl<>(qnaList, pageable, totalcount);
 
+    }
+
+    @Override
+    public List<InfoBoardDTO> mypageList(Long id) {
+        List<InfoBoardDTO> mypagelist = queryFactory.select(Projections.fields(
+                InfoBoardDTO.class
+                ,infoBoard.iid
+                , infoBoard.title
+                , infoBoard.repContent
+        )).from(infoBoard)
+                .join(infoBoard.user, user)
+                .where(user.uid.eq(id))
+                .fetch();
+
+        return mypagelist;
     }
 }
