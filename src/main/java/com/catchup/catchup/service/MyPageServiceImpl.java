@@ -1,7 +1,5 @@
 package com.catchup.catchup.service;
 
-import com.catchup.catchup.domain.FreeBoard;
-import com.catchup.catchup.domain.InfoBoard;
 import com.catchup.catchup.domain.User;
 import com.catchup.catchup.dto.*;
 import com.catchup.catchup.repository.FreeBoardRepository;
@@ -11,15 +9,11 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 @Service
 @RequiredArgsConstructor
@@ -125,13 +119,14 @@ public class MyPageServiceImpl implements MyPageService{
 
     /** 진짜 모달창 */
     @Override
-    public String updateNickname(Long id, String nickname) {
+    public String updateNickname(Long id, String nickname, String profile) {
         User user = repository.findById(id)
                 .orElseThrow(() -> new RuntimeException("User not found"));
         user.setNickname(nickname);
+        user.setProfile(profile);
 
         repository.save(user);
-        return user.getNickname();
+        return user.getNickname() + user.getProfile();
     }
 
 

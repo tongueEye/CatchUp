@@ -149,7 +149,14 @@ public class MyPageController {
         }
     }*/
 
+    @PostMapping("/profileupdate")
+    public ResponseEntity<String> updateProfile(@RequestBody UserDTO dto, Model model) {
+        // 세션 처리 완료되면 변경하기
+        Long id = 101L;
 
+        log.info("aaddasdsadasda {}", dto.getNickname());
 
-
+        String profile = service.updateNickname(id, dto.getNickname(), dto.getProfile());
+        return ResponseEntity.ok(profile);
+    }
 }
