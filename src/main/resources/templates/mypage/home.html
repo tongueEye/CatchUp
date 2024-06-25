@@ -17,7 +17,7 @@
     <div id="mypage-main" class="mymain">
         <article id="profile">
             <img id="modalOpenButton" th:src="${result.profile}">
-            <p th:text="${result.nickname}"></p>
+            <p id="top-nickname" th:text="${result.nickname}"></p>
         </article>
         <div id="container">
             <nav>
@@ -73,7 +73,7 @@
     <!-- 모달창 -->
     <div id="modalContainer" class="hidden">
         <div id="modalContent">
-            <form method="post" th:href="@{/modal}">
+            <!--<form method="post" th:href="@{/profileupdate}">-->
                 <ul>
                     <li class="modal-li-1">
                         <h2>프로필 이미지 변경하기</h2>
@@ -99,7 +99,7 @@
                         <button type="reset"> 취소하기 </button>
                     </li>
                 </ul>
-            </form>
+            <!--</form>-->
         </div>
     </div>
 
@@ -116,6 +116,59 @@
 
         modalOpenButton.addEventListener('click', () => {
             modal.classList.remove('hidden');
+        });
+
+
+
+        /** 모달창 정보 뽑기*/
+        let nicknameInput = document.getElementById('nickname');
+        let saveButton = document.querySelector('.modal-li-6 button[type="submit"]');
+        let nickname = document.getElementById('top-nickname');
+
+        // 저장하기 버튼 클릭 이벤트 리스너 추가
+        saveButton.addEventListener('click', (event) => {
+            // 기본 폼 제출 동작 막기
+            event.preventDefault();
+
+            // 수정된 닉네임 값 가져오기
+            let newNickname = nicknameInput.value;
+
+            console.log('nickname' + newNickname);
+
+            // 닉네임 정보를 담은 객체 생성
+            let updatedProfile = {
+                nickname: newNickname
+            };
+
+            fetch('/profileupdate', {
+                method: 'POST',
+                headers: {
+                    'Content-Type' : 'application/json;charset=utf-8'
+                    , 'Accept' : 'application/json'
+                },
+                body: JSON.stringify(updatedProfile)
+            })
+                .then(response => {
+                    if(response.status == 200) {
+                        console.log('저장완료');
+                        return response.text();
+                    } else if(response.status == 403) {
+                        console.log("403 에러 발생")
+                        return response.text();
+                    }
+                })
+                .then(data => {
+                    // 업데이트 성공함?
+                    console.log('등록됨!!! 바뀜!! ', data);
+                    // 모달창 닫아주면서 데이터 업데이트 해야 함
+                    nickname.value = ''; // 일단 빈 공간으로 만들어주고
+                    // nickname.appendChild = newNickname;
+                    nickname.innerText = newNickname;
+                    modal.classList.add('hidden');
+                })
+                .catch(error => {
+                    console.error('에러 에러 에러 에러 에러 ', error);
+                });
         });
 
     </script>
