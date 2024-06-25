@@ -1,4 +1,4 @@
-package com.catchup.catchup.controller.InfoBoardController;
+package com.catchup.catchup.controller;
 
 import com.catchup.catchup.service.AWSService;
 import lombok.RequiredArgsConstructor;
