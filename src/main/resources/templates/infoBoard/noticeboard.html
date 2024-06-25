@@ -41,7 +41,9 @@
                     <li>
                         <span class="content1" th:text="${item.iid}"></span>
                         <span class="content2" th:text="${item.cate}"></span>
-                        <span class="content3_1" th:text="${item.title}"></span>
+                        <span class="content3_1">
+                            <a th:text="${item.title}" th:href="@{|/noticeDetail/${item.iid}|}"></a>
+                        </span>
                         <span class="content5" th:text="관리자"></span>
                         <span class="content4" th:text="${#temporals.format(item.createDate,'yyyy-MM-dd')}"></span>
                     </li>

@@ -490,10 +490,10 @@
 .section_box {
     /* 기본적인 스타일 */
     opacity: 0; /* 초기에는 투명하게 설정 */
-    transform: translateY(50px); /* 아래에서 위로 50px 만큼 이동 */
+    transform: translateY(100px); /* 아래에서 위로 50px 만큼 이동 */
 
     /* 트랜지션 */
-    transition: opacity 0.5s ease, transform 0.5s ease; /* 변경 사항에 대한 애니메이션 지정 */
+    transition: opacity 0.7s ease, transform 0.7s ease; /* 변경 사항에 대한 애니메이션 지정 */
 }
 
 .section_box.show {
