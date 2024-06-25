@@ -122,8 +122,17 @@ public class MyPageServiceImpl implements MyPageService{
     public String updateNickname(Long id, String nickname, String profile) {
         User user = repository.findById(id)
                 .orElseThrow(() -> new RuntimeException("User not found"));
+
+        int startIndex = profile.indexOf("%2F") + 3;
+
+        if (startIndex < 3) { // 파일이 없다면 예외 던짐
+            throw new IllegalArgumentException("Invalid S3 URL");
+        }
+
+        String delete_file = profile.substring(startIndex);
+
         user.setNickname(nickname);
-        user.setProfile(profile);
+        user.setProfile(delete_file);
 
         repository.save(user);
         return user.getNickname() + user.getProfile();

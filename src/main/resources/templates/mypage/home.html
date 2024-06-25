@@ -6,6 +6,8 @@
     <link rel="stylesheet" th:href="@{/css/mypage/home.css}">
     <link rel="stylesheet" th:href="@{/css/mypage/modal.css}">
     <link rel="stylesheet" th:href="@{/css/mypage/mypage.css}">
+    <script defer th:src="@{/js/mypage/modal.js}"></script>
+
 
 </head>
 <body>
@@ -17,7 +19,7 @@
     -->
     <div id="mypage-main" class="mymain">
         <article id="profile_top">
-            <img id="modalOpenButton" th:src="${result.profile}">
+            <img id="modalOpenButton" class="top-profile" th:src="'https://kdt-java5-2.s3.ap-northeast-2.amazonaws.com/profile/' + ${result.profile}">
             <p id="top-nickname" th:text="${result.nickname}"></p>
         </article>
         <div id="container">
@@ -30,6 +32,7 @@
                     <li><a th:href="@{/mypage/rlist}">작성 댓글 보기</a></li>
                 </ul>
             </nav>
+
             <article id="content">
                 <div class="article-1 article-2-content">
                     <p> 급식 확인하기 </p>
@@ -85,16 +88,16 @@
                     </li>
                     <li class="modal-li-3">
                         <!-- 임시로 넣어둠 -->
-                        <img th:src="${result.profile}">
+                        <img id="modal-img" th:src="'https://kdt-java5-2.s3.ap-northeast-2.amazonaws.com/profile/' + ${result.profile}">
                     </li>
-                    <!--<li class="modal-li-4"> &lt;!&ndash;일단 닉네임 성공시키고 하기 => s3 연동해서... 가능? ㅎ&ndash;&gt;
+                    <li class="modal-li-4"> <!--일단 닉네임 성공시키고 하기 => s3 연동해서... 가능? ㅎ-->
                         <label th:for="profile">이미지</label>
                         <input type="file" th:id="profile" th:name="profile">
-                    </li>-->
-                    <li class="modal-li-4">
+                    </li>
+                    <!--<li class="modal-li-4">
                         <label for="profile">이미지</label>
                         <input type="file" id="profile" name="profile">
-                    </li>
+                    </li>-->
                     <li class="modal-li-5">
                         <label th:for="nickname">닉네임</label>
                         <input type="text" th:id="nickname" th:name="nickname" th:value="${result.nickname}">
@@ -108,6 +111,5 @@
         </div>
     </div>
 
-    <script defer th:src="@{/js/mypage/modal.js}"></script>
 </body>
 </html>
