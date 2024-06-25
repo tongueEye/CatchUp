@@ -8,4 +8,6 @@ public interface UserQDSLRepository {
     User loginCheck(String id);
 
     Long idCheck(String id);
+
+    Long getuid(String id);
 }

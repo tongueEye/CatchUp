@@ -2,6 +2,7 @@ package com.catchup.catchup.repository;
 
 import com.catchup.catchup.domain.QUser;
 import com.catchup.catchup.domain.User;
+import com.querydsl.core.Tuple;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
 
@@ -34,4 +35,14 @@ public class UserQDSLRepositoryImpl implements UserQDSLRepository{
     }
 
 
+    /** Uid 가지고 오기 */
+    @Override
+    public Long getuid(String id) {
+        Long uid = queryFactory.select(user.uid)
+                .from(user)
+                .where(user.id.eq(id))
+                .fetchOne();
+
+        return uid;
+    }
 }

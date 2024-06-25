@@ -3,6 +3,9 @@ package com.catchup.catchup.controller.mypage;
 import com.catchup.catchup.domain.User;
 import com.catchup.catchup.dto.*;
 import com.catchup.catchup.service.MyPageService;
+import com.catchup.catchup.service.UserService;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -26,46 +29,63 @@ import java.util.List;
 public class MyPageController {
 
     private final MyPageService service;
+    private final UserService userService;
     /* user 정보 끌고 와야 함 */
 
     @GetMapping("/home")
-    public String mypage(Model model) {
+    public String mypage(HttpServletRequest request, Model model) {
 
+        HttpSession session = request.getSession(false);
+        if(session!=null && session.getAttribute("sessionId")!=null) {
+            Long uid = (Long) session.getAttribute("sessionId");
 
+            System.out.println(uid + "  >>>>>>>>>>>>>>>>>>>>>>> id ");
 
+            if (uid != null) {
+                /* 프로필 사진 뽑아내기 */
+                MyPageDTO result = service.getProfile(uid);
+                model.addAttribute("result", result);
 
-        /* 프로필 사진 뽑아내기 */
-        // MyPageDTO getid = service.getid(); // 세션 받으면 그걸로
-        MyPageDTO result = service.getProfile();
-        model.addAttribute("result", result);
+                /* 내가 문의한 내역 뽑아오기 */
+                List<InfoBoardDTO> qna = service.getQnaList(uid);
+                model.addAttribute("qna", qna);
+                model.addAttribute("uid", uid);
 
-        /* 내가 문의한 내역 뽑아오기 */
-        List<InfoBoardDTO> qna = service.getQnaList();
-        model.addAttribute("qna", qna);
-
-        model.addAttribute("view", "mypage/home");
+                model.addAttribute("view", "mypage/home");
+            } else {
+                model.addAttribute("view", "user/login");
+            }
+        }
         return "index";
     }
 
     /** 정보 수정 */
     @GetMapping("/info")
-    public String changeInfo(Model model) {
+    public String changeInfo(HttpServletRequest request, Model model) {
+
+        HttpSession session = request.getSession(false);
+        Long uid = (Long) session.getAttribute("sessionId");
+
         /* 프로필 사진 보여주는 곳 */
-        MyPageDTO result = service.getProfile();
+        MyPageDTO result = service.getProfile(uid);
         model.addAttribute("result", result);
 
         /* 기존 정보 불러오기 */
-        UserDTO dto = service.getInfo();
+        UserDTO dto = service.getInfo(uid);
         model.addAttribute("dto", dto);
         model.addAttribute("view", "mypage/info");
         return "index";
     }
 
     @PostMapping("/info")
-    public String changeInfoResult(@Valid @ModelAttribute("dto") UserDTO dto
+    public String changeInfoResult(HttpServletRequest request
+            , @Valid @ModelAttribute("dto") UserDTO dto
             , BindingResult bindingResult,  Model model) {
 
-        MyPageDTO result = service.getProfile();
+        HttpSession session = request.getSession(false);
+        Long uid = (Long) session.getAttribute("sessionId");
+
+        MyPageDTO result = service.getProfile(uid);
         model.addAttribute("result", result);
 
         if(bindingResult.hasErrors()) {
@@ -75,7 +95,7 @@ public class MyPageController {
             return "index";
         } else {
             /* 성공했을 떄 */
-            long id = service.modifyInfo(dto);
+            long id = service.modifyInfo(dto, uid);
             model.addAttribute("dto", dto);
             model.addAttribute("view", "mypage/home");
             return "index";
@@ -85,15 +105,19 @@ public class MyPageController {
 
     /** 내가 쓴 글 보기*/
     @GetMapping("wlist")
-    public String writeList(
-            @PageableDefault(size = 10, page = 0, sort = "boardId", direction = Sort.Direction.ASC) Pageable pageable
+    public String writeList(HttpServletRequest request
+            , @PageableDefault(size = 10, page = 0, sort = "boardId", direction = Sort.Direction.ASC) Pageable pageable
             , Model model) {
         /* 프로필 사진 보여주는 곳 */
-        MyPageDTO result = service.getProfile();
+
+        HttpSession session = request.getSession(false);
+        Long uid = (Long) session.getAttribute("sessionId");
+
+        MyPageDTO result = service.getProfile(uid);
         model.addAttribute("result", result);
 
         /** 내가 쓴 글 보기 */
-        Page<FreeBoardDTO> boardlist = service.boardlist(pageable);
+        Page<FreeBoardDTO> boardlist = service.boardlist(pageable, uid);
 
         // 페이징
         int pageSize= 5;
@@ -111,12 +135,15 @@ public class MyPageController {
 
     /** 내가 쓴 댓글 보기 */
     @GetMapping("rlist")
-    public String repBoardList(
-            @PageableDefault(size = 10, page = 0, sort = "boardId", direction = Sort.Direction.ASC) Pageable pageable
+    public String repBoardList(HttpServletRequest request
+            , @PageableDefault(size = 10, page = 0, sort = "boardId", direction = Sort.Direction.ASC) Pageable pageable
             , Model model) {
 
+        HttpSession session = request.getSession(false);
+        Long uid = (Long) session.getAttribute("sessionId");
+
         /* 프로필 사진 보여주는 곳 */
-        MyPageDTO result = service.getProfile();
+        MyPageDTO result = service.getProfile(uid);
         model.addAttribute("result", result);
 
         /** 댓글 DTO 생기면 수정하기 */
@@ -126,16 +153,5 @@ public class MyPageController {
 
         model.addAttribute("view", "mypage/repboardlist");
         return "index";
-    }
-
-    @PostMapping("/profileupdate")
-    public ResponseEntity<String> updateProfile(@RequestBody UserDTO dto, Model model) {
-        // 세션 처리 완료되면 변경하기
-        Long id = 101L;
-
-        log.info("aaddasdsadasda {}", dto.getNickname());
-
-        String profile = service.updateNickname(id, dto.getNickname(), dto.getProfile());
-        return ResponseEntity.ok(profile);
     }
 }

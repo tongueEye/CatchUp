@@ -4,12 +4,14 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <link rel="stylesheet" th:href="@{/css/mypage/mypage.css}">
+    <link rel="stylesheet" th:href="@{/css/mypage/modal.css}">
+    <script defer th:src="@{/js/mypage/modal.js}"></script>
 </head>
 <body>
     <div id="mypage-main">
         <article id="profile_top">
-            <img id="modalOpenButton" th:src="${result.profile}">
-            <p th:text="${result.nickname}"></p>
+            <img id="modalOpenButton" class="top-profile" th:src="'https://kdt-java5-2.s3.ap-northeast-2.amazonaws.com/profile/' + ${result.profile}">
+            <p id="top-nickname" th:text="${result.nickname}"></p>
         </article>
         <div id="container">
             <nav>
@@ -25,6 +27,43 @@
                 <h2> 댓글 내역 보기 </h2>
 
             </article>
+        </div>
+    </div>
+
+    <!-- 모달창 -->
+    <div id="modalContainer" class="hidden">
+        <div id="modalContent">
+            <form>
+                <ul>
+                    <li class="modal-li-1">
+                        <h2>프로필 이미지 변경하기</h2>
+                        <p class="modalClose">X</p>
+                    </li>
+                    <li class="modal-li-2">
+                        <p> 나를 소개하는 이미지를 넣어주세요. </p>
+                    </li>
+                    <li class="modal-li-3">
+                        <!-- 임시로 넣어둠 -->
+                        <img id="modal-img" th:src="'https://kdt-java5-2.s3.ap-northeast-2.amazonaws.com/profile/' + ${result.profile}">
+                    </li>
+                    <li class="modal-li-4"> <!--일단 닉네임 성공시키고 하기 => s3 연동해서... 가능? ㅎ-->
+                        <label th:for="profile">이미지</label>
+                        <input type="file" th:id="profile" th:name="profile">
+                    </li>
+                    <!--<li class="modal-li-4">
+                        <label for="profile">이미지</label>
+                        <input type="file" id="profile" name="profile">
+                    </li>-->
+                    <li class="modal-li-5">
+                        <label th:for="nickname">닉네임</label>
+                        <input type="text" th:id="nickname" th:name="nickname" th:value="${result.nickname}">
+                    </li>
+                    <li class="modal-li-6">
+                        <button type="submit" id="submit"> 저장하기 </button>
+                        <button type="reset"> 취소하기 </button>
+                    </li>
+                </ul>
+            </form>
         </div>
     </div>
 </body>
