@@ -19,7 +19,7 @@
                 <h4 id="field2" th:text="${dto.title}"></h4>
             </div>
 
-            <div class="btn_box">
+            <div class="btn_box" th:if="${uid==100 || uid==dto.uid}">
                 <a id="edit_btn" th:href="@{|/noticeUpdate/${dto.iid}|}">수정하기</a>
                 <a id="delete_btn" th:href="@{|/noticeDelete/${dto.iid}|}">삭제하기</a>
             </div>
@@ -36,7 +36,7 @@
         <!--프로필 영역-->
         <section class="info_section">
             <div class="profile_box">
-                <div id="profile_img"></div>
+                <div id="profile_img"><img th:src="'https://kdt-java5-2.s3.ap-northeast-2.amazonaws.com/profile/' + ${profile}"></div>
                 <h4 th:text="${dto.writer}"></h4>
             </div>
 
