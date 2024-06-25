@@ -7,6 +7,7 @@ import com.catchup.catchup.repository.InfoBoardRepository;
 import com.catchup.catchup.repository.MyPageRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -17,6 +18,7 @@ import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class MyPageServiceImpl implements MyPageService{
 
     private final MyPageRepository repository;
@@ -25,8 +27,9 @@ public class MyPageServiceImpl implements MyPageService{
     private final ModelMapper modelMapper;
 
     @Override
-    public MyPageDTO getProfile() {
-        Optional<User> result = repository.findById(101L);
+    public MyPageDTO getProfile(Long uid) {
+
+        Optional<User> result = repository.findById(uid);
 
         // 출력하려면 entity -> dto 변환하기
         modelMapper.map(User.class, MyPageDTO.class);
@@ -41,11 +44,10 @@ public class MyPageServiceImpl implements MyPageService{
 
     /** 마이페이지 정보 수정 => 기존값 불러오기 */
     @Override
-    public UserDTO getInfo() {
+    public UserDTO getInfo(Long uid) {
 
         // 세션 정보 받아와야 함...
-        Long id = 101L;
-        Optional<User> result = repository.findById(id);// update 해 줘야 함 => 받아줘야
+        Optional<User> result = repository.findById(uid);// update 해 줘야 함 => 받아줘야
         UserDTO list = result.stream().map(item -> modelMapper.map(item, UserDTO.class))
                 .findAny()
                 .orElseThrow(() -> {
@@ -57,9 +59,8 @@ public class MyPageServiceImpl implements MyPageService{
     /** 리얼 트루 정보 수정 */
     @Transactional
     @Override
-    public long modifyInfo(UserDTO dto) {
-        Long id = 101L; // 세션 받아ㅏㅏㅏㅏㅏ
-        User user = repository.findById(id)
+    public long modifyInfo(UserDTO dto, Long uid) {
+        User user = repository.findById(uid)
                 .orElseThrow(() -> new RuntimeException("User not found"));
 
         user.setPassword(dto.getPassword());
@@ -68,7 +69,7 @@ public class MyPageServiceImpl implements MyPageService{
         user.setAddr(dto.getAddr());
 
         repository.save(user);
-        return id;
+        return uid;
     }
 
 
@@ -82,10 +83,9 @@ public class MyPageServiceImpl implements MyPageService{
 
     /** 내가 쓴 글 불러오기 */
     @Override
-    public Page<FreeBoardDTO> boardlist(Pageable pageable) {
+    public Page<FreeBoardDTO> boardlist(Pageable pageable, Long uid) {
 
-        Long id = 101L; // session에서 받아올 애 ...
-        Page<FreeBoardDTO> list = freeRepository.list(id, pageable);
+        Page<FreeBoardDTO> list = freeRepository.list(uid, pageable);
 
         return list;
     }
@@ -108,11 +108,10 @@ public class MyPageServiceImpl implements MyPageService{
     }
 
     @Override // Qna 리스트
-    public List<InfoBoardDTO> getQnaList() {
+    public List<InfoBoardDTO> getQnaList(Long uid) {
 
         /* 세션값 받으면 수정해야 함 */
-        Long id = 101L;
-        List<InfoBoardDTO> list = infoRepository.mypageList(id);
+        List<InfoBoardDTO> list = infoRepository.mypageList(uid);
 
         return list;
     }
@@ -137,8 +136,4 @@ public class MyPageServiceImpl implements MyPageService{
         repository.save(user);
         return user.getNickname() + user.getProfile();
     }
-
-
-
-
 }

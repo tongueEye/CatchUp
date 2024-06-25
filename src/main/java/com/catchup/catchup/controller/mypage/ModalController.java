@@ -3,6 +3,8 @@ package com.catchup.catchup.controller.mypage;
 import com.catchup.catchup.dto.UserDTO;
 import com.catchup.catchup.service.AWSService;
 import com.catchup.catchup.service.MyPageService;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -25,14 +27,16 @@ public class ModalController {
     private final AWSService S3Service;
 
     @PostMapping("/profileupdate")
-    public ResponseEntity<String> updateProfile(@RequestBody UserDTO dto, Model model) {
+    public ResponseEntity<String> updateProfile(HttpServletRequest request
+            , @RequestBody UserDTO dto, Model model) {
         // 세션 처리 완료되면 변경하기
-        Long id = 101L;
+        HttpSession session = request.getSession(false);
+        Long uid = (Long) session.getAttribute("sessionId");
 
         log.info("nickname >>>>>>>>>>>>>>> {}", dto.getNickname());
         log.info("profile >>>>>>>>>>>> {} ", dto.getProfile());
 
-        String profile = service.updateNickname(id, dto.getNickname(), dto.getProfile());
+        String profile = service.updateNickname(uid, dto.getNickname(), dto.getProfile());
         return ResponseEntity.ok(profile);
     }
 }
