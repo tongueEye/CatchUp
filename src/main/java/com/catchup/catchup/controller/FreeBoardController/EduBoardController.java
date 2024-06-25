@@ -8,6 +8,7 @@ import com.catchup.catchup.service.FreeBoardService;
 import com.catchup.catchup.service.UserService;
 import com.querydsl.core.Tuple;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
@@ -38,13 +39,24 @@ public class EduBoardController {
             , @RequestParam(required = false, defaultValue = "") String searchTxt
             , @RequestParam(required = false, defaultValue = "") String kind
             , @PageableDefault(size = 5, page = 0, sort = "fid", direction = Sort.Direction.ASC) Pageable pageable
+            , HttpServletRequest request
             , Model model
-    ){
+    ) {
+        Long sessionId = 0L;
+        HttpSession session = request.getSession(false);
+        if (session != null && session.getAttribute("sessionId") != null) {
+            sessionId = (Long) session.getAttribute("sessionId");
+        }
+
         Page<FreeBoardDTO> boardList = freeService.boardList(search, searchTxt, kind, pageable);
         int pageSize = 5;
-        int startPage = ((int)(Math.ceil(pageable.getPageNumber()/pageSize))) *pageSize+1;
-        int endPage=Math.min(startPage+ pageSize-1, boardList.getTotalPages());
+        int startPage = ((int) (Math.ceil(pageable.getPageNumber() / pageSize))) * pageSize + 1;
+        int endPage = Math.min(startPage + pageSize - 1, boardList.getTotalPages());
 
+        List<FreeBoardDTO> hotList = freeService.mostView();
+
+        model.addAttribute("sessionId", sessionId);
+        model.addAttribute("hotList", hotList);
         model.addAttribute("boardList", boardList);
         model.addAttribute("startPage", startPage);
         model.addAttribute("endPage", endPage);
@@ -53,14 +65,20 @@ public class EduBoardController {
         model.addAttribute("view", "freeBoard/eduBoard");
         return "index";
     }
-    
+
     /** 게시글 세부 **/
     @GetMapping("/edudetail/{fid}")
-    public String comDetail(@PathVariable Long fid, Model model){
+    public String comDetail(@PathVariable Long fid, HttpServletRequest request, Model model) {
+
+        Long sessionId = 0L;
+        HttpSession session = request.getSession(false);
+        if (session != null && session.getAttribute("sessionId") != null) {
+            sessionId = (Long) session.getAttribute("sessionId");
+        }
+
         FreeBoardDTO dto = freeService.boardDetail(fid);
 
-        /** session ID **/
-        model.addAttribute("sessionId", 100);
+        model.addAttribute("sessionId", sessionId);
         model.addAttribute("dto", dto);
         model.addAttribute("view", "freeBoard/eduDetail");
         return "index";
@@ -68,15 +86,22 @@ public class EduBoardController {
 
     /** 게시글 작성 페이지 **/
     @GetMapping("/writeFree")
-    public String boardInsert(Model model) {
-        //세션 받은 후 이부분 수정해야 함.
-        UserDTO userDTO = userService.findUserById(100L);
+    public String boardInsert(HttpServletRequest request, Model model) {
+
+        Long sessionId = 0L;
+        HttpSession session = request.getSession(false);
+        if (session != null && session.getAttribute("sessionId") != null) {
+            sessionId = (Long) session.getAttribute("sessionId");
+        }
+
+        UserDTO userDTO = userService.findUserById(sessionId);
 
         model.addAttribute("dto", new FreeBoardDTO());
         model.addAttribute("user", userDTO);
-            model.addAttribute("view", "freeBoard/boardInsert");
+        model.addAttribute("view", "freeBoard/boardInsert");
         return "index";
     }
+
     /** 게시글 작성 폼 **/
     @PostMapping("/writeFree")
     public String boardInsertResult(
@@ -85,8 +110,8 @@ public class EduBoardController {
             , @RequestParam(name = "content", required = false) String content
             , @RequestParam(name = "writer", required = false) String writer
             , @RequestParam(name = "kind", required = false) String kind
-            , @RequestParam(name = "cnt", required = false) Integer cnt
-            , @RequestParam(name = "uid") long uid
+            , @RequestParam(name = "count", required = false) Integer count
+            , @RequestParam(name = "sessionId") long sessionId
     ) {
 
         FreeBoardDTO dto = FreeBoardDTO.builder()
@@ -95,8 +120,8 @@ public class EduBoardController {
                 .content(content)
                 .writer(writer)
                 .kind(kind)
-                .cnt(cnt)
-                .uid(uid)
+                .count(count)
+                .uid(sessionId)
                 .createDate(LocalDateTime.now())
                 .build();
 
@@ -107,13 +132,19 @@ public class EduBoardController {
 
     /** 게시글 수정 페이지 **/
     @GetMapping("/boardUpdate/{fid}")
-    public String qnaUpdate(@PathVariable Long fid, Model model){
+    public String boardUpdate(@PathVariable Long fid, HttpServletRequest request, Model model) {
         FreeBoardDTO dto = freeService.boardDetail(fid);
 
-        //세션 받은 후 이부분 수정해야 함.
-        UserDTO userDTO = userService.findUserById(101L);
+        Long sessionId = 0L;
+        HttpSession session = request.getSession(false);
+        if (session != null && session.getAttribute("sessionId") != null) {
+            sessionId = (Long) session.getAttribute("sessionId");
+        }
+
+        UserDTO userDTO = userService.findUserById(sessionId);
 
         model.addAttribute("dto", dto);
+        model.addAttribute("sessionId", sessionId);
         model.addAttribute("user", userDTO);
         model.addAttribute("view", "freeBoard/boardUpdate");
         return "index";
@@ -121,15 +152,15 @@ public class EduBoardController {
 
     /** 게시글 수정 폼 **/
     @PostMapping("/boardUpdate/{fid}")
-    public String qnaUpdateResult(
+    public String boardUpdateResult(
             @PathVariable Long fid
             , @RequestParam(name = "cate", required = false) String cate
             , @RequestParam(name = "title", required = false) String title
             , @RequestParam(name = "content", required = false) String content
             , @RequestParam(name = "writer", required = false) String writer
             , @RequestParam(name = "kind", required = false) String kind
-            , @RequestParam(name = "cnt", required = false) Integer cnt
-            , @RequestParam(name = "uid") long uid
+            , @RequestParam(name = "count", required = false) Integer count
+            , @RequestParam(name = "sessionId") long sessionId
 
     ) {
 
@@ -139,8 +170,8 @@ public class EduBoardController {
                 .content(content)
                 .writer(writer)
                 .kind(kind)
-                .cnt(cnt)
-                .uid(uid)
+                .count(count)
+                .uid(sessionId)
                 .createDate(LocalDateTime.now())
                 .fid(fid)
                 .build();
@@ -148,12 +179,12 @@ public class EduBoardController {
 
         Long update_fid = freeService.boardUpdate(dto);
 
-        return "redirect:/edudetail/"+update_fid;
+        return "redirect:/edudetail/" + update_fid;
     }
 
     /** 게시글 삭제 **/
     @GetMapping("/boardDelete/{fid}")
-    public String qnaDelete(@PathVariable Long fid, Model model){
+    public String qnaDelete(@PathVariable Long fid, Model model) {
 
         Long id = freeService.boardDelete(fid);
         return "redirect:/eduboard";
@@ -162,25 +193,28 @@ public class EduBoardController {
 
     /** 댓글 리스트 **/
     @GetMapping("/replist/{fid}")
-    public ResponseEntity<List<FreeBoardDTO>> repList(@PathVariable Long fid){
+    public ResponseEntity<List<FreeBoardDTO>> repList(@PathVariable Long fid) {
         List<FreeBoardDTO> list = freeService.repList(fid);
         return ResponseEntity.ok().body(list);
     }
-    
+
     /** 댓글 추가 **/
     @PostMapping("/repinsert")
-    public ResponseEntity<List<FreeBoardDTO>> repInsert(@RequestBody RepBoardDTO dto, HttpServletRequest request){
-        // sessionID 후에 수정
-        Long sessionId = 100L;
-//        log.info("Session ID: " + sessionId);
+    public ResponseEntity<List<FreeBoardDTO>> repInsert(@RequestBody RepBoardDTO dto, HttpServletRequest request) {
+
+        Long sessionId = 0L;
+        HttpSession session = request.getSession(false);
+        if (session != null && session.getAttribute("sessionId") != null) {
+            sessionId = (Long) session.getAttribute("sessionId");
+        }
 
         Long result = freeService.repInsert(dto, sessionId);
         List<FreeBoardDTO> repList = freeService.repList(dto.getFid());
         return ResponseEntity.ok().body(repList);
     }
-    
+
     /** 댓글 삭제 **/
-    @GetMapping ("/repdelete/{frid}")
+    @GetMapping("/repdelete/{frid}")
     @ResponseBody
     public ResponseEntity<String> repDelete(@PathVariable Long frid) {
         Long result = freeService.repDelete(frid);

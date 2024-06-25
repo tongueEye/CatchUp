@@ -8,32 +8,28 @@
 </head>
 <body>
 
-<!--사이드 메뉴-->
 <section id="eduBoard">
-
+    <div th:text="${sessionId}"></div>
+    <!--사이드 메뉴-->
     <section id="sideMenu">
         <aside>
             <h3>카테고리</h3>
             <ul>
-                <li>뉴스</li>
-                <li>초등학교</li>
-                <li>중학교</li>
-                <li>고등학교</li>
-                <li>학원추천</li>
+                <li><a href="/eduboard?search=cate&searchTxt=뉴스">뉴스</a></li>
+                <li><a href="/eduboard?search=cate&searchTxt=초등">초등학교</a></li>
+                <li><a href="/eduboard?search=cate&searchTxt=중등">중학교</a></li>
+                <li><a href="/eduboard?search=cate&searchTxt=고등">고등학교</a></li>
+                <li><a href="/eduboard?search=cate&searchTxt=학원">학원추천</a></li>
             </ul>
         </aside>
         <aside>
             <h3>조회수</h3>
-            <ul>
-                <li>1</li>
-                <li>2</li>
-                <li>3</li>
-                <li>4</li>
-                <li>5</li>
+            <ul th:each="i:${hotList}">
+                <li><a th:href="@{|/edudetail/${i.fid}|}" th:text="${i.title}"></a></li>
             </ul>
         </aside>
         <aside>
-            <h3>추천수</h3>
+            <h3>좋아요</h3>
             <ul>
                 <li>1</li>
                 <li>2</li>
@@ -52,6 +48,7 @@
                 <option value="title">제목</option>
                 <option value="content">내용</option>
                 <option value="writer">작성자</option>
+                <option value="cate">카테고리</option>
             </select>
             <input type="text" name="searchTxt">
         </form>
@@ -64,7 +61,7 @@
                 <li th:text="|${i.title}|"></li>
                 <li th:text="|작성자: ${i.writer}|"></li>
                 <li th:text="|${#temporals.format(i.createDate, 'yyyy-MM-dd')}|"></li>
-                <li th:text="|좋아요수: ${i.cnt}|"></li>
+                <li th:text="|조회수: ${i.count}|"></li>
             </a>
         </ul>
 

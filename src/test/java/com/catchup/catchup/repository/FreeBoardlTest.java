@@ -40,7 +40,7 @@ class FreeBoardlTest {
 
     @Test
     public void countTest(){
-        Integer cnt = queryFactory.select(freeBoard.cnt)
+        Integer cnt = queryFactory.select(freeBoard.count)
                 .from(freeBoard)
                 .where(freeBoard.fid.eq(10L))
                 .fetchOne();
@@ -123,7 +123,7 @@ class FreeBoardlTest {
                 .freeBoard(freeBoard)
                 .build();
         loveRepository.save(love);
-        freeRepository.addLove(21L);
+//        freeRepository.addLove(21L);
     }
 
     @Test
@@ -137,7 +137,7 @@ class FreeBoardlTest {
                 .orElseThrow(() -> new NotFoundException("Could not found lid"));
 
         loveRepository.delete(love);
-        freeRepository.delLove(21L);
+//        freeRepository.delLove(21L);
     }
 
     @Test

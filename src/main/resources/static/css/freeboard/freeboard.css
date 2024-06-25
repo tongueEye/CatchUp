@@ -110,6 +110,34 @@ form{
     border: 1px solid silver;
 }
 
+#option_toggle{
+    width: 70px;
+    height: 70px;
+    background-image: url(../../img/freeboard/option.png);
+    background-size: cover;
+}
+
+#qna_img{
+    width: 70px;
+    height: 70px;
+    background-image: url(../../img/freeboard/inquiry.png);
+    background-size: cover;
+}
+
+#mod_img{
+    width: 70px;
+    height: 70px;
+    background-image: url(../../img/freeboard/note.png);
+    background-size: cover;
+}
+
+#del_img{
+     width: 70px;
+     height: 70px;
+     background-image: url(../../img/freeboard/trash.png);
+     background-size: cover;
+ }
+
 #content{
     min-height: 50vh;
     border: 2px solid #9BA2D7;
@@ -117,7 +145,13 @@ form{
     padding: 10px
 }
 
-#rec_btn{
+#like_img{
+    width: 70px;
+    height: 70px;
+    background-image: url(../../img/freeboard/heart.png);
+    background-size: cover;
+}
+#like_btn{
     margin: 20px 0;
     width: 100px;
     position: relative;
