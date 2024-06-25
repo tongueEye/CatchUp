@@ -31,6 +31,9 @@ public class MyPageController {
     @GetMapping("/home")
     public String mypage(Model model) {
 
+
+
+
         /* 프로필 사진 뽑아내기 */
         // MyPageDTO getid = service.getid(); // 세션 받으면 그걸로
         MyPageDTO result = service.getProfile();
@@ -125,31 +128,14 @@ public class MyPageController {
         return "index";
     }
 
+    @PostMapping("/profileupdate")
+    public ResponseEntity<String> updateProfile(@RequestBody UserDTO dto, Model model) {
+        // 세션 처리 완료되면 변경하기
+        Long id = 101L;
 
-    /** 모달창에서 프로필 수정하기 */
-    /*@GetMapping("/modal")
-    public String modal(Model model) {
+        log.info("aaddasdsadasda {}", dto.getNickname());
 
-        model.addAttribute("view", "mypage/home");
-        return "index";
+        String profile = service.updateNickname(id, dto.getNickname(), dto.getProfile());
+        return ResponseEntity.ok(profile);
     }
-
-    @PostMapping("/modal")
-    public String modalResult(@Valid @ModelAttribute("dto") UserDTO dto, BindingResult bindingResult
-                              ,Model model) {
-
-        if (bindingResult.hasErrors()) {
-            model.addAttribute("view", "mypage/home");
-            return "index";
-        } else {
-            // 닉네임 업데이트 코드
-            long id = service.modifyProfile(dto);
-            model.addAttribute("view", "mypage/home");
-            return "index";
-        }
-    }*/
-
-
-
-
 }

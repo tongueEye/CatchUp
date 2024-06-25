@@ -26,11 +26,11 @@ p, a {
     position: relative;
 }
 /* 프로필 부분 */
-#mypage-main  #profile {
+#mypage-main  #profile_top {
     z-index: 2;
 }
 
-#mypage-main  #profile > img {
+#mypage-main  #profile_top > img {
     width: 200px;
     height: 200px;
     border-radius: 50%;
