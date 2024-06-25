@@ -27,12 +27,12 @@ public class AWSService {
 
     private final AmazonS3 amazonS3;
 
-    public List<String> uploadFile(List<MultipartFile> multipartFiles) {
+    public List<String> uploadFile(List<MultipartFile> multipartFiles, String folderName) {
         List<String> fileNameList = new ArrayList<>();
         log.info("file......{}",multipartFiles);
         if (multipartFiles != null) {
             multipartFiles.forEach(file -> {
-                String fileName = createFileName(file.getOriginalFilename());
+                String fileName = folderName+'/'+createFileName(file.getOriginalFilename());
                 ObjectMetadata objectMetadata = new ObjectMetadata();
                 objectMetadata.setContentLength(file.getSize());
                 objectMetadata.setContentType(file.getContentType());
@@ -67,6 +67,9 @@ public class AWSService {
     }
 
     public void deleteFile(String fileName){
+        System.out.println(">>>>>>>>> 버킷: "+bucket+"///파일 명:"+fileName);
+        System.out.println(">>>>>>>>> "+bucket+fileName);
         amazonS3.deleteObject(new DeleteObjectRequest(bucket, fileName));
+
     }
 }
