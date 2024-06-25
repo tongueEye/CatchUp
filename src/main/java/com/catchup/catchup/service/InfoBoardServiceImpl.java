@@ -99,6 +99,8 @@ public class InfoBoardServiceImpl implements InfoBoardService{
                 item->modelMapper.map(item, InfoBoardDTO.class)).findAny()
                 .orElseThrow(()->new RuntimeException()
                 );
+        System.out.println("uid 가져오는지 테스트: "+dto.getUid());
+        System.out.println("uid 가져오는지 테스트: "+dto.getCate());
         return dto;
     }
 

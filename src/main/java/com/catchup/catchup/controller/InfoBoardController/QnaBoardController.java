@@ -6,6 +6,9 @@ import com.catchup.catchup.dto.InfoBoardDTO;
 import com.catchup.catchup.dto.UserDTO;
 import com.catchup.catchup.service.InfoBoardService;
 import com.catchup.catchup.service.UserService;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -33,33 +36,52 @@ public class QnaBoardController {
             , @RequestParam(required = false, defaultValue = "") String searchtxt
             , @RequestParam(required = false, defaultValue = "") String kind
             , @PageableDefault(size = 5, page = 0, sort = "iid", direction = Sort.Direction.ASC) Pageable pageable
+            , HttpServletRequest request
             , Model model
     ){
+
+        //세션으로 uid 가져오기
+        Long uid  = 0L;
+        HttpSession session = request.getSession(false);
+        if(session!=null && session.getAttribute("sessionId")!=null) {
+            uid = (Long) session.getAttribute("sessionId");
+        }
 
         Page<InfoBoardDTO> qnaList = infoService.getQnaList(search, searchtxt, kind, pageable);
         int pageSize = 5;
         int startPage = ((int) Math.ceil(pageable.getPageNumber()/pageSize))*pageSize+1;
         int endPage = Math.min(startPage+pageSize-1, qnaList.getTotalPages());
+
         model.addAttribute("qnaList", qnaList);
         model.addAttribute("startPage", startPage);
         model.addAttribute("endPage", endPage);
         model.addAttribute("search", search);
         model.addAttribute("searchtxt", searchtxt);
-
+        model.addAttribute("uid",uid);
         model.addAttribute("view", "infoboard/qnaboard");
         return "index";
     }
 
     @GetMapping("/writeQna")
-    public String qnaInsert(Model model) {
+    public String qnaInsert(
+            HttpServletRequest request
+            , Model model
+    ) {
 
-        //세션 받은 후 이부분 수정해야 함.
-        UserDTO userDTO = userService.findUserById(101L);
+        //세션으로 uid 가져오기
+        Long uid  = 0L;
+        HttpSession session = request.getSession(false);
+        if(session!=null && session.getAttribute("sessionId")!=null) {
+            uid = (Long) session.getAttribute("sessionId");
+        }
+
+        UserDTO userDTO = userService.findUserById(uid);
 
         //System.out.println("nickname:"+userDTO.getNickname());
 
         model.addAttribute("dto", new InfoBoardDTO());
         model.addAttribute("user", userDTO);
+        model.addAttribute("uid", uid);
         model.addAttribute("view", "infoboard/qnaInsert");
         return "index";
     }
@@ -93,10 +115,23 @@ public class QnaBoardController {
     @GetMapping("/qnaDetail/{iid}")
     public String qnaDetail(
             @PathVariable Long iid
+            , HttpServletRequest request
             , Model model
     ){
+
+        //세션으로 uid 가져오기
+        Long uid  = 0L;
+        HttpSession session = request.getSession(false);
+        if(session!=null && session.getAttribute("sessionId")!=null) {
+            uid = (Long) session.getAttribute("sessionId");
+        }
+
         InfoBoardDTO dto = infoService.getDetail(iid);
+
+        System.out.println("uid_test:"+iid);
+        System.out.println("uid_test:"+dto.getUid());
         model.addAttribute("dto", dto);
+        model.addAttribute("uid", uid);
         model.addAttribute("view", "infoBoard/qnaDetail");
         return "index";
     }
