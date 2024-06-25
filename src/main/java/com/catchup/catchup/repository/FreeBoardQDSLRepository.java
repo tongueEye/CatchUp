@@ -14,11 +14,13 @@ import java.util.List;
 public interface FreeBoardQDSLRepository {
     Page<FreeBoardDTO> search(SearchCondition condition, Pageable pageable);
 
-    void addLove(Long fid);
+//    void addLove(Long fid);
+//
+//    void delLove(Long fid);
 
-    void delLove(Long fid);
-
-//    List<FreeBoardDTO> repList(Long fid);
     Page<FreeBoardDTO> list(Long id, Pageable pageable); // 채원
 
+    void updateCount(Long fid);
+
+    List<FreeBoardDTO> mostView();
 }

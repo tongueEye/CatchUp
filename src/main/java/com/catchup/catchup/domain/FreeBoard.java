@@ -27,8 +27,7 @@ public class FreeBoard extends BoardBase {
     @Column(name = "update_date")
     private LocalDateTime updateDate;
 
-    @Column(name = "count")
-    private Integer cnt;
+    private Integer count;
     private String link;
 
     //uid 외래키

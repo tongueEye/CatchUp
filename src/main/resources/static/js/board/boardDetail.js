@@ -140,7 +140,7 @@ window.onload = function () {
         });
     }
     /** 좋아요 기능 **/
-    const loveBtn = document.getElementById('love_btn');
+    const likeBtn = document.getElementById('like_btn');
     const sessionId = document.getElementById('sessionId').value;
     const fid = document.getElementById('fid').value;
     let hasLiked = localStorage.getItem('hasLiked_' + sessionId + '_' + fid) === 'true'; // 로컬 스토리지에서 좋아요 상태 불러오기
@@ -150,9 +150,9 @@ window.onload = function () {
 
     function updateButton() {
         if (hasLiked) {
-            loveBtn.innerText = '취소';
+            likeBtn.innerText = '취소';
         } else {
-            loveBtn.innerText = '좋아요';
+            likeBtn.innerText = '좋아요';
         }
     }
 
@@ -187,6 +187,6 @@ window.onload = function () {
             });
     }
 
-    loveBtn.addEventListener('click', toggleLike);
+    likeBtn.addEventListener('click', toggleLike);
 };
 

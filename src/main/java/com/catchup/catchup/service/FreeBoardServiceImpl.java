@@ -52,6 +52,7 @@ public class FreeBoardServiceImpl implements FreeBoardService {
         condition.setTitle(null);
         condition.setContent(null);
         condition.setWriter(null);
+        condition.setCate(null);
         condition.setKind("e");
 
         if ("title".equals(search)) {
@@ -60,6 +61,8 @@ public class FreeBoardServiceImpl implements FreeBoardService {
             condition.setContent(searchTxt);
         } else if ("writer".equals(search)) {
             condition.setWriter(searchTxt);
+        } else if ("cate".equals(search)){
+            condition.setCate(searchTxt);
         }
 
         Page<FreeBoardDTO> searchList = freeRepository.search(condition, pageable);
@@ -67,11 +70,18 @@ public class FreeBoardServiceImpl implements FreeBoardService {
         return searchList;
     }
 
+    @Override
+    public List<FreeBoardDTO> mostView() {
+        List<FreeBoardDTO> hotList = freeRepository.mostView();
+        return hotList;
+    }
+
     /** 게시글 세부 **/
     @Override
     public FreeBoardDTO boardDetail(Long fid) {
         Optional<FreeBoard> freeBoard = freeRepository.findById(fid);
         FreeBoardDTO dto = modelMapper.map(freeBoard, FreeBoardDTO.class);
+        freeRepository.updateCount(fid);
         return dto;
     }
 
@@ -81,7 +91,6 @@ public class FreeBoardServiceImpl implements FreeBoardService {
         FreeBoard freeBoard = modelMapper.map(dto, FreeBoard.class);
         User user = new User();
         user.setUid(dto.getUid());
-
         freeBoard.setUser(user);
         FreeBoard save = freeRepository.save(freeBoard);
 
@@ -122,7 +131,7 @@ public class FreeBoardServiceImpl implements FreeBoardService {
             // S3에서 파일을 삭제
             if (imageUrl != null && !imageUrl.isEmpty()) {
                 // imageUrl에서 버킷 내 경로를 추출합니다.
-                String key = extractKeyFromUrl(imageUrl);
+                String key = extractKeyFromUrl(imageUrl, board.getKind());
                 awsService.deleteFile(key);
             }
         }
@@ -132,15 +141,29 @@ public class FreeBoardServiceImpl implements FreeBoardService {
         return fid;
     }
 
-    private String extractKeyFromUrl(String imageUrl) {
+    private String extractKeyFromUrl(String imageUrl, String boardKind) {
         // imageUrl에서 S3 버킷 내의 경로를 추출하는 코드
-        // ".com/" 이후의 부분을 추출
-        //"https://버킷명.s3.지역.amazonaws.com/경로에 저장된 이미지 이름" 일 때, 경로에 저장된 이미지 이름 추출
-        int startIndex = imageUrl.indexOf(".com/") + 5;
-        if (startIndex < 5) { // 파일이 없다면 예외 던짐
+        // "%2F" 이후의 부분을 추출
+        //"https://버킷명.s3.지역.amazonaws.com/폴더명%2F/경로에 저장된 이미지 이름" 일 때, 경로에 저장된 이미지 이름 추출
+
+        int startIndex = imageUrl.indexOf("%2F") + 3;
+
+        if (startIndex < 3) { // 파일이 없다면 예외 던짐
             throw new IllegalArgumentException("Invalid S3 URL");
         }
-        return imageUrl.substring(startIndex); //파싱한 이미지 이름값 리턴
+        //System.out.println("test0625 이미지url 추출:"+imageUrl.substring(startIndex));
+
+        String delete_file = imageUrl.substring(startIndex);
+
+        if (boardKind.equals("e")){
+            delete_file = "edu/"+imageUrl.substring(startIndex);
+        } else if (boardKind.equals("c")) {
+            delete_file = "comu/"+imageUrl.substring(startIndex);
+        }
+
+        //System.out.println("test0625 이미지url 경로:"+delete_file);
+
+        return delete_file; //파싱한 이미지 이름값 리턴
     }
 
     
@@ -198,7 +221,7 @@ public class FreeBoardServiceImpl implements FreeBoardService {
     }
 
 
-    /** 좋아요 추가 / 카운트 증가 **/
+    /** 좋아요 추가  **/
     @Override
     @Transactional
     public void addLove(LoveDTO dto) {
@@ -214,10 +237,9 @@ public class FreeBoardServiceImpl implements FreeBoardService {
                 .freeBoard(freeBoard)
                 .build();
         loveRepository.save(love);
-        freeRepository.addLove(dto.getFid());
     }
 
-    /** 좋아요 삭제 / 카운트 감소 **/
+    /** 좋아요 삭제  **/
     @Override
     @Transactional
     public void delLove(LoveDTO dto) {
@@ -229,7 +251,6 @@ public class FreeBoardServiceImpl implements FreeBoardService {
                 .orElseThrow(() -> new NotFoundException("Could not found lid"));
 
         loveRepository.delete(love);
-        freeRepository.delLove(dto.getFid());
     }
 
 
