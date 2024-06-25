@@ -4,12 +4,14 @@ import com.catchup.catchup.dto.FreeBoardDTO;
 import com.catchup.catchup.dto.RepBoardDTO;
 import com.catchup.catchup.service.FreeBoardService;
 import com.querydsl.core.Tuple;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.http.HttpRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,6 +26,7 @@ public class EduBoardController {
 
     private FreeBoardService freeService;
 
+    /** 게시글 목록 **/
     @GetMapping("/eduboard")
     public String comList(
             @RequestParam(required = false, defaultValue = "") String search
@@ -45,60 +48,46 @@ public class EduBoardController {
         model.addAttribute("view", "freeBoard/eduBoard");
         return "index";
     }
-
+    
+    /** 게시글 세부 **/
     @GetMapping("/edudetail/{fid}")
     public String comDetail(@PathVariable Long fid, Model model){
         List<FreeBoardDTO> list = freeService.boardDetail(fid);
 
         /** session ID **/
-        model.addAttribute("sessionId", 1);
+        model.addAttribute("sessionId", 100);
         model.addAttribute("list", list);
         model.addAttribute("view", "freeBoard/eduDetail");
         return "index";
     }
 
+    /** 게시글 작성 **/
     @GetMapping("/write")
     public String boardInsert(Model model) {
             model.addAttribute("view", "freeBoard/boardInsert");
         return "index";
     }
-////
-////    @PostMapping
-////    public String comInsertResult(FreeBoardDTO dto){
-////
-////        return null;
-////    }
-////
-////    @GetMapping
-////    public String comUpdate(Long fid){
-////
-////        return null;
-////    }
-////
-////    @PostMapping
-////    public String comUpdateResult(FreeBoardDTO dto){
-////
-////        return null;
-////    }
-////
-////    @PostMapping
-////    public String comDelete(Long fid){
-////        return null;
-////    }
 
+    /** 댓글 리스트 **/
     @GetMapping("/replist/{fid}")
     public ResponseEntity<List<FreeBoardDTO>> repList(@PathVariable Long fid){
         List<FreeBoardDTO> list = freeService.repList(fid);
         return ResponseEntity.ok().body(list);
     }
-
+    
+    /** 댓글 추가 **/
     @PostMapping("/repinsert")
-    public ResponseEntity<List<FreeBoardDTO>> repInsert(@RequestBody RepBoardDTO dto){
-        Long result = freeService.repInsert(dto);
+    public ResponseEntity<List<FreeBoardDTO>> repInsert(@RequestBody RepBoardDTO dto, HttpServletRequest request){
+        // sessionID 후에 수정
+        Long sessionId = 100L;
+//        log.info("Session ID: " + sessionId);
+
+        Long result = freeService.repInsert(dto, sessionId);
         List<FreeBoardDTO> repList = freeService.repList(dto.getFid());
         return ResponseEntity.ok().body(repList);
     }
-
+    
+    /** 댓글 삭제 **/
     @GetMapping ("/repdelete/{frid}")
     @ResponseBody
     public ResponseEntity<String> repDelete(@PathVariable Long frid) {

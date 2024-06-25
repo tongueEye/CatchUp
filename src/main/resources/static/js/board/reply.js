@@ -19,21 +19,22 @@ const replyList = function () {
     }).then((data) => {
         data.forEach(item => {
             let ele_li = document.createElement('li');
-            let profile = document.createTextNode(item.profile);
             let nickname = document.createTextNode(item.nickname);
+            let profile = document.createTextNode(item.profile);
             let content = document.createTextNode(item.frcontent);
             let c_date = document.createTextNode(item.frCreateDate);
             let u_date = document.createTextNode(item.frUpdateDate);
             let frid = item.frid;
 
-            ele_li.appendChild(profile);
             ele_li.appendChild(nickname);
+            ele_li.appendChild(profile);
             ele_li.appendChild(content);
             ele_li.appendChild(c_date);
             ele_li.appendChild(u_date);
 
             let deleteButton = document.createElement('button');
             deleteButton.textContent = '삭제';
+            deleteButton.id = 'del_btn'
             deleteButton.onclick = function() {
                 deleteRep(frid);
             };

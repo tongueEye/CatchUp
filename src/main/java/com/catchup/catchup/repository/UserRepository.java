@@ -13,5 +13,8 @@ public interface UserRepository extends JpaRepository<User, Long>, UserQDSLRepos
     @Override
     <S extends User> S save(S entity);
 
+    @Override
+    Optional<User> findById(Long aLong);
+
 
 }

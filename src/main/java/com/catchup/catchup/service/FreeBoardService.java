@@ -1,6 +1,7 @@
 package com.catchup.catchup.service;
 
 import com.catchup.catchup.dto.FreeBoardDTO;
+import com.catchup.catchup.dto.LoveDTO;
 import com.catchup.catchup.dto.RepBoardDTO;
 import com.catchup.catchup.dto.SearchCondition;
 import com.querydsl.core.Tuple;
@@ -17,7 +18,13 @@ public interface FreeBoardService {
 
     List<FreeBoardDTO> repList(Long fid);
 
-    Long repInsert(RepBoardDTO dto);
+    Long repInsert(RepBoardDTO dto, Long sessionId);
 
     Long repDelete(Long frid);
+
+    void addLove(LoveDTO dto);
+
+    void delLove(LoveDTO dto);
+
+    boolean loveCheck(LoveDTO dto);
 }

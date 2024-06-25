@@ -5,7 +5,7 @@
     <title>Title</title>
     <link rel="stylesheet" th:href="@{/css/freeboard/freeboard.css}">
     <script th:src="@{/js/board/reply.js}"></script>
-
+    <script th:src="@{/js/board/love.js}"></script>
 </head>
 <body>
 
@@ -14,10 +14,15 @@
     <section id="eduBoardDetail">
 
         <ul id="writer_info">
-            이미지 자리
             <li th:text="${i.profile}"></li>
             <li th:text="${i.title}"></li>
             <li th:text="|작성자  ${i.writer}|"></li>
+        </ul>
+
+        <ul id="setting">
+            <li><a th:href="@{/qna}">문의하기</a></li>
+            <li>수정</li>
+            <li>삭제</li>
         </ul>
 
         <section id="content">
@@ -26,11 +31,11 @@
 
     </section>
 
-    <button type="button" id="rec_btn">추천</button>
+    <button type="button" id="love_btn">좋아요</button>
 
     <section id="replySection">
 
-        <ul>
+        <ul th:id="reply_insert">
             <li>
                 <input type="text" name="rep_content" id="rep_content">
                 <input type="hidden" name="fid" id="fid" th:value="${i.fid}">
