@@ -13,4 +13,6 @@ public interface InfoBoardQDSLRepository {
 
     List<InfoBoardDTO> mypageList(Long id);
 
+    InfoBoardDTO findInfoById(Long iid);
+
 }

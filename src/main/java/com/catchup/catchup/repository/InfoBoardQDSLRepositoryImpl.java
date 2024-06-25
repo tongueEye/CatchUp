@@ -76,4 +76,25 @@ public class InfoBoardQDSLRepositoryImpl implements InfoBoardQDSLRepository{
 
         return mypagelist;
     }
+
+    @Override
+    public InfoBoardDTO findInfoById(Long iid) {
+        List<InfoBoardDTO> dto = queryFactory.select(Projections.fields(
+                InfoBoardDTO.class
+                , infoBoard.iid
+                , infoBoard.title
+                , infoBoard.content
+                , infoBoard.cate
+                , infoBoard.writer
+                , infoBoard.createDate
+                , infoBoard.repContent
+                , infoBoard.kind
+                , user.uid
+        )).from(infoBoard)
+                .join(infoBoard.user, user)
+                .where(infoBoard.iid.eq(iid))
+                .fetch();
+
+        return dto.get(0);
+    }
 }

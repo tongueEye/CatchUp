@@ -3,8 +3,10 @@ package com.catchup.catchup.controller.InfoBoardController;
 import com.catchup.catchup.domain.InfoBoard;
 import com.catchup.catchup.dto.FreeBoardDTO;
 import com.catchup.catchup.dto.InfoBoardDTO;
+import com.catchup.catchup.dto.MyPageDTO;
 import com.catchup.catchup.dto.UserDTO;
 import com.catchup.catchup.service.InfoBoardService;
+import com.catchup.catchup.service.MyPageService;
 import com.catchup.catchup.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -29,6 +31,8 @@ public class QnaBoardController {
 
     private final InfoBoardService infoService;
     private final UserService userService;
+
+    private final MyPageService myPageService;
 
     @GetMapping("/qna")
     public String qnaList(
@@ -128,9 +132,10 @@ public class QnaBoardController {
 
         InfoBoardDTO dto = infoService.getDetail(iid);
 
-        System.out.println("uid_test:"+iid);
-        System.out.println("uid_test:"+dto.getUid());
+        MyPageDTO myprofile = myPageService.getProfile(dto.getUid());
+
         model.addAttribute("dto", dto);
+        model.addAttribute("profile", myprofile.getProfile());
         model.addAttribute("uid", uid);
         model.addAttribute("view", "infoBoard/qnaDetail");
         return "index";

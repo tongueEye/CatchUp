@@ -93,12 +93,14 @@ public class InfoBoardServiceImpl implements InfoBoardService{
 
     @Override
     public InfoBoardDTO getDetail(Long iid) {
-        Optional<InfoBoard> info = infoRepository.findById(iid);
+//        Optional<InfoBoard> info = infoRepository.findById(iid);
+//
+//        InfoBoardDTO dto = info.stream().map(
+//                item->modelMapper.map(item, InfoBoardDTO.class)).findAny()
+//                .orElseThrow(()->new RuntimeException()
+//                );
 
-        InfoBoardDTO dto = info.stream().map(
-                item->modelMapper.map(item, InfoBoardDTO.class)).findAny()
-                .orElseThrow(()->new RuntimeException()
-                );
+        InfoBoardDTO dto = infoRepository.findInfoById(iid);
         System.out.println("uid 가져오는지 테스트: "+dto.getUid());
         System.out.println("uid 가져오는지 테스트: "+dto.getCate());
         return dto;
