@@ -11,8 +11,10 @@
 
 <div class="join_wrap">
 
-    <form th:action="@{'/joinresult'}" th:object="${dto}" method="post">
+
+    <form th:action="@{'/joinresult'}" th:object="${dto}" method="post" class="join_form">
         <ul>
+            <img src="/img/user/catchup_logo.png" alt="logo">
             <li class="join_box">
                 <label for="id" class="join_title">아이디</label>
                 <div class="join_idCK">
@@ -24,7 +26,7 @@
             </li>
             <li class="join_box">
                 <label for="password" class="join_title">비밀번호</label>
-                <span><input type="password" id="password" th:field="*{password}" class="join_input"></span>
+                <span><input type="password" id="password" th:field="*{password}" class="join_input" placeholder="영문 대or소문자, 숫자, 특수문자 6~12자"></span>
                 <span><th:block th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></th:block></span>
             </li>
             <li class="join_box">
@@ -44,32 +46,30 @@
             </li>
             <li class="join_box">
                 <label for="phone" class="join_title">전화번호</label>
-                <span><input type="text" id="phone" th:field="*{phone}" class="join_input"></span>
+                <span><input type="text" id="phone" th:field="*{phone}" class="join_input" placeholder="- 를 빼고 작성하세요"></span>
                 <span><th:block th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}"></th:block></span>
             </li>
             <li class="join_box">
                 <label class="join_title">주소</label>
                 <div class="juso_input">
                     <input type="text" id="sample6_postcode" placeholder="우편번호" class="juso_input1">
-                    <input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기" class="find_post"><br>
+                    <input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기" class="find_post">
                 </div>
-                <input type="text" id="sample6_address" th:field="*{addr}" placeholder="주소" class="juso_input2"><br>
+                <input type="text" id="sample6_address" th:field="*{addr}" placeholder="주소" class="juso_input2">
                 <div class="juso_input3">
                     <input type="text" id="sample6_detailAddress" placeholder="상세주소" class="juso_input33">
-                    <input type="text" id="sample6_extraAddress" placeholder="참고항목" class="juso_input33">
+                    <input type="text" id="sample6_extraAddress" placeholder="참고항목" class="juso_input44">
                 </div>
                 <span><th:block th:if="${#fields.hasErrors('addr')}" th:errors="*{addr}"></th:block></span>
             </li>
             <li>
-                <input type="checkbox" name="agree" id="agree1">
+                <input type="checkbox" name="agree" id="agree1" required>
                 [필수] 만 14세 이상이며 모두 동의합니다.
             </li>
             <li>
                 <button type="submit" class="join_btn">가입하기</button>
             </li>
-
         </ul>
-
     </form>
 
 </div>
