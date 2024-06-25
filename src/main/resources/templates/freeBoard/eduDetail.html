@@ -4,36 +4,40 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <link rel="stylesheet" th:href="@{/css/freeboard/freeboard.css}">
-    <script th:src="@{/js/board/reply.js}"></script>
-
+    <script th:src="@{/js/board/boardDetail.js}"></script>
 </head>
 <body>
 
-<div id="eduDetail" th:each="i:${list}">
+<div id="eduDetail">
 
     <section id="eduBoardDetail">
 
         <ul id="writer_info">
-            이미지 자리
-            <li th:text="${i.profile}"></li>
-            <li th:text="${i.title}"></li>
-            <li th:text="|작성자  ${i.writer}|"></li>
+            <li th:text="${dto.profile}"></li>
+            <li th:text="${dto.title}"></li>
+            <li th:text="|작성자  ${dto.writer}|"></li>
+        </ul>
+
+        <ul id="setting">
+            <li><button type="button" th:id="qna_btn">문의하기</button></li>
+            <li><button type="button" th:id="mod_btn">수정하기</button></li>
+            <li><button type="button" th:id="boardDel_btn">삭제하기</button></li>
         </ul>
 
         <section id="content">
-            <th:block th:utext="${i.content}"></th:block>
+            <th:block th:utext="${dto.content}"></th:block>
         </section>
 
     </section>
 
-    <button type="button" id="rec_btn">추천</button>
+    <button type="button" id="love_btn">좋아요</button>
 
     <section id="replySection">
 
-        <ul>
+        <ul th:id="reply_insert">
             <li>
                 <input type="text" name="rep_content" id="rep_content">
-                <input type="hidden" name="fid" id="fid" th:value="${i.fid}">
+                <input type="hidden" name="fid" id="fid" th:value="${dto.fid}">
                 <input type="hidden" name="sessionId" id="sessionId" th:value="${sessionId}">
                 <button type="button" id="append">댓글 추가</button>
             </li>
@@ -46,7 +50,7 @@
 
 <script th:inline="javascript">
     document.addEventListener('DOMContentLoaded', function (){
-        init([[${i.fid}]])
+        init([[${dto.fid}]])
     })
 </script>
 

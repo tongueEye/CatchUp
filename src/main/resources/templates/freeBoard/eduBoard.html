@@ -7,12 +7,13 @@
     <script th:src="@{/js/board/board.js}"></script>
 </head>
 <body>
+
 <!--사이드 메뉴-->
 <section id="eduBoard">
 
     <section id="sideMenu">
         <aside>
-            카테고리
+            <h3>카테고리</h3>
             <ul>
                 <li>뉴스</li>
                 <li>초등학교</li>
@@ -22,7 +23,7 @@
             </ul>
         </aside>
         <aside>
-            조회수
+            <h3>조회수</h3>
             <ul>
                 <li>1</li>
                 <li>2</li>
@@ -32,7 +33,7 @@
             </ul>
         </aside>
         <aside>
-            추천수
+            <h3>추천수</h3>
             <ul>
                 <li>1</li>
                 <li>2</li>
@@ -53,7 +54,6 @@
                 <option value="writer">작성자</option>
             </select>
             <input type="text" name="searchTxt">
-            <button type="submit">검색</button>
         </form>
 
         <button type="button" th:id="write_btn">글쓰기</button>
@@ -63,8 +63,8 @@
                 <li th:text="|${i.cate}|"></li>
                 <li th:text="|${i.title}|"></li>
                 <li th:text="|작성자: ${i.writer}|"></li>
-                <li th:text="|${#dates.format(i.createDate, 'yyyy-MM-dd HH:mm')}|"></li>
-                <li th:text="|추천수: ${i.cnt}|"></li>
+                <li th:text="|${#temporals.format(i.createDate, 'yyyy-MM-dd')}|"></li>
+                <li th:text="|좋아요수: ${i.cnt}|"></li>
             </a>
         </ul>
 

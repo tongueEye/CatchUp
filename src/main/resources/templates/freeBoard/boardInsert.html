@@ -3,104 +3,146 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <link rel="stylesheet" th:href="@{/css/summernote/summernote-lite.css}">
+    <link rel="stylesheet" href="/css/summernote/summernote-lite.css">
+    <link rel="stylesheet" href="/css/infoboard/writeform.css">
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script th:src="@{/js/summernote/summernote-lite.js}"></script>
-    <script th:src="@{/js/summernote/lang/summernote-ko-KR.js}"></script>
+    <script src="/js/summernote/summernote-lite.js"></script>
+    <script src="/js/summernote/lang/summernote-ko-KR.js"></script>
 
 
 </head>
 <body>
-<form method="post" th:action="@{/list}">
-    <ul>
-        <li>
-            <select id="cate">
-                <option value="news">뉴스</option>
-                <option value="elem">초등학교</option>
-                <option value="mid">중학교</option>
-                <option value="high">고등학교</option>
-                <option value="academy">학원추천</option>
-            </select>
-            <input type="text" th:name="title" th:id="title" placeholder="제목을 입력하세요.">
-        </li>
-        <li>
-            <textarea id="summernote" name="summernote"></textarea>
-        </li>
-        <li>
-            <button type="submit" id="btn"> 등록하기</button>
-        </li>
-    </ul>
-</form>
+<div id="write_box">
+
+    <form id="writeForm" method="post" th:action="@{/writeFree}">
+        <!--세션 받으면 변경해야 함-->
+        <input type="hidden" th:name="uid" th:value="${100}">
+        <input type="hidden" th:name="writer" th:value="${user.nickname}">
+
+        <!--작성폼 같이쓸거면 이부분 변경해야 함-->
+        <input type="hidden" th:name="kind" th:value="e">
+
+        <ul>
+            <!--            <p th:text="${user.nickname}"></p>-->
+            <li>
+                <select th:id="cate" th:name="cate">
+                    <option th:value="뉴스" th:selected="뉴스">뉴스</option>
+                    <option th:value="초등">초등</option>
+                    <option th:value="중동">중동</option>
+                    <option th:value="고등">고등</option>
+                    <option th:value="학원추천">학원추천</option>
+                </select>
+                <input type="text" th:name="title" th:id="title" placeholder="제목을 입력하세요.">
+            </li>
+            <li>
+                <textarea id="summernote" th:name="content"></textarea>
+            </li>
+            <li>
+                <button type="submit" id="btn"> 등록하기</button>
+            </li>
+        </ul>
+    </form>
+</div>
 
 <script>
+    let uploadedImages = []; //업로드 한 이미지를 임시 보관할 배열
+    let isFormSubmitting = false; // 폼 제출 여부 플래그
+
     $('#summernote').summernote({
-
-        // 에디터 크기 설정
-        height: 500,
-        // 에디터 한글 설정
-        lang: 'ko-KR',
-        // 에디터에 커서 이동 (input창의 autofocus라고 생각하시면 됩니다.)
-        toolbar: [
-            // 글자 크기 설정
+        placeholder : '작성할 글 내용을 입력하세요.',
+        tabsize : 2,
+        width: 800,
+        height: 400,
+        minHeight : 300,
+        maxHeight : 300,
+        disableResizeEditor : true,
+        lang : 'ko-KR',
+        toolbar : [
+            ['style', ['style'] ],
             ['fontsize', ['fontsize']],
-            // 글자 [굵게, 기울임, 밑줄, 취소 선, 지우기]
-            ['style', ['bold', 'italic', 'underline', 'strikethrough', 'clear']],
-            // 글자색 설정
-            ['color', ['color']],
-            // 표 만들기
-            ['table', ['table']],
-            // 서식 [글머리 기호, 번호매기기, 문단정렬]
-            ['para', ['ul', 'ol', 'paragraph']],
-            // 줄간격 설정
-            ['height', ['height']],
-            // 이미지 첨부
-            ['insert', ['picture']]
-        ],
-        // 추가한 글꼴
-        fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New', '맑은 고딕', '궁서', '굴림체', '굴림', '돋음체', '바탕체'],
-        // 추가한 폰트사이즈
-        fontSizes: ['8', '9', '10', '11', '12', '14', '16', '18', '20', '22', '24', '28', '30', '36', '50', '72', '96'],
-        // focus는 작성 페이지 접속시 에디터에 커서를 위치하도록 하려면 설정해주세요.
-        focus: true,
-        // callbacks은 이미지 업로드 처리입니다.
-        callbacks: {  //여기 부분이 이미지를 첨부하는 부분
-            onImageUpload:
-                function (file) {
-                    for (let i = 0; i < file.length; i++)
-                        uploadSummernoteImageFile(file[i], this);
-                }
-        }
+            ['font',['bold','italic','underline','strikethrough','clear']],
+            ['color',['color']],
+            ['para',['paragraph']],
+            ['height',['height']],
+            ['table',['table']],
+            ['insert',['picture','link','hr']],
+            ['view',['codeview']]],
+        fontSizes : ['8','10','12','14','16','18','20','22','24','28','30','36','50','72'],
+        lineHeights : ['0.2','0.3','0.4','0.5','0.6','0.8','1.0','1.2','1.4','1.5','2.0','3.0'],
 
+        callbacks : { // 사진 여러 개 처리하려면 1개가 아니라 for문 돌려서 처리해야 함
+            onImageUpload : function(files) {
+                for (let i = 0; i < files.length; i++) {
+                    uploadSummernoteImageFile(files[i], this);
+                }
+            },
+            onMediaDelete : function(target) {
+                deleteSummernoteImageFile(target[0].src);
+            }
+        }
     });
 
     function uploadSummernoteImageFile(file, editor) {
         let formData = new FormData();
         formData.append("multipartFiles", file);
 
-        fetch('/file/uploadFile', {
+        fetch('/file/uploadImageFile', {
             method: 'POST',
-            body  : formData
+            body: formData
         })
             .then(response => {
                 if (!response.ok) {
-                    throw new Error('Upload failed');
+                    throw new Error('업로드 실패');
                 }
                 return response.json();
             })
             .then(data => {
                 if (data && data.length > 0) {
                     let imageUrl = data[0];
-                    $(editor).summernote('insertImage', 'https://kdt-java5-2.s3.ap-northeast-2.amazonaws.com/' + imageUrl);
+                    $(editor).summernote('insertImage', 'https://kdt-java5-2.s3.ap-northeast-2.amazonaws.com/' + encodeURIComponent(imageUrl));
+                    uploadedImages.push(imageUrl); //이미지 업로드 시 임시 배열에 추가
                     console.log(data)
                 } else {
                     alert('업로드 실패');
                 }
             })
             .catch(error => {
-                console.error('업로드 실패:', error);
+                console.error("업로드 실패", error);
             });
     }
 
+    function deleteSummernoteImageFile(imageUrl) {
+        const fileName = imageUrl.split('/').pop();
+
+        fetch(`/file/deleteImageFile?fileName=${fileName}`, {
+            method: 'DELETE'
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('삭제 실패');
+                }
+                return response.text();
+            })
+            .then(data => {
+                console.log(`Deleted: ${data}`);
+            })
+            .catch(error => {
+                console.error("삭제 실패", error);
+            });
+    }
+
+    window.addEventListener('beforeunload', function (e) { //페이지 이동 시 이벤트
+        if (!isFormSubmitting) { // 폼 제출 시에는 실행하지 않음
+            uploadedImages.forEach(imageUrl => {
+                deleteSummernoteImageFile(imageUrl); //페이지 떠나면 기존에 업로드 했던 사진들 삭제
+            });
+        }
+    });
+
+    document.getElementById('writeForm').addEventListener('submit', function() {
+        isFormSubmitting = true; // 폼 제출 중임을 표시
+    });
 </script>
 </body>
 </html>

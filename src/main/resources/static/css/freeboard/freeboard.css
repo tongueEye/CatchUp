@@ -12,23 +12,57 @@ ul li{
     flex-direction: row;
 }
 
-aside {
-    border: 1px solid silver;
-    margin: 20px 0;
-}
-
 #sideMenu{
-    height: 50vh;
+    padding: 10px;
     position: relative;
-    top: 50px;
+    top: 75px;
+    min-width: 15%;
     display: flex;
     flex-direction: column;
-    width: 20%;
+    justify-content: center;.
+}
+
+aside {
+    margin: 20px 0;
+    padding: 10px;
+    border: 1px solid #9BA2D7;
+    border-radius: 15px;
+}
+
+aside ul{
+}
+
+input, select {
+    padding: 5px 10px;
+    border: 2px solid #9BA2D7;
+    border-radius: 15px;
+}
+
+input:focus, select:focus{
+    outline: none;
+}
+
+form{
+
+}
+
+#write_btn , #append , #del_btn{
+    width: 100px;
+    color: white;
+    background-color: #9BA2D7;
+    border-color: #9BA2D7;
+    border-radius: 15px;
+    padding: 5px 10px;
+    position: relative;
+}
+
+#write_btn:hover{
+
 }
 
 #eduBoardList{
     position: relative;
-    top: 50px;
+    top: 75px;
     display: flex;
     flex-direction: column;
     width: 80%;
@@ -36,7 +70,8 @@ aside {
 
 #eduBoardList ul {
     border: 1px solid silver;
-    margin: 20px;
+    margin: 15px;
+    padding: 10px;
 }
 
 #eduBoardList ul a:hover {
@@ -46,7 +81,7 @@ aside {
 #page{
     justify-content: center;
     display: flex;
-    margin: 20px 0;
+    margin: 0 0 10% 0;
 }
 
 #page a{
@@ -76,7 +111,10 @@ aside {
 }
 
 #content{
-    border: 1px solid silver;
+    min-height: 50vh;
+    border: 2px solid #9BA2D7;
+    border-radius: 15px;
+    padding: 10px
 }
 
 #rec_btn{
@@ -94,6 +132,13 @@ aside {
     list-style: none;
 }
 
+#replySection #reply_insert{
+    display: flex;
+    justify-content: center;
+}
+
 #replyList{
-    border: 1px solid silver;
+    border: 2px solid #9BA2D7;
+    border-radius: 15px;
+    padding: 10px
 }

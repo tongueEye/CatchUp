@@ -1,9 +1,7 @@
 package com.catchup.catchup.repository;
 
-import com.catchup.catchup.dto.FreeBoardDTO;
-import com.catchup.catchup.dto.RepBoardDTO;
-import com.catchup.catchup.dto.InfoBoardDTO;
-import com.catchup.catchup.dto.SearchCondition;
+import com.catchup.catchup.domain.Love;
+import com.catchup.catchup.dto.*;
 import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.Tuple;
 import com.querydsl.core.types.Projections;
@@ -17,6 +15,7 @@ import java.util.List;
 import static com.catchup.catchup.domain.QFreeBoard.freeBoard;
 import static com.catchup.catchup.domain.QFreeRepBoard.freeRepBoard;
 import static com.catchup.catchup.domain.QUser.user;
+import static com.querydsl.core.types.dsl.Wildcard.count;
 
 
 public class FreeBoardQDSLRepositoryImpl implements FreeBoardQDSLRepository {
@@ -27,9 +26,7 @@ public class FreeBoardQDSLRepositoryImpl implements FreeBoardQDSLRepository {
         this.queryFactory = queryFactory;
     }
 
-    /**
-     * 게시판 검색/전체 페이지 조회
-     **/
+    /** 게시판 검색/전체 페이지 조회 **/
     @Override
     public Page<FreeBoardDTO> search(SearchCondition condition, Pageable pageable) {
 
@@ -70,47 +67,23 @@ public class FreeBoardQDSLRepositoryImpl implements FreeBoardQDSLRepository {
         return new PageImpl<>(list, pageable, totalCount);
     }
 
-    /**
-     * 게시판 상세 페이지
-     **/
+
+    /** 게시글 좋아요 카운트 +1 **/
     @Override
-    public List<FreeBoardDTO> detail(Long fid) {
-        List<FreeBoardDTO> detail = queryFactory.select(Projections.fields(
-                        FreeBoardDTO.class
-                        , freeBoard.fid
-                        , freeBoard.title
-                        , freeBoard.writer
-                        , freeBoard.content
-                        , freeBoard.cate
-                        , user.profile
-                ))
-                .from(freeBoard)
-                .join(freeBoard.user, user)
+    public void addLove(Long fid) {
+        queryFactory.update(freeBoard)
+                .set(freeBoard.cnt, freeBoard.cnt.add(1))
                 .where(freeBoard.fid.eq(fid))
-                .fetch();
-        return detail;
+                .execute();
     }
-
-
-//    @Override
-//    public List<FreeBoardDTO> repList(Long fid) {
-//        List<FreeBoardDTO> repList = queryFactory.select(Projections.fields(
-//                        FreeBoardDTO.class
-//                        , freeBoard.user.profile
-//                        , freeBoard.user.nickname
-//                        , freeRepBoard.frid
-//                        , freeRepBoard.user.uid
-//                        , freeRepBoard.frcontent
-//                        , freeRepBoard.frCreateDate
-//                        , freeRepBoard.frUpdateDate
-//                ))
-//                .from(freeBoard)
-//                .join(freeBoard.repList, freeRepBoard)
-//                .join(freeBoard.user, user)
-//                .where(freeBoard.fid.eq(fid))
-//                .fetch();
-//        return repList;
-//    }
+    /** 게시글 좋아요 카운트 -1 **/
+    @Override
+    public void delLove(Long fid) {
+        queryFactory.update(freeBoard)
+                .set(freeBoard.cnt, freeBoard.cnt.subtract(1))
+                .where(freeBoard.fid.eq(fid))
+                .execute();
+    }
 
     @Override // 채원
     public Page<FreeBoardDTO> list(Long id, Pageable pageable) {
@@ -134,5 +107,6 @@ public class FreeBoardQDSLRepositoryImpl implements FreeBoardQDSLRepository {
 
         return new PageImpl<>(list, pageable, totalCount);
     }
+
 
 }

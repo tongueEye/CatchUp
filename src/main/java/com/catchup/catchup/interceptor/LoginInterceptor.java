@@ -1,4 +1,3 @@
-/*
 package com.catchup.catchup.interceptor;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -21,4 +20,4 @@ public class LoginInterceptor implements HandlerInterceptor {
         return true;
     }
 }
-*/
+
