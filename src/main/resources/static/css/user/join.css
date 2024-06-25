@@ -1,10 +1,11 @@
 .join_wrap{
-    padding-top: 150px;
+    padding-top: 100px;
+    display: flex;
+    justify-content: center;
+    align-content: center;
     text-align: center;
-    box-shadow: 0px 5px 5px #B6BEED;
-    min-width: 250px;
-    width: 40%;
 }
+
 .join_wrap ul{
     padding: 0;
 }
@@ -12,18 +13,34 @@
     list-style: none;
 }
 
+.join_form ul img{
+    width: 170px;
+    padding-bottom: 40px;
+}
+
+.join_form{
+    margin: auto;
+    padding: 50px 0px;
+    width: 500px;
+    border-radius: 25px;
+    box-shadow: rgba(182, 190, 237, 1) 0px 5px 15px;
+}
+
 .join_box{
+    margin: auto;
     display: flex;
     flex-direction: column;
     padding-bottom: 25px;
-    max-width: 250px;
+    width: 50%;
 }
 
 .join_title{
     display: inline-block;
-    font-size: 0.8rem;
+    font-size: 1.2rem;
     font-weight: 600;
     margin-bottom: 7px;
+    width: 100%;
+    text-align: left;
 }
 
 .join_input{
@@ -32,7 +49,7 @@
     font-weight: bold;
     border: none;
     border-bottom: 2px solid black;
-    width: 80%;
+    width: 100%;
     height: 35px;
 }
 
@@ -49,7 +66,8 @@
     border: 2px solid #F4EBF3;
     background-color: transparent;
     border-radius: 30px;
-    font-size: 0.8rem;
+    font-size: 1rem;
+    padding: 5px 3px;
 }
 .find_post:hover{
     background-color: #F9E8F7;
@@ -60,41 +78,48 @@
 .juso_input{
     display: flex;
     flex-direction: row;
-
+    align-items: baseline;
 }
 .juso_input3{
     display: flex;
     flex-direction: row;
 }
-.juso_input1, .juso_input2, .juso_input33{
+.juso_input1, .juso_input2, .juso_input33, .juso_input44{
     border: none;
     border-bottom: 2px solid black;
+    width: 100%;
+    margin-bottom: 15px;
+    font-size: 1rem;
+    font-weight: bold;
+}
+.juso_input33{
     margin-right: 5px;
 }
 
 
 
 
-/* 중복체크 버튼 */
+/* 중복체크 */
 .join_idCK{
     display: flex;
-    flex-direction: row;
-    justify-content: center;
-    position: relative;
-    left: 5px;
+
 }
 
 .idCk_btn{
     border: 2px solid #F4EBF3;
     background-color: transparent;
-    border-radius: 10px;
-    font-size: 0.8rem;
+    border-radius: 30px;
+    font-size: 1rem;
+    padding: 0px 5px;
 }
 .idCk_btn:hover{
     background-color: #F9E8F7;
 }
 .idCk_btn:active{
     background-color: transparent;
+}
+#check{
+    height: 16px;
 }
 
 
@@ -103,16 +128,16 @@
 /* 가입하기 버튼 */
 .join_btn{
     background-color: #F4EBF3;
-    font-size: 0.9rem;
+    font-size: 1rem;
     border: none;
     padding: 5px 0px;
-    margin-bottom: 10px;
-    width: 300px;
+    margin: 15px 0px;
+    width: 250px;
     border-radius: 30px;
 }
 
 .join_btn:hover{
-    background-color: #F9E8F7;
+    background-color: #DBBCD7;
 }
 
 .join_btn:active{

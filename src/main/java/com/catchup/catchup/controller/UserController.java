@@ -2,6 +2,7 @@ package com.catchup.catchup.controller;
 
 import com.catchup.catchup.dto.UserDTO;
 import com.catchup.catchup.service.UserService;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -44,6 +45,7 @@ public class UserController {
         }
     }
 
+    //회원가입 아이디 중복체크
     @PostMapping("/IdCheck")
     public @ResponseBody Long IdCheck(@RequestBody HashMap<String,Object> hm) {
         String id = (String) hm.get("id");
@@ -89,5 +91,13 @@ public class UserController {
         }
     }
 
+    @GetMapping("/logout")
+    public String logout(HttpServletRequest request){
+        HttpSession session = request.getSession(false);
+        if(session!=null && session.getAttribute("sessionId")!=null)
+            session.invalidate();
+
+        return "redirect:index";
+    }
 
 }
