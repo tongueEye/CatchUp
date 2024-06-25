@@ -17,8 +17,8 @@
 <div id="write_box">
 
     <form id="writeForm" method="post" th:action="@{/writeQna}">
-        <!--세션 받으면 변경해야 함-->
-        <input type="hidden" th:name="uid" th:value="${101}">
+
+        <input type="hidden" th:name="uid" th:value="${uid}">
         <input type="hidden" th:name="writer" th:value="${user.nickname}">
 
         <!--작성폼 같이쓸거면 이부분 변경해야 함-->

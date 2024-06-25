@@ -25,7 +25,9 @@
                 <h4 id="field2" th:text="${dto.title}"></h4>
             </div>
 
-            <div class="btn_box">
+
+            <div th:text="${dto.uid}+${uid}"></div>
+            <div class="btn_box" th:if="${uid==100 || uid==dto.uid}">
                 <a id="edit_btn" th:href="@{|/qnaUpdate/${dto.iid}|}">수정하기</a>
                 <a id="delete_btn" th:href="@{|/qnaDelete/${dto.iid}|}">삭제하기</a>
             </div>
@@ -68,7 +70,7 @@
 
         <!--댓글 입력창-->
         <div id="rep_input_box">
-            <div>
+            <div th:if="${uid==100}">
                 <textarea id="rep_content" cols="20" rows="3" placeholder="* 입력/수정: 글 작성 후 버튼 클릭 &#13;&#10;* 삭제: 공백 입력 후 버튼 클릭"></textarea>
                 <input id="rep_btn" type="submit" value="답변 등록">
             </div>

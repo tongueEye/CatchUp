@@ -4,6 +4,8 @@ import com.catchup.catchup.dto.InfoBoardDTO;
 import com.catchup.catchup.dto.UserDTO;
 import com.catchup.catchup.service.InfoBoardService;
 import com.catchup.catchup.service.UserService;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -32,8 +34,16 @@ public class NoticeBoardController {
             , @RequestParam(required = false, defaultValue = "") String searchtxt
             , @RequestParam(required = false, defaultValue = "") String kind
             , @PageableDefault(size = 5, page = 0, sort = "iid", direction = Sort.Direction.ASC) Pageable pageable
+            , HttpServletRequest request
             , Model model
     ){
+
+        //세션으로 uid 가져오기
+        Long uid  = 0L;
+        HttpSession session = request.getSession(false);
+        if(session!=null && session.getAttribute("sessionId")!=null) {
+            uid = (Long) session.getAttribute("sessionId");
+        }
 
         Page<InfoBoardDTO> noticeList = infoService.getNoticeList(search, searchtxt, kind, pageable);
         int pageSize = 5;
@@ -43,6 +53,7 @@ public class NoticeBoardController {
         model.addAttribute("startPage", startPage);
         model.addAttribute("endPage", endPage);
         model.addAttribute("search", search);
+        model.addAttribute("uid",uid);
         model.addAttribute("searchtxt", searchtxt);
 
         model.addAttribute("view", "infoboard/noticeboard");
@@ -51,15 +62,25 @@ public class NoticeBoardController {
 
 
     @GetMapping("/writeNotice")
-    public String noticeInsert(Model model) {
+    public String noticeInsert(
+            HttpServletRequest request,
+            Model model
+    ) {
 
-        //세션 받은 후 이부분 수정해야 함.
-        UserDTO userDTO = userService.findUserById(101L);
+        //세션으로 uid 가져오기
+        Long uid  = 0L;
+        HttpSession session = request.getSession(false);
+        if(session!=null && session.getAttribute("sessionId")!=null) {
+            uid = (Long) session.getAttribute("sessionId");
+        }
+
+        UserDTO userDTO = userService.findUserById(uid);
 
         //System.out.println("nickname:"+userDTO.getNickname());
 
         model.addAttribute("dto", new InfoBoardDTO());
         model.addAttribute("user", userDTO);
+        model.addAttribute("uid", uid);
         model.addAttribute("view", "infoboard/noticeInsert");
         return "index";
     }
@@ -93,10 +114,20 @@ public class NoticeBoardController {
     @GetMapping("/noticeDetail/{iid}")
     public String noticeDetail(
             @PathVariable Long iid
+            , HttpServletRequest request
             , Model model
     ){
+
+        //세션으로 uid 가져오기
+        Long uid  = 0L;
+        HttpSession session = request.getSession(false);
+        if(session!=null && session.getAttribute("sessionId")!=null) {
+            uid = (Long) session.getAttribute("sessionId");
+        }
+
         InfoBoardDTO dto = infoService.getDetail(iid);
         model.addAttribute("dto", dto);
+        model.addAttribute("uid", uid);
         model.addAttribute("view", "infoBoard/noticeDetail");
         return "index";
     }
