@@ -4,12 +4,112 @@
     justify-content: center;
     position: relative;
 }
+
+#spring{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    position: relative;
+    top: -30px;
+}
+
+.spring_item{
+    width: 45px;
+    height: 80px;
+    border-radius: 18px;
+    position: relative;
+}
+
+.spring_item img{
+    width: 100%;
+    height: 100%;
+}
+
+
 #write_box form{
     position: absolute;
     top: 50%;
-    margin-top: -200px;
+    margin-top: -300px;
+    background: white;
+    border-radius: 60px;
+    padding: 0 50px;
+    border: 3px solid lightblue;
 }
 
 #write_box form ul {
     list-style: none;
+}
+
+#writeForm .field1{
+    margin: 30px 0;
+    text-align: center;
+}
+
+#cate{
+    border-radius: 20px;
+    border: 2px solid lightskyblue;
+    padding: 5px 8px;
+    margin-right: 10px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: lightskyblue;
+}
+
+select:focus{
+    outline: none;
+}
+
+#form_title{
+    text-align: center;
+    color: lightskyblue;
+}
+
+#title{
+    border-radius: 20px;
+    border: 2px solid lightskyblue;
+    padding: 5px 8px;
+    font-size: 1.1rem;
+    width: 300px;
+}
+
+input:focus{
+    outline: none;
+}
+
+/*에디터 css 시작*/
+.note-editor.note-frame, .note-editor.note-airframe {
+    border: 1px solid lightblue;
+    border-radius: 40px;
+}
+
+.note-toolbar {
+    text-align: center;
+    background-color: white;
+    border-top-left-radius: 50px;
+    border-top-right-radius: 50px;
+}
+
+.note-btn{
+    border-radius: 30px;
+}
+
+.note-editor.note-frame .note-statusbar, .note-editor.note-airframe .note-statusbar {
+    display: none;
+}
+
+/*에디터 css 끝*/
+
+
+#btn{
+    border-radius: 30px;
+    border: none;
+    color: white;
+    background: lightskyblue;
+    padding: 8px;
+    font-size: 1.4rem;
+    font-weight: normal;
+}
+
+#btn:hover{
+    background: lightblue;
 }

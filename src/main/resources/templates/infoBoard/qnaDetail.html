@@ -18,7 +18,7 @@
 
         <section class="title_section">
             <div class="title_box">
-                <a th:href="@{/qna}"><h1 th:text="'<'"></h1></a>
+                <a id="back_btn" th:href="@{/qna}"><h1 th:text="'<'"></h1></a>
                 <h1 id="field1" th:text="${dto.cate}"
                     th:classappend="${dto.cate == '일반' ? 'cate_col1' : (dto.cate == '신고' ? 'cate_col2' : (dto.cate == '건의' ? 'cate_col3' : (dto.cate == '문의' ? 'cate_col4' : '')))}">
                 </h1>
@@ -32,44 +32,53 @@
 
         </section>
 
-        <!---->
-        <section class="info_section">
-            <div></div>
-            <h4 th:text="${#temporals.format(dto.createDate, 'yyyy년 MM월 dd일')}"></h4>
-            <div></div>
-        </section>
+        <!--작성자 정보-->
+        <div class="scrollBar">
+            <div class="chat_room">
 
-        <!--프로필 영역-->
-        <section class="info_section">
-            <div class="profile_box">
-                <div id="profile_img"><img th:src="'https://kdt-java5-2.s3.ap-northeast-2.amazonaws.com/profile/' + ${profile}"></div>
-                <h4 th:text="${dto.writer}"></h4>
+                <section class="info_section">
+                    <div></div>
+                    <h4 th:text="${#temporals.format(dto.createDate, 'yyyy년 MM월 dd일')}"></h4>
+                    <div></div>
+                </section>
+
+                <!--프로필 영역-->
+                <section class="info_section">
+                    <div class="profile_box">
+                        <div id="profile_img"><img th:src="'https://kdt-java5-2.s3.ap-northeast-2.amazonaws.com/profile/' + ${profile}"></div>
+                        <h4 th:text="${dto.writer}"></h4>
+                    </div>
+
+                    <div></div>
+                </section>
+
+                <!--콘텐트 영역-->
+                <div class="chat_box">
+                    <section class="content_section" th:utext="${dto.content}">
+
+                    </section>
+
+                    <section class="info_section">
+                        <div></div>
+                        <h4 th:text="${#temporals.format(dto.createDate, 'HH:mm')}"></h4>
+                    </section>
+                </div>
+
+                <!--댓글 영역-->
+                <section th:id="rep_box">
+                </section>
+
+
             </div>
-
-            <div></div>
-        </section>
-
-        <!--콘텐트 영역-->
-        <div class="chat_box">
-            <section class="content_section" th:utext="${dto.content}">
-
-            </section>
-
-            <section class="info_section">
-                <div></div>
-                <h4 th:text="${#temporals.format(dto.createDate, 'HH:mm')}"></h4>
-            </section>
         </div>
 
-        <!--댓글 영역-->
-        <section th:id="rep_box">
-        </section>
+
 
 
         <!--댓글 입력창-->
         <div id="rep_input_box">
             <div th:if="${uid==100}">
-                <textarea id="rep_content" cols="20" rows="3" placeholder="* 입력/수정: 글 작성 후 버튼 클릭 &#13;&#10;* 삭제: 공백 입력 후 버튼 클릭"></textarea>
+                <textarea id="rep_content" cols="20" rows="2" placeholder="* 입력/수정: 글 작성 후 버튼 클릭 &#13;&#10;* 삭제: 공백 입력 후 버튼 클릭"></textarea>
                 <input id="rep_btn" type="submit" value="답변 등록">
             </div>
         </div>

@@ -153,14 +153,22 @@ public class QnaBoardController {
     @GetMapping("/qnaUpdate/{iid}")
     public String qnaUpdate(
             @PathVariable Long iid
+            , HttpServletRequest request
             , Model model
     ){
         InfoBoardDTO infoDto = infoService.getDetail(iid);
 
-        //세션 받은 후 이부분 수정해야 함.
-        UserDTO userDTO = userService.findUserById(101L);
+        //세션으로 uid 가져오기
+        Long uid  = 0L;
+        HttpSession session = request.getSession(false);
+        if(session!=null && session.getAttribute("sessionId")!=null) {
+            uid = (Long) session.getAttribute("sessionId");
+        }
+
+        UserDTO userDTO = userService.findUserById(uid);
 
         model.addAttribute("dto", infoDto);
+        model.addAttribute("uid", uid);
         model.addAttribute("user", userDTO);
         model.addAttribute("view", "infoBoard/qnaUpdate");
         return "index";
