@@ -63,6 +63,10 @@ public class MyPageController {
                 UserDTO bap = service.getBap(uid);
                 model.addAttribute("bap", bap);
 
+                /* 좋아요 정보 불러오기 */
+                List<LoveDTO> love = service.getLove(uid);
+                model.addAttribute("love", love);
+
                 model.addAttribute("view", "mypage/home");
             } else {
                 model.addAttribute("view", "user/login");
@@ -159,9 +163,8 @@ public class MyPageController {
         model.addAttribute("result", result);
 
         /** 댓글 DTO 생기면 수정하기 */
-        /* 댓글 리스트 불러오기 */
-        // Page<RepBoardDTO> list = service.getRepList(pageable);
-        // model.addAttribute("list", list);
+        Page<RepBoardDTO> list = service.getRepList(pageable, uid);
+        model.addAttribute("list", list);
 
         model.addAttribute("view", "mypage/repboardlist");
         return "index";

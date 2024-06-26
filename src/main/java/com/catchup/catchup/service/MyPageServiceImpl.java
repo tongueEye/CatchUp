@@ -1,20 +1,21 @@
 package com.catchup.catchup.service;
 
+import com.catchup.catchup.domain.Love;
 import com.catchup.catchup.domain.User;
 import com.catchup.catchup.dto.*;
-import com.catchup.catchup.repository.FreeBoardRepository;
-import com.catchup.catchup.repository.InfoBoardRepository;
-import com.catchup.catchup.repository.MyPageRepository;
+import com.catchup.catchup.repository.*;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -25,6 +26,8 @@ public class MyPageServiceImpl implements MyPageService{
     private final FreeBoardRepository freeRepository;
     private final InfoBoardRepository infoRepository;
     private final ModelMapper modelMapper;
+    private final FreeRepBoardRepository repBoardRepository;
+    private final LoveRepository loveRepository;
 
     @Override
     public MyPageDTO getProfile(Long uid) {
@@ -75,10 +78,10 @@ public class MyPageServiceImpl implements MyPageService{
 
     /** 댓글 리스트 불러오기 */
     @Override
-    public MyPageDTO getRepList() {
+    public Page<RepBoardDTO> getRepList(Pageable pageable, Long uid) {
+        Page<RepBoardDTO> list = repBoardRepository.mypageList(pageable, uid);
 
-
-        return null;
+        return list;
     }
 
     /** 내가 쓴 글 불러오기 */
@@ -159,4 +162,17 @@ public class MyPageServiceImpl implements MyPageService{
                 });
         return list;
     }
+
+    /** 좋아요 불러오기*/
+    @Override
+    public List<LoveDTO> getLove(Long uid) {
+        List<Object[]> result = loveRepository.findTitlesAndCateByUserId(uid);
+
+        List<LoveDTO> lovelist = result.stream()
+                .map(item -> modelMapper.map(item, LoveDTO.class))
+                .collect(Collectors.toList());
+
+        return lovelist;
+    }
+
 }

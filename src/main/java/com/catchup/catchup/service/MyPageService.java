@@ -11,7 +11,7 @@ public interface MyPageService {
 
     UserDTO getInfo(Long uid); // 정보 수정하기
 
-    MyPageDTO getRepList(); // 댓글 리스트 불러오기
+    Page<RepBoardDTO> getRepList(Pageable pageable, Long uid); // 댓글 리스트 불러오기
 
     Page<FreeBoardDTO> boardlist(Pageable pageable, Long uid); // 내가 쓴 글 불러오기
 
@@ -26,4 +26,6 @@ public interface MyPageService {
     void schoolInsert(UserDTO dto, Long uid);
 
     UserDTO getBap(Long uid);
+
+    List<LoveDTO> getLove(Long uid);
 }

@@ -54,9 +54,18 @@
                     <section class="fav article-2-content">
                         <p> 좋아요 </p>
                         <div class="article-content article-content-2">
-                            내용
+                            <ul>
+                                <li class="qna-menu">
+                                    <span>카테고리</span>
+                                    <span>제목</span>
+                                </li>
+                                <li th:each="item:${love}" class="qna-list">
+                                    <span th:text="${item.title}"></span>
+                                </li>
+                            </ul>
                         </div>
                     </section>
+
                     <section class="qna article-2-content">
                         <p> 문의내역 </p>
                         <div class="article-content article-content-2">
@@ -66,6 +75,7 @@
                                     <span class="qna-content">제목</span>
                                     <span class="qna-content">처리여부</span>
                                 </li>
+
                                 <li th:each="item:${qna}" class="qna-list">
                                     <!-- 구현할까 말까 => 답변 완료 안 뜬 애들은 밑으로 밀어버리고 안 된 애들만 상위에 뜨기 -->
                                     <span class="qna-content"> - </span>
