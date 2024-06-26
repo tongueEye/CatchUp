@@ -1,9 +1,6 @@
 package com.catchup.catchup.controller.FreeBoardController;
 
-import com.catchup.catchup.dto.FreeBoardDTO;
-import com.catchup.catchup.dto.InfoBoardDTO;
-import com.catchup.catchup.dto.RepBoardDTO;
-import com.catchup.catchup.dto.UserDTO;
+import com.catchup.catchup.dto.*;
 import com.catchup.catchup.service.FreeBoardService;
 import com.catchup.catchup.service.UserService;
 import com.querydsl.core.Tuple;
@@ -54,9 +51,11 @@ public class EduBoardController {
         int endPage = Math.min(startPage + pageSize - 1, boardList.getTotalPages());
 
         List<FreeBoardDTO> hotList = freeService.mostView();
+        List<FreeBoardDTO> likeList = freeService.mostLike();
 
         model.addAttribute("sessionId", sessionId);
         model.addAttribute("hotList", hotList);
+        model.addAttribute("likeList", likeList);
         model.addAttribute("boardList", boardList);
         model.addAttribute("startPage", startPage);
         model.addAttribute("endPage", endPage);
@@ -120,7 +119,7 @@ public class EduBoardController {
                 .content(content)
                 .writer(writer)
                 .kind(kind)
-                .count(count)
+                .count(0)
                 .uid(sessionId)
                 .createDate(LocalDateTime.now())
                 .build();

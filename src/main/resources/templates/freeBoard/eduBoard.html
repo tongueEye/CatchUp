@@ -30,12 +30,8 @@
         </aside>
         <aside>
             <h3>좋아요</h3>
-            <ul>
-                <li>1</li>
-                <li>2</li>
-                <li>3</li>
-                <li>4</li>
-                <li>5</li>
+            <ul th:each="i:${likeList}">
+                <li><a th:href="@{|/edudetail/${i.fid}|}" th:text="${i.title}"></a></li>
             </ul>
         </aside>
     </section>

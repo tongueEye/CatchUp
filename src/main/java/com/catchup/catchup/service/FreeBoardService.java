@@ -10,6 +10,7 @@ import java.util.List;
 public interface FreeBoardService {
     Page<FreeBoardDTO> boardList(String search, String searchTxt, String kind, Pageable pageable);
     List<FreeBoardDTO> mostView();
+    List<FreeBoardDTO> mostLike();
 
     FreeBoardDTO boardDetail(Long fid);
 

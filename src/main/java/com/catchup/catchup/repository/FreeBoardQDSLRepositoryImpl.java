@@ -15,7 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 import static com.catchup.catchup.domain.QFreeBoard.freeBoard;
-import static com.catchup.catchup.domain.QFreeRepBoard.freeRepBoard;
+import static com.catchup.catchup.domain.QLove.love;
 import static com.catchup.catchup.domain.QUser.user;
 import static com.querydsl.core.types.dsl.Wildcard.count;
 
@@ -28,7 +28,9 @@ public class FreeBoardQDSLRepositoryImpl implements FreeBoardQDSLRepository {
         this.queryFactory = queryFactory;
     }
 
-    /** 게시판 검색/전체 페이지 조회 **/
+    /**
+     * 게시판 검색/전체 페이지 조회
+     **/
     @Override
     public Page<FreeBoardDTO> search(SearchCondition condition, Pageable pageable) {
 
@@ -71,7 +73,9 @@ public class FreeBoardQDSLRepositoryImpl implements FreeBoardQDSLRepository {
         return new PageImpl<>(list, pageable, totalCount);
     }
 
-    /** 조회수 카운트 +1 **/
+    /**
+     * 조회수 카운트 +1
+     **/
     @Override
     @Transactional
     public void updateCount(Long fid) {
@@ -96,22 +100,22 @@ public class FreeBoardQDSLRepositoryImpl implements FreeBoardQDSLRepository {
         return hotList;
     }
 
-//    /** 게시글 좋아요 카운트 +1 **/
-//    @Override
-//    public void addLove(Long fid) {
-//        queryFactory.update(freeBoard)
-//                .set(freeBoard.count, freeBoard.count.add(1))
-//                .where(freeBoard.fid.eq(fid))
-//                .execute();
-//    }
-//    /** 게시글 좋아요 카운트 -1 **/
-//    @Override
-//    public void delLove(Long fid) {
-//        queryFactory.update(freeBoard)
-//                .set(freeBoard.count, freeBoard.count.subtract(1))
-//                .where(freeBoard.fid.eq(fid))
-//                .execute();
-//    }
+    @Override
+    public List<FreeBoardDTO> mostLike() {
+        List<FreeBoardDTO> mostLike = queryFactory.select(Projections.fields(
+                        FreeBoardDTO.class
+                        , love.freeBoard.fid
+                        , love.freeBoard.title
+                )).from(freeBoard)
+                .innerJoin(freeBoard.loveList, love)
+                .groupBy(freeBoard.fid)
+                .orderBy(love.lid.count().desc())
+                .offset(0)
+                .limit(5)
+                .fetch();
+        return mostLike;
+    }
+
 
     @Override // 채원
     public Page<FreeBoardDTO> list(Long id, Pageable pageable) {
@@ -135,8 +139,6 @@ public class FreeBoardQDSLRepositoryImpl implements FreeBoardQDSLRepository {
 
         return new PageImpl<>(list, pageable, totalCount);
     }
-
-
 
 
 }

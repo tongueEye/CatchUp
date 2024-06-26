@@ -41,7 +41,7 @@ public class FreeRepBoard {
     //fid
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "fid")
-    FreeBoard fBoard;
+    FreeBoard freeBoard;
 
 
 }
