@@ -34,7 +34,6 @@ public class UserDTO {
 
     private String profile;
 
-
     private String sidoCode;
 
     private String sDCode;

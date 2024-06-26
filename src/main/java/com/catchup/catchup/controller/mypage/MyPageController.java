@@ -4,11 +4,15 @@ import com.catchup.catchup.domain.User;
 import com.catchup.catchup.dto.*;
 import com.catchup.catchup.service.MyPageService;
 import com.catchup.catchup.service.UserService;
+import com.google.gson.Gson;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.tomcat.util.json.JSONParser;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -20,6 +24,10 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.List;
 
 @Controller
@@ -50,6 +58,10 @@ public class MyPageController {
                 List<InfoBoardDTO> qna = service.getQnaList(uid);
                 model.addAttribute("qna", qna);
                 model.addAttribute("uid", uid);
+
+                /*급식 정보 뽑아오기*/
+                UserDTO bap = service.getBap(uid);
+                model.addAttribute("bap", bap);
 
                 model.addAttribute("view", "mypage/home");
             } else {
@@ -104,7 +116,7 @@ public class MyPageController {
 
 
     /** 내가 쓴 글 보기*/
-    @GetMapping("wlist")
+    @GetMapping("/wlist")
     public String writeList(HttpServletRequest request
             , @PageableDefault(size = 10, page = 0, sort = "boardId", direction = Sort.Direction.ASC) Pageable pageable
             , Model model) {
@@ -134,7 +146,7 @@ public class MyPageController {
 
 
     /** 내가 쓴 댓글 보기 */
-    @GetMapping("rlist")
+    @GetMapping("/rlist")
     public String repBoardList(HttpServletRequest request
             , @PageableDefault(size = 10, page = 0, sort = "boardId", direction = Sort.Direction.ASC) Pageable pageable
             , Model model) {
@@ -154,4 +166,32 @@ public class MyPageController {
         model.addAttribute("view", "mypage/repboardlist");
         return "index";
     }
+
+    @GetMapping("/api")
+    public String api(Model model) {
+        model.addAttribute("view", "mypage/repboardlist");
+        return "index";
+    }
+
+    @PostMapping("/api")
+    public String loadAndSave(@RequestBody UserDTO dto, Model model, HttpServletRequest request) {
+        HttpSession session = request.getSession(false);
+        Long uid = (Long) session.getAttribute("sessionId");
+
+        String schoolName = dto.getSchoolName();
+        String schoolSido = dto.getSidoCode();
+
+        System.out.println(schoolName);
+        System.out.println(schoolSido);
+        // 추가적인 처리 로직 수행
+        // ...
+
+        model.addAttribute("view", "mypage/home");
+        return "index";
+    }
 }
+
+
+
+
+

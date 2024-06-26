@@ -1,3 +1,5 @@
+
+
 #mypage-main #content {
     display: flex;
     flex-direction: row;
@@ -35,7 +37,7 @@
 
 #mypage-main .article-content {
     background-color: white;
-    height: 75%;
+    height: calc(100% - 70px);
     overflow: scroll; /* 넘치면 스크롤 됨 */
     padding: 10px 20px 20px;
 }
@@ -69,11 +71,26 @@
     border-radius: 30px;
 }
 
-.mymain .article-content li{
+.mymain .article-content-2 li{
     border-bottom: 1px solid black;
     padding: 10px 0;
 }
 
 .mymain .article-content span {
     font-size: 18px;
+}
+
+/* 급식 정보 */
+.article-1 > .article-content > span {
+    font-size: 30px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid black;
+}
+
+.school_food_result {
+    padding-top: 30px;
+}
+
+.bap-content {
+    background-color: #F9F2E7;
 }
