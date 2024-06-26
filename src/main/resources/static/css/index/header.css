@@ -40,6 +40,7 @@ header {
     right: 10%;
     white-space: nowrap;
     font-family: omyu_pretty;
+    margin-left: 160px;
 }
 
 a {
@@ -58,12 +59,12 @@ a {
     padding: 7px 10px;
 }
 
-/*#logout_btn{*/
-/*    font-weight: bold;*/
-/*    background-color: white;*/
-/*    border-radius: 30px;*/
-/*    border: 2px solid #1A2375;*/
-/*    color: #1A2375;*/
-/*    padding: 10px;*/
-/*}*/
+#logout_btn{
+    font-weight: bold;
+    background-color: white;
+    border-radius: 30px;
+    border: 2px solid #9BA2D7;
+    color: #9BA2D7;
+    padding: 6px 8px;
+}
 /* 네이게이션 바 끝 */

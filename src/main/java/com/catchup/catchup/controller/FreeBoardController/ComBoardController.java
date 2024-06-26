@@ -1,9 +1,10 @@
 package com.catchup.catchup.controller.FreeBoardController;
 
-import com.catchup.catchup.dto.*;
+import com.catchup.catchup.dto.FreeBoardDTO;
+import com.catchup.catchup.dto.RepBoardDTO;
+import com.catchup.catchup.dto.UserDTO;
 import com.catchup.catchup.service.FreeBoardService;
 import com.catchup.catchup.service.UserService;
-import com.querydsl.core.Tuple;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.AllArgsConstructor;
@@ -12,7 +13,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
-import org.springframework.http.HttpRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,17 +24,18 @@ import java.util.List;
 @Controller
 @AllArgsConstructor
 @Slf4j
-public class EduBoardController {
+public class ComBoardController {
 
     private FreeBoardService freeService;
     private final UserService userService;
 
     /** 게시글 목록 **/
-    @GetMapping("/eduboard")
+    @GetMapping("/comboard")
     public String comList(
             @RequestParam(required = false, defaultValue = "") String search
             , @RequestParam(required = false, defaultValue = "") String searchTxt
             , @RequestParam(required = false, defaultValue = "") String kind
+            , @RequestParam(required = false, defaultValue = "") Long fid
             , @PageableDefault(size = 5, page = 0, sort = "fid", direction = Sort.Direction.ASC) Pageable pageable
             , HttpServletRequest request
             , Model model
@@ -45,13 +46,13 @@ public class EduBoardController {
             sessionId = (Long) session.getAttribute("sessionId");
         }
 
-        Page<FreeBoardDTO> boardList = freeService.boardList(search, searchTxt, kind, pageable);
+        Page<FreeBoardDTO> boardList = freeService.comboardList(search, searchTxt, kind, pageable);
         int pageSize = 5;
         int startPage = ((int) (Math.ceil(pageable.getPageNumber() / pageSize))) * pageSize + 1;
         int endPage = Math.min(startPage + pageSize - 1, boardList.getTotalPages());
 
-        List<FreeBoardDTO> hotList = freeService.mostView();
-        List<FreeBoardDTO> likeList = freeService.mostLike();
+        List<FreeBoardDTO> hotList = freeService.mostViewC();
+        List<FreeBoardDTO> likeList = freeService.mostLikeC();
 
         model.addAttribute("sessionId", sessionId);
         model.addAttribute("hotList", hotList);
@@ -61,12 +62,12 @@ public class EduBoardController {
         model.addAttribute("endPage", endPage);
         model.addAttribute("search", search);
         model.addAttribute("searchTxt", searchTxt);
-        model.addAttribute("view", "freeBoard/eduBoard");
+        model.addAttribute("view", "freeBoard/comBoard");
         return "index";
     }
 
     /** 게시글 세부 **/
-    @GetMapping("/edudetail/{fid}")
+    @GetMapping("/comdetail/{fid}")
     public String comDetail(@PathVariable Long fid, HttpServletRequest request, Model model) {
 
         Long sessionId = 0L;
@@ -79,12 +80,12 @@ public class EduBoardController {
 
         model.addAttribute("sessionId", sessionId);
         model.addAttribute("dto", dto);
-        model.addAttribute("view", "freeBoard/eduDetail");
+        model.addAttribute("view", "freeBoard/comDetail");
         return "index";
     }
 
     /** 게시글 작성 페이지 **/
-    @GetMapping("/writeFree")
+    @GetMapping("/com/writeFree")
     public String boardInsert(HttpServletRequest request, Model model) {
 
         Long sessionId = 0L;
@@ -97,12 +98,12 @@ public class EduBoardController {
 
         model.addAttribute("dto", new FreeBoardDTO());
         model.addAttribute("user", userDTO);
-        model.addAttribute("view", "freeBoard/boardInsert");
+        model.addAttribute("view", "freeBoard/comboardInsert");
         return "index";
     }
 
     /** 게시글 작성 폼 **/
-    @PostMapping("/writeFree")
+    @PostMapping("/com/writeFree")
     public String boardInsertResult(
             @RequestParam(name = "cate", required = false) String cate
             , @RequestParam(name = "title", required = false) String title
@@ -126,11 +127,11 @@ public class EduBoardController {
 
         freeService.boardInsert(dto);
 
-        return "redirect:/eduboard";
+        return "redirect:/comboard";
     }
 
     /** 게시글 수정 페이지 **/
-    @GetMapping("/boardUpdate/{fid}")
+    @GetMapping("/comboardUpdate/{fid}")
     public String boardUpdate(@PathVariable Long fid, HttpServletRequest request, Model model) {
         FreeBoardDTO dto = freeService.boardDetail(fid);
 
@@ -145,12 +146,12 @@ public class EduBoardController {
         model.addAttribute("dto", dto);
         model.addAttribute("sessionId", sessionId);
         model.addAttribute("user", userDTO);
-        model.addAttribute("view", "freeBoard/boardUpdate");
+        model.addAttribute("view", "freeBoard/comboardUpdate");
         return "index";
     }
 
     /** 게시글 수정 폼 **/
-    @PostMapping("/boardUpdate/{fid}")
+    @PostMapping("/comboardUpdate/{fid}")
     public String boardUpdateResult(
             @PathVariable Long fid
             , @RequestParam(name = "cate", required = false) String cate
@@ -178,27 +179,27 @@ public class EduBoardController {
 
         Long update_fid = freeService.boardUpdate(dto);
 
-        return "redirect:/edudetail/" + update_fid;
+        return "redirect:/comdetail/" + update_fid;
     }
 
     /** 게시글 삭제 **/
-    @GetMapping("/boardDelete/{fid}")
+    @GetMapping("/com/boardDelete/{fid}")
     public String qnaDelete(@PathVariable Long fid, Model model) {
 
         Long id = freeService.boardDelete(fid);
-        return "redirect:/eduboard";
+        return "redirect:/comboard";
     }
 
 
     /** 댓글 리스트 **/
-    @GetMapping("/replist/{fid}")
+    @GetMapping("/com/replist/{fid}")
     public ResponseEntity<List<FreeBoardDTO>> repList(@PathVariable Long fid) {
         List<FreeBoardDTO> list = freeService.repList(fid);
         return ResponseEntity.ok().body(list);
     }
 
     /** 댓글 추가 **/
-    @PostMapping("/repinsert")
+    @PostMapping("/com/repinsert")
     public ResponseEntity<List<FreeBoardDTO>> repInsert(@RequestBody RepBoardDTO dto, HttpServletRequest request) {
 
         Long sessionId = 0L;
@@ -213,7 +214,7 @@ public class EduBoardController {
     }
 
     /** 댓글 삭제 **/
-    @GetMapping("/repdelete/{frid}")
+    @GetMapping("/com/repdelete/{frid}")
     @ResponseBody
     public ResponseEntity<String> repDelete(@PathVariable Long frid) {
         Long result = freeService.repDelete(frid);

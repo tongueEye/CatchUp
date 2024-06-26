@@ -20,6 +20,7 @@ import java.util.List;
 
 import static com.catchup.catchup.domain.QFreeBoard.freeBoard;
 import static com.catchup.catchup.domain.QFreeRepBoard.freeRepBoard;
+import static com.catchup.catchup.domain.QLove.love;
 import static com.catchup.catchup.domain.QUser.user;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
@@ -109,36 +110,23 @@ class FreeBoardlTest {
     }
 
     @Test
-    @Transactional
-    public void loveAddTest(){
-        User user = userRepository.findById(100L)
-                .orElseThrow(() -> new NotFoundException("Could not found fid"));
-        FreeBoard freeBoard = freeRepository.findById(22L)
-                .orElseThrow(() -> new NotFoundException("Could not found fid"));
-        if(loveRepository.findByUserAndFreeBoard(user, freeBoard).isPresent()){
-            throw new RuntimeException();
+    public void mostLikeTest(){
+        List<FreeBoardDTO> mostLike = queryFactory.select(Projections.fields(
+                        FreeBoardDTO.class
+                        , love.freeBoard.fid
+                        , love.freeBoard.title
+                )).from(freeBoard)
+                .innerJoin(freeBoard.loveList, love)
+                .groupBy(freeBoard.fid)
+                .orderBy(love.lid.count().desc())
+                .offset(0)
+                .limit(5)
+                .fetch();
+        for(FreeBoardDTO dto : mostLike){
+            System.out.println(dto.getFid());
         }
-        Love love = Love.builder()
-                .user(user)
-                .freeBoard(freeBoard)
-                .build();
-        loveRepository.save(love);
-//        freeRepository.addLove(21L);
     }
 
-    @Test
-    @Transactional
-    public void loveSubTest(){
-        User user = userRepository.findById(100L)
-                .orElseThrow(() -> new NotFoundException("Could not found fid"));
-        FreeBoard freeBoard = freeRepository.findById(21L)
-                .orElseThrow(() -> new NotFoundException("Could not found fid"));
-        Love love = (Love) loveRepository.findByUserAndFreeBoard(user, freeBoard)
-                .orElseThrow(() -> new NotFoundException("Could not found lid"));
-
-        loveRepository.delete(love);
-//        freeRepository.delLove(21L);
-    }
 
     @Test
     public void CheckTest(){

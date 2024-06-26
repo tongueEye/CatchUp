@@ -10,7 +10,6 @@ import com.catchup.catchup.repository.FreeBoardRepository;
 import com.catchup.catchup.repository.FreeRepBoardRepository;
 import com.catchup.catchup.repository.LoveRepository;
 import com.catchup.catchup.repository.UserRepository;
-import com.querydsl.core.Tuple;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.jsoup.Jsoup;
@@ -27,9 +26,6 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
-
-import static org.modelmapper.Converters.Collection.map;
 
 @Slf4j
 @Service
@@ -55,6 +51,7 @@ public class FreeBoardServiceImpl implements FreeBoardService {
         condition.setCate(null);
         condition.setKind("e");
 
+
         if ("title".equals(search)) {
             condition.setTitle(searchTxt);
         } else if ("content".equals(search)) {
@@ -74,6 +71,12 @@ public class FreeBoardServiceImpl implements FreeBoardService {
     public List<FreeBoardDTO> mostView() {
         List<FreeBoardDTO> hotList = freeRepository.mostView();
         return hotList;
+    }
+
+    @Override
+    public List<FreeBoardDTO> mostLike() {
+        List<FreeBoardDTO> likeList = freeRepository.mostLike();
+        return likeList;
     }
 
     /** 게시글 세부 **/
@@ -113,6 +116,7 @@ public class FreeBoardServiceImpl implements FreeBoardService {
 
         return dto.getFid();
     }
+
 
     /** 게시글 삭제 **/
     @Override
@@ -166,7 +170,7 @@ public class FreeBoardServiceImpl implements FreeBoardService {
         return delete_file; //파싱한 이미지 이름값 리턴
     }
 
-    
+
     /** 댓글 리스트 **/
     @Override
     public List<FreeBoardDTO> repList(Long fid) {
@@ -196,7 +200,7 @@ public class FreeBoardServiceImpl implements FreeBoardService {
 
         FreeRepBoard repBoard = FreeRepBoard.builder()
                 .frcontent(dto.getFrcontent())
-                .fBoard(freeBoard)
+                .freeBoard(freeBoard)
                 .user(userId)
                 .build();
         FreeRepBoard save = repRepository.save(repBoard);
@@ -252,7 +256,41 @@ public class FreeBoardServiceImpl implements FreeBoardService {
 
         loveRepository.delete(love);
     }
+    @Override
+    public Page<FreeBoardDTO> comboardList(String search, String searchTxt, String kind, Pageable pageable) {
+        SearchCondition condition = new SearchCondition();
+        condition.setTitle(null);
+        condition.setContent(null);
+        condition.setWriter(null);
+        condition.setCate(null);
+        condition.setKind("c");
 
 
+        if ("title".equals(search)) {
+            condition.setTitle(searchTxt);
+        } else if ("content".equals(search)) {
+            condition.setContent(searchTxt);
+        } else if ("writer".equals(search)) {
+            condition.setWriter(searchTxt);
+        } else if ("cate".equals(search)){
+            condition.setCate(searchTxt);
+        }
+
+        Page<FreeBoardDTO> searchList = freeRepository.search(condition, pageable);
+
+        return searchList;
+    }
+
+    @Override
+    public List<FreeBoardDTO> mostViewC() {
+        List<FreeBoardDTO> hotList = freeRepository.mostViewC();
+        return hotList;
+    }
+
+    @Override
+    public List<FreeBoardDTO> mostLikeC() {
+        List<FreeBoardDTO> likeList = freeRepository.mostLikeC();
+        return likeList;
+    }
 
 }

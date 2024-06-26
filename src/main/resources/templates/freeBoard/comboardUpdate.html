@@ -13,47 +13,33 @@
 
 </head>
 <body>
-
 <div id="write_box">
 
-    <form id="writeForm" method="post" th:action="@{/writeQna}">
-
-        <div id="spring">
-            <div class="spring_item"><img th:src="@{/img/infoboard/spring_one.png}"></div>
-            <div class="spring_item"><img th:src="@{/img/infoboard/spring_one.png}"></div>
-            <div class="spring_item"><img th:src="@{/img/infoboard/spring_one.png}"></div>
-            <div class="spring_item"><img th:src="@{/img/infoboard/spring_one.png}"></div>
-            <div class="spring_item"><img th:src="@{/img/infoboard/spring_one.png}"></div>
-            <div class="spring_item"><img th:src="@{/img/infoboard/spring_one.png}"></div>
-            <div class="spring_item"><img th:src="@{/img/infoboard/spring_one.png}"></div>
-            <div class="spring_item"><img th:src="@{/img/infoboard/spring_one.png}"></div>
-            <div class="spring_item"><img th:src="@{/img/infoboard/spring_one.png}"></div>
-            <div class="spring_item"><img th:src="@{/img/infoboard/spring_one.png}"></div>
-
-        </div>
-
-        <h1 id="form_title">Q&A 작성</h1>
-
-        <input type="hidden" th:name="uid" th:value="${uid}">
+    <form id="writeForm" method="post" th:action="@{|/comboardUpdate/${dto.fid}|}">
+        <!--세션 받으면 변경해야 함-->
+        <input type="hidden" th:name="sessionId" th:value="${user.uid}">
         <input type="hidden" th:name="writer" th:value="${user.nickname}">
+        <input type="hidden" th:name="count" th:value="${dto.count}">
 
         <!--작성폼 같이쓸거면 이부분 변경해야 함-->
-        <input type="hidden" th:name="kind" th:value="q">
+        <input type="hidden" th:name="kind" th:value="c">
 
         <ul>
-            <li class="field1">
+            <!--            <p th:text="${user.nickname}"></p>-->
+            <li>
                 <select th:id="cate" th:name="cate">
-                    <option th:value="일반" th:selected="일반">일반</option>
-                    <option th:value="신고">신고</option>
-                    <option th:value="건의">건의</option>
-                    <option th:value="문의">문의</option>
+                    <option th:value="아이" th:selected="아이">아이</option>
+                    <option th:value="맛집">맛집</option>
+                    <option th:value="체험">체험</option>
+                    <option th:value="일상">일상</option>
+                    <option th:value="기타">기타</option>
                 </select>
-                <input type="text" th:name="title" th:id="title" placeholder="제목을 입력하세요." required>
+                <input type="text" th:name="title" th:id="title" placeholder="제목을 입력하세요.">
             </li>
             <li>
                 <textarea id="summernote" th:name="content"></textarea>
             </li>
-            <li class="field1">
+            <li>
                 <button type="submit" id="btn"> 등록하기</button>
             </li>
         </ul>
@@ -102,7 +88,7 @@
         let formData = new FormData();
         formData.append("multipartFiles", file);
 
-        fetch('/file/uploadImageFile/qna', {
+        fetch('/file/uploadImageFile/edu', {
             method: 'POST',
             body: formData
         })
@@ -116,8 +102,7 @@
                 if (data && data.length > 0) {
                     let imageUrl = data[0];
                     $(editor).summernote('insertImage', 'https://kdt-java5-2.s3.ap-northeast-2.amazonaws.com/' + encodeURIComponent(imageUrl));
-                    uploadedImages.push(imageUrl.replace('/','%2F')); //이미지 업로드 시 임시 배열에 추가 (db에 %2F로 저장되므로 변경 작업 수행)
-                    //console.log("추가되는 이미지: "+imageUrl.replace('/','%2F'));
+                    uploadedImages.push(imageUrl.replace('/','%2F')); //이미지 업로드 시 임시 배열에 추가
                     console.log(data)
                 } else {
                     alert('업로드 실패');
@@ -130,7 +115,6 @@
 
     function deleteSummernoteImageFile(imageUrl) {
         const fileName = imageUrl.split('/').pop();
-        //console.log(">>>>>>fileName: "+fileName);
 
         fetch(`/file/deleteImageFile?fileName=${fileName}`, {
             method: 'DELETE'
@@ -159,9 +143,7 @@
 
     document.getElementById('writeForm').addEventListener('submit', function() {
         isFormSubmitting = true; // 폼 제출 중임을 표시
-        alert("글이 등록되었습니다.");
     });
-
 </script>
 </body>
 </html>

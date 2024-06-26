@@ -30,7 +30,6 @@ public class User {
     private String profile;
     private String phone;
 
-
     @Column(name = "ATPT_OFCDC_SC_CODE")
     private String sidoCode;
 
@@ -39,8 +38,7 @@ public class User {
 
     @Column(name = "SCHUL_NM")
     private String schoolName;
-
-
+  
     @OneToMany(mappedBy = "user")
     private List<FreeBoard> boardList = new ArrayList<>();
 

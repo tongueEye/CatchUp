@@ -51,6 +51,7 @@ public class InfoBoardQDSLRepositoryImpl implements InfoBoardQDSLRepository{
                 .where(builder.and(infoBoard.kind.eq(condition.getKind())))
                 .offset(pageable.getOffset())
                 .limit(pageable.getPageSize())
+                .orderBy(infoBoard.iid.desc())
                 .fetch();
 
         Long totalcount = queryFactory.select(infoBoard.count())
