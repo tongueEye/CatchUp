@@ -1,10 +1,7 @@
 package com.catchup.catchup.repository;
 
 import com.catchup.catchup.domain.Love;
-import com.catchup.catchup.dto.FreeBoardDTO;
-import com.catchup.catchup.dto.RepBoardDTO;
-import com.catchup.catchup.dto.InfoBoardDTO;
-import com.catchup.catchup.dto.SearchCondition;
+import com.catchup.catchup.dto.*;
 import com.querydsl.core.Tuple;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -23,4 +20,6 @@ public interface FreeBoardQDSLRepository {
     void updateCount(Long fid);
 
     List<FreeBoardDTO> mostView();
+
+    List<FreeBoardDTO> mostLike();
 }

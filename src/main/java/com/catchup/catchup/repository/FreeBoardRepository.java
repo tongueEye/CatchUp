@@ -20,9 +20,9 @@ public interface FreeBoardRepository extends JpaRepository<FreeBoard, Long>
 
     @Query("SELECT u.nickname, u.profile, r.frcontent, r.frCreateDate, r.frUpdateDate, r.frid " +
             " FROM FreeRepBoard r INNER JOIN FreeBoard f " +
-            " ON r.fBoard.fid = f.fid AND f.fid = r.fBoard.fid" +
+            " ON r.freeBoard.fid = f.fid AND f.fid = r.freeBoard.fid" +
             " inner join User u on f.user.uid = u.uid" +
-            " WHERE r.fBoard.fid = :fid")
+            " WHERE r.freeBoard.fid = :fid")
     List<Object[]> repList(Long fid);
 
     @Override

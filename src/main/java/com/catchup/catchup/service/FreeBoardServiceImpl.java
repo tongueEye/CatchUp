@@ -10,7 +10,6 @@ import com.catchup.catchup.repository.FreeBoardRepository;
 import com.catchup.catchup.repository.FreeRepBoardRepository;
 import com.catchup.catchup.repository.LoveRepository;
 import com.catchup.catchup.repository.UserRepository;
-import com.querydsl.core.Tuple;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.jsoup.Jsoup;
@@ -27,9 +26,6 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
-
-import static org.modelmapper.Converters.Collection.map;
 
 @Slf4j
 @Service
@@ -74,6 +70,12 @@ public class FreeBoardServiceImpl implements FreeBoardService {
     public List<FreeBoardDTO> mostView() {
         List<FreeBoardDTO> hotList = freeRepository.mostView();
         return hotList;
+    }
+
+    @Override
+    public List<FreeBoardDTO> mostLike() {
+        List<FreeBoardDTO> likeList = freeRepository.mostLike();
+        return likeList;
     }
 
     /** 게시글 세부 **/
@@ -196,7 +198,7 @@ public class FreeBoardServiceImpl implements FreeBoardService {
 
         FreeRepBoard repBoard = FreeRepBoard.builder()
                 .frcontent(dto.getFrcontent())
-                .fBoard(freeBoard)
+                .freeBoard(freeBoard)
                 .user(userId)
                 .build();
         FreeRepBoard save = repRepository.save(repBoard);

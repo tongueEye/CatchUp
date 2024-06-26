@@ -17,10 +17,10 @@ public class Love {
     //uid
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "uid")
-    User user;
+    private User user;
 
     //fid
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "fid")
-    FreeBoard freeBoard;
+    private FreeBoard freeBoard;
 }

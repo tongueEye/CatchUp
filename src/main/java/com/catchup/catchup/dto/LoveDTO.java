@@ -11,4 +11,6 @@ public class LoveDTO {
     private Long lid;
     private Long fid;
     private Long uid;
+
+    private String title;
 }
