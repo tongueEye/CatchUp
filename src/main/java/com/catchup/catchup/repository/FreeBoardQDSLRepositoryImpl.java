@@ -116,6 +116,39 @@ public class FreeBoardQDSLRepositoryImpl implements FreeBoardQDSLRepository {
         return mostLike;
     }
 
+    @Override
+    public List<FreeBoardDTO> mostViewC() {
+        List<FreeBoardDTO> hotList = queryFactory.select(Projections.fields(
+                        FreeBoardDTO.class
+                        , freeBoard.title
+                        , freeBoard.fid
+                ))
+                .from(freeBoard)
+                .where(freeBoard.kind.eq("c"))
+                .orderBy(freeBoard.count.desc())
+                .offset(0)
+                .limit(5)
+                .fetch();
+        return hotList;
+    }
+
+    @Override
+    public List<FreeBoardDTO> mostLikeC() {
+        List<FreeBoardDTO> mostLike = queryFactory.select(Projections.fields(
+                        FreeBoardDTO.class
+                        , love.freeBoard.fid
+                        , love.freeBoard.title
+                )).from(freeBoard)
+                .innerJoin(freeBoard.loveList, love)
+                .where(freeBoard.kind.eq("c"))
+                .groupBy(freeBoard.fid)
+                .orderBy(love.lid.count().desc())
+                .offset(0)
+                .limit(5)
+                .fetch();
+        return mostLike;
+    }
+
 
     @Override // 채원
     public Page<FreeBoardDTO> list(Long id, Pageable pageable) {

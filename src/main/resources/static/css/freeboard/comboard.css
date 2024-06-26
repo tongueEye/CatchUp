@@ -1,0 +1,151 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+.frBoardList ul li{
+    list-style: none;
+}
+
+
+.frBoard {
+    display: flex;
+    flex-direction: row;
+    width: 70%;
+    margin: auto;
+}
+
+.sideMenu{
+    padding: 10px;
+    position: relative;
+    top: 140px;
+    min-width: 15%;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+}
+
+.sideMenu h3{
+    position: relative;
+    left: -20px;
+}
+
+aside {
+    margin: 10px 0;
+    padding: 10px 35px;
+    border: none;
+    border-radius: 15px;
+    background-color: #F4EBF3;
+    line-height: 1.5rem;
+}
+
+aside ul li a:hover{
+    color: #9BA2D7;
+}
+
+
+
+.frfr{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: baseline;
+}
+.frfr h2{
+    font-size: 2.5rem;
+    letter-spacing: 10px;
+    padding-left: 15px;
+}
+.frfr form{
+    padding-right: 20px;
+}
+
+input, select {
+    padding: 5px 10px;
+    border: 2px solid #9BA2D7;
+    border-radius: 15px;
+    font-size: 1rem;
+    margin-right: 10px;
+}
+input:focus, select:focus{
+    outline: none;
+}
+
+
+
+
+.frBoardList{
+    position: relative;
+    top: 105px;
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+}
+
+.frBoardList ul {
+    margin: 15px;
+    padding: 10px;
+    border-bottom: 1px solid silver;
+}
+
+.frBoardList ul a:hover {
+    color: #9BA2D7;
+}
+
+.titlee1{
+    display: flex;
+    flex-direction: row;
+    font-size: 1.3rem;
+    font-weight: bold;
+}
+.titlee1 li, .titlee2 li{
+    padding: 0 10px 10px 0;
+}
+
+.titlee2{
+    display: flex;
+    flex-direction: row;
+    padding-right: 20px;
+    color: grey;
+}
+
+
+
+.rmsid{
+}
+
+.page{
+    display: flex;
+    justify-content: center;
+    margin: 0 0 10% 0;
+    font-size: 1.2rem;
+}
+.page a{
+    padding: 0 10px;
+}
+.page a:hover{
+    color: #9BA2D7;
+}
+
+.page_writebtn{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 50px;
+    align-items: baseline;
+}
+
+#write_btn{
+    width: 100px;
+    height: 40px;
+    color: white;
+    background-color: #9BA2D7;
+    border-color: #9BA2D7;
+    border-radius: 15px;
+    padding: 5px 10px;
+    position: relative;
+    right: 15px;
+    font-size: 1rem;
+}
+
+
