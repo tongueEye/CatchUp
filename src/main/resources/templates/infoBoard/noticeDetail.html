@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <link rel="stylesheet" th:href="@{/css/infoboard/infoboard_detail2.css}">
+    <link rel="stylesheet" th:href="@{/css/infoboard/infoboard_detail.css}">
 </head>
 <body>
 
@@ -26,35 +26,38 @@
 
         </section>
 
-        <!---->
-        <section class="info_section">
-            <div></div>
-            <h4 th:text="${#temporals.format(dto.createDate, 'yyyy년 MM월 dd일')}"></h4>
-            <div></div>
-        </section>
+        <!--작성자 정보-->
+        <div class="scrollBar">
+            <div class="chat_room">
+                <section class="info_section">
+                    <div></div>
+                    <h4 th:text="${#temporals.format(dto.createDate, 'yyyy년 MM월 dd일')}"></h4>
+                    <div></div>
+                </section>
 
-        <!--프로필 영역-->
-        <section class="info_section">
-            <div class="profile_box">
-                <div id="profile_img"><img th:src="'https://kdt-java5-2.s3.ap-northeast-2.amazonaws.com/profile/' + ${profile}"></div>
-                <h4 th:text="${dto.writer}"></h4>
+                <!--프로필 영역-->
+                <section class="info_section">
+                    <div class="profile_box">
+                        <div id="profile_img"><img th:src="'https://kdt-java5-2.s3.ap-northeast-2.amazonaws.com/profile/' + ${profile}"></div>
+                        <h4 th:text="${dto.writer}"></h4>
+                    </div>
+
+                    <div></div>
+                </section>
+
+                <!--콘텐트 영역-->
+                <div class="chat_box">
+                    <section class="content_section" th:utext="${dto.content}">
+
+                    </section>
+
+                    <section class="info_section">
+                        <div></div>
+                        <h4 th:text="${#temporals.format(dto.createDate, 'HH:mm')}"></h4>
+                    </section>
+                </div>
             </div>
-
-            <div></div>
-        </section>
-
-        <!--콘텐트 영역-->
-        <div class="chat_box">
-            <section class="content_section" th:utext="${dto.content}">
-
-            </section>
-
-            <section class="info_section">
-                <div></div>
-                <h4 th:text="${#temporals.format(dto.createDate, 'HH:mm')}"></h4>
-            </section>
         </div>
-
     </article>
 
 

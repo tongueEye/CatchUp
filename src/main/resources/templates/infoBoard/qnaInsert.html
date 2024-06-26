@@ -18,6 +18,22 @@
 
     <form id="writeForm" method="post" th:action="@{/writeQna}">
 
+        <div id="spring">
+            <div class="spring_item"><img th:src="@{/img/infoboard/spring_one.png}"></div>
+            <div class="spring_item"><img th:src="@{/img/infoboard/spring_one.png}"></div>
+            <div class="spring_item"><img th:src="@{/img/infoboard/spring_one.png}"></div>
+            <div class="spring_item"><img th:src="@{/img/infoboard/spring_one.png}"></div>
+            <div class="spring_item"><img th:src="@{/img/infoboard/spring_one.png}"></div>
+            <div class="spring_item"><img th:src="@{/img/infoboard/spring_one.png}"></div>
+            <div class="spring_item"><img th:src="@{/img/infoboard/spring_one.png}"></div>
+            <div class="spring_item"><img th:src="@{/img/infoboard/spring_one.png}"></div>
+            <div class="spring_item"><img th:src="@{/img/infoboard/spring_one.png}"></div>
+            <div class="spring_item"><img th:src="@{/img/infoboard/spring_one.png}"></div>
+
+        </div>
+
+        <h1 id="form_title">Q&A 작성</h1>
+
         <input type="hidden" th:name="uid" th:value="${uid}">
         <input type="hidden" th:name="writer" th:value="${user.nickname}">
 
@@ -25,20 +41,19 @@
         <input type="hidden" th:name="kind" th:value="q">
 
         <ul>
-<!--            <p th:text="${user.nickname}"></p>-->
-            <li>
+            <li class="field1">
                 <select th:id="cate" th:name="cate">
                     <option th:value="일반" th:selected="일반">일반</option>
                     <option th:value="신고">신고</option>
                     <option th:value="건의">건의</option>
                     <option th:value="문의">문의</option>
                 </select>
-                <input type="text" th:name="title" th:id="title" placeholder="제목을 입력하세요.">
+                <input type="text" th:name="title" th:id="title" placeholder="제목을 입력하세요." required>
             </li>
             <li>
                 <textarea id="summernote" th:name="content"></textarea>
             </li>
-            <li>
+            <li class="field1">
                 <button type="submit" id="btn"> 등록하기</button>
             </li>
         </ul>
@@ -144,7 +159,9 @@
 
     document.getElementById('writeForm').addEventListener('submit', function() {
         isFormSubmitting = true; // 폼 제출 중임을 표시
+        alert("글이 등록되었습니다.");
     });
+
 </script>
 </body>
 </html>

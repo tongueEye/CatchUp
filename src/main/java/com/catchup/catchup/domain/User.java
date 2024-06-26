@@ -30,16 +30,14 @@ public class User {
     private String profile;
     private String phone;
 
+    @Column(name = "ATPT_OFCDC_SC_CODE")
+    private String sidoCode;
 
-    @Column(name = "school_code")
-    private String schoolCode;
+    @Column(name = "SD_SCHUL_CODE")
+    private String sDCode;
 
-    @Column(name = "school_name")
+    @Column(name = "SCHUL_NM")
     private String schoolName;
-
-    @Column(name = "local_code")
-    private String localCode;
-
 
     @OneToMany(mappedBy = "user")
     private List<FreeBoard> boardList = new ArrayList<>();
