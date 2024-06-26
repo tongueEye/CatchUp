@@ -136,4 +136,27 @@ public class MyPageServiceImpl implements MyPageService{
         repository.save(user);
         return user.getNickname() + user.getProfile();
     }
+
+    @Override
+    public void schoolInsert(UserDTO dto, Long uid) {
+        repository.schoolInsert(dto, uid);
+
+    }
+
+    /** 밥 정보 불러오기!! */
+    @Override
+    public UserDTO getBap(Long uid) {
+
+        Optional<User> result = repository.findById(uid);
+
+        // 출력하려면 entity -> dto 변환하기
+        modelMapper.map(User.class, UserDTO.class);
+
+        UserDTO list = result.stream().map(item -> modelMapper.map(item, UserDTO.class))
+                .findAny()
+                .orElseThrow(() -> {
+                    throw new RuntimeException();
+                });
+        return list;
+    }
 }
