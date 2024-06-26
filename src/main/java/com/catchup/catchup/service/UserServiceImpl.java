@@ -1,12 +1,14 @@
 package com.catchup.catchup.service;
 
 import com.catchup.catchup.domain.User;
+import com.catchup.catchup.dto.FreeBoardDTO;
 import com.catchup.catchup.dto.UserDTO;
 import com.catchup.catchup.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -55,4 +57,5 @@ public class UserServiceImpl implements UserService{
 
         return cnt;
     }
+
 }

@@ -1,0 +1,197 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+ul li{
+    list-style: none;
+}
+
+#eduDetail{
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    top: 80px;
+    height: 150vh;
+    margin: 0 20vw;
+}
+
+#detail_util{
+    display: flex;
+    justify-content: space-between;
+    height: 80px;
+}
+
+#eduBoardDetail{
+    position: relative;
+}
+
+#profile{
+    width: 70px;
+    height: 70px;
+}
+#profile img{
+    width: 70px;
+    height: 70px;
+    border-radius: 15px;
+}
+#writer_info{
+    position: relative;
+    font-size: 1.3rem;
+    margin-left: 10px;
+}
+
+#option_toggle{
+    width: 70px;
+    height: 70px;
+    background-size: cover;
+    text-align: center;
+    position: relative;
+    top: 25px;
+    margin-left: auto;
+}
+
+#option_toggle img{
+    transition: transform 0.1s ease;
+    width: 40px;
+}
+#option_toggle img:active {
+    transform: rotate(60deg);
+}
+#check-btn { display: none; }
+#check-btn:checked ~ #setting { display: block; }
+
+#setting {
+    display: none;
+    position: relative;
+    right: 25px;
+    border-radius: 10px;
+}
+#setting button{
+    padding: 0 0 0 15px;
+}
+#setting li{
+    margin: 5px 0;
+}
+
+#setting img{
+    width: 20px;
+}
+
+
+
+#qna_img{
+    width: 20px;
+    height: 20px;
+    background-image: url(../../img/freeboard/inquiry.png);
+    background-size: cover;
+    position: absolute;
+    margin: 3px;
+}
+
+#mod_img{
+    width: 20px;
+    height: 20px;
+    background-image: url(../../img/freeboard/note.png);
+    background-size: cover;
+    position: absolute;
+    margin: 3px;
+}
+
+#del_img{
+    width: 20px;
+    height: 20px;
+    background-image: url(../../img/freeboard/trash.png);
+    background-size: cover;
+    position: absolute;
+    margin: 3px;
+}
+
+#content{
+    min-height: 50vh;
+    border: 2px solid #F4EBF3;
+    border-radius: 15px;
+    padding: 10px;
+    background-color: #F4EBF3;
+}
+
+#like{
+    margin: 20px 0;
+    display: flex;
+    justify-content: center;
+}
+
+#like_img{
+    width: 20px;
+    height: 20px;
+    background-image: url(../../img/freeboard/heart.png);
+    background-size: cover;
+    display: inline-block;
+    position: relative;
+    left: 35px;
+    margin: 2px;
+    z-index: 999;
+}
+
+#like_btn{
+    padding: 0 0 0 15px;
+    width: 100px;
+    position: relative;
+}
+
+#replySection{
+    display: flex;
+    flex-direction: column;
+}
+
+#replySection ul{
+    list-style: none;
+}
+
+#reply_insert{
+    display: flex;
+    justify-content: center;
+    border: 2px solid #F4EBF3;
+    border-radius: 15px;
+    padding: 10px;
+    background-color: #F4EBF3;
+    margin: 10px 0;
+}
+
+#reply_insert input{
+    border-top: 0;
+    border-left: 0;
+    border-right: 0;
+    border-bottom: 2px solid #B6BEED;
+    background-color: #F4EBF3;
+}
+input:focus{
+    outline: #B6BEED;
+}
+
+
+#replyList{
+    border-radius: 15px;
+    padding: 10px;
+    background-color: #F4EBF3;
+    margin: 10px 0;
+}
+#replyList ul{
+    border-bottom: 1px solid #B6BEED;
+}
+
+#replyList ul li{
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+}
+
+button{
+    width: 80px;
+    height: 25px;
+    color: white;
+    background-color: #B6BEED;
+    border: #B6BEED;
+    border-radius: 15px;
+
+}
