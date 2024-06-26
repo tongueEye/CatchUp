@@ -66,12 +66,14 @@ public class FreeBoardServiceImpl implements FreeBoardService {
         return searchList;
     }
 
+    /** 조회수 1-5 **/
     @Override
     public List<FreeBoardDTO> mostView() {
         List<FreeBoardDTO> hotList = freeRepository.mostView();
         return hotList;
     }
 
+    /** 좋아요 1-5 **/
     @Override
     public List<FreeBoardDTO> mostLike() {
         List<FreeBoardDTO> likeList = freeRepository.mostLike();
@@ -83,8 +85,16 @@ public class FreeBoardServiceImpl implements FreeBoardService {
     public FreeBoardDTO boardDetail(Long fid) {
         Optional<FreeBoard> freeBoard = freeRepository.findById(fid);
         FreeBoardDTO dto = modelMapper.map(freeBoard, FreeBoardDTO.class);
+
         freeRepository.updateCount(fid);
         return dto;
+    }
+
+    /** 작성자 정보 **/
+    @Override
+    public List<FreeBoardDTO> getWriterInfo(Long fid) {
+        List<FreeBoardDTO> writerInfo = freeRepository.getWriterInfo(fid);
+        return writerInfo;
     }
 
     /** 게시글 작성 **/
@@ -176,11 +186,9 @@ public class FreeBoardServiceImpl implements FreeBoardService {
         List<FreeBoardDTO> list = objects.stream().map(item ->
                 FreeBoardDTO.builder()
                         .nickname((String) item[0])
-                        .profile((String) item[1])
-                        .frcontent((String) item[2])
-                        .frCreateDate((LocalDateTime) item[3])
-                        .frUpdateDate((LocalDateTime) item[4])
-                        .frid((Long) item[5])
+                        .frcontent((String) item[1])
+                        .frid((Long) item[2])
+                        .uid((Long) item[3])
                         .build()
         ).collect(Collectors.toList());
         return list;

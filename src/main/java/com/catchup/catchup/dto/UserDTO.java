@@ -34,11 +34,11 @@ public class UserDTO {
 
     private String profile;
 
-    private String schoolCode;
+    private String sidoCode;
+
+    private String sDCode;
 
     private String schoolName;
-
-    private String local_code;
 
 
 

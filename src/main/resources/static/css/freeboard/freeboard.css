@@ -7,16 +7,43 @@ ul li{
     list-style: none;
 }
 
+#utility{
+    display: flex;
+    justify-content: space-between;
+}
+
 #eduBoard {
     display: flex;
     flex-direction: row;
+    margin: 0 150px;
+    height: 80vh;
+}
+
+#eduBoardList{
+    position: relative;
+    top: 105px;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin: 0 0 0 165px;
+    height: 50vh;
+}
+
+#eduBoardList ul {
+    border-bottom: 1px solid #9BA2D7;
+    padding: 15px;
+    margin: 15px 0;
+}
+
+#eduBoardList ul a:hover {
+    color: #9BA2D7;
 }
 
 #sideMenu{
-    padding: 10px;
-    position: relative;
+    margin: 10px 20px;
+    position: fixed;
     top: 75px;
-    min-width: 15%;
+    width: 130px;
     display: flex;
     flex-direction: column;
     justify-content: center;.
@@ -25,8 +52,13 @@ ul li{
 aside {
     margin: 20px 0;
     padding: 10px;
-    border: 1px solid #9BA2D7;
+    border: 1px solid #F4EBF3;
     border-radius: 15px;
+    background: #F4EBF3;
+}
+
+aside h3{
+    margin: 5px 0;
 }
 
 aside ul li a:hover{
@@ -47,133 +79,34 @@ form{
 
 }
 
-#write_btn , #append , #del_btn{
+#write_btn {
     width: 100px;
     color: white;
-    background-color: #9BA2D7;
-    border-color: #9BA2D7;
+    background-color: #B6BEED;
+    border-color: #B6BEED;
     border-radius: 15px;
     padding: 5px 10px;
     position: relative;
 }
 
 #write_btn:hover{
-
-}
-
-#eduBoardList{
-    position: relative;
-    top: 75px;
-    display: flex;
-    flex-direction: column;
-    width: 80%;
-}
-
-#eduBoardList ul {
-    border: 1px solid silver;
-    margin: 15px;
-    padding: 10px;
-}
-
-#eduBoardList ul a:hover {
-    color: #9BA2D7;
+    color: black;
+    background-color: white;
+    border-color: white;
 }
 
 #page{
     justify-content: center;
     display: flex;
-    margin: 0 0 10% 0;
+    font-size: 1.2rem;
+}
+#page span{
+    margin-right: 10px;
 }
 
 #page a{
-    padding: 0 10px;
-
 }
 
 #page a:hover{
     color: #9BA2D7;
-}
-
-#eduDetail{
-    display: flex;
-    flex-direction: column;
-    position: relative;
-    top: 50px;
-    height: 100vh;
-    margin: 0 20vw;
-}
-
-#eduBoardDetail{
-    position: relative;
-}
-
-#writer_info{
-    border: 1px solid silver;
-}
-
-#option_toggle{
-    width: 70px;
-    height: 70px;
-    background-image: url(../../img/freeboard/option.png);
-    background-size: cover;
-}
-
-#qna_img{
-    width: 70px;
-    height: 70px;
-    background-image: url(../../img/freeboard/inquiry.png);
-    background-size: cover;
-}
-
-#mod_img{
-    width: 70px;
-    height: 70px;
-    background-image: url(../../img/freeboard/note.png);
-    background-size: cover;
-}
-
-#del_img{
-     width: 70px;
-     height: 70px;
-     background-image: url(../../img/freeboard/trash.png);
-     background-size: cover;
- }
-
-#content{
-    min-height: 50vh;
-    border: 2px solid #9BA2D7;
-    border-radius: 15px;
-    padding: 10px
-}
-
-#like_img{
-    width: 70px;
-    height: 70px;
-    background-image: url(../../img/freeboard/heart.png);
-    background-size: cover;
-}
-#like_btn{
-    margin: 20px 0;
-    width: 100px;
-    position: relative;
-}
-
-#replySection{
-    display: flex;
-    flex-direction: column;
-}
-
-#replySection ul{
-    list-style: none;
-}
-
-#replySection #reply_insert{
-    display: flex;
-    justify-content: center;
-}
-
-#replyList{
-    border: 2px solid #9BA2D7;
-    border-radius: 15px;
-    padding: 10px
 }

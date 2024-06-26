@@ -18,29 +18,33 @@ const replyList = function () {
         return response.json();
     }).then((data) => {
         data.forEach(item => {
+            let ele_span = document.createElement('span');
+            let ele_ul = document.createElement('ul');
             let ele_li = document.createElement('li');
-            let nickname = document.createTextNode(item.nickname);
-            let profile = document.createTextNode(item.profile);
-            let content = document.createTextNode(item.frcontent);
-            let c_date = document.createTextNode(item.frCreateDate);
-            let u_date = document.createTextNode(item.frUpdateDate);
+            let nickname = document.createTextNode('['+item.nickname + ']');
+            let content = document.createTextNode(' '+item.frcontent);
+            let uid = item.uid;
             let frid = item.frid;
 
-            ele_li.appendChild(nickname);
-            ele_li.appendChild(profile);
-            ele_li.appendChild(content);
-            ele_li.appendChild(c_date);
-            ele_li.appendChild(u_date);
 
-            let deleteButton = document.createElement('button');
-            deleteButton.textContent = '삭제';
-            deleteButton.id = 'del_btn'
-            deleteButton.onclick = function() {
-                deleteRep(frid);
-            };
-            ele_li.appendChild(deleteButton);
+            ele_span.appendChild(nickname);
+            ele_span.appendChild(content);
+            ele_li.appendChild(ele_span);
+            ele_ul.appendChild(ele_li);
 
-            document.getElementById('replyList').appendChild(ele_li);
+            /** 삭제 버튼 추가 **/
+            let sessionId = document.getElementById('sessionId').value;
+            if(String(sessionId) === String(uid) || String(sessionId) === '100') {
+                let deleteButton = document.createElement('button');
+                deleteButton.textContent = '삭제';
+                deleteButton.id = 'del_btn'
+                deleteButton.onclick = function () {
+                    alert('정말 삭제할까요?');
+                    deleteRep(frid);
+                };
+                ele_li.appendChild(deleteButton);
+            }
+            document.getElementById('replyList').appendChild(ele_ul);
 
         })
     }).catch(error => {
@@ -70,24 +74,39 @@ const deleteRep = function (frid) {
     });
 };
 
+
 window.onload = function () {
 
     replyList();
 
-    /** 문의하기 버튼 **/
-    document.getElementById('qna_btn').onclick = function () {
-        console.log('click!');
-        location.href = '/qna'
+    /** 문의하기 **/
+    let qnaBtn = document.getElementById('qna_btn');
+    if (qnaBtn) {
+        qnaBtn.onclick = function () {
+            location.href = '/qna';
+        }
+    } else {
+        console.error('Element with id "qna_btn" not found.');
     }
-    /** 수정하기 버튼 **/
-    document.getElementById('mod_btn').onclick = function () {
-        console.log('click!');
-        location.href = '/boardUpdate/' + num;
+
+    /** 글 수정 **/
+    let modBtn = document.getElementById('mod_btn');
+    if (modBtn) {
+        modBtn.onclick = function () {
+            location.href = '/boardUpdate/' + num;
+        }
+    } else {
+        console.error('Element with id "mod_btn" not found.');
     }
-    /** 삭제하기 버튼 **/
-    document.getElementById('boardDel_btn').onclick = function () {
-        console.log('click!');
-        location.href = '/boardDelete/' + num;
+
+    /** 글 삭제 **/
+    let boardDelBtn = document.getElementById('boardDel_btn');
+    if (boardDelBtn) {
+        boardDelBtn.onclick = function () {
+            location.href = '/boardDelete/' + num;
+        }
+    } else {
+        console.error('Element with id "boardDel_btn" not found.');
     }
 
     /** 댓글 입력 **/
@@ -118,19 +137,15 @@ window.onload = function () {
         }).then((data) => {
             document.querySelector('#replyList').replaceChildren("");
             data.forEach(item =>{
+                let ele_ul = document.createElement('ul');
                 let ele_li = document.createElement('li');
-                let profile = document.createTextNode(item.profile);
                 let nickname = document.createTextNode(item.nickname);
                 let content = document.createTextNode(item.frcontent);
-                let c_date = document.createTextNode(item.frCreateDate);
-                let u_date = document.createTextNode(item.frUpdateDate);
 
-                ele_li.appendChild(profile);
                 ele_li.appendChild(nickname);
                 ele_li.appendChild(content);
-                ele_li.appendChild(c_date);
-                ele_li.appendChild(u_date);
-                document.getElementById('replyList').appendChild(ele_li);
+                ele_ul.appendChild(ele_li);
+                document.getElementById('replyList').appendChild(ele_ul);
                 location.reload();
             })
         }).catch(error => {
@@ -139,8 +154,10 @@ window.onload = function () {
             console.log("reply insert finally");
         });
     }
-    /** 좋아요 기능 **/
+
+    /** 좋아요 **/
     const likeBtn = document.getElementById('like_btn');
+    const likeImg = document.getElementById('like_img');
     const sessionId = document.getElementById('sessionId').value;
     const fid = document.getElementById('fid').value;
     let hasLiked = localStorage.getItem('hasLiked_' + sessionId + '_' + fid) === 'true'; // 로컬 스토리지에서 좋아요 상태 불러오기
@@ -151,12 +168,15 @@ window.onload = function () {
     function updateButton() {
         if (hasLiked) {
             likeBtn.innerText = '취소';
+            likeBtn.style.backgroundColor = '#C6C6C6';
+            likeImg.style.backgroundImage = 'url("../../img/freeboard/unheart.png")';
         } else {
             likeBtn.innerText = '좋아요';
+            likeBtn.style.backgroundColor = '#B6BEED';
+            likeImg.style.backgroundImage ='url("../../img/freeboard/heart.png")';
         }
     }
 
-    /** 좋아요 버튼 토글 **/
     function toggleLike() {
         const dto = { 'uid': sessionId, 'fid': fid };
 

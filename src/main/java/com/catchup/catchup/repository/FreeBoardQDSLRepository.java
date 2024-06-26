@@ -1,5 +1,6 @@
 package com.catchup.catchup.repository;
 
+import com.catchup.catchup.domain.FreeBoard;
 import com.catchup.catchup.domain.Love;
 import com.catchup.catchup.dto.*;
 import com.querydsl.core.Tuple;
@@ -22,4 +23,7 @@ public interface FreeBoardQDSLRepository {
     List<FreeBoardDTO> mostView();
 
     List<FreeBoardDTO> mostLike();
+
+    List<FreeBoardDTO> getWriterInfo(Long fid);
+
 }

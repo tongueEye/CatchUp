@@ -14,6 +14,8 @@ public interface FreeBoardService {
 
     FreeBoardDTO boardDetail(Long fid);
 
+    List<FreeBoardDTO> getWriterInfo(Long fid);
+
     Long boardInsert(FreeBoardDTO dto);
 
     List<FreeBoardDTO> repList(Long fid);

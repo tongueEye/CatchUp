@@ -28,9 +28,7 @@ public class FreeBoardQDSLRepositoryImpl implements FreeBoardQDSLRepository {
         this.queryFactory = queryFactory;
     }
 
-    /**
-     * 게시판 검색/전체 페이지 조회
-     **/
+    /** 게시판 검색/전체 페이지 조회 **/
     @Override
     public Page<FreeBoardDTO> search(SearchCondition condition, Pageable pageable) {
 
@@ -73,9 +71,7 @@ public class FreeBoardQDSLRepositoryImpl implements FreeBoardQDSLRepository {
         return new PageImpl<>(list, pageable, totalCount);
     }
 
-    /**
-     * 조회수 카운트 +1
-     **/
+    /** 조회수 카운트 +1 **/
     @Override
     @Transactional
     public void updateCount(Long fid) {
@@ -85,6 +81,7 @@ public class FreeBoardQDSLRepositoryImpl implements FreeBoardQDSLRepository {
                 .execute();
     }
 
+    /** 조회수 1-5 **/
     @Override
     public List<FreeBoardDTO> mostView() {
         List<FreeBoardDTO> hotList = queryFactory.select(Projections.fields(
@@ -100,6 +97,7 @@ public class FreeBoardQDSLRepositoryImpl implements FreeBoardQDSLRepository {
         return hotList;
     }
 
+    /** 좋아요 1-5 **/
     @Override
     public List<FreeBoardDTO> mostLike() {
         List<FreeBoardDTO> mostLike = queryFactory.select(Projections.fields(
@@ -115,9 +113,24 @@ public class FreeBoardQDSLRepositoryImpl implements FreeBoardQDSLRepository {
                 .fetch();
         return mostLike;
     }
+    /** 작성자 정보 가져오기 **/
+    @Override
+    public List<FreeBoardDTO> getWriterInfo(Long fid) {
+        List<FreeBoardDTO> list = queryFactory.select(Projections.fields(
+                        FreeBoardDTO.class
+                        , user.nickname
+                        , user.profile
+                        , user.uid
+                        , freeBoard.title
+                        , freeBoard.fid
+                ))
+                .from(user)
+                .join(user.boardList, freeBoard)
+                .where(freeBoard.fid.eq(fid))
+                .fetch();
+        return list;
+    }
 
-
-    @Override // 채원
     public Page<FreeBoardDTO> list(Long id, Pageable pageable) {
         /** 마이페이지 내가 쓴 게시글 조회하기 */
         List<FreeBoardDTO> list = queryFactory.select(Projections.fields(

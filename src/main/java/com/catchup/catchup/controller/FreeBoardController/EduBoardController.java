@@ -2,6 +2,7 @@ package com.catchup.catchup.controller.FreeBoardController;
 
 import com.catchup.catchup.dto.*;
 import com.catchup.catchup.service.FreeBoardService;
+import com.catchup.catchup.service.MyPageService;
 import com.catchup.catchup.service.UserService;
 import com.querydsl.core.Tuple;
 import jakarta.servlet.http.HttpServletRequest;
@@ -26,8 +27,9 @@ import java.util.List;
 @Slf4j
 public class EduBoardController {
 
-    private FreeBoardService freeService;
+    private final FreeBoardService freeService;
     private final UserService userService;
+    private final MyPageService myService;
 
     /** 게시글 목록 **/
     @GetMapping("/eduboard")
@@ -75,10 +77,11 @@ public class EduBoardController {
             sessionId = (Long) session.getAttribute("sessionId");
         }
 
+        List<FreeBoardDTO> writerInfo = freeService.getWriterInfo(fid);
         FreeBoardDTO dto = freeService.boardDetail(fid);
-
         model.addAttribute("sessionId", sessionId);
         model.addAttribute("dto", dto);
+        model.addAttribute("writerInfo", writerInfo);
         model.addAttribute("view", "freeBoard/eduDetail");
         return "index";
     }

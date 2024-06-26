@@ -2,14 +2,19 @@ package com.catchup.catchup.repository;
 
 import com.catchup.catchup.domain.QUser;
 import com.catchup.catchup.domain.User;
+import com.catchup.catchup.dto.FreeBoardDTO;
 import com.querydsl.core.Tuple;
+import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
 
+import java.util.List;
+
 import static com.catchup.catchup.domain.QUser.user;
+import static com.catchup.catchup.domain.QFreeBoard.freeBoard;
 
 @RequiredArgsConstructor
-public class UserQDSLRepositoryImpl implements UserQDSLRepository{
+public class UserQDSLRepositoryImpl implements UserQDSLRepository {
 
     private final JPAQueryFactory queryFactory;
 
@@ -35,7 +40,9 @@ public class UserQDSLRepositoryImpl implements UserQDSLRepository{
     }
 
 
-    /** Uid 가지고 오기 */
+    /**
+     * Uid 가지고 오기
+     */
     @Override
     public Long getuid(String id) {
         Long uid = queryFactory.select(user.uid)
@@ -45,4 +52,5 @@ public class UserQDSLRepositoryImpl implements UserQDSLRepository{
 
         return uid;
     }
+
 }
