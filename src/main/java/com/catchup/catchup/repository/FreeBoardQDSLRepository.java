@@ -22,4 +22,8 @@ public interface FreeBoardQDSLRepository {
     List<FreeBoardDTO> mostView();
 
     List<FreeBoardDTO> mostLike();
+
+    List<FreeBoardDTO> mostViewC();
+
+    List<FreeBoardDTO> mostLikeC();
 }

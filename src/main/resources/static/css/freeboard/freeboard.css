@@ -25,8 +25,9 @@ ul li{
 aside {
     margin: 20px 0;
     padding: 10px;
-    border: 1px solid #9BA2D7;
+    border: none;
     border-radius: 15px;
+    background-color: #F4EBF3;
 }
 
 aside ul li a:hover{
