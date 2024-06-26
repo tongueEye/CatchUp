@@ -12,10 +12,10 @@
     position: absolute;
     top: 15vh;
     background: white;
-    border: 3px solid mediumpurple;
+    border: 3px solid #9BA2D7;
     padding: 50px;
-    border-radius: 25px;
-    width: 70%;
+    border-radius: 50px;
+    width: 50%;
 }
 
 img{ /*표시되는 이미지 최대크기 설정*/
@@ -28,20 +28,52 @@ img{ /*표시되는 이미지 최대크기 설정*/
     flex-direction: row;
     justify-content: space-between;
     padding-bottom: 20px;
-    margin-bottom: 20px;
-    border-bottom: 2px solid mediumpurple;
+    border-bottom: 2px solid #9BA2D7;
 }
 
 .title_box{
     display: flex;
     flex-direction: row;
+}
 
+#back_btn{
+    color: #9BA2D7;
 }
 
 .btn_box{
     position: relative;
     top: 30px;
+    right: 20px;
 }
+
+
+/* 스크롤바 시작 */
+.scrollBar {
+    padding: 30px;
+    height: 70vh;
+    overflow: scroll;
+    overflow-x: hidden;
+}
+.scrollBar::-webkit-scrollbar {
+    /* 스크롤바의 너비 */
+    width: 10px;
+}
+.scrollBar::-webkit-scrollbar-thumb {
+    /* 스크롤바의 길이 */
+    height: 30%;
+    /* 스크롤바의 색상 */
+    background: rgba(182,190,237,0.5);
+    border-radius: 10px;
+}
+
+.scrollBar::-webkit-scrollbar-track {
+    /*스크롤바 뒷 배경 색상*/
+    background: rgba(215,221,247,0.6);
+    border-radius: 50px;
+    margin: 10px 0;
+}
+
+/* 스크롤바 끝 */
 
 #edit_btn{
     margin-right: 10px;
@@ -60,7 +92,7 @@ img{ /*표시되는 이미지 최대크기 설정*/
 }
 
 #profile_img{
-    background-color: #0056b3;
+    background-color: whitesmoke;
     border-radius: 30px;
     width: 50px;
     height: 50px;
@@ -90,10 +122,10 @@ img{ /*표시되는 이미지 최대크기 설정*/
 
 .content_section{
     padding: 30px;
-    background: aqua;
+    background: #D7DDF7;
     border-radius: 10px 60px 60px 60px;
     width: 75%;
-    margin: 0 0 40px 60px;
+    margin: 0 20px 40px 60px;
     font-size: 1.5rem;
 }
 
@@ -113,14 +145,14 @@ img{ /*표시되는 이미지 최대크기 설정*/
 }
 
 #rep_input_box{
-    width: 75%;
+    width: 90%;
     margin: 0 auto;
 }
 
 #rep_input_box>div{
     display: flex;
     flex-direction: row;
-    margin-top: 40px;
+    margin-top: 10px;
 }
 
 /*레이아웃 잡기 끝*/
@@ -142,18 +174,18 @@ img{ /*표시되는 이미지 최대크기 설정*/
     font-size: 1.5rem;
 }
 .cate_col1{
-    background-color: lightblue;
+    background-color: #B6E3E9;
 }
 .cate_col2{
-    background-color: lightpink;
+    background-color: #FADEE1;
 }
 
 .cate_col3{
-    background-color: lightyellow;
+    background-color: #FAF1D6;
 }
 
 .cate_col4{
-    background-color: lightgrey;
+    background-color: #D9F1F1;
 }
 
 
@@ -165,9 +197,10 @@ img{ /*표시되는 이미지 최대크기 설정*/
     padding: 10px;
     width: 100%;
     border-radius: 20px;
-    border: 1px solid blueviolet;
+    border: 2px solid #9BA2D7;
     resize: none;
     font-size: 1.2rem;
+    overflow: hidden;
 }
 
 #rep_input_box textarea:focus{
@@ -176,7 +209,7 @@ img{ /*표시되는 이미지 최대크기 설정*/
 
 #rep_btn{
     padding: 10px;
-    background: #0056b3;
+    background: #9BA2D7;
     font-size: 1.2rem;
     border-radius: 20px;
     margin-left: 10px;

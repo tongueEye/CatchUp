@@ -7,6 +7,7 @@
     background-position: center;
     height: 110vh;
     display: flex;
+    overflow-x: hidden;
 }
 
 .board_box{
@@ -19,12 +20,13 @@
 }
 
 .board{
-    height: 350px;
     background-color: white;
     border: 3px solid #9BA2D7;
-    border-radius: 30px;
-    padding: 50px;
+    border-radius: 50px;
+    padding: 30px 50px;
+    min-width: 360px;
     overflow: hidden;
+    min-height: 460px;
 }
 
 .board ul li{
@@ -41,6 +43,13 @@
 .board_box ul li{
     display: flex;
     justify-content: space-evenly;
+    font-size: 1.2rem;
+}
+
+.board_title{
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 2.5rem;
 }
 
 /*보드 끝*/
@@ -56,15 +65,25 @@ input:focus, select:focus{
 #search_box{
     text-align: center;
 }
-#search_box select, #search_box input{
-    padding: 7px 10px;
-    border-radius: 15px;
+#search_box select{
+    padding: 6px 10px 8px 8px;
+    border-radius: 20px;
 }
+
+#search_box input{
+    padding: 7px 10px;
+    border-radius: 20px;
+    font-size: 1rem;
+}
+
+
 #search_box select{
     text-align: center;
     text-align-last: center;
     position: relative;
-    top: 2px;
+    color: #9BA2D7;
+    font-size: 1rem;
+    font-weight: bold;
 }
 
 #searchtxt{
@@ -81,9 +100,18 @@ input:focus, select:focus{
     background-color: #9BA2D7;
     color: white;
     border-radius: 15px;
-    padding: 5px 10px;
+    padding: 9px 10px;
     position: relative;
     left: 87%;
+}
+#write_btn:hover{
+    background-color: #BCC3E6;
+}
+#write_icon{
+    width: 21px;
+    position: relative;
+    top: 6px;
+    margin-right: 2px;
 }
 /* 글쓰기 버튼 끝*/
 
@@ -92,26 +120,39 @@ input:focus, select:focus{
 .content1{
     flex-basis: 5%;
     text-align: center;
+    min-width: 25px;
 }
 .content2{
     flex-basis: 15%;
     text-align: center;
+    min-width: 75px;
 }
 .content3{
     flex-basis: 45%;
     text-align: center;
+    min-width: 100px;
 }
 .content3_1{
     flex-basis: 45%;
     text-align: left;
+    min-width: 100px;
 }
+.content3_1 p{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 100%;
+}
+
 .content4{
     flex-basis: 20%;
     text-align: center;
+    min-width: 100px;
 }
 .content5{
     flex-basis: 12%;
     text-align: center;
+    min-width: 60px;
 }
 
 /*보드 필드 끝*/
@@ -119,19 +160,20 @@ input:focus, select:focus{
 /*페이지 박스 시작*/
 #page_box{
     text-align: center;
-    margin: 40px;
+    margin: 50px;
     color: white;
     font-size: 1.2rem;
     font-weight: bold;
+    min-width: 400px;
 }
-#page_box span{
-    margin-right: 10px;
-}
+
 #page_box a{
     color: white;
+    margin-right: 10px;
 }
 .selected_page{
     color: #483F6A;
+    margin-right: 10px;
 }
 /*페이지 박스 끝*/
 

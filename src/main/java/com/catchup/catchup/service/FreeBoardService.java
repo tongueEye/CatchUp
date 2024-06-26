@@ -34,4 +34,9 @@ public interface FreeBoardService {
 
     Long boardUpdate(FreeBoardDTO dto);
 
+    Page<FreeBoardDTO> comboardList(String search, String searchTxt, String kind, Pageable pageable);
+
+    List<FreeBoardDTO> mostViewC();
+
+    List<FreeBoardDTO> mostLikeC();
 }

@@ -23,4 +23,7 @@ public interface MyPageService {
 
     String updateNickname(Long id, String nickname, String profile);
 
+    void schoolInsert(UserDTO dto, Long uid);
+
+    UserDTO getBap(Long uid);
 }

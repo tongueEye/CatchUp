@@ -51,6 +51,7 @@ public class FreeBoardServiceImpl implements FreeBoardService {
         condition.setCate(null);
         condition.setKind("e");
 
+
         if ("title".equals(search)) {
             condition.setTitle(searchTxt);
         } else if ("content".equals(search)) {
@@ -126,6 +127,7 @@ public class FreeBoardServiceImpl implements FreeBoardService {
         return dto.getFid();
     }
 
+
     /** 게시글 삭제 **/
     @Override
     public Long boardDelete(Long fid) {
@@ -178,7 +180,7 @@ public class FreeBoardServiceImpl implements FreeBoardService {
         return delete_file; //파싱한 이미지 이름값 리턴
     }
 
-    
+
     /** 댓글 리스트 **/
     @Override
     public List<FreeBoardDTO> repList(Long fid) {
@@ -262,7 +264,41 @@ public class FreeBoardServiceImpl implements FreeBoardService {
 
         loveRepository.delete(love);
     }
+    @Override
+    public Page<FreeBoardDTO> comboardList(String search, String searchTxt, String kind, Pageable pageable) {
+        SearchCondition condition = new SearchCondition();
+        condition.setTitle(null);
+        condition.setContent(null);
+        condition.setWriter(null);
+        condition.setCate(null);
+        condition.setKind("c");
 
 
+        if ("title".equals(search)) {
+            condition.setTitle(searchTxt);
+        } else if ("content".equals(search)) {
+            condition.setContent(searchTxt);
+        } else if ("writer".equals(search)) {
+            condition.setWriter(searchTxt);
+        } else if ("cate".equals(search)){
+            condition.setCate(searchTxt);
+        }
+
+        Page<FreeBoardDTO> searchList = freeRepository.search(condition, pageable);
+
+        return searchList;
+    }
+
+    @Override
+    public List<FreeBoardDTO> mostViewC() {
+        List<FreeBoardDTO> hotList = freeRepository.mostViewC();
+        return hotList;
+    }
+
+    @Override
+    public List<FreeBoardDTO> mostLikeC() {
+        List<FreeBoardDTO> likeList = freeRepository.mostLikeC();
+        return likeList;
+    }
 
 }

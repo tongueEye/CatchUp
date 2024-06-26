@@ -10,7 +10,7 @@
 <div id="qna_wrap">
     <div class="board_box">
         <div class="board">
-            <h1>Q&A</h1>
+            <h1 class="board_title"><a th:href="@{/qna}">Q&A</a></h1>
 
             <!--검색창-->
             <div id="search_box">
@@ -26,7 +26,7 @@
             </div>
 
 
-            <a th:if="${uid!=0}" th:href="@{/writeQna}" id="write_btn">글쓰기</a>
+            <a th:if="${uid!=0}" th:href="@{/writeQna}" id="write_btn"><img id="write_icon" th:src="@{/img/infoboard/pencil.png}">글쓰기</img></a>
 
             <!--글목록-->
 
@@ -43,7 +43,7 @@
                         <span class="content1" th:text="${item.iid}"></span>
                         <span class="content2" th:text="${item.cate}"></span>
                         <span class="content3_1">
-                            <a th:text="${item.title}" th:href="@{|/qnaDetail/${item.iid}|}"></a>
+                            <a th:href="@{|/qnaDetail/${item.iid}|}"><p th:text="${item.title}"></p></a>
                         </span>
                         <span class="content4" th:text="${#temporals.format(item.createDate,'yyyy-MM-dd')}"></span>
 

@@ -59,6 +59,10 @@ aside {
 
 aside h3{
     margin: 5px 0;
+    border: none;
+    border-radius: 15px;
+    background-color: #F4EBF3;
+
 }
 
 aside ul li a:hover{

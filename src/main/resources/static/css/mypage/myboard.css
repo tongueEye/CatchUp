@@ -1,5 +1,10 @@
 .mypage-board .board-list {
     display: flex;
+    border-bottom: 1px solid;
+}
+
+.mypage-board .board-list:not(:first-child){
+    padding: 20px 0;
 }
 
 .mypage-board #container #content {
