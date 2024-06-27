@@ -15,14 +15,23 @@
 }
 
 #text_box{
+    /*기울임 없는 버전*/
+    /*position: absolute;*/
+    /*bottom: calc(100% - 900px);*/
+    /*left: 5vw;*/
+    /*z-index: 3;*/
+    /*color: white;*/
+    /*line-height: 65px;*/
+
+
     position: absolute;
     bottom: calc(100% - 900px);
-    left: 5vw;
-    z-index: 3;
+    left: 8vw;
     color: white;
     line-height: 65px;
-/* transform: skewX(-30deg); */
-/* rotate: 19deg;*/
+    transform: skewX(-30deg);
+    rotate: 19deg;
+    bottom: -1vw;
 }
 
 #text_box h1{
