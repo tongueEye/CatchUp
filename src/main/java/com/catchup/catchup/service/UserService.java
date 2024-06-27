@@ -1,8 +1,11 @@
 package com.catchup.catchup.service;
 
+import com.catchup.catchup.dto.FreeBoardDTO;
 import com.catchup.catchup.dto.UserDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+
+import java.util.List;
 
 public interface UserService {
 
@@ -17,4 +20,5 @@ public interface UserService {
     Page<UserDTO> userlist(String search, String searchtxt, Pageable pageable);
 
     Long delUser(Long uid);
+
 }

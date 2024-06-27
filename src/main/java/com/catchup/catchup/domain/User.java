@@ -38,9 +38,10 @@ public class User {
 
     @Column(name = "SCHUL_NM")
     private String schoolName;
-  
+
     @OneToMany(mappedBy = "user")
     private List<FreeBoard> boardList = new ArrayList<>();
+
 
 
 }

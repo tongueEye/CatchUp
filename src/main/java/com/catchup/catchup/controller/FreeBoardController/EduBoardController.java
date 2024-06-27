@@ -2,6 +2,7 @@ package com.catchup.catchup.controller.FreeBoardController;
 
 import com.catchup.catchup.dto.*;
 import com.catchup.catchup.service.FreeBoardService;
+import com.catchup.catchup.service.MyPageService;
 import com.catchup.catchup.service.UserService;
 import com.querydsl.core.Tuple;
 import jakarta.servlet.http.HttpServletRequest;
@@ -26,8 +27,9 @@ import java.util.List;
 @Slf4j
 public class EduBoardController {
 
-    private FreeBoardService freeService;
+    private final FreeBoardService freeService;
     private final UserService userService;
+    private final MyPageService myService;
 
     /** 게시글 목록 **/
     @GetMapping("/eduboard")
@@ -75,16 +77,17 @@ public class EduBoardController {
             sessionId = (Long) session.getAttribute("sessionId");
         }
 
+        List<FreeBoardDTO> writerInfo = freeService.getWriterInfo(fid);
         FreeBoardDTO dto = freeService.boardDetail(fid);
-
         model.addAttribute("sessionId", sessionId);
         model.addAttribute("dto", dto);
+        model.addAttribute("writerInfo", writerInfo);
         model.addAttribute("view", "freeBoard/eduDetail");
         return "index";
     }
 
     /** 게시글 작성 페이지 **/
-    @GetMapping("/writeFree")
+    @GetMapping("/writeEdu")
     public String boardInsert(HttpServletRequest request, Model model) {
 
         Long sessionId = 0L;
@@ -97,12 +100,12 @@ public class EduBoardController {
 
         model.addAttribute("dto", new FreeBoardDTO());
         model.addAttribute("user", userDTO);
-        model.addAttribute("view", "freeBoard/boardInsert");
+        model.addAttribute("view", "freeBoard/eduBoardInsert");
         return "index";
     }
 
     /** 게시글 작성 폼 **/
-    @PostMapping("/writeFree")
+    @PostMapping("/writeEdu")
     public String boardInsertResult(
             @RequestParam(name = "cate", required = false) String cate
             , @RequestParam(name = "title", required = false) String title
@@ -145,7 +148,7 @@ public class EduBoardController {
         model.addAttribute("dto", dto);
         model.addAttribute("sessionId", sessionId);
         model.addAttribute("user", userDTO);
-        model.addAttribute("view", "freeBoard/boardUpdate");
+        model.addAttribute("view", "freeBoard/eduBoardUpdate");
         return "index";
     }
 

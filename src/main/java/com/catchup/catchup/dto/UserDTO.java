@@ -36,7 +36,7 @@ public class UserDTO {
 
     private String sidoCode;
 
-    private String sDCode;
+    private String sdschulCode;
 
     private String schoolName;
 

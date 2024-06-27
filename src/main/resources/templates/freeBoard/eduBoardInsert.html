@@ -15,16 +15,14 @@
 <body>
 <div id="write_box">
 
-    <form id="writeForm" method="post" th:action="@{/writeFree}">
+    <form id="writeForm" method="post" th:action="@{/writeEdu}">
         <input type="hidden" th:name="sessionId" th:value="${user.uid}">
         <input type="hidden" th:name="writer" th:value="${user.nickname}">
         <input type="hidden" th:name="count" th:value="${dto.count}">
 
-        <!--작성폼 같이쓸거면 이부분 변경해야 함-->
         <input type="hidden" th:name="kind" th:value="e">
 
         <ul>
-            <!--            <p th:text="${user.nickname}"></p>-->
             <li>
                 <select th:id="cate" th:name="cate">
                     <option th:value="뉴스" th:selected="뉴스">뉴스</option>

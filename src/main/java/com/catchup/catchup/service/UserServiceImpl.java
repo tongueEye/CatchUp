@@ -2,6 +2,7 @@ package com.catchup.catchup.service;
 
 import com.catchup.catchup.domain.User;
 import com.catchup.catchup.dto.SearchCondition;
+import com.catchup.catchup.dto.FreeBoardDTO;
 import com.catchup.catchup.dto.UserDTO;
 import com.catchup.catchup.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -10,6 +11,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -59,6 +61,7 @@ public class UserServiceImpl implements UserService{
         return cnt;
     }
 
+
     @Override
     public Page<UserDTO> userlist(String search, String searchtxt, Pageable pageable) {
         SearchCondition condition = new SearchCondition();
@@ -81,4 +84,5 @@ public class UserServiceImpl implements UserService{
         userRepository.deleteById(uid);
         return uid;
     }
+
 }

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <link rel="stylesheet" th:href="@{/css/freeboard/freeboard.css}">
+    <link rel="stylesheet" th:href="@{/css/freeboard/freeboard_detail.css}">
     <script th:src="@{/js/board/boardDetail.js}"></script>
 </head>
 <body>
@@ -12,28 +12,35 @@
 
     <section id="eduBoardDetail">
 
-        <ul id="writer_info">
-            <li th:text="${dto.profile}"></li>
-            <li th:text="${dto.title}"></li>
-            <li th:text="|작성자  ${dto.writer}|"></li>
-        </ul>
+        <div id="detail_util">
+            <div id="profile" th:each="i:${writerInfo}">
+                <img th:src="'https://kdt-java5-2.s3.ap-northeast-2.amazonaws.com/profile/'+${i.profile} "
+                     alt="프로필이미지">
+            </div>
+            <ul id="writer_info">
+                <li th:text="${dto.title}"></li>
+                <li th:text="${dto.writer}"></li>
+            </ul>
 
-        <div id="option_toggle"></div>
-
-        <ul id="setting">
-            <li>
-                <div id="qna_img"></div>
-                <button type="button" th:id="qna_btn">문의하기</button>
-            </li>
-            <li>
-                <div id="mod_img"></div>
-                <button type="button" th:id="mod_btn">수정하기</button>
-            </li>
-            <li>
-                <div id="del_img"></div>
-                <button type="button" th:id="boardDel_btn">삭제하기</button>
-            </li>
-        </ul>
+            <div id="option_toggle">
+                <input id="check-btn" type="checkbox"/>
+                <label for="check-btn"><img th:src="@{/img/freeboard/option.png}"></label>
+                <ul id="setting">
+                    <li>
+                        <div id="qna_img"></div>
+                        <button type="button" th:id="qna_btn">문의하기</button>
+                    </li>
+                    <li th:if="${sessionId==100|| sessionId==dto.uid}">
+                        <div id="mod_img"></div>
+                        <button type="button" th:id="mod_btn">수정하기</button>
+                    </li>
+                    <li th:if="${sessionId==100|| sessionId==dto.uid}">
+                        <div id="del_img"></div>
+                        <button type="button" th:id="boardDel_btn">삭제하기</button>
+                    </li>
+                </ul>
+            </div>
+        </div>
 
         <section id="content">
             <th:block th:utext="${dto.content}"></th:block>
@@ -41,11 +48,12 @@
 
     </section>
 
-    <div id="like_img"></div>
-    <button type="button" id="like_btn">좋아요</button>
+    <section id="like">
+        <div id="like_img"></div>
+        <button type="button" id="like_btn">좋아요</button>
+    </section>
 
     <section id="replySection">
-
         <ul th:id="reply_insert">
             <li>
                 <input type="text" name="rep_content" id="rep_content">
@@ -55,16 +63,15 @@
             </li>
         </ul>
 
-        <ul th:id="replyList">
-        </ul>
+        <div th:id="replyList"></div>
 
     </section>
 
-<script th:inline="javascript">
-    document.addEventListener('DOMContentLoaded', function (){
-        init([[${dto.fid}]])
-    })
-</script>
+    <script th:inline="javascript">
+        document.addEventListener('DOMContentLoaded', function () {
+            init([[${dto.fid}]])
+        })
+    </script>
 
 </div>
 

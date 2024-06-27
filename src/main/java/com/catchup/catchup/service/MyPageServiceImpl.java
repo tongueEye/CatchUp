@@ -1,20 +1,21 @@
 package com.catchup.catchup.service;
 
+import com.catchup.catchup.domain.Love;
 import com.catchup.catchup.domain.User;
 import com.catchup.catchup.dto.*;
-import com.catchup.catchup.repository.FreeBoardRepository;
-import com.catchup.catchup.repository.InfoBoardRepository;
-import com.catchup.catchup.repository.MyPageRepository;
+import com.catchup.catchup.repository.*;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -25,6 +26,8 @@ public class MyPageServiceImpl implements MyPageService{
     private final FreeBoardRepository freeRepository;
     private final InfoBoardRepository infoRepository;
     private final ModelMapper modelMapper;
+    private final FreeRepBoardRepository repBoardRepository;
+    private final LoveRepository loveRepository;
 
     @Override
     public MyPageDTO getProfile(Long uid) {
@@ -75,10 +78,10 @@ public class MyPageServiceImpl implements MyPageService{
 
     /** 댓글 리스트 불러오기 */
     @Override
-    public MyPageDTO getRepList() {
+    public Page<RepBoardDTO> getRepList(Pageable pageable, Long uid) {
+        Page<RepBoardDTO> list = repBoardRepository.mypageList(pageable, uid);
 
-
-        return null;
+        return list;
     }
 
     /** 내가 쓴 글 불러오기 */
@@ -152,11 +155,48 @@ public class MyPageServiceImpl implements MyPageService{
         // 출력하려면 entity -> dto 변환하기
         modelMapper.map(User.class, UserDTO.class);
 
-        UserDTO list = result.stream().map(item -> modelMapper.map(item, UserDTO.class))
+        UserDTO bap = result.stream().map(item -> modelMapper.map(item, UserDTO.class))
                 .findAny()
                 .orElseThrow(() -> {
                     throw new RuntimeException();
                 });
-        return list;
+        log.info("bap data ............... {} ", bap.getSchoolName());
+        log.info("bap data ............... {} ", bap.getSidoCode());
+        log.info("bap data ............... {} ", bap.getSdschulCode());
+        return bap;
     }
+
+    /** 좋아요 불러오기*/
+    @Override
+    public List<LoveDTO> getLove(Long uid) {
+        List<LoveDTO> lovelist = loveRepository.findFreeboardTitleAndCateByUserId(uid)
+                .stream()
+                .map(tuple -> {
+                    LoveDTO loveDTO = new LoveDTO();
+                    loveDTO.setTitle((String) tuple[0]);
+                    loveDTO.setCate((String) tuple[1]);
+                    return loveDTO;
+                })
+                .collect(Collectors.toList());
+        return lovelist;
+    }
+
+
+    /** 학교 정보 ㄹㅇ 디비에 값 변경하기 */
+    @Override
+    public void school_result(UserDTO dto, Long uid) {
+        Optional<User> result = repository.findById(uid);
+
+        User findBoard = result.orElseThrow(() -> {
+            throw new RuntimeException();
+        });
+
+        findBoard.setSchoolName(dto.getSchoolName());
+        findBoard.setSDCode(dto.getSdschulCode());
+        findBoard.setSidoCode(dto.getSidoCode());
+
+        repository.save(findBoard);
+
+    }
+
 }

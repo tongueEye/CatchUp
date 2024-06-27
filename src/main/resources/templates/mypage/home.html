@@ -7,8 +7,7 @@
     <link rel="stylesheet" th:href="@{/css/mypage/modal.css}">
     <link rel="stylesheet" th:href="@{/css/mypage/mypage.css}">
     <script defer th:src="@{/js/mypage/modal.js}"></script>
-
-
+<!--<script defer th:src="@{/js/mypage/school.js}"></script>-->
 </head>
 <body>
 
@@ -41,22 +40,38 @@
                         </th:block>
 
                         <!-- 급식 정보 있는 애들 => 급식 정보 뜸 -->
-                        <p th:text="${#calendars.format(#calendars.createNow(), 'yyyy년 MM월 dd일')}"> </p>
-                        <span class="school_name" th:text="|${bap.schoolName} 오늘의 급식|"></span>
                         <th:block th:if="${bap.sidoCode != null}">
+                            <p th:text="${#calendars.format(#calendars.createNow(), 'yyyy년 MM월 dd일')}"> </p>
+                            <span class="school_name" th:text="|${bap.schoolName} 오늘의 급식|"></span>
                             <div id="today-bap">
                                 <!-- ajax이 알아서 해 줄 거야 >< -->
                             </div>
+
+                            <p id="school_change">학교 변경하기</p>
                         </th:block>
+
+
                     </div>
                 </div>
                 <div class="article-2">
                     <section class="fav article-2-content">
                         <p> 좋아요 </p>
                         <div class="article-content article-content-2">
-                            내용
+                            <ul>
+                                <li class="qna-menu">
+                                    <span class="qna-content"> 번호 </span>
+                                    <span class="qna-content">제목</span>
+                                    <span class="qna-content">카테고리</span>
+                                </li>
+                                <li th:each="item, stat : ${love}" class="qna-list">
+                                    <span class="qna-content" th:text="${stat.count}"></span>
+                                    <span class="nowrap" th:text="${item.title}"></span>
+                                    <span class="qna-content yes" th:text="${item.cate}"></span>
+                                </li>
+                            </ul>
                         </div>
                     </section>
+
                     <section class="qna article-2-content">
                         <p> 문의내역 </p>
                         <div class="article-content article-content-2">
@@ -66,6 +81,7 @@
                                     <span class="qna-content">제목</span>
                                     <span class="qna-content">처리여부</span>
                                 </li>
+
                                 <li th:each="item:${qna}" class="qna-list">
                                     <!-- 구현할까 말까 => 답변 완료 안 뜬 애들은 밑으로 밀어버리고 안 된 애들만 상위에 뜨기 -->
                                     <span class="qna-content"> - </span>
@@ -149,16 +165,14 @@
         </div>
     </div>
 
-
-
-
     <script th:inline="javascript">
-
+        "use strict";
         /** 학교 검색하기 */
         let school_name = document.getElementById('schoolList');
         let school_input = document.getElementById('schoolInput');
 
         let SDSCHULCODE = ''; // 학교코드 정보 담아오기
+
         let sido = '';
         let sido_result = document.getElementById('sido');
 
@@ -167,8 +181,11 @@
             sido = this.value;
         });
 
+
         function search(target) {
+            // console.log(target, ">>>>>>>>> target");
             let school = target.value
+            console.log(school, ">>>>>> school");
 
             fetch("https://open.neis.go.kr/hub/schoolInfo??KEY=7578fdd86a164ce4b0eebabfdbf51a5&Type=json&pIndex=1&pSize=100&ATPT_OFCDC_SC_CODE=" + sido +"&SCHUL_NM=" + school)
                 .then(response => {
@@ -183,9 +200,9 @@
                 console.log(data, ">>> data")
                 school_name.innerHTML = ''; // 이게 있어야지 검색 결과 초기화 됨
 
-                SDSCHULCODE = data.schoolInfo[1].row.map(school => school.SD_SCHUL_CODE);
-
                 let SCHULNM = data.schoolInfo[1].row.map(school => school.SCHUL_NM); // 학교 이름 뽑아오기
+                console.log(SCHULNM, ">> SCHULNM");
+
                 SCHULNM.forEach((a) => {
                     console.log(a)
                     let school_li= document.createElement('li');
@@ -197,35 +214,51 @@
                     // 클릭하면 input 창에 뜨도록 하기
                     school_li.addEventListener('click', function () {
                         school_input.value = a;
+                        console.log(school_input, " >> html school_input ")
+                        console.log(school_input.value, " >> input schoolvalue");
+
+                        SDSCHULCODE = data.schoolInfo[1].row.map(school => school.SD_SCHUL_CODE);
+                        console.log(SDSCHULCODE, "............ top_SDSCHULCODE ");
                     })
                 })
-
             }).catch(error => {
                 console.error('Error:', error);
             });
-
         }
 
+
         /** 검색한 값 DB에 넘겨서 저장하기 => 저장해야 하는 것 1. 시도교육청코드(ATPT_OFCDC_SC_CODE) 2. 행정표준코드(SD_SCHUL_CODE) */
-        // 급식일자는 무조건 오늘 날짜로 설정함 (주말이어도 일단 해) => MLSV_YMD
-        // 시간 남으면 토, 일요일일 경우 월요일로 넘겨주는 작업 진행하기
+            // 급식일자는 무조건 오늘 날짜로 설정함 (주말이어도 일단 해) => MLSV_YMD
+            // 시간 남으면 토, 일요일일 경우 월요일로 넘겨주는 작업 진행하기
 
         let schoolResult = document.getElementById('schoolResult');
         schoolResult.onclick = function uploadSchool() {
 
             // 시도 결과 받아오기
             let sido_search = sido_result.options[sido_result.selectedIndex].value;
+            let school = school_input.value;
 
-            let school = school_input.value
+            console.log(school_input, "upload, school_input")
+            search(school_input);
 
-            /*search(school)
-            console.log(SDSCHULCODE, " >>>>>>>>>>>>>>> school");*/
+            console.log(SDSCHULCODE[0], " !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! sdcode");
 
-            let schoolData = {
-                schoolName: school,
-                sidoCode : sido_search
-                // sDCode : SDSCHULCODE
-            };
+            let schoolData ={}
+            if(Array.isArray(SDSCHULCODE)) {
+                schoolData={
+                    schoolName: school,
+                    sidoCode : sido_search,
+                    sdschulCode : SDSCHULCODE[0]
+                };
+            }else{
+                schoolData={
+                    schoolName: school,
+                    sidoCode : sido_search,
+                    sdschulCode : SDSCHULCODE
+                };
+            }
+
+            console.log(schoolData , "---------------- data");
 
             fetch("/api", {
                 method: 'POST',
@@ -256,7 +289,8 @@
         }
 
 
-        let bap_SDCode = [[${bap.sDCode}]];
+
+        let bap_SDCode = [[${bap.sdschulCode}]];
         let bap_sidocode = [[${bap.sidoCode}]];
 
         console.log(bap_SDCode)
@@ -280,9 +314,9 @@
 
             const meals = data.mealServiceDietInfo[1].row;
 
-            let breakfast = "";
+            // let breakfast = "";
             let lunch = "";
-            let dinner = "";
+            // let dinner = "";
 
             meals.forEach(meal => {
                 let mealType = meal.MMEAL_SC_NM; // 조식, 중식, 석식 구분
@@ -304,7 +338,6 @@
                         <중식 메뉴> <br/> ${lunch}<br/>`;
 
             //<석식 메뉴> <br/> ${dinner
-
 
             // HTML에 추가
             let menuDiv = document.createElement('div');

@@ -3,22 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" th:href="@{/css/error/error.css}">
 </head>
 <body>
-에러 페이지<br>
-에러 페이지<br>
-에러 페이지<br>
-에러 페이지<br>
-에러 페이지<br>
-에러 페이지<br>
-에러 페이지<br>
-에러 페이지<br>
-에러 페이지<br>
-에러 페이지<br>
-에러 페이지<br>
-<p>에러 메시지 예시: org.springframework.web.servlet.resource.NoResourceFoundException: No static resource qna123.</p>
+    <div id="error_wrap">
+
+        <div id="text_box">
+            <h1>ERROR</h1>
+            <h2>에러를 잡지 못했어요!</h2>
+            <h2>다시 시도해 주세요.</h2>
+            <a th:href="@{/index}">홈으로</a>
+        </div>
+
+        <div id="mouse">
+            <img th:src="@{/img/error/mouse.gif}">
+        </div>
+    </div>
+
 <!--<div th:text="${error_msg}">-->
 
-</div>
+
 </body>
 </html>
