@@ -42,6 +42,12 @@
     padding: 10px 20px 20px;
 }
 
+#mypage-main .bap-article-content {
+    background-color: #FDBFC4;
+    height: calc(100% - 70px);
+    padding: 30px;
+}
+
 .mymain .qna-menu, .qna-list {
     display: flex;
     justify-content: space-between;
@@ -93,4 +99,22 @@
 
 .bap-content {
     background-color: #F9F2E7;
+    height: calc(100% - 40px);
+    padding: 20px;
+}
+
+.bap-list-div {
+    display: flex;
+    justify-content: space-between;
+}
+
+.bap-list-div span {
+    font-size: 20px;
+}
+
+.today-bap-p {
+    font-family: bmjua;
+    font-size: 40px;
+    border-bottom: 1px solid black;
+    padding: 0 10px;
 }

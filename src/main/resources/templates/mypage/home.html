@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <link rel="stylesheet" th:href="@{/css/mypage/home.css}">
     <link rel="stylesheet" th:href="@{/css/mypage/modal.css}">
     <link rel="stylesheet" th:href="@{/css/mypage/mypage.css}">
+    <link rel="stylesheet" th:href="@{/css/mypage/home.css}">
     <script defer th:src="@{/js/mypage/modal.js}"></script>
 <!--<script defer th:src="@{/js/mypage/school.js}"></script>-->
 </head>
@@ -32,25 +32,27 @@
             <article id="content">
                 <div class="article-1 article-2-content">
                     <p class="bap-p"> 급식 확인하기 </p>
-                    <div class="article-content bap-content">
+                    <div class="bap-article-content ">
+                        <div class="bap-content">
+                            <!-- 급식 정보 없는 애들 -->
+                            <th:block th:if="${bap.sidoCode == null}">
+                                급식 정보를 등록해 주세요.
+                            </th:block>
 
-                        <!-- 급식 정보 없는 애들 -->
-                        <th:block th:if="${bap.sidoCode == null}">
-                            급식 정보를 등록해 주세요.
-                        </th:block>
+                            <!-- 급식 정보 있는 애들 => 급식 정보 뜸 -->
+                            <th:block th:if="${bap.sidoCode != null}">
+                                <div class="bap-list-div">
+                                    <span th:text="${#calendars.format(#calendars.createNow(), 'yyyy년 MM월 dd일')}"> </span>
+                                    <span class="school_name" th:text="${bap.schoolName}"></span>
+                                </div>
+                                <span class="today-bap-p">오늘의 급식</span>
+                                <div id="today-bap">
+                                    <!-- ajax이 알아서 해 줄 거야 >< -->
+                                </div>
 
-                        <!-- 급식 정보 있는 애들 => 급식 정보 뜸 -->
-                        <th:block th:if="${bap.sidoCode != null}">
-                            <p th:text="${#calendars.format(#calendars.createNow(), 'yyyy년 MM월 dd일')}"> </p>
-                            <span class="school_name" th:text="|${bap.schoolName} 오늘의 급식|"></span>
-                            <div id="today-bap">
-                                <!-- ajax이 알아서 해 줄 거야 >< -->
-                            </div>
-
-                            <p id="school_change">학교 변경하기</p>
-                        </th:block>
-
-
+                                <p id="school_change">학교 변경하기</p>
+                            </th:block>
+                        </div>
                     </div>
                 </div>
                 <div class="article-2">
@@ -82,9 +84,9 @@
                                     <span class="qna-content">처리여부</span>
                                 </li>
 
-                                <li th:each="item:${qna}" class="qna-list">
+                                <li th:each="item, stat :${qna}" class="qna-list">
                                     <!-- 구현할까 말까 => 답변 완료 안 뜬 애들은 밑으로 밀어버리고 안 된 애들만 상위에 뜨기 -->
-                                    <span class="qna-content"> - </span>
+                                    <span class="qna-content" th:text="${stat.count}"> </span>
                                     <span class="qna-content nowrap">
                                         <a th:text="${item.title}" th:href="@{|/qnaDetail/${item.iid}|}"></a>
                                     </span>
@@ -314,9 +316,7 @@
 
             const meals = data.mealServiceDietInfo[1].row;
 
-            // let breakfast = "";
             let lunch = "";
-            // let dinner = "";
 
             meals.forEach(meal => {
                 let mealType = meal.MMEAL_SC_NM; // 조식, 중식, 석식 구분
@@ -328,14 +328,12 @@
                 // 각 구분에 맞게 변수에 추가
                 if (mealType === "중식") {
                     lunch += menuItems + " ";
-                } /*else if (mealType === "석식") {
-                    dinner += menuItems + " ";
-                }*/
+                }
             });
 
             // 화면에 출력할 부분
             let menuText = `
-                        <중식 메뉴> <br/> ${lunch}<br/>`;
+                         <br/> ${lunch}<br/>`;
 
             //<석식 메뉴> <br/> ${dinner
 
