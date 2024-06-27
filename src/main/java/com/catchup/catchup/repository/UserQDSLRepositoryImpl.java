@@ -83,7 +83,7 @@ public class UserQDSLRepositoryImpl implements UserQDSLRepository {
                         , user.addr
                         , user.phone
                         , user.profile
-                        , user.sDCode
+                        , user.sdschulCode
                         , user.sidoCode
                         , user.schoolName))
                 .from(user)
