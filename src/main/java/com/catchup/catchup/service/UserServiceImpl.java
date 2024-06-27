@@ -1,10 +1,13 @@
 package com.catchup.catchup.service;
 
 import com.catchup.catchup.domain.User;
+import com.catchup.catchup.dto.SearchCondition;
 import com.catchup.catchup.dto.UserDTO;
 import com.catchup.catchup.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -54,5 +57,28 @@ public class UserServiceImpl implements UserService{
         Long cnt = userRepository.idCheck(id);
 
         return cnt;
+    }
+
+    @Override
+    public Page<UserDTO> userlist(String search, String searchtxt, Pageable pageable) {
+        SearchCondition condition = new SearchCondition();
+        condition.setId(null);
+        condition.setName(null);
+
+        if("Id".equals(search) && search!=null && !"".equals(search)){
+            condition.setId(searchtxt);
+        }else if("Name".equals(search) && search!=null && !"".equals(search)){
+            condition.setName(searchtxt);
+        }
+
+         Page<UserDTO> userlist = userRepository.search(condition, pageable);
+
+        return userlist;
+    }
+
+    @Override
+    public Long delUser(Long uid) {
+        userRepository.deleteById(uid);
+        return uid;
     }
 }

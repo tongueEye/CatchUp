@@ -189,6 +189,41 @@ public class MyPageController {
         model.addAttribute("view", "mypage/home");
         return "index";
     }
+
+    @GetMapping("/admin")
+    public String userList(@RequestParam(required = false, defaultValue = "") String search
+                         , @RequestParam(required = false, defaultValue = "") String searchtxt
+                         , @PageableDefault(size = 10, page = 0, sort = "uid", direction = Sort.Direction.ASC) Pageable pageable
+                         , HttpServletRequest request
+                         , Model model){
+
+        HttpSession session = request.getSession(false);
+        Long uid = (Long) session.getAttribute("sessionId");
+
+        MyPageDTO result = service.getProfile(uid);
+        model.addAttribute("result", result);
+
+        int pagesize = 3;
+
+        Page<UserDTO> userlist = userService.userlist(search, searchtxt, pageable);
+        int startPage = ((int)Math.ceil(pageable.getPageNumber()/pagesize)) * pagesize + 1;
+        int endPage = Math.min(startPage + pagesize -1, userlist.getTotalPages());
+
+        model.addAttribute("userlist", userlist);
+        model.addAttribute("startPage", startPage);
+        model.addAttribute("endPage", endPage);
+        model.addAttribute("search", search);
+        model.addAttribute("searchtxt", searchtxt);
+
+        model.addAttribute("view", "mypage/admin");
+        return "index";
+    }
+
+    @GetMapping("/del/{uid}")
+    public String userdel(@PathVariable Long uid){
+        Long id = userService.delUser(uid);
+        return "redirect:/mypage/admin";
+    }
 }
 
 
