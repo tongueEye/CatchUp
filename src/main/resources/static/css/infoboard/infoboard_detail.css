@@ -15,7 +15,7 @@
     position: absolute;
     top: 15vh;
     background: rgba(255,255,255,0.9);
-    border: 3px solid #9BA2D7;
+    border: 3px solid #B6BEED;
     padding: 50px;
     border-radius: 50px;
     width: 50%;
@@ -31,7 +31,8 @@ img{ /*표시되는 이미지 최대크기 설정*/
     flex-direction: row;
     justify-content: space-between;
     padding-bottom: 20px;
-    border-bottom: 2px solid #9BA2D7;
+    /*border-bottom: 2px solid #B6BEED;*/
+    box-shadow: 0 3px 4px -4px rgba(0, 0, 0, 0.3);
 }
 
 .title_box{
@@ -40,7 +41,7 @@ img{ /*표시되는 이미지 최대크기 설정*/
 }
 
 #back_btn{
-    color: #9BA2D7;
+    color: #B6BEED;
 }
 
 .btn_box{
@@ -65,13 +66,13 @@ img{ /*표시되는 이미지 최대크기 설정*/
     /* 스크롤바의 길이 */
     height: 30%;
     /* 스크롤바의 색상 */
-    background: rgba(182,190,237,0.5);
+    background: rgba(182,190,237,0.4);
     border-radius: 10px;
 }
 
 .scrollBar::-webkit-scrollbar-track {
     /*스크롤바 뒷 배경 색상*/
-    background: rgba(215,221,247,0.6);
+    background: rgba(215,221,247,0.3);
     border-radius: 50px;
     margin: 10px 0;
 }

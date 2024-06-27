@@ -15,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 import static com.catchup.catchup.domain.QFreeBoard.freeBoard;
+import static com.catchup.catchup.domain.QFreeRepBoard.freeRepBoard;
 import static com.catchup.catchup.domain.QLove.love;
 import static com.catchup.catchup.domain.QUser.user;
 import static com.querydsl.core.types.dsl.Wildcard.count;
@@ -28,7 +29,9 @@ public class FreeBoardQDSLRepositoryImpl implements FreeBoardQDSLRepository {
         this.queryFactory = queryFactory;
     }
 
-    /** 게시판 검색/전체 페이지 조회 **/
+    /**
+     * 게시판 검색/전체 페이지 조회
+     **/
     @Override
     public Page<FreeBoardDTO> search(SearchCondition condition, Pageable pageable) {
 
@@ -59,6 +62,7 @@ public class FreeBoardQDSLRepositoryImpl implements FreeBoardQDSLRepository {
                 ))
                 .from(freeBoard)
                 .where(builder.and(freeBoard.kind.eq(condition.getKind())))
+                .orderBy(freeBoard.createDate.desc())
                 .offset(pageable.getOffset())
                 .limit(pageable.getPageSize())
                 .fetch();
@@ -71,7 +75,38 @@ public class FreeBoardQDSLRepositoryImpl implements FreeBoardQDSLRepository {
         return new PageImpl<>(list, pageable, totalCount);
     }
 
-    /** 조회수 카운트 +1 **/
+    /** 게시글 세부 **/
+    @Override
+    public FreeBoardDTO freeDetail(Long fid) {
+        FreeBoardDTO freeBoardDTO = queryFactory.select(Projections.fields(
+                        FreeBoardDTO.class
+                        , freeBoard.user.uid
+                        , freeBoard.title
+                        , freeBoard.writer
+                        , freeBoard.content
+                        , freeBoard.fid
+                        , freeBoard.kind
+
+                )).from(freeBoard)
+                .where(freeBoard.fid.eq(fid))
+                .fetchOne();
+        return freeBoardDTO;
+    }
+
+    /** 게시글 댓글 수 **/
+    @Override
+    public Long repCount(Long fid) {
+        Long repCount = queryFactory.select(freeRepBoard.frid.count())
+                .from(freeRepBoard)
+                .where(freeRepBoard.freeBoard.fid.eq(fid))
+                .fetchOne();
+        return repCount;
+    }
+
+
+    /**
+     * 조회수 카운트 +1
+     **/
     @Override
     @Transactional
     public void updateCount(Long fid) {
@@ -81,7 +116,9 @@ public class FreeBoardQDSLRepositoryImpl implements FreeBoardQDSLRepository {
                 .execute();
     }
 
-    /** 조회수 1-5 **/
+    /**
+     * 조회수 1-5
+     **/
     @Override
     public List<FreeBoardDTO> mostView() {
         List<FreeBoardDTO> hotList = queryFactory.select(Projections.fields(
@@ -98,7 +135,9 @@ public class FreeBoardQDSLRepositoryImpl implements FreeBoardQDSLRepository {
         return hotList;
     }
 
-    /** 좋아요 1-5 **/
+    /**
+     * 좋아요 1-5
+     **/
     @Override
     public List<FreeBoardDTO> mostLike() {
         List<FreeBoardDTO> mostLike = queryFactory.select(Projections.fields(
@@ -115,7 +154,10 @@ public class FreeBoardQDSLRepositoryImpl implements FreeBoardQDSLRepository {
                 .fetch();
         return mostLike;
     }
-    /** 작성자 정보 가져오기 **/
+
+    /**
+     * 작성자 정보 가져오기
+     **/
     @Override
     public List<FreeBoardDTO> getWriterInfo(Long fid) {
         List<FreeBoardDTO> list = queryFactory.select(Projections.fields(
@@ -133,7 +175,9 @@ public class FreeBoardQDSLRepositoryImpl implements FreeBoardQDSLRepository {
         return list;
     }
 
-  /** 조회수 1-5 **/
+    /**
+     * 조회수 1-5
+     **/
     @Override
     public List<FreeBoardDTO> mostViewC() {
         List<FreeBoardDTO> hotList = queryFactory.select(Projections.fields(
@@ -150,7 +194,9 @@ public class FreeBoardQDSLRepositoryImpl implements FreeBoardQDSLRepository {
         return hotList;
     }
 
-  /** 좋아요 1-5 **/
+    /**
+     * 좋아요 1-5
+     **/
     @Override
     public List<FreeBoardDTO> mostLikeC() {
         List<FreeBoardDTO> mostLike = queryFactory.select(Projections.fields(
@@ -167,7 +213,6 @@ public class FreeBoardQDSLRepositoryImpl implements FreeBoardQDSLRepository {
                 .fetch();
         return mostLike;
     }
-
 
     @Override // 채원
     public Page<FreeBoardDTO> list(Long id, Pageable pageable) {

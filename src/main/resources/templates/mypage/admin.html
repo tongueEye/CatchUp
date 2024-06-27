@@ -6,7 +6,15 @@
     <link rel="stylesheet" th:href="@{/css/mypage/mypage.css}">
     <link rel="stylesheet" th:href="@{/css/mypage/myboard.css}">
     <link rel="stylesheet" th:href="@{/css/mypage/modal.css}">
+    <link rel="stylesheet" th:href="@{/css/mypage/admin.css}">
     <script defer th:src="@{/js/mypage/modal.js}"></script>
+    <script>
+        function delConfirm(event) {
+            if (!confirm('정말 삭제하겠습니까?')) {
+                event.preventDefault();
+            }
+        }
+    </script>
 <body>
 <div id="mypage-main" class="mypage-board">
     <article id="profile_top">
@@ -29,23 +37,42 @@
         <article id="content">
 
             <!-- 회원검색 -->
+
             <form method="get" th:action="@{/mypage/admin}">
-                <select name="search">
-                    <option value="id">아이디</option>
-                    <option value="name">이름</option>
-                </select>
-                <input type="text" name="searchtxt">
-                <button type="submit">검색</button>
+                <div class="userlist">
+                <p>회원 목록</p>
+
+                <div class="usersearch">
+                    <select name="search">
+                        <option value="id">아이디</option>
+                        <option value="name">이름</option>
+                    </select>
+                    <input type="text" name="searchtxt">
+                    <button type="submit">검색</button>
+                </div>
+                </div>
             </form>
 
             <!-- 회원리스트 -->
-            <ul>
-                <li th:each="i:${userlist}">
-                    <span th:text="${i.id}"></span>
-                    <span th:text="${i.name}"></span>
-                    <span><a th:href="@{'/mypage/del/'+${i.uid}}" th:text="나가"></a></span>
-                </li>
-            </ul>
+            <div class="zzin_list"></div>
+            <table>
+                <thead>
+                    <tr class="usertitle">
+                        <th>아이디</th>
+                        <th>이름</th>
+                        <th>나가</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <th:block class="userlist">
+                        <tr th:each="i:${userlist}">
+                            <td th:text="${i.id}"></td>
+                            <td th:text="${i.name}"></td>
+                            <td><a th:href="@{'/mypage/del/' + ${i.uid}}" th:text="나가" onclick="delConfirm(event)"></a></td>
+                        </tr>
+                    </th:block>
+                </tbody>
+            </table>
 
             <!-- 페이징 -->
             <div class="page">

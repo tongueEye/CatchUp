@@ -43,10 +43,10 @@
                     <option th:value="일상">일상</option>
                     <option th:value="기타">기타</option>
                 </select>
-                <input type="text" th:name="title" th:id="title" placeholder="제목을 입력하세요.">
+                <input type="text" th:name="title" th:id="title" th:value="${dto.title}" placeholder="제목을 입력하세요.">
             </li>
             <li>
-                <textarea id="summernote" th:name="content"></textarea>
+                <textarea id="summernote" th:name="content" th:utext="${dto.content}"></textarea>
             </li>
             <li class="field1">
                 <button type="submit" id="btn"> 등록하기</button>

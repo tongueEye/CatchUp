@@ -7,6 +7,7 @@ import com.catchup.catchup.service.UserService;
 import com.querydsl.core.Tuple;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
@@ -17,6 +18,7 @@ import org.springframework.http.HttpRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
@@ -31,7 +33,9 @@ public class EduBoardController {
     private final UserService userService;
     private final MyPageService myService;
 
-    /** 게시글 목록 **/
+    /**
+     * 게시글 목록
+     **/
     @GetMapping("/eduboard")
     public String comList(
             @RequestParam(required = false, defaultValue = "") String search
@@ -67,7 +71,9 @@ public class EduBoardController {
         return "index";
     }
 
-    /** 게시글 세부 **/
+    /**
+     * 게시글 세부
+     **/
     @GetMapping("/edudetail/{fid}")
     public String comDetail(@PathVariable Long fid, HttpServletRequest request, Model model) {
 
@@ -79,14 +85,19 @@ public class EduBoardController {
 
         List<FreeBoardDTO> writerInfo = freeService.getWriterInfo(fid);
         FreeBoardDTO dto = freeService.boardDetail(fid);
+        Long repCount = freeService.repCount(fid);
+
         model.addAttribute("sessionId", sessionId);
         model.addAttribute("dto", dto);
         model.addAttribute("writerInfo", writerInfo);
+        model.addAttribute("repCount", repCount);
         model.addAttribute("view", "freeBoard/eduDetail");
         return "index";
     }
 
-    /** 게시글 작성 페이지 **/
+    /**
+     * 게시글 작성 페이지
+     **/
     @GetMapping("/writeEdu")
     public String boardInsert(HttpServletRequest request, Model model) {
 
@@ -104,7 +115,9 @@ public class EduBoardController {
         return "index";
     }
 
-    /** 게시글 작성 폼 **/
+    /**
+     * 게시글 작성 폼
+     **/
     @PostMapping("/writeEdu")
     public String boardInsertResult(
             @RequestParam(name = "cate", required = false) String cate
@@ -128,14 +141,15 @@ public class EduBoardController {
                 .build();
 
         freeService.boardInsert(dto);
-
         return "redirect:/eduboard";
+
     }
 
-    /** 게시글 수정 페이지 **/
+    /**
+     * 게시글 수정 페이지
+     **/
     @GetMapping("/boardUpdate/{fid}")
     public String boardUpdate(@PathVariable Long fid, HttpServletRequest request, Model model) {
-        FreeBoardDTO dto = freeService.boardDetail(fid);
 
         Long sessionId = 0L;
         HttpSession session = request.getSession(false);
@@ -143,6 +157,7 @@ public class EduBoardController {
             sessionId = (Long) session.getAttribute("sessionId");
         }
 
+        FreeBoardDTO dto = freeService.boardDetail(fid);
         UserDTO userDTO = userService.findUserById(sessionId);
 
         model.addAttribute("dto", dto);
@@ -152,7 +167,9 @@ public class EduBoardController {
         return "index";
     }
 
-    /** 게시글 수정 폼 **/
+    /**
+     * 게시글 수정 폼
+     **/
     @PostMapping("/boardUpdate/{fid}")
     public String boardUpdateResult(
             @PathVariable Long fid
@@ -184,7 +201,9 @@ public class EduBoardController {
         return "redirect:/edudetail/" + update_fid;
     }
 
-    /** 게시글 삭제 **/
+    /**
+     * 게시글 삭제
+     **/
     @GetMapping("/boardDelete/{fid}")
     public String qnaDelete(@PathVariable Long fid, Model model) {
 
@@ -193,14 +212,18 @@ public class EduBoardController {
     }
 
 
-    /** 댓글 리스트 **/
+    /**
+     * 댓글 리스트
+     **/
     @GetMapping("/replist/{fid}")
     public ResponseEntity<List<FreeBoardDTO>> repList(@PathVariable Long fid) {
         List<FreeBoardDTO> list = freeService.repList(fid);
         return ResponseEntity.ok().body(list);
     }
 
-    /** 댓글 추가 **/
+    /**
+     * 댓글 추가
+     **/
     @PostMapping("/repinsert")
     public ResponseEntity<List<FreeBoardDTO>> repInsert(@RequestBody RepBoardDTO dto, HttpServletRequest request) {
 
@@ -215,7 +238,9 @@ public class EduBoardController {
         return ResponseEntity.ok().body(repList);
     }
 
-    /** 댓글 삭제 **/
+    /**
+     * 댓글 삭제
+     **/
     @GetMapping("/repdelete/{frid}")
     @ResponseBody
     public ResponseEntity<String> repDelete(@PathVariable Long frid) {

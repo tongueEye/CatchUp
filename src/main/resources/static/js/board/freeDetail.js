@@ -7,8 +7,8 @@ const init = function (data) {
 /** 댓글 리스트 **/
 const replyList = function () {
     fetch('/replist/' + num, {
-        method   : 'GET'
-        , headers: {
+        method   : 'GET',
+        headers: {
             'Accept': 'application/json'
         }
     }).then((response) => {
@@ -38,8 +38,9 @@ const replyList = function () {
                 deleteButton.textContent = '삭제';
                 deleteButton.id = 'del_btn'
                 deleteButton.onclick = function () {
-                    confirm('정말 삭제할까요?');
-                    deleteRep(frid);
+                    if (confirm('정말 삭제할까요?')) {
+                        deleteRep(frid);
+                    }
                 };
                 ele_li.appendChild(deleteButton);
             }
@@ -55,7 +56,6 @@ const replyList = function () {
 
 /** 댓글 삭제 **/
 const deleteRep = function (frid) {
-
     fetch('/repdelete/' + frid, {
         method: 'GET',
     }).then((response) => {
@@ -93,10 +93,9 @@ window.onload = function () {
     /** 글 수정 **/
     let modBtn = document.getElementById('mod_btn');
     let kind = document.getElementById('kind').value;
-    console.log(kind);
     if(String(kind) === "e"){
         distinctUpdate = '/boardUpdate/'
-        distinctDelete = '/boardUpdate/'
+        distinctDelete = '/boardDelete/'
     }else{
         distinctUpdate = '/comboardUpdate/'
         distinctDelete = '/com/boardDelete/'
@@ -187,12 +186,12 @@ window.onload = function () {
     function updateButton() {
         if (hasLiked) {
             likeBtn.innerText = '취소';
-            // likeBtn.style.backgroundColor = '#C6C6C6';
-            likeImg.style.backgroundImage = 'url("../../img/freeboard/unheart.png")';
+            likeBtn.style.border = '2px solid pink';
+            likeImg.style.backgroundImage ='url("../../img/freeboard/heart.png")';
         } else {
             likeBtn.innerText = '좋아요';
-            // likeBtn.style.backgroundColor = '#B6BEED';
-            likeImg.style.backgroundImage ='url("../../img/freeboard/heart.png")';
+            likeBtn.style.border = '2px solid silver';
+            likeImg.style.backgroundImage = 'url("../../img/freeboard/unheart.png")';
         }
     }
 

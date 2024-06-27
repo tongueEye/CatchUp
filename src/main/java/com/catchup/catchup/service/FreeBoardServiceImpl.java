@@ -84,11 +84,16 @@ public class FreeBoardServiceImpl implements FreeBoardService {
     /** 게시글 세부 **/
     @Override
     public FreeBoardDTO boardDetail(Long fid) {
-        Optional<FreeBoard> freeBoard = freeRepository.findById(fid);
-        FreeBoardDTO dto = modelMapper.map(freeBoard, FreeBoardDTO.class);
-
+        FreeBoardDTO dto = freeRepository.freeDetail(fid);
         freeRepository.updateCount(fid);
         return dto;
+    }
+
+    /** 게시글 댓글 수 **/
+    @Override
+    public Long repCount(Long fid) {
+        Long repCount = freeRepository.repCount(fid);
+        return repCount;
     }
 
     /** 작성자 정보 **/

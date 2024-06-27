@@ -10,6 +10,7 @@ ul li{
 .utility{
     display: flex;
     justify-content: space-between;
+    margin-right: 30px;
 }
 
 .utility h2{
@@ -22,7 +23,7 @@ ul li{
     display: flex;
     flex-direction: row;
     margin: auto;
-    width: 70%;
+    width: 60%;
     height: 80vh;
 }
 
@@ -32,23 +33,24 @@ ul li{
     display: flex;
     flex-direction: column;
     width: 100%;
-    margin: 0 0 0 165px;
+    /* margin: 0 0 0 165px; */
     height: 50vh;
 }
 
 .eduBoardList ul {
-    border-bottom: 1px solid #9BA2D7;
-    margin: 15px;
-    padding: 10px;
+    margin: 10px;
+    border: 2px solid lightgray;
+    border-radius: 30px;
+    padding: 10px 20px;
 }
 
 .eduBoardList ul a:hover {
     color: #9BA2D7;
 }
 .sideMenu{
-    margin: 10px 0;
-    position: fixed;
-    top: 155px;
+    margin: 10px 10px 0 0;
+    position: relative;
+    top: 30px;
     width: 170px;
     display: flex;
     flex-direction: column;
@@ -57,10 +59,14 @@ ul li{
 
 aside {
     margin: 10px 0;
-    padding: 10px;
+    padding: 20px;
     border: 1px solid #F4EBF3;
-    border-radius: 15px;
+    border-radius: 30px;
     background: #F4EBF3;
+    height: 110px;
+    width: 100px;
+    white-space: nowrap;
+    overflow: hidden;
 }
 
 aside h3{
@@ -117,9 +123,12 @@ input:focus, select:focus{
     background-color: #B6BEED;
     border-color: #B6BEED;
     border-radius: 15px;
-    padding: 5px 10px;
+    padding: 7px 5px;
     position: relative;
     right: 15px;
+    top: -40px;
+    border: 0;
+    font-size: 1rem;
 }
 
 #write_btn:hover{
@@ -132,8 +141,9 @@ input:focus, select:focus{
     justify-content: space-between;
     display: flex;
     font-size: 1.2rem;
-    width: 70%;
+    width: 100%;
     margin: auto;
+    padding-top: 50px;
 }
 
 .blank{
@@ -146,4 +156,20 @@ input:focus, select:focus{
 
 .page a:hover{
     color: #9BA2D7;
+}
+
+
+#banner{
+    background-color: blueviolet;
+    width: 190px;
+    height: 510px;
+    position: relative;
+    top: 160px;
+    margin-left: 10px;
+    border-radius: 30px;
+}
+
+.utility form{
+    position: relative;
+    top: 10px;
 }
