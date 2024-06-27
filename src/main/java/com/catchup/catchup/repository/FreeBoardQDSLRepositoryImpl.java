@@ -90,6 +90,7 @@ public class FreeBoardQDSLRepositoryImpl implements FreeBoardQDSLRepository {
                         , freeBoard.fid
                 ))
                 .from(freeBoard)
+                .where(freeBoard.kind.eq("e"))
                 .orderBy(freeBoard.count.desc())
                 .offset(0)
                 .limit(5)
@@ -106,6 +107,7 @@ public class FreeBoardQDSLRepositoryImpl implements FreeBoardQDSLRepository {
                         , love.freeBoard.title
                 )).from(freeBoard)
                 .innerJoin(freeBoard.loveList, love)
+                .where(freeBoard.kind.eq("e"))
                 .groupBy(freeBoard.fid)
                 .orderBy(love.lid.count().desc())
                 .offset(0)

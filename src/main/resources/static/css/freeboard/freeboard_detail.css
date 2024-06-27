@@ -11,9 +11,13 @@ ul li{
     display: flex;
     flex-direction: column;
     position: relative;
-    top: 80px;
-    height: 150vh;
-    margin: 0 20vw;
+    top: calc(50vh - 300px);
+    width: 50%;
+    margin: 0 auto;
+    background: white;
+    padding: 50px;
+    border-radius: 50px;
+    border: 3px solid lightblue;
 }
 
 #detail_util{
@@ -131,16 +135,19 @@ ul li{
     position: relative;
     left: 35px;
     margin: 3px 5px;
-    z-index: 1;
+    z-index: 0;
 }
 #like_btn{
     padding: 0 0 0 20px;
     width: 100px;
     position: relative;
+    background-color: transparent;
+    color: black;
+    border: 2px solid pink;
 }
 
 #like_btn:hover{
-    background-color: #9BA2D7;
+    /*background-color: #9BA2D7;*/
 }
 
 #replySection{
