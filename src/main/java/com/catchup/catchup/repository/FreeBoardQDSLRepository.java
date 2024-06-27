@@ -12,6 +12,8 @@ import java.util.List;
 public interface FreeBoardQDSLRepository {
     Page<FreeBoardDTO> search(SearchCondition condition, Pageable pageable);
 
+    FreeBoardDTO freeDetail(Long fid);
+
     Page<FreeBoardDTO> list(Long id, Pageable pageable); // 채원
 
     void updateCount(Long fid);
@@ -25,5 +27,6 @@ public interface FreeBoardQDSLRepository {
     List<FreeBoardDTO> mostViewC();
 
     List<FreeBoardDTO> mostLikeC();
+
 
 }

@@ -30,11 +30,11 @@
                         <div id="qna_img"></div>
                         <button type="button" th:id="qna_btn">문의하기</button>
                     </li>
-                    <li th:if="${sessionId==100|| sessionId==dto.uid}">
+                    <li th:if="${sessionId==dto.uid || sessionId==100}">
                         <div id="mod_img"></div>
                         <button type="button" th:id="mod_btn">수정하기</button>
                     </li>
-                    <li th:if="${sessionId==100|| sessionId==dto.uid}">
+                    <li th:if="${sessionId==dto.uid || sessionId==100}">
                         <div id="del_img"></div>
                         <button type="button" th:id="boardDel_btn">삭제하기</button>
                     </li>
