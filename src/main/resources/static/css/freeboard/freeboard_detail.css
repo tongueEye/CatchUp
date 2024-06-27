@@ -146,10 +146,6 @@ ul li{
     border: 2px solid pink;
 }
 
-#like_btn:hover{
-    /*background-color: #9BA2D7;*/
-}
-
 #replySection{
     display: flex;
     flex-direction: column;
