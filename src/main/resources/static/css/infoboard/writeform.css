@@ -3,6 +3,9 @@
     display: flex;
     justify-content: center;
     position: relative;
+    background-image: url("../../img/infoboard/cats_bg.png");
+    background-size: cover;
+    background-repeat: no-repeat;
 }
 
 #spring{
@@ -18,6 +21,7 @@
     height: 80px;
     border-radius: 18px;
     position: relative;
+    pointer-events: none;
 }
 
 .spring_item img{
@@ -33,7 +37,7 @@
     background: white;
     border-radius: 60px;
     padding: 0 50px;
-    border: 3px solid lightblue;
+    border: 3px solid rgba(182,190,237,0.8);
 }
 
 #write_box form ul {
@@ -47,12 +51,12 @@
 
 #cate{
     border-radius: 20px;
-    border: 2px solid lightskyblue;
+    border: 2px solid rgba(182, 190, 237, 1);;
     padding: 5px 8px;
     margin-right: 10px;
     font-size: 1.1rem;
     font-weight: bold;
-    color: lightskyblue;
+    color: rgba(182, 190, 237, 1);
 }
 
 select:focus{
@@ -61,12 +65,12 @@ select:focus{
 
 #form_title{
     text-align: center;
-    color: lightskyblue;
+    color: rgba(182, 190, 237, 1);
 }
 
 #title{
     border-radius: 20px;
-    border: 2px solid lightskyblue;
+    border: 2px solid rgba(182, 190, 237, 1);
     padding: 5px 8px;
     font-size: 1.1rem;
     width: 300px;
@@ -78,13 +82,14 @@ input:focus{
 
 /*에디터 css 시작*/
 .note-editor.note-frame, .note-editor.note-airframe {
-    border: 1px solid lightblue;
+    border: 1px solid rgba(182, 190, 237, 0.8);
     border-radius: 40px;
 }
 
 .note-toolbar {
     text-align: center;
     background-color: white;
+    border-bottom: 1px solid rgba(182, 190, 237, 0.8);
     border-top-left-radius: 50px;
     border-top-right-radius: 50px;
 }
@@ -104,12 +109,17 @@ input:focus{
     border-radius: 30px;
     border: none;
     color: white;
-    background: lightskyblue;
+    background: rgba(182, 190, 237, 1);
     padding: 8px;
     font-size: 1.4rem;
     font-weight: normal;
 }
 
 #btn:hover{
-    background: lightblue;
+    background: rgba(202, 210, 247, 0.8);
+}
+
+footer{
+    color: white;
+    background: #4E8AB8;
 }

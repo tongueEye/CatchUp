@@ -9,75 +9,76 @@
     background-color: green;
     background-image: url("../../img/error/cat_bg.jpg");
     background-repeat: no-repeat;
-    background-size: cover;
+    background-size: 100% 130%;
     overflow: hidden;
     overflow-x: hidden;
 }
 
 #text_box{
     position: absolute;
-    bottom: 10vw;
-    left: 10vw;
-
+    bottom: calc(100% - 900px);
+    left: 5vw;
     z-index: 3;
     color: white;
-    line-height: 100px;
-
-    transform: skewX(-30deg);
-    rotate: 19deg;
+    line-height: 65px;
+/* transform: skewX(-30deg); */
+/* rotate: 19deg;*/
 }
 
 #text_box h1{
-    font-family: 'chab';
-    font-size: 7rem;
-    font-weight: normal;
-    margin-bottom: 2vw;
+font-family: 'chab';
+font-size: 4.5rem;
+font-weight: normal;
+margin-bottom: 1vw;
+white-space: nowrap;
 }
 
 #text_box h2{
-    font-family: 'chab';
-    font-size: 5rem;
-    font-weight: normal;
+font-family: 'chab';
+font-size: 3rem;
+font-weight: normal;
+white-space: nowrap;
 }
 
 #text_box a{
-    padding: 1vw;
-    color: white;
-    background: #7F9E52;
-    border-radius: 3vw;
-    font-size: 3rem;
-    font-weight: bolder;
-    position: relative;
-    left: 17vw;
-    top: 1vw;
+padding: 15px;
+color: white;
+background: #7F9E52;
+border-radius: 3vw;
+font-size: 2.5rem;
+font-weight: bolder;
+position: relative;
+left: 0;
+top: 1vw;
 }
 
 #mouse {
-    width: 100px;
-    position: absolute;
-    bottom: -150px;
-    left: 70vh;
-    animation: moveDiagonally 7s ease-in-out infinite;
+width: 100px;
+position: absolute;
+bottom: -150px;
+left: 80vh;
+animation: moveDiagonally 8s ease-in-out infinite;
 }
 
 body{
-    background-color: white;
+background-color: white;
 }
 
 @keyframes moveDiagonally {
-    0% {
-        transform: translate(0%, 0%);
-    }
-    100% {
-        transform: translate(-100vw, -50vw);
-    }
+0% {
+    transform: translate(0%, 0%);
+}
+100% {
+    /*transform: translate(-100vw, -50vw);*/
+    transform: translate(-120vw, -45vw);
+}
 }
 
 footer{
-    text-align: center;
-    padding: 30px 0;
-    z-index: 2;
-    position: relative;
-    background: darkgreen;
-    color: wheat;
+text-align: center;
+padding: 30px 0;
+z-index: 2;
+position: relative;
+background: darkgreen;
+color: wheat;
 }
