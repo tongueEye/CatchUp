@@ -17,7 +17,10 @@
         <nav>
             <ul>
                 <li><a th:href="@{/mypage/home}">마이홈</a></li>
-                <li><a th:href="@{/mypage/admin}"> 회원 관리</a></li>
+                <li th:if="${uid == 100}"> <!-- 관리자만 보이는 화면 -->
+                    <a th:href="@{/mypage/admin}"> 회원 관리</a>
+                </li>
+                <li><a th:href="@{/mypage/info}">정보수정</a></li>
                 <li><a th:href="@{/mypage/wlist}">작성 글 보기</a></li>
                 <li><a th:href="@{/mypage/rlist}">작성 댓글 보기</a></li>
             </ul>
@@ -26,7 +29,7 @@
         <article id="content">
 
             <!-- 회원검색 -->
-            <form method="get" th:action="@{/admin}">
+            <form method="get" th:action="@{/mypage/admin}">
                 <select name="search">
                     <option value="id">아이디</option>
                     <option value="name">이름</option>
@@ -36,10 +39,12 @@
             </form>
 
             <!-- 회원리스트 -->
-            <ul th:each="i:${userlist}">
-                <li th:text="${i.id}"></li>
-                <li th:text="${i.name}"></li>
-                <li><a th:href="@{'/mypage/del/'+${i.uid}}" th:text="나가"></a></li>
+            <ul>
+                <li th:each="i:${userlist}">
+                    <span th:text="${i.id}"></span>
+                    <span th:text="${i.name}"></span>
+                    <span><a th:href="@{'/mypage/del/'+${i.uid}}" th:text="나가"></a></span>
+                </li>
             </ul>
 
             <!-- 페이징 -->

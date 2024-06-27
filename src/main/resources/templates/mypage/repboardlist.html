@@ -5,6 +5,7 @@
     <title>Title</title>
     <link rel="stylesheet" th:href="@{/css/mypage/mypage.css}">
     <link rel="stylesheet" th:href="@{/css/mypage/modal.css}">
+    <link rel="stylesheet" th:href="@{/css/mypage/repboard.css}">
     <script defer th:src="@{/js/mypage/modal.js}"></script>
 </head>
 <body>
@@ -20,7 +21,7 @@
                     <li><a th:href="@{/mypage/info}">정보수정</a></li>
                     <!--<li><p th:href="@{/mypage/dd}"> 회원 관리</p></li>-->
                     <li><a th:href="@{/mypage/wlist}">작성 글 보기</a></li>
-                    <li><a th:href="@{/mypage/rlist}">작성 댓글 보기</a></li>
+                    <li><a th:href="@{/mypage/rlist}" class="nowpage">작성 댓글 보기</a></li>
                 </ul>
             </nav>
             <article id="content">

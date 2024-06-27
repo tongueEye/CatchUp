@@ -1,6 +1,11 @@
 .mypage-board .board-list {
     display: flex;
     border-bottom: 1px solid;
+    align-items: flex-start;
+}
+
+.mypage-board .board-list:first-child {
+    padding-bottom: 20px;
 }
 
 .mypage-board .board-list:not(:first-child){

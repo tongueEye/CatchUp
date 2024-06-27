@@ -106,6 +106,7 @@
 .bap-list-div {
     display: flex;
     justify-content: space-between;
+    margin-bottom: 10px;
 }
 
 .bap-list-div span {
@@ -117,4 +118,10 @@
     font-size: 40px;
     border-bottom: 1px solid black;
     padding: 0 10px;
+}
+
+.bap-img {
+    position: absolute;
+    left: 119px;
+    bottom: 140px;
 }
