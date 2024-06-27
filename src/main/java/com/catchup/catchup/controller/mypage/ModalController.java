@@ -54,11 +54,13 @@ public class ModalController {
 
         String schoolName = dto.getSchoolName();
         String sidoCode = dto.getSidoCode();
-        String sDCode = dto.getSDCode();
+        String sdschulCode = dto.getSdschulCode();
 
         System.out.println(schoolName);
         System.out.println(sidoCode);
-        System.out.println(sDCode);
+        System.out.println(sdschulCode);
+
+        service.school_result(dto, uid);
 
 
         /*String result = "";
