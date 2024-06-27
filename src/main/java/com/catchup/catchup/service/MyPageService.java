@@ -28,4 +28,6 @@ public interface MyPageService {
     UserDTO getBap(Long uid);
 
     List<LoveDTO> getLove(Long uid);
+
+    void school_result(UserDTO dto, Long uid);
 }

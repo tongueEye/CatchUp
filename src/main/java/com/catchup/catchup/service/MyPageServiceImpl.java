@@ -155,24 +155,48 @@ public class MyPageServiceImpl implements MyPageService{
         // 출력하려면 entity -> dto 변환하기
         modelMapper.map(User.class, UserDTO.class);
 
-        UserDTO list = result.stream().map(item -> modelMapper.map(item, UserDTO.class))
+        UserDTO bap = result.stream().map(item -> modelMapper.map(item, UserDTO.class))
                 .findAny()
                 .orElseThrow(() -> {
                     throw new RuntimeException();
                 });
-        return list;
+        log.info("bap data ............... {} ", bap.getSchoolName());
+        log.info("bap data ............... {} ", bap.getSidoCode());
+        log.info("bap data ............... {} ", bap.getSdschulCode());
+        return bap;
     }
 
     /** 좋아요 불러오기*/
     @Override
     public List<LoveDTO> getLove(Long uid) {
-        List<Object[]> result = loveRepository.findTitlesAndCateByUserId(uid);
-
-        List<LoveDTO> lovelist = result.stream()
-                .map(item -> modelMapper.map(item, LoveDTO.class))
+        List<LoveDTO> lovelist = loveRepository.findFreeboardTitleAndCateByUserId(uid)
+                .stream()
+                .map(tuple -> {
+                    LoveDTO loveDTO = new LoveDTO();
+                    loveDTO.setTitle((String) tuple[0]);
+                    loveDTO.setCate((String) tuple[1]);
+                    return loveDTO;
+                })
                 .collect(Collectors.toList());
-
         return lovelist;
+    }
+
+
+    /** 학교 정보 ㄹㅇ 디비에 값 변경하기 */
+    @Override
+    public void school_result(UserDTO dto, Long uid) {
+        Optional<User> result = repository.findById(uid);
+
+        User findBoard = result.orElseThrow(() -> {
+            throw new RuntimeException();
+        });
+
+        findBoard.setSchoolName(dto.getSchoolName());
+        findBoard.setSDCode(dto.getSdschulCode());
+        findBoard.setSidoCode(dto.getSidoCode());
+
+        repository.save(findBoard);
+
     }
 
 }

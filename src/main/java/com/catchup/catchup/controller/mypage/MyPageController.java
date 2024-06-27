@@ -1,33 +1,21 @@
 package com.catchup.catchup.controller.mypage;
 
-import com.catchup.catchup.domain.User;
 import com.catchup.catchup.dto.*;
 import com.catchup.catchup.service.MyPageService;
 import com.catchup.catchup.service.UserService;
-import com.google.gson.Gson;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.tomcat.util.json.JSONParser;
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.util.List;
 
 @Controller
@@ -37,7 +25,6 @@ import java.util.List;
 public class MyPageController {
 
     private final MyPageService service;
-    private final UserService userService;
     /* user 정보 끌고 와야 함 */
 
     @GetMapping("/home")

@@ -13,4 +13,5 @@ public class LoveDTO {
     private Long uid;
 
     private String title;
+    private String Cate;
 }

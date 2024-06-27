@@ -1,5 +1,3 @@
-// 하아아아아아아ㅏㅁㅁ 옮기자아ㅏㅏㅏ
-
 /** 학교 검색하기 */
 let school_name = document.getElementById('schoolList');
 let school_input = document.getElementById('schoolInput');
@@ -49,7 +47,6 @@ function search(target) {
     }).catch(error => {
         console.error('Error:', error);
     });
-
 }
 
 /** 검색한 값 DB에 넘겨서 저장하기 => 저장해야 하는 것 1. 시도교육청코드(ATPT_OFCDC_SC_CODE) 2. 행정표준코드(SD_SCHUL_CODE) */
@@ -102,66 +99,11 @@ function getToday(){
 }
 
 
+
+/*
 let bap_SDCode = [[${bap.sDCode}]];
 let bap_sidocode = [[${bap.sidoCode}]];
 
 console.log(bap_SDCode)
 console.log(bap_sidocode)
-
-
-/** 급식 불러오기 */
-fetch("https://open.neis.go.kr/hub/mealServiceDietInfo?KEY=7578fdd86a164ce4b0eebabfdbf51a5f&Type=json&pIndex=1&pSize=100&ATPT_OFCDC_SC_CODE=" + bap_sidocode + "&SD_SCHUL_CODE=" + bap_SDCode + "&MLSV_YMD=" + getToday())
-    .then(response => {
-        if (response.status == 200) {
-            console.log('호출완료');
-            return response.json(); // 응답을 JSON 형식으로 파싱
-        } else if (response.status == 403) {
-            console.log("403 에러 발생");
-            return response.json();
-        }
-    }).then(data => {
-    console.log(data, ">>> data")
-
-    let today_bap = document.getElementById('today-bap'); // 최상단 div
-
-    const meals = data.mealServiceDietInfo[1].row;
-
-    let breakfast = "";
-    let lunch = "";
-    let dinner = "";
-
-    meals.forEach(meal => {
-        let mealType = meal.MMEAL_SC_NM; // 조식, 중식, 석식 구분
-
-        // 메뉴에서 괄호 안의 내용과 숫자 및 마침표 제거
-        let menuItems = meal.DDISH_NM.replace(/\([^)]*\)|\d+\.*\d*|\./g, '');
-
-
-        // 각 구분에 맞게 변수에 추가
-        if (mealType === "조식") {
-            breakfast += menuItems + " ";
-            if(breakfast.trim() === '') {
-                breakfast += '조식이 없습니다.'
-            }
-            console.log(breakfast, ">>>>>>>>>>>>>>>>> breakfast ")
-        } else if (mealType === "중식") {
-            lunch += menuItems + " ";
-        } else if (mealType === "석식") {
-            dinner += menuItems + " ";
-        }
-    });
-
-    // 화면에 출력할 부분
-    let menuText = `<조식 메뉴> <br/> ${breakfast}<br/><br/>
-                        <중식 메뉴> <br/> ${lunch}<br/><br/>
-                        <석식 메뉴> <br/> ${dinner}`;
-
-
-    // HTML에 추가
-    let menuDiv = document.createElement('div');
-    menuDiv.innerHTML = menuText;
-    today_bap.appendChild(menuDiv);
-
-}).catch(error => {
-    console.error('Error:', error);
-});
+*/
