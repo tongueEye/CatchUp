@@ -93,7 +93,6 @@ window.onload = function () {
     /** 글 수정 **/
     let modBtn = document.getElementById('mod_btn');
     let kind = document.getElementById('kind').value;
-    console.log(kind);
     if(String(kind) === "e"){
         distinctUpdate = '/boardUpdate/'
         distinctDelete = '/boardUpdate/'
