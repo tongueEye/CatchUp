@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 public class ExceptionController {
 
     //개발 마지막에 추가하기
-/*
+
     @ExceptionHandler(Exception.class)
     public String except(Exception ex, Model model){
         model.addAttribute("error_msg", ex);
@@ -17,7 +17,7 @@ public class ExceptionController {
         return "index";
     }
 
-
+/*
     @ExceptionHandler(NoHandlerFoundException.class)
     public String handle404(NoHandlerFoundException ex, Model model){
         model.addAttribute("error_msg", "페이지를 찾을 수 없습니다.");

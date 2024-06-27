@@ -7,11 +7,14 @@
     justify-content: center;
     position: relative;
     padding: 30px;
+    background-image: url("../../img/infoboard/cats_bg3.png");
+    background-size: cover;
+    background-repeat: no-repeat;
 }
 .detail_box{ /* 레이아웃 중앙정렬*/
     position: absolute;
     top: 15vh;
-    background: white;
+    background: rgba(255,255,255,0.9);
     border: 3px solid #9BA2D7;
     padding: 50px;
     border-radius: 50px;
@@ -127,6 +130,7 @@ img{ /*표시되는 이미지 최대크기 설정*/
     width: 75%;
     margin: 0 20px 40px 60px;
     font-size: 1.5rem;
+    overflow: hidden;
 }
 
 
@@ -219,3 +223,8 @@ img{ /*표시되는 이미지 최대크기 설정*/
 
 
 /*필드 디자인 끝 - 폰트사이즈, 색상*/
+
+footer{
+    color: white;
+    background: #4E8AB8;
+}
