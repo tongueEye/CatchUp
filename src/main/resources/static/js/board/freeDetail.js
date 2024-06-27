@@ -186,11 +186,11 @@ window.onload = function () {
     function updateButton() {
         if (hasLiked) {
             likeBtn.innerText = '취소';
-            // likeBtn.style.backgroundColor = '#C6C6C6';
+            likeBtn.style.border = '2px solid silver';
             likeImg.style.backgroundImage = 'url("../../img/freeboard/unheart.png")';
         } else {
             likeBtn.innerText = '좋아요';
-            // likeBtn.style.backgroundColor = '#B6BEED';
+            likeBtn.style.border = '2px solid pink';
             likeImg.style.backgroundImage ='url("../../img/freeboard/heart.png")';
         }
     }
