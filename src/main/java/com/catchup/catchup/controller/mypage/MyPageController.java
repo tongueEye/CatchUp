@@ -26,6 +26,7 @@ public class MyPageController {
 
     private final MyPageService service;
     /* user 정보 끌고 와야 함 */
+    private final UserService userService;
 
     @GetMapping("/home")
     public String mypage(HttpServletRequest request, Model model) {
