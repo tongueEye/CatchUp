@@ -87,7 +87,7 @@ public class EduBoardController {
     }
 
     /** 게시글 작성 페이지 **/
-    @GetMapping("/writeFree")
+    @GetMapping("/writeEdu")
     public String boardInsert(HttpServletRequest request, Model model) {
 
         Long sessionId = 0L;
@@ -100,12 +100,12 @@ public class EduBoardController {
 
         model.addAttribute("dto", new FreeBoardDTO());
         model.addAttribute("user", userDTO);
-        model.addAttribute("view", "freeBoard/boardInsert");
+        model.addAttribute("view", "freeBoard/eduBoardInsert");
         return "index";
     }
 
     /** 게시글 작성 폼 **/
-    @PostMapping("/writeFree")
+    @PostMapping("/writeEdu")
     public String boardInsertResult(
             @RequestParam(name = "cate", required = false) String cate
             , @RequestParam(name = "title", required = false) String title
@@ -148,7 +148,7 @@ public class EduBoardController {
         model.addAttribute("dto", dto);
         model.addAttribute("sessionId", sessionId);
         model.addAttribute("user", userDTO);
-        model.addAttribute("view", "freeBoard/boardUpdate");
+        model.addAttribute("view", "freeBoard/eduBoardUpdate");
         return "index";
     }
 
