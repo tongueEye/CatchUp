@@ -6,6 +6,7 @@
     <link rel="stylesheet" th:href="@{/css/mypage/modal.css}">
     <link rel="stylesheet" th:href="@{/css/mypage/mypage.css}">
     <link rel="stylesheet" th:href="@{/css/mypage/home.css}">
+    <link rel="stylesheet" th:href="@{/css/mypage/school.css}">
     <script defer th:src="@{/js/mypage/modal.js}"></script>
 <!--<script defer th:src="@{/js/mypage/school.js}"></script>-->
 </head>
@@ -19,7 +20,7 @@
         <div id="container">
             <nav>
                 <ul>
-                    <li><a th:href="@{/mypage/home}">마이홈</a></li>
+                    <li><a th:href="@{/mypage/home}" class="nowpage">마이홈</a></li>
                     <li th:if="${uid == 100}"> <!-- 관리자만 보이는 화면 -->
                         <a th:href="@{/mypage/admin}"> 회원 관리</a>
                     </li>
@@ -33,10 +34,11 @@
                 <div class="article-1 article-2-content">
                     <p class="bap-p"> 급식 확인하기 </p>
                     <div class="bap-article-content ">
+                        <img class="bap-img" src="/img/mypage/spring.png" alt="스프링">
                         <div class="bap-content">
                             <!-- 급식 정보 없는 애들 -->
                             <th:block th:if="${bap.sidoCode == null}">
-                                급식 정보를 등록해 주세요.
+                                <p class="schoolOpenButton"> 급식 정보를 등록해 주세요. </p>
                             </th:block>
 
                             <!-- 급식 정보 있는 애들 => 급식 정보 뜸 -->
@@ -50,7 +52,7 @@
                                     <!-- ajax이 알아서 해 줄 거야 >< -->
                                 </div>
 
-                                <p id="school_change">학교 변경하기</p>
+                                <p class="schoolOpenButton">학교 변경하기</p>
                             </th:block>
                         </div>
                     </div>
@@ -136,38 +138,67 @@
         </div>
     </div>
 
-    <div id="school-modal" class="hidden">
+    <div id="school-modal" class="school-hidden">
         <div id="school-controller">
-            <p>사는 지역 확인해 주세요. (세종시 분리), 최대 다섯 개까지 뜹니다... </p>
-
-            <select name="sido" id="sido">
-                <option value="J10">경기도</option>
-                <option value="B10">서울특별시</option>
-                <option value="E10">인천광역시</option>
-                <option value="C10">부산광역시</option>
-                <option value="D10">대구광역시</option>
-                <option value="F10">광주광역시</option>
-                <option value="G10">대전광역시</option>
-                <option value="H10">울산광역시</option>
-                <option value="I10">세종시</option>
-                <option value="K10">강원도</option>
-                <option value="M10">충청북도</option>
-                <option value="N10">충청남도</option>
-                <option value="P10">전라북도</option>
-                <option value="Q10">전라남도</option>
-                <option value="R10">경상북도</option>
-                <option value="S10">경상남도</option>
-                <option value="T10">제주도</option>
-                <option value="V10">기타</option>
-            </select>
-            <input id="schoolInput" type="text" data-cate="high" onkeyup="search(this)" placeholder="학교를 입력하세요">
-            <ul id="schoolList"></ul>
-            <button id="schoolResult" type="submit">학교 등록하기</button>
+            <ul>
+                <li class="school-li-1">
+                    <h2>학교 등록</h2>
+                    <p class="schoolClose">X</p>
+                </li>
+                <li class="school-li-2">
+                    <p>급식 확인하고 싶은 학교 등록하기 </p>
+                    <p>검색 결과는 최대 다섯 개까지 뜹니다.</p>
+                </li>
+                <li class="school-li-3">
+                    <select name="sido" id="sido">
+                        <option value="0" selected disabled>지역 선택하기</option>
+                        <option value="J10">경기도</option>
+                        <option value="B10">서울특별시</option>
+                        <option value="E10">인천광역시</option>
+                        <option value="C10">부산광역시</option>
+                        <option value="D10">대구광역시</option>
+                        <option value="F10">광주광역시</option>
+                        <option value="G10">대전광역시</option>
+                        <option value="H10">울산광역시</option>
+                        <option value="I10">세종시</option>
+                        <option value="K10">강원도</option>
+                        <option value="M10">충청북도</option>
+                        <option value="N10">충청남도</option>
+                        <option value="P10">전라북도</option>
+                        <option value="Q10">전라남도</option>
+                        <option value="R10">경상북도</option>
+                        <option value="S10">경상남도</option>
+                        <option value="T10">제주도</option>
+                        <option value="V10">기타</option>
+                    </select>
+                    <input id="schoolInput" type="text" data-cate="high" onkeyup="search(this)" placeholder="학교를 입력하세요">
+                    <span></span>
+                </li>
+                <li>
+                    <ul id="schoolList"></ul>
+                </li>
+                <li>
+                    <button id="schoolResult" type="submit">학교 등록하기</button>
+                </li>
+            </ul>
 
         </div>
     </div>
 
     <script th:inline="javascript">
+
+        let schoolOpenButton = document.querySelector('.schoolOpenButton');
+        let school = document.getElementById('school-modal');
+        let schoolCloseButton = document.querySelector('.schoolClose');
+
+        schoolCloseButton.addEventListener('click', () => {
+            school.classList.add('school-hidden');
+        });
+
+        schoolOpenButton.addEventListener('click', () => {
+            school.classList.remove('school-hidden');
+        });
+
         "use strict";
         /** 학교 검색하기 */
         let school_name = document.getElementById('schoolList');
@@ -182,7 +213,6 @@
         sido_result.addEventListener('change', function() {
             sido = this.value;
         });
-
 
         function search(target) {
             // console.log(target, ">>>>>>>>> target");
@@ -240,10 +270,7 @@
             let sido_search = sido_result.options[sido_result.selectedIndex].value;
             let school = school_input.value;
 
-            console.log(school_input, "upload, school_input")
             search(school_input);
-
-            console.log(SDSCHULCODE[0], " !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! sdcode");
 
             let schoolData ={}
             if(Array.isArray(SDSCHULCODE)) {
@@ -259,8 +286,6 @@
                     sdschulCode : SDSCHULCODE
                 };
             }
-
-            console.log(schoolData , "---------------- data");
 
             fetch("/api", {
                 method: 'POST',
@@ -278,7 +303,11 @@
                         console.log("403 에러 발생");
                         return response.json();
                     }
-                })
+                }).then(() => {
+            }).finally(() => {
+                alert("등록되었습니다.")
+                school.classList.add('school-hidden'); // 모달 이벤트
+            })
         }
 
         // 오늘 날짜 출력하기
@@ -289,8 +318,6 @@
             let day = ("0" + date.getDate()).slice(-2);
             return year + month + day;
         }
-
-
 
         let bap_SDCode = [[${bap.sdschulCode}]];
         let bap_sidocode = [[${bap.sidoCode}]];
@@ -323,6 +350,7 @@
 
                 // 메뉴에서 괄호 안의 내용과 숫자 및 마침표 제거
                 let menuItems = meal.DDISH_NM.replace(/\([^)]*\)|\d+\.*\d*|\./g, '');
+                console.log(menuItems)
 
 
                 // 각 구분에 맞게 변수에 추가
@@ -333,8 +361,6 @@
 
             // 화면에 출력할 부분
             let menuText = `${lunch}<br/>`;
-
-            //<석식 메뉴> <br/> ${dinner
 
             // HTML에 추가
             let menuDiv = document.createElement('div');
@@ -348,6 +374,8 @@
         }).catch(error => {
             console.error('Error:', error);
         });
+
+
     </script>
 
 

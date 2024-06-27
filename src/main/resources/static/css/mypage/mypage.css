@@ -74,4 +74,7 @@ ul li {
     padding-right: 100px;
 }
 
-/* 여기까지 공통 => 시간 나면 템플릿 설정하고... 아님 걍 살자 */
+/* 현재페이지 */
+.nowpage {
+    font-weight: bolder;
+}

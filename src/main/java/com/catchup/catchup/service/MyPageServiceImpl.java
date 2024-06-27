@@ -179,9 +179,8 @@ public class MyPageServiceImpl implements MyPageService{
                 .collect(Collectors.toList());
         return lovelist;
     }
-
-
     /** 학교 정보 ㄹㅇ 디비에 값 변경하기 */
+    @Transactional
     @Override
     public void school_result(UserDTO dto, Long uid) {
         Optional<User> result = repository.findById(uid);

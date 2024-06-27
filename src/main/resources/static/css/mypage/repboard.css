@@ -1,0 +1,15 @@
+#container #content {
+    width: calc(85% - 78px);
+    background-color: white;
+    margin: 20px auto;
+    border-radius: 15px;
+    padding: 20px 40px;
+    text-align: left;
+}
+
+#container #content h2 {
+    font-size: 30px;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #A8A8A8;
+    padding-bottom: 10px;
+}
