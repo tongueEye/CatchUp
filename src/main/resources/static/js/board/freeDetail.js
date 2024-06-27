@@ -7,8 +7,8 @@ const init = function (data) {
 /** 댓글 리스트 **/
 const replyList = function () {
     fetch('/replist/' + num, {
-        method   : 'GET'
-        , headers: {
+        method   : 'GET',
+        headers: {
             'Accept': 'application/json'
         }
     }).then((response) => {
@@ -38,7 +38,9 @@ const replyList = function () {
                 deleteButton.textContent = '삭제';
                 deleteButton.id = 'del_btn'
                 deleteButton.onclick = function () {
-                    deleteRep(frid);
+                    if (confirm('정말 삭제할까요?')) {
+                        deleteRep(frid);
+                    }
                 };
                 ele_li.appendChild(deleteButton);
             }
@@ -54,7 +56,6 @@ const replyList = function () {
 
 /** 댓글 삭제 **/
 const deleteRep = function (frid) {
-
     fetch('/repdelete/' + frid, {
         method: 'GET',
     }).then((response) => {

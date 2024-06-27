@@ -1,0 +1,63 @@
+/* 테이블 스타일 */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    /*font-family: Arial, sans-serif;*/
+}
+
+/* 테이블 헤더 스타일 */
+.usertitle {
+    background-color: #f2f2f2;
+    font-weight: bold;
+    text-align: left;
+    padding: 10px;
+}
+
+/* 테이블 행 스타일 */
+.userlist tr {
+    border-bottom: 1px solid #ddd;
+}
+
+/* 테이블 셀 스타일 */
+.userlist td {
+    padding: 10px;
+}
+
+
+.userlisttt{
+    display: flex;
+    justify-content: space-between;
+}
+
+.userlisttt p{
+    font-weight: bold;
+    letter-spacing: 3px;
+}
+
+.usersearch{
+    display: flex;
+    justify-content: flex-end;
+    align-items: stretch;
+}
+
+.usersearch input, .usersearch select {
+    padding: 5px 10px;
+    border: 2px solid #9BA2D7;
+    border-radius: 15px;
+    font-size: 1rem;
+    margin-right: 5px;
+}
+.usersearch input, .usersearch select{
+    outline: none;
+}
+
+.usersearch button{
+    padding: 7px 14px;
+    background-color: #B6BEED;
+    border-radius: 15px;
+    font-size: 1rem;
+    border: none;
+}
+.usersearch button:hover{
+    background-color: #9BA2D7;
+}

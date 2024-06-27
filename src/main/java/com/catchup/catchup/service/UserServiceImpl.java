@@ -68,9 +68,9 @@ public class UserServiceImpl implements UserService{
         condition.setId(null);
         condition.setName(null);
 
-        if("Id".equals(search) && search!=null && !"".equals(search)){
+        if("id".equals(search) && search!=null && !"".equals(search)){
             condition.setId(searchtxt);
-        }else if("Name".equals(search) && search!=null && !"".equals(search)){
+        }else if("name".equals(search) && search!=null && !"".equals(search)){
             condition.setName(searchtxt);
         }
 
