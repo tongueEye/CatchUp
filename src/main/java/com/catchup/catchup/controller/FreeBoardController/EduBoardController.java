@@ -135,7 +135,6 @@ public class EduBoardController {
     /** 게시글 수정 페이지 **/
     @GetMapping("/boardUpdate/{fid}")
     public String boardUpdate(@PathVariable Long fid, HttpServletRequest request, Model model) {
-        FreeBoardDTO dto = freeService.boardDetail(fid);
 
         Long sessionId = 0L;
         HttpSession session = request.getSession(false);
@@ -143,6 +142,7 @@ public class EduBoardController {
             sessionId = (Long) session.getAttribute("sessionId");
         }
 
+        FreeBoardDTO dto = freeService.boardDetail(fid);
         UserDTO userDTO = userService.findUserById(sessionId);
 
         model.addAttribute("dto", dto);
