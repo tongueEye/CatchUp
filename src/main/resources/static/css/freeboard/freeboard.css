@@ -7,18 +7,18 @@ ul li{
     list-style: none;
 }
 
-#utility{
+.utility{
     display: flex;
     justify-content: space-between;
 }
 
-#utility h2{
+.utility h2{
     font-size: 2.5rem;
     letter-spacing: 10px;
     padding-left: 15px;
 }
 
-#eduBoard {
+.eduBoard {
     display: flex;
     flex-direction: row;
     margin: auto;
@@ -26,7 +26,7 @@ ul li{
     height: 80vh;
 }
 
-#eduBoardList{
+.eduBoardList{
     position: relative;
     top: 105px;
     display: flex;
@@ -36,17 +36,16 @@ ul li{
     height: 50vh;
 }
 
-#eduBoardList ul {
+.eduBoardList ul {
     border-bottom: 1px solid #9BA2D7;
     margin: 15px;
     padding: 10px;
 }
 
-#eduBoardList ul a:hover {
+.eduBoardList ul a:hover {
     color: #9BA2D7;
 }
-
-#sideMenu{
+.sideMenu{
     margin: 10px 0;
     position: fixed;
     top: 155px;
@@ -124,12 +123,12 @@ input:focus, select:focus{
 }
 
 #write_btn:hover{
-    color: black;
-    background-color: white;
-    border-color: white;
+    background-color: #9BA2D7;
+    border-color: #9BA2D7;
+    cursor: pointer;
 }
 
-#page{
+.page{
     justify-content: space-between;
     display: flex;
     font-size: 1.2rem;
@@ -137,17 +136,14 @@ input:focus, select:focus{
     margin: auto;
 }
 
-#blank{
+.blank{
     padding: 0 50px;
 }
 
-#page span{
+.page span{
     margin-right: 10px;
 }
 
-#page a{
-}
-
-#page a:hover{
+.page a:hover{
     color: #9BA2D7;
 }

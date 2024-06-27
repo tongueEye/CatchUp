@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <link rel="stylesheet" th:href="@{/css/freeboard/comboard.css}">
+    <link rel="stylesheet" th:href="@{/css/freeboard/freeboard.css}">
     <script th:src="@{/js/board/comboard.js}"></script>
 </head>
 <body>
 
-<section class="frBoard">
+<section class="eduBoard">
     <div th:text="${sessionId}"></div>
     <!--사이드 메뉴-->
     <section class="sideMenu">
@@ -37,63 +37,69 @@
     </section>
 
     <!--게시판 리스트-->
-    <section class="frBoardList">
+    <section class="eduBoardList">
 
-        <div class="frfr">
-        <h2>일상/소통</h2>
-        <form method="get" th:action="@{/comboard}">
-            <select name="search">
-                <option value="title">제목</option>
-                <option value="content">내용</option>
-                <option value="writer">작성자</option>
-                <option value="cate">카테고리</option>
-            </select>
-            <input type="text" name="searchTxt">
-        </form>
+        <div class="utility">
+            <h2><a th:href="@{/comboard}">일상/소통</a></h2>
+            <form method="get" th:action="@{/comboard}">
+                <select name="search">
+                    <option value="title">제목</option>
+                    <option value="content">내용</option>
+                    <option value="writer">작성자</option>
+                    <option value="cate">카테고리</option>
+                </select>
+                <input type="text" name="searchTxt">
+            </form>
         </div>
 
 
         <ul th:each="i:${boardList}">
             <a th:href="@{|/comdetail/${i.fid}|}">
                 <div class="titlee1">
-                <li th:text="|[${i.cate}]|" class="cateee"></li>
-                <li th:text="|${i.title}|"></li>
+                    <li th:text="'['+${i.cate}+']'" class="cateee"></li>
+                    <li th:text="|${i.title}|"></li>
                 </div>
                 <div class="titlee2">
-                <li th:text="|작성자: ${i.writer}|"></li>
-                <li th:text="|${#temporals.format(i.createDate, 'yyyy-MM-dd')}|"></li>
-                <li th:text="|조회수: ${i.count}|"></li>
+                    <li th:text="|작성자: ${i.writer}|"></li>
+                    <li th:text="|${#temporals.format(i.createDate, 'yyyy-MM-dd')}|"></li>
+                    <li th:text="|조회수: ${i.count}|"></li>
                 </div>
             </a>
         </ul>
 
-        <div class="page_writebtn">
-            <div class="rmsid"></div>
-        <!-- 페이징 -->
-        <div class="page">
-            <th:block th:if="${startPage>1}">
-                <a th:href="@{/comboard(page=${startPage}-1,search=${search},searchTxt=${searchTxt})}" th:text="이전"></a>
-            </th:block>
-
-            <th:block th:if="${startPage<=endPage}">
-                <th:block th:each="index:${#numbers.sequence(startPage, endPage)}">
-                    <span th:if="${index == boardList.pageable.getPageNumber()+1}" th:text="${index}"></span>
-                    <span th:if="${index != boardList.pageable.getPageNumber()+1}">
-                <a th:href="@{/comboard(page=${index},search=${search},searchTxt=${searchTxt})}" th:text="${index}"></a>
-            </span>
-                </th:block>
-            </th:block>
-
-            <th:block th:if="${endPage < boardList.getTotalPages()}">
-                <a th:href="@{/comboard(page=${endPage}+1,search=${search},searchTxt=${searchTxt})}" th:text="다음"></a>
-            </th:block>
-        </div>
-
-        <button type="button" th:id="write_btn">글쓰기</button>
-        </div>
     </section>
 
 </section>
+
+
+<div class="page">
+            <div class="blank">
+                <span></span>
+            </div>
+            <!-- 페이징 -->
+            <div>
+                <th:block th:if="${startPage>1}">
+                    <a th:href="@{/comboard(page=${startPage}-1,search=${search},searchTxt=${searchTxt})}"
+                       th:text="이전"></a>
+                </th:block>
+
+                <th:block th:if="${startPage<=endPage}">
+                    <th:block th:each="index:${#numbers.sequence(startPage, endPage)}">
+                        <span th:if="${index == boardList.pageable.getPageNumber()+1}" th:text="${index}"></span>
+                        <span th:if="${index != boardList.pageable.getPageNumber()+1}">
+                <a th:href="@{/comboard(page=${index},search=${search},searchTxt=${searchTxt})}" th:text="${index}"></a>
+            </span>
+                    </th:block>
+                </th:block>
+
+                <th:block th:if="${endPage < boardList.getTotalPages()}">
+                    <a th:href="@{/comboard(page=${endPage}+1,search=${search},searchTxt=${searchTxt})}"
+                       th:text="다음"></a>
+                </th:block>
+            </div>
+
+            <button type="button" th:id="write_btn">글쓰기</button>
+        </div>
 
 
 </body>

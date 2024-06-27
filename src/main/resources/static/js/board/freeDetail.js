@@ -26,7 +26,6 @@ const replyList = function () {
             let uid = item.uid;
             let frid = item.frid;
 
-
             ele_span.appendChild(nickname);
             ele_span.appendChild(content);
             ele_li.appendChild(ele_span);
@@ -89,11 +88,23 @@ window.onload = function () {
         console.error('Element with id "qna_btn" not found.');
     }
 
+    let distinctUpdate = '';
+    let distinctDelete = '';
     /** 글 수정 **/
     let modBtn = document.getElementById('mod_btn');
+    let kind = document.getElementById('kind').value;
+    console.log(kind);
+    if(String(kind) === "e"){
+        distinctUpdate = '/boardUpdate/'
+        distinctDelete = '/boardUpdate/'
+    }else{
+        distinctUpdate = '/comboardUpdate/'
+        distinctDelete = '/com/boardDelete/'
+    }
+
     if (modBtn) {
         modBtn.onclick = function () {
-            location.href = '/boardUpdate/' + num;
+            location.href = distinctUpdate + num;
         }
     } else {
         console.error('Element with id "mod_btn" not found.');
@@ -103,7 +114,7 @@ window.onload = function () {
     let boardDelBtn = document.getElementById('boardDel_btn');
     if (boardDelBtn) {
         boardDelBtn.onclick = function () {
-            location.href = '/boardDelete/' + num;
+            location.href = distinctDelete + num;
         }
     } else {
         console.error('Element with id "boardDel_btn" not found.');
@@ -176,11 +187,11 @@ window.onload = function () {
     function updateButton() {
         if (hasLiked) {
             likeBtn.innerText = '취소';
-            likeBtn.style.backgroundColor = '#C6C6C6';
+            // likeBtn.style.backgroundColor = '#C6C6C6';
             likeImg.style.backgroundImage = 'url("../../img/freeboard/unheart.png")';
         } else {
             likeBtn.innerText = '좋아요';
-            likeBtn.style.backgroundColor = '#B6BEED';
+            // likeBtn.style.backgroundColor = '#B6BEED';
             likeImg.style.backgroundImage ='url("../../img/freeboard/heart.png")';
         }
     }

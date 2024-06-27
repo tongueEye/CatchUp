@@ -8,10 +8,10 @@
 </head>
 <body>
 
-<section id="eduBoard">
+<section class="eduBoard">
     <div th:text="${sessionId}"></div>
     <!--사이드 메뉴-->
-    <section id="sideMenu">
+    <section class="sideMenu">
         <aside>
             <h3>카테고리</h3>
             <ol>
@@ -37,9 +37,9 @@
     </section>
 
     <!-- 게시판 목록 -->
-    <section id="eduBoardList">
-        <div id="utility">
-            <h2>교육/정보</h2>
+    <section class="eduBoardList">
+        <div class="utility">
+            <h2><a th:href="@{/eduboard}">교육/정보</a></h2>
             <!-- 검색 창 -->
             <form method="get" th:action="@{/eduboard}">
                 <select name="search">
@@ -71,8 +71,8 @@
 
 </section>
 <!-- 페이징 -->
-<div id="page">
-    <div id="blank">
+<div class="page">
+    <div class="blank">
         <span></span>
     </div>
 

@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <link rel="stylesheet" th:href="@{/css/freeboard/freeboard_detail.css}">
-    <script th:src="@{/js/board/boardDetail.js}"></script>
+    <script th:src="@{/js/board/freeDetail.js}"></script>
 </head>
 <body>
 
@@ -58,6 +58,7 @@
             <li>
                 <input type="text" name="rep_content" id="rep_content">
                 <input type="hidden" name="fid" id="fid" th:value="${dto.fid}">
+                <input type="hidden" name="kind" id="kind" th:value="${dto.kind}">
                 <input type="hidden" name="sessionId" id="sessionId" th:value="${sessionId}">
                 <button type="button" id="append">댓글 추가</button>
             </li>

@@ -16,6 +16,23 @@
 <div id="write_box">
 
     <form id="writeForm" method="post" th:action="@{/writeEdu}">
+
+        <div id="spring">
+            <div class="spring_item"><img th:src="@{/img/infoboard/spring_one.png}"></div>
+            <div class="spring_item"><img th:src="@{/img/infoboard/spring_one.png}"></div>
+            <div class="spring_item"><img th:src="@{/img/infoboard/spring_one.png}"></div>
+            <div class="spring_item"><img th:src="@{/img/infoboard/spring_one.png}"></div>
+            <div class="spring_item"><img th:src="@{/img/infoboard/spring_one.png}"></div>
+            <div class="spring_item"><img th:src="@{/img/infoboard/spring_one.png}"></div>
+            <div class="spring_item"><img th:src="@{/img/infoboard/spring_one.png}"></div>
+            <div class="spring_item"><img th:src="@{/img/infoboard/spring_one.png}"></div>
+            <div class="spring_item"><img th:src="@{/img/infoboard/spring_one.png}"></div>
+            <div class="spring_item"><img th:src="@{/img/infoboard/spring_one.png}"></div>
+
+        </div>
+
+        <h1 id="form_title">교육/정보 글 작성</h1>
+
         <input type="hidden" th:name="sessionId" th:value="${user.uid}">
         <input type="hidden" th:name="writer" th:value="${user.nickname}">
         <input type="hidden" th:name="count" th:value="${dto.count}">
@@ -23,7 +40,7 @@
         <input type="hidden" th:name="kind" th:value="e">
 
         <ul>
-            <li>
+            <li class="field1">
                 <select th:id="cate" th:name="cate">
                     <option th:value="뉴스" th:selected="뉴스">뉴스</option>
                     <option th:value="초등">초등</option>
@@ -36,7 +53,7 @@
             <li>
                 <textarea id="summernote" th:name="content"></textarea>
             </li>
-            <li>
+            <li class="field1">
                 <button type="submit" id="btn"> 등록하기</button>
             </li>
         </ul>

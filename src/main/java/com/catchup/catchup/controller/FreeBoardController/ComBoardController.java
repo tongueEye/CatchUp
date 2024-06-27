@@ -76,11 +76,12 @@ public class ComBoardController {
             sessionId = (Long) session.getAttribute("sessionId");
         }
 
+        List<FreeBoardDTO> writerInfo = freeService.getWriterInfo(fid);
         FreeBoardDTO dto = freeService.boardDetail(fid);
-
         model.addAttribute("sessionId", sessionId);
         model.addAttribute("dto", dto);
-        model.addAttribute("view", "freeBoard/comDetail");
+        model.addAttribute("writerInfo", writerInfo);
+        model.addAttribute("view", "freeBoard/eduDetail");
         return "index";
     }
 
