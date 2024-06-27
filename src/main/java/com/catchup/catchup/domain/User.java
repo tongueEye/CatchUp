@@ -34,7 +34,7 @@ public class User {
     private String sidoCode;
 
     @Column(name = "SD_SCHUL_CODE")
-    private String sDCode;
+    private String sdschulCode;
 
     @Column(name = "SCHUL_NM")
     private String schoolName;

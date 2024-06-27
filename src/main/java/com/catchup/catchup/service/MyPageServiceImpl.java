@@ -160,7 +160,6 @@ public class MyPageServiceImpl implements MyPageService{
                 .orElseThrow(() -> {
                     throw new RuntimeException();
                 });
-        log.info("bap data ............... {} ", bap.getSchoolName());
         log.info("bap data ............... {} ", bap.getSidoCode());
         log.info("bap data ............... {} ", bap.getSdschulCode());
         return bap;
@@ -192,7 +191,7 @@ public class MyPageServiceImpl implements MyPageService{
         });
 
         findBoard.setSchoolName(dto.getSchoolName());
-        findBoard.setSDCode(dto.getSdschulCode());
+        findBoard.setSdschulCode(dto.getSdschulCode());
         findBoard.setSidoCode(dto.getSidoCode());
 
         repository.save(findBoard);

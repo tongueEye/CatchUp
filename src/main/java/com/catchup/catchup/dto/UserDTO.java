@@ -3,6 +3,7 @@ package com.catchup.catchup.dto;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Pattern;
 import lombok.*;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.w3c.dom.Text;
 
 @Getter @Setter
