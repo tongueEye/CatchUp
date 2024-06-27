@@ -39,8 +39,8 @@
 
         <input type="hidden" th:name="kind" th:value="e">
 
-        <ul>
-            <li class="field1">
+        <ul class="field1" th:object="${dto}">
+            <li>
                 <select th:id="cate" th:name="cate">
                     <option th:value="뉴스" th:selected="뉴스">뉴스</option>
                     <option th:value="초등">초등</option>

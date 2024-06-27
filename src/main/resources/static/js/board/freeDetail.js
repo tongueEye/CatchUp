@@ -38,7 +38,6 @@ const replyList = function () {
                 deleteButton.textContent = '삭제';
                 deleteButton.id = 'del_btn'
                 deleteButton.onclick = function () {
-                    confirm('정말 삭제할까요?');
                     deleteRep(frid);
                 };
                 ele_li.appendChild(deleteButton);
@@ -95,7 +94,7 @@ window.onload = function () {
     let kind = document.getElementById('kind').value;
     if(String(kind) === "e"){
         distinctUpdate = '/boardUpdate/'
-        distinctDelete = '/boardUpdate/'
+        distinctDelete = '/boardDelete/'
     }else{
         distinctUpdate = '/comboardUpdate/'
         distinctDelete = '/com/boardDelete/'
@@ -186,12 +185,12 @@ window.onload = function () {
     function updateButton() {
         if (hasLiked) {
             likeBtn.innerText = '취소';
-            likeBtn.style.border = '2px solid silver';
-            likeImg.style.backgroundImage = 'url("../../img/freeboard/unheart.png")';
-        } else {
-            likeBtn.innerText = '좋아요';
             likeBtn.style.border = '2px solid pink';
             likeImg.style.backgroundImage ='url("../../img/freeboard/heart.png")';
+        } else {
+            likeBtn.innerText = '좋아요';
+            likeBtn.style.border = '2px solid silver';
+            likeImg.style.backgroundImage = 'url("../../img/freeboard/unheart.png")';
         }
     }
 

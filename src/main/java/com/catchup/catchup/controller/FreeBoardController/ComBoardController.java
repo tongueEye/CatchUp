@@ -16,6 +16,7 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
@@ -78,9 +79,12 @@ public class ComBoardController {
 
         List<FreeBoardDTO> writerInfo = freeService.getWriterInfo(fid);
         FreeBoardDTO dto = freeService.boardDetail(fid);
+        Long repCount = freeService.repCount(fid);
+
         model.addAttribute("sessionId", sessionId);
         model.addAttribute("dto", dto);
         model.addAttribute("writerInfo", writerInfo);
+        model.addAttribute("repCount", repCount);
         model.addAttribute("view", "freeBoard/eduDetail");
         return "index";
     }
@@ -127,7 +131,6 @@ public class ComBoardController {
                 .build();
 
         freeService.boardInsert(dto);
-
         return "redirect:/comboard";
     }
 

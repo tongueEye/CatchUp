@@ -15,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 import static com.catchup.catchup.domain.QFreeBoard.freeBoard;
+import static com.catchup.catchup.domain.QFreeRepBoard.freeRepBoard;
 import static com.catchup.catchup.domain.QLove.love;
 import static com.catchup.catchup.domain.QUser.user;
 import static com.querydsl.core.types.dsl.Wildcard.count;
@@ -90,6 +91,16 @@ public class FreeBoardQDSLRepositoryImpl implements FreeBoardQDSLRepository {
                 .where(freeBoard.fid.eq(fid))
                 .fetchOne();
         return freeBoardDTO;
+    }
+
+    /** 게시글 댓글 수 **/
+    @Override
+    public Long repCount(Long fid) {
+        Long repCount = queryFactory.select(freeRepBoard.frid.count())
+                .from(freeRepBoard)
+                .where(freeRepBoard.freeBoard.fid.eq(fid))
+                .fetchOne();
+        return repCount;
     }
 
 

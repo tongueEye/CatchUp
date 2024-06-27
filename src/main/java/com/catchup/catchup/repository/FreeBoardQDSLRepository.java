@@ -14,6 +14,8 @@ public interface FreeBoardQDSLRepository {
 
     FreeBoardDTO freeDetail(Long fid);
 
+    Long repCount(Long fid);
+
     Page<FreeBoardDTO> list(Long id, Pageable pageable); // 채원
 
     void updateCount(Long fid);
@@ -27,6 +29,5 @@ public interface FreeBoardQDSLRepository {
     List<FreeBoardDTO> mostViewC();
 
     List<FreeBoardDTO> mostLikeC();
-
 
 }
