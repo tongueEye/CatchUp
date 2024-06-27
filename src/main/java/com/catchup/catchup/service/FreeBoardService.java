@@ -11,6 +11,7 @@ public interface FreeBoardService {
     Page<FreeBoardDTO> boardList(String search, String searchTxt, String kind, Pageable pageable);
     List<FreeBoardDTO> mostView();
     List<FreeBoardDTO> mostLike();
+    Long repCount(Long fid);
 
     FreeBoardDTO boardDetail(Long fid);
 
@@ -39,4 +40,5 @@ public interface FreeBoardService {
     List<FreeBoardDTO> mostViewC();
 
     List<FreeBoardDTO> mostLikeC();
+
 }

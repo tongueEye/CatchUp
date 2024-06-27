@@ -89,6 +89,13 @@ public class FreeBoardServiceImpl implements FreeBoardService {
         return dto;
     }
 
+    /** 게시글 댓글 수 **/
+    @Override
+    public Long repCount(Long fid) {
+        Long repCount = freeRepository.repCount(fid);
+        return repCount;
+    }
+
     /** 작성자 정보 **/
     @Override
     public List<FreeBoardDTO> getWriterInfo(Long fid) {

@@ -14,25 +14,25 @@
     <section class="sideMenu">
         <aside>
             <h3>카테고리</h3>
-            <ul>
+            <ol>
                 <li><a href="/comboard?search=cate&searchTxt=아이">아이</a></li>
                 <li><a href="/comboard?search=cate&searchTxt=맛집">맛집</a></li>
                 <li><a href="/comboard?search=cate&searchTxt=체험">체험</a></li>
                 <li><a href="/comboard?search=cate&searchTxt=일상">일상</a></li>
                 <li><a href="/comboard?search=cate&searchTxt=기타">기타</a></li>
-            </ul>
+            </ol>
         </aside>
         <aside>
-            <h3>조회수</h3>
-            <ul th:each="i:${hotList}">
+            <h3>가장 많이 본 글</h3>
+            <ol th:each="i:${hotList}">
                 <li><a th:href="@{|/comdetail/${i.fid}|}" th:text="${i.title}"></a></li>
-            </ul>
+            </ol>
         </aside>
         <aside>
-            <h3>좋아요</h3>
-            <ul th:each="i:${likeList}">
+            <h3>인기글</h3>
+            <ol th:each="i:${likeList}">
                 <li><a th:href="@{|/comdetail/${i.fid}|}" th:text="${i.title}"></a></li>
-            </ul>
+            </ol>
         </aside>
     </section>
 
