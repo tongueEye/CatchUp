@@ -14,31 +14,32 @@
     <section id="sideMenu">
         <aside>
             <h3>카테고리</h3>
-            <ul>
+            <ol>
                 <li><a href="/eduboard?search=cate&searchTxt=뉴스">뉴스</a></li>
                 <li><a href="/eduboard?search=cate&searchTxt=초등">초등학교</a></li>
                 <li><a href="/eduboard?search=cate&searchTxt=중등">중학교</a></li>
                 <li><a href="/eduboard?search=cate&searchTxt=고등">고등학교</a></li>
                 <li><a href="/eduboard?search=cate&searchTxt=학원">학원추천</a></li>
-            </ul>
+            </ol>
         </aside>
         <aside>
             <h3>조회수</h3>
-            <ul th:each="i:${hotList}">
+            <ol th:each="i:${hotList}">
                 <li><a th:href="@{|/edudetail/${i.fid}|}" th:text="${i.title}"></a></li>
-            </ul>
+            </ol>
         </aside>
         <aside>
             <h3>좋아요</h3>
-            <ul th:each="i:${likeList}">
+            <ol th:each="i:${likeList}">
                 <li><a th:href="@{|/edudetail/${i.fid}|}" th:text="${i.title}"></a></li>
-            </ul>
+            </ol>
         </aside>
     </section>
 
     <!-- 게시판 목록 -->
     <section id="eduBoardList">
         <div id="utility">
+            <h2>교육/정보</h2>
             <!-- 검색 창 -->
             <form method="get" th:action="@{/eduboard}">
                 <select name="search">
@@ -50,17 +51,19 @@
                 <input type="text" name="searchTxt">
             </form>
 
-            <button type="button" th:id="write_btn">글쓰기</button>
         </div>
         <!--게시글 리스트-->
         <ul th:each="i:${boardList}">
             <a th:href="@{|/edudetail/${i.fid}|}">
-                <li>[[${i.cate}]] [[${i.title}]]</li>
-                <li>
-                    작성자: [[${i.writer}]]
-                    작성일: [[${#temporals.format(i.createDate, 'yyyy-MM-dd')}]]
-                    조회수: [[${i.count}]]
-                </li>
+                <div class="titlee1">
+                    <li th:text="'['+${i.cate}+']'" class="cateee"></li>
+                    <li th:text="|${i.title}|"></li>
+                </div>
+                <div class="titlee2">
+                    <li th:text="|작성자: ${i.writer}|"></li>
+                    <li th:text="|${#temporals.format(i.createDate, 'yyyy-MM-dd')}|"></li>
+                    <li th:text="|조회수: ${i.count}|"></li>
+                </div>
             </a>
         </ul>
 
@@ -69,24 +72,31 @@
 </section>
 <!-- 페이징 -->
 <div id="page">
-    <th:block th:if="${startPage>1}">
-        <a th:href="@{/eduboard(page=${startPage}-1,search=${search},searchTxt=${searchTxt})}" th:text="이전"></a>
-    </th:block>
+    <div id="blank">
+        <span></span>
+    </div>
 
-    <th:block th:if="${startPage<=endPage}">
-        <th:block th:each="index:${#numbers.sequence(startPage, endPage)}">
-            <span th:if="${index == boardList.pageable.getPageNumber()+1}" th:text="${index}"></span>
-            <span th:if="${index != boardList.pageable.getPageNumber()+1}">
+    <div>
+        <th:block th:if="${startPage>1}">
+            <a th:href="@{/eduboard(page=${startPage}-1,search=${search},searchTxt=${searchTxt})}" th:text="이전"></a>
+        </th:block>
+
+        <th:block th:if="${startPage<=endPage}">
+            <th:block th:each="index:${#numbers.sequence(startPage, endPage)}">
+                <span th:if="${index == boardList.pageable.getPageNumber()+1}" th:text="${index}"></span>
+                <span th:if="${index != boardList.pageable.getPageNumber()+1}">
                 <a th:href="@{/eduboard(page=${index},search=${search},searchTxt=${searchTxt})}" th:text="${index}"></a>
             </span>
+            </th:block>
         </th:block>
-    </th:block>
 
-    <th:block th:if="${endPage < boardList.getTotalPages()}">
-        <a th:href="@{/eduboard(page=${endPage}+1,search=${search},searchTxt=${searchTxt})}" th:text="다음"></a>
-    </th:block>
+        <th:block th:if="${endPage < boardList.getTotalPages()}">
+            <a th:href="@{/eduboard(page=${endPage}+1,search=${search},searchTxt=${searchTxt})}" th:text="다음"></a>
+        </th:block>
+    </div>
+
+    <button type="button" th:id="write_btn">글쓰기</button>
 </div>
-
 
 </body>
 </html>

@@ -16,21 +16,18 @@
 <div id="write_box">
 
     <form id="writeForm" method="post" th:action="@{|/boardUpdate/${dto.fid}|}">
-        <!--세션 받으면 변경해야 함-->
         <input type="hidden" th:name="sessionId" th:value="${user.uid}">
         <input type="hidden" th:name="writer" th:value="${user.nickname}">
         <input type="hidden" th:name="count" th:value="${dto.count}">
 
-        <!--작성폼 같이쓸거면 이부분 변경해야 함-->
         <input type="hidden" th:name="kind" th:value="e">
 
         <ul>
-            <!--            <p th:text="${user.nickname}"></p>-->
             <li>
                 <select th:id="cate" th:name="cate">
                     <option th:value="뉴스" th:selected="뉴스">뉴스</option>
                     <option th:value="초등">초등</option>
-                    <option th:value="중동">중동</option>
+                    <option th:value="중등">중등</option>
                     <option th:value="고등">고등</option>
                     <option th:value="학원추천">학원추천</option>
                 </select>

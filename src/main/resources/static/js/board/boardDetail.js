@@ -39,7 +39,7 @@ const replyList = function () {
                 deleteButton.textContent = '삭제';
                 deleteButton.id = 'del_btn'
                 deleteButton.onclick = function () {
-                    alert('정말 삭제할까요?');
+                    confirm('정말 삭제할까요?');
                     deleteRep(frid);
                 };
                 ele_li.appendChild(deleteButton);
@@ -83,7 +83,7 @@ window.onload = function () {
     let qnaBtn = document.getElementById('qna_btn');
     if (qnaBtn) {
         qnaBtn.onclick = function () {
-            location.href = '/qna';
+            location.href = '/writeQna';
         }
     } else {
         console.error('Element with id "qna_btn" not found.');
@@ -154,6 +154,14 @@ window.onload = function () {
             console.log("reply insert finally");
         });
     }
+
+    /** 댓글 입력 엔터키 동작 **/
+    document.querySelector('#rep_content').addEventListener('keydown', function (event) {
+        if (event.key === 'Enter') {
+            event.preventDefault();
+            document.querySelector('#append').onclick();
+        }
+    });
 
     /** 좋아요 **/
     const likeBtn = document.getElementById('like_btn');
