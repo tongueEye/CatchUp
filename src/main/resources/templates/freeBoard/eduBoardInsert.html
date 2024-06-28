@@ -39,8 +39,8 @@
 
         <input type="hidden" th:name="kind" th:value="e">
 
-        <ul class="field1" th:object="${dto}">
-            <li>
+        <ul>
+            <li class="field1">
                 <select th:id="cate" th:name="cate">
                     <option th:value="뉴스" th:selected="뉴스">뉴스</option>
                     <option th:value="초등">초등</option>
@@ -48,7 +48,7 @@
                     <option th:value="고등">고등</option>
                     <option th:value="학원추천">학원추천</option>
                 </select>
-                <input type="text" th:name="title" th:id="title" placeholder="제목을 입력하세요.">
+                <input type="text" th:name="title" th:id="title" required placeholder="제목을 입력하세요.">
             </li>
             <li>
                 <textarea id="summernote" th:name="content"></textarea>

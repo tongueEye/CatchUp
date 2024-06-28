@@ -18,7 +18,7 @@
                      alt="프로필이미지">
             </div>
             <ul id="writer_info">
-                <li th:text="${dto.title}"></li>
+                <li><h3>[[${dto.title}]]</h3></li>
                 <li th:text="${dto.writer}"></li>
             </ul>
 
@@ -64,7 +64,7 @@
             </li>
         </ul>
 
-        <div th:text="|댓글수: ${repCount}|"></div>
+        <div th:id="reply_count" th:text="|댓글수: ${repCount}|"></div>
         <div th:id="replyList"></div>
 
     </section>

@@ -185,7 +185,7 @@ public class MyPageController {
     @GetMapping("/admin")
     public String userList(@RequestParam(required = false, defaultValue = "") String search
                          , @RequestParam(required = false, defaultValue = "") String searchtxt
-                         , @PageableDefault(size = 10, page = 0, sort = "uid", direction = Sort.Direction.ASC) Pageable pageable
+                         , @PageableDefault(size = 10, page = 0, sort = "uid", direction = Sort.Direction.DESC) Pageable pageable
                          , HttpServletRequest request
                          , Model model){
 

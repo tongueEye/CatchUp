@@ -225,7 +225,7 @@ public class EduBoardController {
      * 댓글 추가
      **/
     @PostMapping("/repinsert")
-    public ResponseEntity<List<FreeBoardDTO>> repInsert(@RequestBody RepBoardDTO dto, HttpServletRequest request) {
+    public ResponseEntity<List<FreeBoardDTO>> repInsert(@RequestBody RepBoardDTO dto, HttpServletRequest request, Model model) {
 
         Long sessionId = 0L;
         HttpSession session = request.getSession(false);
@@ -248,4 +248,11 @@ public class EduBoardController {
         return ResponseEntity.ok("Deleted successfully");
     }
 
+
+    @GetMapping("/repcount/{fid}")
+    @ResponseBody
+    public ResponseEntity<Long> repCount(@PathVariable Long fid) {
+        Long result = freeService.repCount(fid);
+        return ResponseEntity.ok().body(result);
+    }
 }

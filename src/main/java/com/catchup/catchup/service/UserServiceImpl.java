@@ -67,11 +67,14 @@ public class UserServiceImpl implements UserService{
         SearchCondition condition = new SearchCondition();
         condition.setId(null);
         condition.setName(null);
+        condition.setNickname(null);
 
         if("id".equals(search) && search!=null && !"".equals(search)){
             condition.setId(searchtxt);
         }else if("name".equals(search) && search!=null && !"".equals(search)){
             condition.setName(searchtxt);
+        }else if("nickname".equals(search) && search!=null && !"".equals(search)){
+            condition.setNickname(searchtxt);
         }
 
          Page<UserDTO> userlist = userRepository.search(condition, pageable);
