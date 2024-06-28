@@ -16,6 +16,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.HashMap;
 import java.util.List;
 
 @Controller
@@ -95,17 +97,14 @@ public class MyPageController {
         if(bindingResult.hasErrors()) {
             /* 실패했을 때 */
             model.addAttribute("dto", dto);
-            model.addAttribute("view", "mypage/info");
-            return "index";
+            return "redirect:/mypage/info";
         } else {
             /* 성공했을 떄 */
             long id = service.modifyInfo(dto, uid);
             model.addAttribute("dto", dto);
-            model.addAttribute("view", "mypage/home");
-            return "index";
+            return "redirect:/mypage/home";
         }
     }
-
 
     /** 내가 쓴 글 보기*/
     @GetMapping("/wlist")

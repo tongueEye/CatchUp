@@ -68,6 +68,7 @@ public class MyPageServiceImpl implements MyPageService{
 
         user.setPassword(dto.getPassword());
         user.setNickname(dto.getNickname());
+        user.setName(dto.getName());
         user.setPhone(dto.getPhone());
         user.setAddr(dto.getAddr());
 
