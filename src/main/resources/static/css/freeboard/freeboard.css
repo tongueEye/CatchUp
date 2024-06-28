@@ -3,6 +3,10 @@
     padding: 0;
 }
 
+#board_wrap{
+    height: 110vh;
+}
+
 ul li{
     list-style: none;
 }
@@ -124,11 +128,10 @@ input:focus, select:focus{
     border-color: #B6BEED;
     border-radius: 15px;
     padding: 7px 5px;
-    position: relative;
-    right: 15px;
-    top: -40px;
     border: 0;
     font-size: 1rem;
+    position: relative;
+    right: 170px;
 }
 
 #write_btn:hover{
@@ -141,9 +144,8 @@ input:focus, select:focus{
     justify-content: space-between;
     display: flex;
     font-size: 1.2rem;
-    width: 100%;
     margin: auto;
-    padding-top: 50px;
+    width: 60%;
 }
 
 .blank{
