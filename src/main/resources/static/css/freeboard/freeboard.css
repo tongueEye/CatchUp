@@ -67,14 +67,14 @@ aside {
     border: 1px solid #F4EBF3;
     border-radius: 30px;
     background: #F4EBF3;
-    height: 110px;
+    height: 113px;
     width: 100px;
     white-space: nowrap;
     overflow: hidden;
 }
 
 aside h3{
-    margin: 5px 0;
+    padding: 0 0 5px 0;
     border: none;
     border-radius: 15px;
     background-color: #F4EBF3;
@@ -86,7 +86,7 @@ aside ol{
 }
 
 aside ol li{
-    margin: 4px 0;
+    margin: 2px 0;
 }
 
 aside ol li a:hover{
@@ -132,6 +132,7 @@ input:focus, select:focus{
     font-size: 1rem;
     position: relative;
     right: 170px;
+    top: -5px;
 }
 
 #write_btn:hover{
