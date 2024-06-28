@@ -79,6 +79,7 @@ public class MyPageController {
         /* 기존 정보 불러오기 */
         UserDTO dto = service.getInfo(uid);
         model.addAttribute("dto", dto);
+        model.addAttribute("uid", uid);
         model.addAttribute("view", "mypage/info");
         return "index";
     }
@@ -130,6 +131,7 @@ public class MyPageController {
         model.addAttribute("boardlist", boardlist);
         model.addAttribute("startPage", startPage);
         model.addAttribute("endPage", endPage);
+        model.addAttribute("uid", uid);
 
         model.addAttribute("view", "mypage/writelist");
         return "index";
@@ -204,6 +206,7 @@ public class MyPageController {
         model.addAttribute("endPage", endPage);
         model.addAttribute("search", search);
         model.addAttribute("searchtxt", searchtxt);
+        model.addAttribute("uid", uid);
 
         model.addAttribute("view", "mypage/admin");
         return "index";

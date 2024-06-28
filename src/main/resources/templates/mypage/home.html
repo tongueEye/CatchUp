@@ -57,6 +57,7 @@
                         </div>
                     </div>
                 </div>
+
                 <div class="article-2">
                     <section class="fav article-2-content">
                         <p> 좋아요 </p>
@@ -69,7 +70,9 @@
                                 </li>
                                 <li th:each="item, stat : ${love}" class="qna-list">
                                     <span class="qna-content" th:text="${stat.count}"></span>
-                                    <span class="nowrap" th:text="${item.title}"></span>
+                                    <a th:href="@{|/edudetail/${item.fid}|}">
+                                        <span class="nowrap" th:text="${item.title}"></span>
+                                    </a>
                                     <span class="qna-content yes" th:text="${item.cate}"></span>
                                 </li>
                             </ul>

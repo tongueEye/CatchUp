@@ -18,8 +18,10 @@
             <nav>
                 <ul>
                     <li><a th:href="@{/mypage/home}">마이홈</a></li>
+                    <li th:if="${uid == 100}"> <!-- 관리자만 보이는 화면 -->
+                        <a th:href="@{/mypage/admin}"> 회원 관리</a>
+                    </li>
                     <li><a th:href="@{/mypage/info}">정보수정</a></li>
-                    <!--<li><p th:href="@{/mypage/dd}"> 회원 관리</p></li>-->
                     <li><a th:href="@{/mypage/wlist}">작성 글 보기</a></li>
                     <li><a th:href="@{/mypage/rlist}" class="nowpage">작성 댓글 보기</a></li>
                 </ul>
