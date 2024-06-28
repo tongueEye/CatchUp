@@ -25,8 +25,10 @@
             </aside>
             <aside>
                 <h3>가장 많이 본 글</h3>
-                <ol th:each="i:${hotList}">
+                <ol>
+                    <th:block th:each="i:${hotList}">
                     <li><a th:href="@{|/edudetail/${i.fid}|}" th:text="${i.title}"></a></li>
+                    </th:block>
                 </ol>
             </aside>
             <aside>
