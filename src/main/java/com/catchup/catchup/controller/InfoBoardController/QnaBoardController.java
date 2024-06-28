@@ -62,7 +62,7 @@ public class QnaBoardController {
         model.addAttribute("search", search);
         model.addAttribute("searchtxt", searchtxt);
         model.addAttribute("uid",uid);
-        model.addAttribute("view", "infoboard/qnaboard");
+        model.addAttribute("view", "infoBoard/qnaboard");
         return "index";
     }
 
@@ -86,7 +86,7 @@ public class QnaBoardController {
         model.addAttribute("dto", new InfoBoardDTO());
         model.addAttribute("user", userDTO);
         model.addAttribute("uid", uid);
-        model.addAttribute("view", "infoboard/qnaInsert");
+        model.addAttribute("view", "infoBoard/qnaInsert");
         return "index";
     }
 

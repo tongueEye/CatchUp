@@ -60,7 +60,7 @@ public class NoticeBoardController {
         model.addAttribute("uid",uid);
         model.addAttribute("searchtxt", searchtxt);
 
-        model.addAttribute("view", "infoboard/noticeboard");
+        model.addAttribute("view", "infoBoard/noticeboard");
         return "index";
     }
 
@@ -85,7 +85,7 @@ public class NoticeBoardController {
         model.addAttribute("dto", new InfoBoardDTO());
         model.addAttribute("user", userDTO);
         model.addAttribute("uid", uid);
-        model.addAttribute("view", "infoboard/noticeInsert");
+        model.addAttribute("view", "infoBoard/noticeInsert");
         return "index";
     }
 
