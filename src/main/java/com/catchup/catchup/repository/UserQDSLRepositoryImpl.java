@@ -71,6 +71,8 @@ public class UserQDSLRepositoryImpl implements UserQDSLRepository {
             builder.and(user.id.contains(condition.getId()));
         } else if (StringUtils.hasText(condition.getName()) && !"null".equals(condition.getName())){
             builder.and(user.name.contains(condition.getName()));
+        }else if (StringUtils.hasText(condition.getNickname()) && !"null".equals(condition.getNickname())){
+            builder.and(user.nickname.contains(condition.getNickname()));
         }
 
         List<UserDTO> list = queryFactory.select(Projections.fields(

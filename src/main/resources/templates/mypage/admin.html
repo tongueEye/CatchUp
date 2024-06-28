@@ -26,7 +26,7 @@
             <ul>
                 <li><a th:href="@{/mypage/home}">마이홈</a></li>
                 <li th:if="${uid == 100}"> <!-- 관리자만 보이는 화면 -->
-                    <a th:href="@{/mypage/admin}"> 회원 관리</a>
+                    <a th:href="@{/mypage/admin}" class="nowpage">회원 관리</a>
                 </li>
                 <li><a th:href="@{/mypage/info}">정보수정</a></li>
                 <li><a th:href="@{/mypage/wlist}">작성 글 보기</a></li>
@@ -39,13 +39,14 @@
             <!-- 회원검색 -->
 
             <form method="get" th:action="@{/mypage/admin}">
-                <div class="userlist">
-                <p>회원 목록</p>
+                <div class="userlisttt">
+                    <p>회원 목록</p>
 
                 <div class="usersearch">
                     <select name="search">
                         <option value="id">아이디</option>
                         <option value="name">이름</option>
+                        <option value="nickname">닉네임</option>
                     </select>
                     <input type="text" name="searchtxt">
                     <button type="submit">검색</button>
@@ -60,15 +61,17 @@
                     <tr class="usertitle">
                         <th>아이디</th>
                         <th>이름</th>
-                        <th>나가</th>
+                        <th>닉네임</th>
+                        <th>삭제</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <th:block class="userlist">
+                    <th:block class="zzin_userlist">
                         <tr th:each="i:${userlist}">
                             <td th:text="${i.id}"></td>
                             <td th:text="${i.name}"></td>
-                            <td><a th:href="@{'/mypage/del/' + ${i.uid}}" th:text="나가" onclick="delConfirm(event)"></a></td>
+                            <td th:text="${i.nickname}"></td>
+                            <td><a th:href="@{'/mypage/del/' + ${i.uid}}" th:text="삭제" onclick="delConfirm(event)" class="delbtn"></a></td>
                         </tr>
                     </th:block>
                 </tbody>
