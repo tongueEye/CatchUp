@@ -13,5 +13,6 @@ public class SearchCondition {
     private String writer;
     private String kind;
     private String cate;
+    private String nickname;
 
 }
