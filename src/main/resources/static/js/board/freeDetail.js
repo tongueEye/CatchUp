@@ -7,7 +7,7 @@ const init = function (data) {
 /** 댓글 리스트 **/
 const replyList = function () {
     fetch('/replist/' + num, {
-        method   : 'GET',
+        method : 'GET',
         headers: {
             'Accept': 'application/json'
         }
@@ -21,8 +21,8 @@ const replyList = function () {
             let ele_span = document.createElement('span');
             let ele_ul = document.createElement('ul');
             let ele_li = document.createElement('li');
-            let nickname = document.createTextNode('['+item.nickname + ']');
-            let content = document.createTextNode(' '+item.frcontent);
+            let nickname = document.createTextNode('[' + item.nickname + ']');
+            let content = document.createTextNode(' ' + item.frcontent);
             let uid = item.uid;
             let frid = item.frid;
 
@@ -33,7 +33,7 @@ const replyList = function () {
 
             /** 삭제 버튼 추가 **/
             let sessionId = document.getElementById('sessionId').value;
-            if(String(sessionId) === String(uid) || String(sessionId) === '100') {
+            if (String(sessionId) === String(uid) || String(sessionId) === '100') {
                 let deleteButton = document.createElement('button');
                 deleteButton.textContent = '삭제';
                 deleteButton.id = 'del_btn'
@@ -52,6 +52,7 @@ const replyList = function () {
     }).finally(() => {
         console.log("reply list finally");
     });
+
 }
 
 /** 댓글 삭제 **/
@@ -71,7 +72,9 @@ const deleteRep = function (frid) {
     }).finally(() => {
         console.log("reply delete finally");
     });
-};
+
+}
+
 
 
 window.onload = function () {
@@ -93,10 +96,10 @@ window.onload = function () {
     /** 글 수정 **/
     let modBtn = document.getElementById('mod_btn');
     let kind = document.getElementById('kind').value;
-    if(String(kind) === "e"){
+    if (String(kind) === "e") {
         distinctUpdate = '/boardUpdate/'
         distinctDelete = '/boardDelete/'
-    }else{
+    } else {
         distinctUpdate = '/comboardUpdate/'
         distinctDelete = '/com/boardDelete/'
     }
@@ -113,7 +116,9 @@ window.onload = function () {
     let boardDelBtn = document.getElementById('boardDel_btn');
     if (boardDelBtn) {
         boardDelBtn.onclick = function () {
-            location.href = distinctDelete + num;
+            if (confirm('정말 삭제할까요?')) {
+                location.href = distinctDelete + num;
+            }
         }
     } else {
         console.error('Element with id "boardDel_btn" not found.');
@@ -124,9 +129,9 @@ window.onload = function () {
         let sessionId = document.getElementById('sessionId');
         let frcontent = document.getElementById('rep_content');
         let rep = {
-            'uid' : sessionId.value
-            , 'frcontent' : frcontent.value
-            , 'fid': num
+            'uid'        : sessionId.value
+            , 'frcontent': frcontent.value
+            , 'fid'      : num
         };
 
         fetch('/repinsert', {
@@ -134,7 +139,7 @@ window.onload = function () {
             , headers: {
                 'Content-Type': 'application/json;utf-8'
                 , 'Accept'    : 'application/json'
-            }, body : JSON.stringify(rep)
+            }, body  : JSON.stringify(rep)
         }).then((response) => {
             if (response.status === 200) {
                 console.log("Insert success");
@@ -146,24 +151,69 @@ window.onload = function () {
             return response.json();
         }).then((data) => {
             document.querySelector('#replyList').replaceChildren("");
-            data.forEach(item =>{
+            data.forEach(item => {
+                let ele_span = document.createElement('span');
                 let ele_ul = document.createElement('ul');
                 let ele_li = document.createElement('li');
-                let nickname = document.createTextNode(item.nickname);
-                let content = document.createTextNode(item.frcontent);
+                let nickname = document.createTextNode('[' + item.nickname + ']');
+                let content = document.createTextNode(' ' + item.frcontent);
+                let uid = item.uid;
+                let frid = item.frid;
 
-                ele_li.appendChild(nickname);
-                ele_li.appendChild(content);
+                ele_span.appendChild(nickname);
+                ele_span.appendChild(content);
+                ele_li.appendChild(ele_span);
                 ele_ul.appendChild(ele_li);
+
+                /** 삭제 버튼 추가 **/
+                let sessionId = document.getElementById('sessionId').value;
+                if (String(sessionId) === String(uid) || String(sessionId) === '100') {
+                    let deleteButton = document.createElement('button');
+                    deleteButton.textContent = '삭제';
+                    deleteButton.id = 'del_btn'
+                    deleteButton.onclick = function () {
+                        if (confirm('정말 삭제할까요?')) {
+                            deleteRep(frid);
+                        }
+                    };
+                    ele_li.appendChild(deleteButton);
+                }
                 document.getElementById('replyList').appendChild(ele_ul);
-                location.reload();
             })
+            document.getElementById('rep_content').value='';
+
+    /** 댓글 수 fetch 처리 **/
+            fetch('/repcount/' + num, {
+                method: 'GET'
+            }).then((response) => {
+                document.querySelector('#reply_count').replaceChildren("");
+                if (!response.ok) {
+                    throw new Error('Failed to reply count');
+                }
+                return response.text();
+            }).then((data) => {
+
+                let ele_p = document.createElement('p');
+                let repCount = document.createTextNode('댓글수: '+data);
+
+                ele_p.appendChild(repCount);
+
+                document.getElementById('reply_count').appendChild(ele_p);
+            }).catch(error => {
+                console.log('Error: ', error);
+            }).finally(() => {
+                console.log("reply count finally");
+            });
+
         }).catch(error => {
             console.log('Error: ', error);
         }).finally(() => {
             console.log("reply insert finally");
         });
+
+
     }
+
 
     /** 댓글 입력 엔터키 동작 **/
     document.querySelector('#rep_content').addEventListener('keydown', function (event) {
@@ -187,7 +237,7 @@ window.onload = function () {
         if (hasLiked) {
             likeBtn.innerText = '취소';
             likeBtn.style.border = '2px solid pink';
-            likeImg.style.backgroundImage ='url("../../img/freeboard/heart.png")';
+            likeImg.style.backgroundImage = 'url("../../img/freeboard/heart.png")';
         } else {
             likeBtn.innerText = '좋아요';
             likeBtn.style.border = '2px solid silver';
@@ -196,14 +246,14 @@ window.onload = function () {
     }
 
     function toggleLike() {
-        const dto = { 'uid': sessionId, 'fid': fid };
+        const dto = {'uid': sessionId, 'fid': fid};
 
         fetch('/love', {
-            method: 'POST',
+            method : 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify(dto)
+            body   : JSON.stringify(dto)
         })
             .then(response => {
                 if (response.ok) {

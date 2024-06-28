@@ -6,6 +6,7 @@ import com.catchup.catchup.dto.*;
 import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.Tuple;
 import com.querydsl.core.types.Projections;
+import com.querydsl.jpa.JPAExpressions;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -75,7 +76,9 @@ public class FreeBoardQDSLRepositoryImpl implements FreeBoardQDSLRepository {
         return new PageImpl<>(list, pageable, totalCount);
     }
 
-    /** 게시글 세부 **/
+    /**
+     * 게시글 세부
+     **/
     @Override
     public FreeBoardDTO freeDetail(Long fid) {
         FreeBoardDTO freeBoardDTO = queryFactory.select(Projections.fields(
@@ -93,7 +96,9 @@ public class FreeBoardQDSLRepositoryImpl implements FreeBoardQDSLRepository {
         return freeBoardDTO;
     }
 
-    /** 게시글 댓글 수 **/
+    /**
+     * 게시글 댓글 수
+     **/
     @Override
     public Long repCount(Long fid) {
         Long repCount = queryFactory.select(freeRepBoard.frid.count())

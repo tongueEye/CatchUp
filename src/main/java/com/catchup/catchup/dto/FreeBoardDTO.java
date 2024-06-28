@@ -31,4 +31,6 @@ public class FreeBoardDTO {
     private LocalDateTime frCreateDate;
     private LocalDateTime frUpdateDate;
 
+    private Long repCount;
+
 }
