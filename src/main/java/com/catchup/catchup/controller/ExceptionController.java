@@ -10,12 +10,12 @@ public class ExceptionController {
 
     //개발 마지막에 추가하기
 
-//    @ExceptionHandler(Exception.class)
-//    public String except(Exception ex, Model model){
-//        model.addAttribute("error_msg", ex);
-//        model.addAttribute("view", "error/except404");
-//        return "index";
-//    }
+    @ExceptionHandler(Exception.class)
+    public String except(Exception ex, Model model){
+        model.addAttribute("error_msg", ex);
+        model.addAttribute("view", "error/except404");
+        return "index";
+    }
 
 /*
     @ExceptionHandler(NoHandlerFoundException.class)
