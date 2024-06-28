@@ -173,8 +173,9 @@ public class MyPageServiceImpl implements MyPageService{
                 .stream()
                 .map(tuple -> {
                     LoveDTO loveDTO = new LoveDTO();
-                    loveDTO.setTitle((String) tuple[0]);
-                    loveDTO.setCate((String) tuple[1]);
+                    loveDTO.setFid((Long) tuple[0]);
+                    loveDTO.setTitle((String) tuple[1]);
+                    loveDTO.setCate((String) tuple[2]);
                     return loveDTO;
                 })
                 .collect(Collectors.toList());

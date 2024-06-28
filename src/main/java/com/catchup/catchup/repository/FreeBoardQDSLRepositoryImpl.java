@@ -224,10 +224,12 @@ public class FreeBoardQDSLRepositoryImpl implements FreeBoardQDSLRepository {
         /** 마이페이지 내가 쓴 게시글 조회하기 */
         List<FreeBoardDTO> list = queryFactory.select(Projections.fields(
                         FreeBoardDTO.class
+                        , freeBoard.fid
                         , freeBoard.title
                         , freeBoard.content
                         , freeBoard.cate
                         , freeBoard.kind
+                        , freeBoard.count
                         , freeBoard.updateDate
                 )).from(freeBoard)
                 .join(freeBoard.user, user)
