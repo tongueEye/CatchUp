@@ -199,6 +199,7 @@ public class FreeBoardServiceImpl implements FreeBoardService {
                         .build()
         ).collect(Collectors.toList());
         return list;
+
     }
 
     /** 댓글 작성 **/
