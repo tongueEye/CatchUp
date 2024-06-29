@@ -38,6 +38,11 @@
                     <span class="content4">작성일자</span>
                     <span class="content5">답변</span>
                 </li>
+
+                <th:block th:if="${qnaList == null || qnaList.isEmpty()}">
+                    <div class="info_msg">검색 결과가 없습니다.</div>
+                </th:block>
+
                 <th:block th:each="item: ${qnaList}">
                     <li>
                         <span class="content1" th:text="${item.iid}"></span>
