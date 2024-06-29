@@ -12,6 +12,17 @@
 </head>
 <body>
 
+    <!--
+    자바스크립트 뜯어 고치기 => 내일 다시 도전 =====> 스크립트 파일 분리!!!!!!!!!!!!!
+    값 없을 때... 알아서 처리하기
+    모달창 디자인 다시하기...
+    더 있나...
+    정보 수정 그냥 하던대로 하기 새로운 거 도전 XX
+    그러고도 시간 남으면 값이 없으면... 위로 올라가는... `오늘의 급식` 처리하기 스크립트로 값이 있으면... 이거... 없으면... 이거
+    아니면 타임리프로 값이 있으면... 이거... 없으면... 저거...
+    시간 남으면 2탄 : 그... 급식 없을 때 바꾸기
+    -->
+
     <div id="mypage-main" class="mymain">
         <article id="profile_top">
             <img id="modalOpenButton" class="top-profile" th:src="'https://kdt-java5-2.s3.ap-northeast-2.amazonaws.com/profile/' + ${result.profile}">
@@ -34,11 +45,11 @@
                 <div class="article-1 article-2-content">
                     <p class="bap-p"> 급식 확인하기 </p>
                     <div class="bap-article-content ">
-                        <img class="bap-img" src="/img/mypage/spring.png" alt="스프링">
+                        <!--<img class="bap-img" src="/img/mypage/spring.png" alt="스프링">-->
                         <div class="bap-content">
                             <!-- 급식 정보 없는 애들 -->
                             <th:block th:if="${bap.sidoCode == null}">
-                                <p class="schoolOpenButton"> 급식 정보를 등록해 주세요. </p>
+                                <p class="schoolOpenButton noschool"> </p>
                             </th:block>
 
                             <!-- 급식 정보 있는 애들 => 급식 정보 뜸 -->
@@ -51,8 +62,9 @@
                                 <div id="today-bap">
                                     <!-- ajax이 알아서 해 줄 거야 >< -->
                                 </div>
-
-                                <p class="schoolOpenButton">학교 변경하기</p>
+                            </th:block>
+                            <th:block th:if="${bap.sidoCode != null}">
+                                <p class="schoolOpenButton yesschool"></p>
                             </th:block>
                         </div>
                     </div>
@@ -249,11 +261,7 @@
                     // 클릭하면 input 창에 뜨도록 하기
                     school_li.addEventListener('click', function () {
                         school_input.value = a;
-                        console.log(school_input, " >> html school_input ")
-                        console.log(school_input.value, " >> input schoolvalue");
-
                         SDSCHULCODE = data.schoolInfo[1].row.map(school => school.SD_SCHUL_CODE);
-                        console.log(SDSCHULCODE, "............ top_SDSCHULCODE ");
                     })
                 })
             }).catch(error => {
@@ -301,6 +309,8 @@
                 .then(response => {
                     if (response.status == 200) {
                         console.log('호출완료');
+                        alert("등록되었습니다.")
+                        modal.classList.add('school-hidden');
                         return response.json(); // 응답을 JSON 형식으로 파싱
                     } else if (response.status == 403) {
                         console.log("403 에러 발생");
@@ -308,8 +318,7 @@
                     }
                 }).then(() => {
             }).finally(() => {
-                alert("등록되었습니다.")
-                school.classList.add('school-hidden'); // 모달 이벤트
+
             })
         }
 
@@ -330,7 +339,7 @@
 
 
         /** 급식 불러오기 */
-        fetch("https://open.neis.go.kr/hub/mealServiceDietInfo?KEY=7578fdd86a164ce4b0eebabfdbf51a5f&Type=json&pIndex=1&pSize=100&ATPT_OFCDC_SC_CODE=" + bap_sidocode + "&SD_SCHUL_CODE=" + bap_SDCode + "&MLSV_YMD=" + getToday())
+        fetch("https://open.neis.go.kr/hub/mealServiceDietInfo?KEY=7578fdd86a164ce4b0eebabfdbf51a5f&Type=json&pIndex=1&pSize=100&ATPT_OFCDC_SC_CODE=" + bap_sidocode + "&SD_SCHUL_CODE=" + bap_SDCode + "&MLSV_YMD=" + 20240701)
             .then(response => {
                 if (response.status == 200) {
                     console.log('호출완료');
