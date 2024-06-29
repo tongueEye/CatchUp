@@ -2,18 +2,17 @@
 /*레이아웃 잡기 시작*/
 
 #detail_wrap{ /* 레이아웃 중앙정렬*/
-    height: 120vh;
+    height: 100vh;
     display: flex;
     justify-content: center;
     position: relative;
-    padding: 30px;
-    background-image: url("../../img/infoboard/cats_bg3.png");
+    background-image: url("../../img/infoboard/mycat_bg.png");
     background-size: cover;
     background-repeat: no-repeat;
 }
 .detail_box{ /* 레이아웃 중앙정렬*/
     position: absolute;
-    top: 15vh;
+    top: 12vh;
     background: rgba(255,255,255,0.9);
     border: 3px solid #B6BEED;
     padding: 50px;
@@ -54,7 +53,7 @@ img{ /*표시되는 이미지 최대크기 설정*/
 /* 스크롤바 시작 */
 .scrollBar {
     padding: 30px;
-    height: 70vh;
+    height: 50vh;
     overflow: scroll;
     overflow-x: hidden;
 }
@@ -168,6 +167,7 @@ img{ /*표시되는 이미지 최대크기 설정*/
 .title_box a h1{
     font-size: 2rem;
     margin-right: 10px;
+    color: #9BA2D7;
 }
 
 #field1{
@@ -226,6 +226,6 @@ img{ /*표시되는 이미지 최대크기 설정*/
 /*필드 디자인 끝 - 폰트사이즈, 색상*/
 
 footer{
+    background: #ADBFFA;
     color: white;
-    background: #9BA2D7;
 }

@@ -1,11 +1,11 @@
 /*보드 시작*/
 
 #qna_wrap, #notice_wrap{
-    background-image: url("../../img/infoboard/miri_cat.png");
+    background-image: url("../../img/infoboard/mycat_bg.png");
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
-    height: 110vh;
+    height: 100vh;
     display: flex;
     overflow-x: hidden;
 }
@@ -16,17 +16,18 @@
     position: relative;
     display: flex;
     flex-direction: column;
-    justify-content: center;
 }
 
 .board{
     background-color: white;
-    border: 3px solid #9BA2D7;
+    border: 3px solid #ADBDFA;
     border-radius: 50px;
     padding: 30px 50px;
     min-width: 360px;
     overflow: hidden;
-    min-height: 460px;
+    min-height: 500px;
+    position: relative;
+    top: 20vh;
 }
 
 .board ul li{
@@ -43,7 +44,7 @@
 .board_box ul li{
     display: flex;
     justify-content: space-evenly;
-    font-size: 1.2rem;
+    font-size: 1.5rem;
 }
 
 .board_title{
@@ -56,7 +57,7 @@
 
 /* 검색창 시작*/
 input, select{
-    border: 2px solid #9BA2D7;
+    border: 2px solid #ADBDFA;
 }
 input:focus, select:focus{
     outline: none;
@@ -65,15 +66,11 @@ input:focus, select:focus{
 #search_box{
     text-align: center;
 }
-#search_box select{
-    padding: 6px 10px 8px 8px;
-    border-radius: 20px;
-}
 
 #search_box input{
     padding: 7px 10px;
     border-radius: 20px;
-    font-size: 1rem;
+    font-size: 1.3rem;
 }
 
 
@@ -81,9 +78,11 @@ input:focus, select:focus{
     text-align: center;
     text-align-last: center;
     position: relative;
-    color: #9BA2D7;
-    font-size: 1rem;
+    color: #ADBDFA;
+    font-size: 1.3rem;
     font-weight: bold;
+    padding: 4px 10px 10px 10px;
+    border-radius: 20px;
 }
 
 #searchtxt{
@@ -97,15 +96,16 @@ input:focus, select:focus{
 
 /* 글쓰기 버튼 시작*/
 #write_btn{
-    background-color: #9BA2D7;
+    background-color: #ADBDFA;
     color: white;
     border-radius: 15px;
     padding: 9px 10px;
     position: relative;
     left: 87%;
+    font-size: 1.3rem;
 }
 #write_btn:hover{
-    background-color: #BCC3E6;
+    background-color: #C0D4FF;
 }
 #write_icon{
     width: 21px;
@@ -162,9 +162,12 @@ input:focus, select:focus{
     text-align: center;
     margin: 50px;
     color: white;
-    font-size: 1.2rem;
+    font-size: 1.5rem;
     font-weight: bold;
-    min-width: 400px;
+    position: absolute;
+    bottom: 10vh;
+    margin: 0 auto;
+    width: 100%;
 }
 
 #page_box a{
@@ -172,14 +175,12 @@ input:focus, select:focus{
     margin-right: 10px;
 }
 .selected_page{
-    color: #483F6A;
+    color: #5A5A5A;
     margin-right: 10px;
 }
 /*페이지 박스 끝*/
 
-/*푸터 커스텀 시작*/
 footer{
-    background: #483F6A;
+    background: #ADBFFA;
     color: white;
 }
-/*푸터 커스텀 끝*/

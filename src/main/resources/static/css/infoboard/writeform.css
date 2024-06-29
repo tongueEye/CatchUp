@@ -3,7 +3,7 @@
     display: flex;
     justify-content: center;
     position: relative;
-    background-image: url("../../img/infoboard/cats_bg.png");
+    background-image: url("../../img/infoboard/mycat_bg.png");
     background-size: cover;
     background-repeat: no-repeat;
 }
@@ -120,6 +120,6 @@ input:focus{
 }
 
 footer{
+    background: #ADBFFA;
     color: white;
-    background: #4E8AB8;
 }
