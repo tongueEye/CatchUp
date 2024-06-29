@@ -12,15 +12,19 @@
     <div id="eduDetail">
 
         <section id="eduBoardDetail">
-
+            <div id="prev_page">
+                <a th:if="${dto.kind=='e'}" th:href="@{/eduboard}"><h1>< 이전</h1></a>
+                <a th:if="${dto.kind=='c'}" th:href="@{/comboard}"><h1>< 이전</h1></a>
+            </div>
             <div id="detail_util">
                 <div id="profile" th:each="i:${writerInfo}">
                     <img th:src="'https://kdt-java5-2.s3.ap-northeast-2.amazonaws.com/profile/'+${i.profile} "
                          alt="프로필이미지">
                 </div>
                 <ul id="writer_info">
-                    <li><h3>[[${dto.title}]]</h3></li>
-                    <li th:text="${dto.writer}"></li>
+                    <li th:id="category" th:text="${dto.cate}"></li>
+                    <li th:id="title"><h3 th:text="${dto.title}"/></li>
+                    <li th:id="writer" th:text="${dto.writer}"></li>
                 </ul>
 
                 <div id="option_toggle">
@@ -61,7 +65,7 @@
                     <input type="hidden" name="fid" id="fid" th:value="${dto.fid}">
                     <input type="hidden" name="kind" id="kind" th:value="${dto.kind}">
                     <input type="hidden" name="sessionId" id="sessionId" th:value="${sessionId}">
-                    <button type="button" id="append">댓글 추가</button>
+                    <button type="button" id="append">댓글 작성</button>
                 </li>
             </ul>
 

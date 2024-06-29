@@ -19,23 +19,30 @@ ul li{
     display: flex;
     flex-direction: column;
     position: relative;
-    top: 12vh;
+    top: 10vh;
     width: 50%;
     margin: 0 auto;
     background: white;
-    padding: 50px;
+    padding: 20px 50px;
     border-radius: 60px;
     border: 3px solid lightblue;
+}
+
+#eduBoardDetail{
+    position: relative;
+}
+#prev_page{
+    margin: 0 0 10px 0;
+}
+
+#prev_page a{
+    display: inline-block;
 }
 
 #detail_util{
     display: flex;
     justify-content: space-between;
     height: 80px;
-}
-
-#eduBoardDetail{
-    position: relative;
 }
 
 #profile{
@@ -47,10 +54,29 @@ ul li{
     height: 70px;
     border-radius: 15px;
 }
+
+#category{
+    padding: 5px 10px;
+    border-radius: 30px;
+    font-weight: normal;
+    font-size: 1.5rem;
+    background-color: #B6E3E9;
+    display: inline-block;
+}
+
 #writer_info{
     position: relative;
     font-size: 1.3rem;
     margin-left: 10px;
+}
+#writer_info h3{
+    font-size: 2rem;
+}
+#writer_info #title{
+    display: inline-block;
+}
+#writer_info #writer{
+    margin: 10px 5px;
 }
 
 #option_toggle{
@@ -127,10 +153,13 @@ ul li{
     border-radius: 15px;
     padding: 10px;
     background-color: #F4EBF3;
+    overflow: scroll;
+    overflow-x: hidden;
+    height: 40vh;
 }
 
 #like{
-    margin: 20px 0;
+    margin: 15px 0;
     display: flex;
     justify-content: center;
 }
@@ -169,7 +198,6 @@ ul li{
     border-radius: 15px;
     padding: 10px;
     background-color: #F4EBF3;
-    margin: 10px 0;
     text-align: center;
 }
 
@@ -193,6 +221,9 @@ input:focus{
     padding: 10px 10px 17px 10px;
     background-color: #F4EBF3;
     margin: 10px 0;
+    overflow: scroll;
+    overflow-x: hidden;
+    height: 10vh;
 }
 #replyList ul{
     border-bottom: 1px solid #B6BEED;
@@ -204,7 +235,8 @@ input:focus{
     justify-content: space-between;
 }
 
-#replyList li span{
+#reply_count{
+    margin: 15px 0 0 10px;
 }
 
 #replyList #del_btn{

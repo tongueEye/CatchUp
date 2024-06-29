@@ -18,10 +18,11 @@ import static com.querydsl.core.JoinType.JOIN;
 public interface FreeBoardRepository extends JpaRepository<FreeBoard, Long>
         , FreeBoardQDSLRepository {
 
-    @Query("SELECT u.nickname, r.frcontent, r.frid, u.uid " +
-            "FROM FreeRepBoard r " +
-            "INNER JOIN r.user u " +
-            "WHERE r.freeBoard.fid = :fid " )
+    @Query(" SELECT u.nickname, r.frcontent, r.frid, u.uid " +
+           " FROM FreeRepBoard r " +
+           " INNER JOIN r.user u " +
+           " WHERE r.freeBoard.fid = :fid " +
+           " ORDER BY r.frCreateDate DESC" )
     List<Object[]> repList(Long fid);
 
     @Override
