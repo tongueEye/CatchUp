@@ -12,15 +12,15 @@
     <div id="eduDetail">
 
         <section id="eduBoardDetail">
-            <div id="prev_page">
-                <a th:if="${dto.kind=='e'}" th:href="@{/eduboard}"><h1>< 이전</h1></a>
-                <a th:if="${dto.kind=='c'}" th:href="@{/comboard}"><h1>< 이전</h1></a>
-            </div>
             <div id="detail_util">
-                <div id="profile" th:each="i:${writerInfo}">
-                    <img th:src="'https://kdt-java5-2.s3.ap-northeast-2.amazonaws.com/profile/'+${i.profile} "
-                         alt="프로필이미지">
-                </div>
+                    <div id="prev_page">
+                        <a th:if="${dto.kind=='e'}" th:href="@{/eduboard}"><h1><</h1></a>
+                        <a th:if="${dto.kind=='c'}" th:href="@{/comboard}"><h1><</h1></a>
+                    </div>
+<!--                <div id="profile" th:each="i:${writerInfo}">-->
+<!--                    <img th:src="'https://kdt-java5-2.s3.ap-northeast-2.amazonaws.com/profile/'+${i.profile} "-->
+<!--                         alt="프로필이미지">-->
+<!--                </div>-->
                 <ul id="writer_info">
                     <li th:id="category" th:text="${dto.cate}"></li>
                     <li th:id="title"><h3 th:text="${dto.title}"/></li>
@@ -47,7 +47,7 @@
                 </div>
             </div>
 
-            <section id="content">
+            <section id="content" class="scrollBar">
                 <th:block th:utext="${dto.content}"></th:block>
             </section>
 
@@ -70,7 +70,7 @@
             </ul>
 
             <div th:id="reply_count" th:text="|댓글수: ${repCount}|"></div>
-            <div th:id="replyList"></div>
+            <div th:id="replyList" class="scrollBar"></div>
 
         </section>
 
