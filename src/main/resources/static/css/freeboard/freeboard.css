@@ -1,10 +1,15 @@
+@font-face {
+    font-family: 'chab';
+    src: url("../../font/index/chab.ttf") format('truetype');
+}
+
 *{
     margin: 0;
     padding: 0;
 }
 
 #board_wrap{
-    height: 110vh;
+    height: 100vh;
     background-image: url("../../img/infoboard/mycat_bg.png");
     background-size: cover;
 }
@@ -16,26 +21,33 @@ ul li{
 .utility{
     display: flex;
     justify-content: space-between;
-    margin-right: 30px;
+    margin: 0 30px 10px 15px;
 }
 
-.utility h2{
-    font-size: 2.5rem;
+.utility form{
+    position: relative;
+    top: 10px;
+}
+
+.utility h2 a{
+    font-size: 3rem;
     letter-spacing: 10px;
     padding-left: 15px;
+    white-space: nowrap;
 }
 
 .eduBoard {
     display: flex;
     flex-direction: row;
-    margin: auto;
+    margin: 0 auto;
     width: 60%;
-    height: 80vh;
+    position: relative;
+    top: 10vh;
+    height: 70vh;
 }
 
 .eduBoardList{
     position: relative;
-    top: 105px;
     display: flex;
     flex-direction: column;
     width: 100%;
@@ -44,137 +56,241 @@ ul li{
 }
 
 .eduBoardList ul {
-    margin: 10px;
-    border-radius: 30px;
-    padding: 20px 20px;
+    border-radius: 40px;
     background: white;
+    width: 90%;
+    margin: 10px auto 10px auto;
+    padding: 20px;
+    box-shadow: 0 0 10px white;
+    /*border: 3px solid #ADBFFA;*/
+    /*box-shadow: 0 0 10px #ADBFFA;*/
 }
 
-.eduBoardList ul a:hover {
-    color: #9BA2D7;
-}
+/*.eduBoardList ul a:hover {*/
+/*    color: #9BA2D7;*/
+/*}*/
 .sideMenu{
-    margin: 10px 10px 0 0;
     position: relative;
-    top: 30px;
     width: 170px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+    top: 55px;
+}
+
+.cat_header{
+    width: 50px;
+    position: relative;
+    top: 25px;
+    left: 55px;
 }
 
 aside {
-    margin: 10px 0;
     padding: 20px;
-    border: 1px solid #F4EBF3;
     border-radius: 30px;
-    background: #F4EBF3;
-    height: 113px;
+    background: #F1F1F1;
+    height: 125px;
     width: 100px;
-    white-space: nowrap;
-    overflow: hidden;
+    margin: 20px 10px;
+    box-shadow: 0 0 10px white;
+}
+
+.aside_box:nth-child(1){
+    position: relative;
+    top: -30px;
+}
+.aside_box:nth-child(2){
+    position: relative;
+    top: -60px;
+}
+.aside_box:nth-child(3){
+    position: relative;
+    top: -90px;
 }
 
 aside h3{
     padding: 0 0 5px 0;
     border: none;
     border-radius: 15px;
-    background-color: #F4EBF3;
-
+    font-size: 1.2rem;
 }
 
 aside ol{
-    list-style: inside;
+    list-style: none;
 }
 
 aside ol li{
     margin: 2px 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 aside ol li a:hover{
-    color: #9BA2D7;
+color: #9BA2D7;
+}
+
+.aside_icon{
+    width: 15px;
+    margin-right: 5px;
+    position: relative;
+    top: 3px;
 }
 
 input, select {
-    padding: 5px 10px;
-    border: 2px solid #9BA2D7;
-    border-radius: 15px;
+    padding: 7px 10px;
+    /*border: 2px solid #ADBDFA;*/
+    border: none;
+    border-radius: 20px;
+    font-size: 1.2rem;
+    font-weight: bold;
 }
 
 input:focus, select:focus{
-    outline: none;
+outline: none;
+}
+
+.title{
+padding: 4px 0 0 10px;
+font-size: 1.8rem;
 }
 
 .titlee1{
-    display: flex;
-    flex-direction: row;
-    font-size: 1.3rem;
-    font-weight: bold;
+display: flex;
+flex-direction: row;
+font-size: 1.6rem;
+font-weight: bold;
+margin-bottom: 15px;
 }
-.titlee1 li, .titlee2 li{
-    padding: 0 10px 10px 0;
+
+.div_line{
+width: 20px;
 }
 
 .titlee2{
-    display: flex;
-    flex-direction: row;
-    padding-right: 20px;
-    color: grey;
+display: flex;
+flex-direction: row;
+color: grey;
+margin: 10px 0 0 10px;
 }
 
 
 #write_btn {
-    width: 100px;
+    width: 105px;
     color: white;
-    background-color: #B6BEED;
-    border-color: #B6BEED;
-    border-radius: 15px;
-    padding: 7px 5px;
+    background-color: #A5A5F7;
+    /*border-color: #B6BEED;*/
+    border-radius: 30px;
     border: 0;
-    font-size: 1rem;
+    font-size: 1.4rem;
     position: relative;
-    right: 170px;
-    top: -5px;
+    left: 84%;
+    font-weight: bold;
+    padding: 0px 10px 8px 10px;
+    top: 10px;
+}
+
+#write_icon{
+    width: 28px;
+    position: relative;
+    top: 6px;
+    margin-right: 2px;
 }
 
 #write_btn:hover{
-    background-color: #9BA2D7;
-    border-color: #9BA2D7;
-    cursor: pointer;
+background-color: #B5B5FF;
+/*border-color: #B5B5FF;*/
+cursor: pointer;
 }
 
 .page{
-    justify-content: space-between;
-    display: flex;
-    font-size: 1.2rem;
-    margin: auto;
-    width: 60%;
+justify-content: center;
+display: flex;
+font-size: 1.5rem;
+position: absolute;
+bottom: 9vh;
+margin: 0 auto;
+width: 100%;
 }
 
 .blank{
-    padding: 0 50px;
+padding: 0 50px;
 }
 
 .page span{
-    margin-right: 10px;
+margin-right: 10px;
+font-weight: bold;
+color: #5A5A5A;
 }
 
-.page a:hover{
-    color: #9BA2D7;
+.page a{
+color: white;
 }
+
+/*.page a:hover{*/
+/*    color: #9BA2D7;*/
+/*}*/
 
 
 #banner{
-    background-color: blueviolet;
+    background-color: white;
     width: 190px;
     height: 510px;
     position: relative;
-    top: 160px;
-    margin-left: 10px;
     border-radius: 30px;
+    top: 130px;
+    margin: 10px;
+    overflow: hidden;
 }
 
-.utility form{
+#banner img{
     position: relative;
-    top: 10px;
+    top:-8px;
+    width: 100%;
+    height: 103%;
+}
+
+
+
+#cate_search{
+    position: relative;
+    text-align: center;
+    padding: 4px 10px 10px 10px;
+    color: grey;
+    margin-right: 3px;
+    margin-left: 10px;
+    width: 100px;
+}
+
+
+.cate_title1{
+    padding: 5px 10px;
+    border-radius: 30px;
+    background: #E9E7E6;
+}
+
+.cate_title2{
+    padding: 5px 10px;
+    border-radius: 30px;
+    background: #FEF8C8;
+}
+
+.cate_title3{
+    padding: 5px 10px;
+    border-radius: 30px;
+    background: #FEE5E2;
+}
+
+.cate_title4{
+    padding: 5px 10px;
+    border-radius: 30px;
+    background: #EBEAF3;
+}
+
+.cate_title5{
+    padding: 5px 10px;
+    border-radius: 30px;
+    background: #DAF0F4;
+}
+
+footer{
+    background: #ADBFFA;
+    color: white;
 }

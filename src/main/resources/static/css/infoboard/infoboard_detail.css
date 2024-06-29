@@ -13,7 +13,7 @@
 .detail_box{ /* 레이아웃 중앙정렬*/
     position: absolute;
     top: 12vh;
-    background: rgba(255,255,255,0.9);
+    background: rgba(255,255,255,0.7);
     border: 3px solid #B6BEED;
     padding: 50px;
     border-radius: 50px;
