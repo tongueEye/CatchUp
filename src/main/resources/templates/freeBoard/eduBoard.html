@@ -10,33 +10,44 @@
 
 <div id="board_wrap">
     <section class="eduBoard">
-        <div th:text="${sessionId}"></div>
         <!--사이드 메뉴-->
         <section class="sideMenu">
-            <aside>
-                <h3>카테고리</h3>
-                <ol>
-                    <li><a href="/eduboard?search=cate&searchTxt=뉴스">뉴스</a></li>
-                    <li><a href="/eduboard?search=cate&searchTxt=초등">초등학교</a></li>
-                    <li><a href="/eduboard?search=cate&searchTxt=중등">중학교</a></li>
-                    <li><a href="/eduboard?search=cate&searchTxt=고등">고등학교</a></li>
-                    <li><a href="/eduboard?search=cate&searchTxt=학원">학원추천</a></li>
-                </ol>
-            </aside>
-            <aside>
-                <h3>가장 많이 본 글</h3>
-                <ol>
-                    <th:block th:each="i:${hotList}">
-                    <li><a th:href="@{|/edudetail/${i.fid}|}" th:text="${i.title}"></a></li>
-                    </th:block>
-                </ol>
-            </aside>
-            <aside>
-                <h3>인기글</h3>
-                <ol th:each="i:${likeList}">
-                    <li><a th:href="@{|/edudetail/${i.fid}|}" th:text="${i.title}"></a></li>
-                </ol>
-            </aside>
+            <div class="aside_box">
+                <img class="cat_header" th:src="@{/img/freeboard/cat_header.png}">
+                <aside>
+                    <h3><img class="aside_icon" th:src="@{/img/freeboard/flower3.png}">카테고리</h3>
+                    <ol>
+                        <li><img class="aside_icon" th:src="@{/img/freeboard/flower1.png}"><a href="/eduboard?search=cate&searchTxt=뉴스">뉴스</a></li>
+                        <li><img class="aside_icon" th:src="@{/img/freeboard/flower1.png}"><a href="/eduboard?search=cate&searchTxt=초등">초등학교</a></li>
+                        <li><img class="aside_icon" th:src="@{/img/freeboard/flower1.png}"><a href="/eduboard?search=cate&searchTxt=중등">중학교</a></li>
+                        <li><img class="aside_icon" th:src="@{/img/freeboard/flower1.png}"><a href="/eduboard?search=cate&searchTxt=고등">고등학교</a></li>
+                        <li><img class="aside_icon" th:src="@{/img/freeboard/flower1.png}"><a href="/eduboard?search=cate&searchTxt=학원">학원추천</a></li>
+                    </ol>
+                </aside>
+            </div>
+
+            <div class="aside_box">
+                <img class="cat_header" th:src="@{/img/freeboard/cat_header.png}">
+                <aside>
+                    <h3><img class="aside_icon" th:src="@{/img/freeboard/flower3.png}">많이 본 글</h3>
+                    <ol>
+                        <th:block th:each="i:${hotList}">
+                            <li><img class="aside_icon" th:src="@{/img/freeboard/flower1.png}"><a th:href="@{|/edudetail/${i.fid}|}" th:text="${i.title}"></a></li>
+                        </th:block>
+                    </ol>
+                </aside>
+            </div>
+
+            <div class="aside_box">
+                <img class="cat_header" th:src="@{/img/freeboard/cat_header.png}">
+                <aside>
+                    <h3><img class="aside_icon" th:src="@{/img/freeboard/flower3.png}">인기글</h3>
+                    <ol th:each="i:${likeList}">
+                        <li><img class="aside_icon" th:src="@{/img/freeboard/flower1.png}"><a th:href="@{|/edudetail/${i.fid}|}" th:text="${i.title}"></a></li>
+                    </ol>
+                </aside>
+            </div>
+
         </section>
 
         <!-- 게시판 목록 -->
@@ -45,13 +56,13 @@
                 <h2><a th:href="@{/eduboard}">교육/정보</a></h2>
                 <!-- 검색 창 -->
                 <form method="get" th:action="@{/eduboard}">
-                    <select name="search">
+                    <select name="search" id="cate_search">
                         <option value="title">제목</option>
                         <option value="content">내용</option>
                         <option value="writer">작성자</option>
                         <option value="cate">카테고리</option>
                     </select>
-                    <input type="text" name="searchTxt">
+                    <input type="text" id="txt_search" name="searchTxt">
                 </form>
 
             </div>
@@ -59,31 +70,40 @@
             <ul th:each="i:${boardList}">
                 <a th:href="@{|/edudetail/${i.fid}|}">
                     <div class="titlee1">
-                        <li th:text="'['+${i.cate}+']'" class="cateee"></li>
-                        <li th:text="|${i.title}|"></li>
+                        <li th:if="${i.cate=='뉴스'}" th:text="${i.cate}" class="cate_title1"></li>
+                        <li th:if="${i.cate=='초등'}" th:text="${i.cate}" class="cate_title2"></li>
+                        <li th:if="${i.cate=='중등'}" th:text="${i.cate}" class="cate_title3"></li>
+                        <li th:if="${i.cate=='고등'}" th:text="${i.cate}" class="cate_title4"></li>
+                        <li th:if="${i.cate=='학원추천'}" th:text="${i.cate}" class="cate_title5"></li>
+                        <div class="title">
+                            <li class="title1" th:text="|${i.title}|"></li>
+                        </div>
                     </div>
                     <div class="titlee2">
                         <li th:text="|작성자: ${i.writer}|"></li>
-                        <li th:text="|${#temporals.format(i.createDate, 'yyyy-MM-dd')}|"></li>
+                        <div class="div_line"></div>
+                        <li th:text="|${#temporals.format(i.createDate, 'yyyy-MM-dd HH:mm')}|"></li>
+                        <div class="div_line"></div>
                         <li th:text="|조회수: ${i.count}|"></li>
                     </div>
                 </a>
             </ul>
 
+            <button type="button" th:if="${sessionId!=0}" th:id="write_btn">
+                <img id="write_icon" th:src="@{/img/infoboard/pencil.png}">글쓰기
+            </button>
+
         </section>
 
         <!--배너 영역-->
         <div id="banner">
-
+            <img th:src="@{/img/freeboard/banner1.png}">
         </div>
 
     </section>
 
     <!-- 페이징 -->
     <div class="page">
-        <div class="blank">
-            <span></span>
-        </div>
 
         <div>
             <th:block th:if="${startPage>1}">
@@ -104,7 +124,6 @@
             </th:block>
         </div>
 
-        <button type="button" th:id="write_btn">글쓰기</button>
     </div>
 </div>
 </body>
