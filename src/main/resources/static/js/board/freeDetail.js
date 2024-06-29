@@ -18,7 +18,8 @@ const replyList = function () {
         return response.json();
     }).then((data) => {
         data.forEach(item => {
-            let ele_span = document.createElement('span');
+            let ele_p1 = document.createElement('p');
+            let ele_p2 = document.createElement('p');
             let ele_ul = document.createElement('ul');
             let ele_li = document.createElement('li');
             let nickname = document.createTextNode('[' + item.nickname + ']');
@@ -26,9 +27,10 @@ const replyList = function () {
             let uid = item.uid;
             let frid = item.frid;
 
-            ele_span.appendChild(nickname);
-            ele_span.appendChild(content);
-            ele_li.appendChild(ele_span);
+            ele_p1.appendChild(nickname);
+            ele_p2.appendChild(content);
+            ele_p1.appendChild(ele_p2);
+            ele_li.appendChild(ele_p1);
             ele_ul.appendChild(ele_li);
 
             /** 삭제 버튼 추가 **/
@@ -152,7 +154,8 @@ window.onload = function () {
         }).then((data) => {
             document.querySelector('#replyList').replaceChildren("");
             data.forEach(item => {
-                let ele_span = document.createElement('span');
+                let ele_p1 = document.createElement('p');
+                let ele_p2 = document.createElement('p');
                 let ele_ul = document.createElement('ul');
                 let ele_li = document.createElement('li');
                 let nickname = document.createTextNode('[' + item.nickname + ']');
@@ -160,9 +163,10 @@ window.onload = function () {
                 let uid = item.uid;
                 let frid = item.frid;
 
-                ele_span.appendChild(nickname);
-                ele_span.appendChild(content);
-                ele_li.appendChild(ele_span);
+                ele_p1.appendChild(nickname);
+                ele_p2.appendChild(content);
+                ele_p1.appendChild(ele_p2);
+                ele_li.appendChild(ele_p1);
                 ele_ul.appendChild(ele_li);
 
                 /** 삭제 버튼 추가 **/

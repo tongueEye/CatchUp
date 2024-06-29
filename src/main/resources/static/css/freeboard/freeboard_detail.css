@@ -32,11 +32,15 @@ ul li{
     position: relative;
 }
 #prev_page{
-    margin: 0 0 10px 0;
+    font-size: 2rem;
+    margin-right: 10px;
+    position: relative;
+    top: 10px;
 }
 
 #prev_page a{
     display: inline-block;
+    color: #9BA2D7;
 }
 
 #detail_util{
@@ -225,6 +229,20 @@ input:focus{
     overflow-x: hidden;
     height: 10vh;
 }
+.scrollBar::-webkit-scrollbar {
+    width: 10px;
+}
+.scrollBar::-webkit-scrollbar-thumb {
+    height: 30%;
+    background: rgba(182,190,237,0.4);
+    border-radius: 10px;
+}
+.scrollBar::-webkit-scrollbar-track {
+    background: rgba(215,221,247,0.3);
+    border-radius: 50px;
+    margin: 10px 0;
+}
+
 #replyList ul{
     border-bottom: 1px solid #B6BEED;
 }
@@ -241,6 +259,8 @@ input:focus{
 
 #replyList #del_btn{
     width: 80px;
+    position: relative;
+    top: 25px;
 }
 
 button{
