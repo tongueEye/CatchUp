@@ -101,6 +101,11 @@
     background-color: #F9F2E7;
     height: calc(100% - 40px);
     padding: 20px;
+    background-image: url(../../img/mypage/backbap.png);
+    background-position: bottom;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position-y: 16px;
 }
 
 .bap-list-div {
@@ -124,4 +129,21 @@
     position: absolute;
     left: 119px;
     bottom: 140px;
+}
+
+.yesschool {
+    background-image: url(../../img/mypage/change_school.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 115px;
+    height: 115px;
+    position: relative;
+    top: -14px;
+    left: 266px;
+}
+
+.noschool {
+    background-image: url(../../img/mypage/bap-info.png);
+    width: 300px;
+    height: 300px;
 }
