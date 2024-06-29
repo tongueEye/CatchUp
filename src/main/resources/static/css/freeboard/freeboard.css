@@ -176,15 +176,15 @@ margin: 10px 0 0 10px;
     width: 105px;
     color: white;
     background-color: #A5A5F7;
-    /*border-color: #B6BEED;*/
+    /* border-color: #B6BEED; */
     border-radius: 30px;
     border: 0;
     font-size: 1.4rem;
-    position: relative;
+    position: absolute;
     left: 84%;
     font-weight: bold;
     padding: 0px 10px 8px 10px;
-    top: 10px;
+    bottom: -250px;
 }
 
 #write_icon{
