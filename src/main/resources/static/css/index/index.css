@@ -374,6 +374,12 @@
 #img3{
     width: 250px;
 }
+
+.intro_img{
+    width: 100%;
+    height: 100%;
+    border-radius: 30px;
+}
 /* 다섯번째 메인 섹션 끝 */
 
 /* 여섯번째 메인 섹션 시작 */
@@ -396,6 +402,11 @@
     position: absolute;
     left: 0;
     bottom: 0;
+}
+
+#paws_bg{
+    width: 100%;
+    position: absolute;
 }
 
 #foot_box{
@@ -479,6 +490,13 @@
     position: relative;
     max-width: 450px;
     max-height: 350px;
+}
+
+.board_intro{
+    width: 90%;
+    border-radius: 60px;
+    height: 86%;
+    padding: 5%;
 }
 
 /* 여섯번째 메인 섹션 끝 */

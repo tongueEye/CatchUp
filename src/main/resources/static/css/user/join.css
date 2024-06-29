@@ -1,9 +1,13 @@
 .join_wrap{
-    padding-top: 100px;
+    padding-top: 150px;
     display: flex;
     justify-content: center;
     align-content: center;
     text-align: center;
+    background-image: url("../../img/infoboard/cats_bg.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 110vh;
 }
 
 .join_wrap ul{
@@ -19,11 +23,12 @@
 }
 
 .join_form{
-    margin: auto;
+    margin-bottom: auto;
     padding: 50px 0px;
     width: 500px;
-    border-radius: 25px;
+    border-radius: 40px;
     box-shadow: rgba(182, 190, 237, 1) 0px 5px 15px;
+    background: white;
 }
 
 .join_box{
@@ -142,4 +147,9 @@
 
 .join_btn:active{
     background-color: #F4EBF3;
+}
+
+footer{
+    color: white;
+    background: #4E8AB8;
 }

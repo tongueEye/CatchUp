@@ -89,7 +89,7 @@
             <div class="right_section">
                 <div class="img_box">
                     <div>
-
+                        <img class="intro_img" th:src="@{/img/index/intro1.png}">
                     </div>
                 </div>
             </div>
@@ -103,7 +103,7 @@
             <div class="right_section">
                 <div class="img_box">
                     <div>
-
+                        <img class="intro_img" th:src="@{/img/index/intro2.png}">
                     </div>
                 </div>
             </div>
@@ -137,7 +137,7 @@
             <div class="right_section">
                 <div class="img_box">
                     <div>
-
+                        <img class="intro_img" th:src="@{/img/index/intro3.png}">
                     </div>
                 </div>
             </div>
@@ -155,18 +155,36 @@
             </div>
         </section>
 
+        <img id="paws_bg" th:src="@{/img/index/paws_group.png}">
+
         <div id="board_kind_box">
             <div class="section_box">
                 <div id="col1_box">
-                    <div class="board_kind"></div>
-                    <div class="board_kind"></div>
+                    <div class="board_kind">
+                        <a th:href="@{/eduboard}">
+                            <img class="board_intro" th:src="@{/img/index/board1.png}">
+                        </a>
+                    </div>
+                    <div class="board_kind">
+                        <a th:href="@{/eduboard}">
+                            <img class="board_intro" th:src="@{/img/index/board2.png}">
+                        </a>
+                    </div>
                 </div>
             </div>
 
             <div class="section_box">
                 <div id="col2_box">
-                    <div class="board_kind"></div>
-                    <div class="board_kind"></div>
+                    <div class="board_kind">
+                        <a th:href="@{/comboard}">
+                            <img class="board_intro" th:src="@{/img/index/board3.png}">
+                        </a>
+                    </div>
+                    <div class="board_kind">
+                        <a th:href="@{/comboard}">
+                            <img class="board_intro" th:src="@{/img/index/board4.png}">
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
