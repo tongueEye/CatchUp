@@ -89,7 +89,7 @@ public class FreeBoardQDSLRepositoryImpl implements FreeBoardQDSLRepository {
                         , freeBoard.content
                         , freeBoard.fid
                         , freeBoard.kind
-
+                        , freeBoard.cate
                 )).from(freeBoard)
                 .where(freeBoard.fid.eq(fid))
                 .fetchOne();
