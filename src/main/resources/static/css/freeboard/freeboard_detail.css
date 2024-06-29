@@ -9,8 +9,8 @@ ul li{
 
 #eduDetail_wrap{
     width: 100%;
-    height: 100vh;
-    background-image: url("../../img/infoboard/mycat_bg.png");
+    height: 120vh;
+    background-image: url("../../img/infoboard/mycat_bg2.png");
     background-size: cover;
     background-repeat: no-repeat;
 }
@@ -23,9 +23,9 @@ ul li{
     width: 50%;
     margin: 0 auto;
     background: white;
-    padding: 20px 50px;
+    padding: 30px 50px 30px 50px;
     border-radius: 60px;
-    border: 3px solid lightblue;
+    border: 3px solid #B6BEED;
 }
 
 #eduBoardDetail{
@@ -40,7 +40,7 @@ ul li{
 
 #prev_page a{
     display: inline-block;
-    color: #9BA2D7;
+    color: #B6BEED;
 }
 
 #detail_util{
@@ -59,12 +59,44 @@ ul li{
     border-radius: 15px;
 }
 
-#category{
+.cate_title1{
     padding: 5px 10px;
     border-radius: 30px;
     font-weight: normal;
     font-size: 1.5rem;
-    background-color: #B6E3E9;
+    background-color: #E9E7E6;
+    display: inline-block;
+}
+.cate_title2{
+    padding: 5px 10px;
+    border-radius: 30px;
+    font-weight: normal;
+    font-size: 1.5rem;
+    background-color: #FEF8C8;
+    display: inline-block;
+}
+.cate_title3{
+    padding: 5px 10px;
+    border-radius: 30px;
+    font-weight: normal;
+    font-size: 1.5rem;
+    background-color: #FEE5E2;
+    display: inline-block;
+}
+.cate_title4{
+    padding: 5px 10px;
+    border-radius: 30px;
+    font-weight: normal;
+    font-size: 1.5rem;
+    background-color: #EBEAF3;
+    display: inline-block;
+}
+.cate_title5{
+    padding: 5px 10px;
+    border-radius: 30px;
+    font-weight: normal;
+    font-size: 1.5rem;
+    background-color: #DAF0F4;
     display: inline-block;
 }
 
@@ -177,6 +209,7 @@ ul li{
     left: 35px;
     margin: 3px 5px;
     z-index: 0;
+    top: 20px;
 }
 #like_btn{
     padding: 0 0 0 20px;
@@ -185,6 +218,7 @@ ul li{
     background-color: transparent;
     color: black;
     border: 2px solid pink;
+    top: 20px
 }
 
 #replySection{
@@ -198,21 +232,23 @@ ul li{
 }
 
 #reply_insert{
-    border: 2px solid #F4EBF3;
     border-radius: 15px;
     padding: 10px;
-    background-color: #F4EBF3;
     text-align: center;
 }
 
+#reply_insert li{
+    position: relative;
+    top: 10px;
+}
+
 #reply_insert input{
-    width: 65%;
-    border-top: 0;
-    border-left: 0;
-    border-right: 0;
-    border-bottom: 2px solid #B6BEED;
+    width: 70%;
     background-color: #F4EBF3;
     font-size: 1.2rem;
+    border-radius: 10px;
+    border: 0;
+    padding: 10px;
 }
 
 input:focus{
@@ -227,7 +263,7 @@ input:focus{
     margin: 10px 0;
     overflow: scroll;
     overflow-x: hidden;
-    height: 10vh;
+    height: 25vh;
 }
 .scrollBar::-webkit-scrollbar {
     width: 10px;
@@ -251,6 +287,8 @@ input:focus{
     padding: 10px;
     display: flex;
     justify-content: space-between;
+    min-height: 50px;
+
 }
 
 #reply_count{

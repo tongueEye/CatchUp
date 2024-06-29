@@ -53,6 +53,14 @@
     font-size: 2.5rem;
 }
 
+.info_msg{
+    text-align: center;
+    font-size: 1.5rem;
+    position: relative;
+    top: 12vh;
+    color: grey;
+}
+
 /*보드 끝*/
 
 /* 검색창 시작*/

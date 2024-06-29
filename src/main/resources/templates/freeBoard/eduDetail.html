@@ -22,9 +22,25 @@
 <!--                         alt="프로필이미지">-->
 <!--                </div>-->
                 <ul id="writer_info">
-                    <li th:id="category" th:text="${dto.cate}"></li>
-                    <li th:id="title"><h3 th:text="${dto.title}"/></li>
-                    <li th:id="writer" th:text="${dto.writer}"></li>
+                    <th:block th:if="${dto.kind=='e'}">
+                        <li class="cate_title1" th:if="${dto.cate=='뉴스'}" th:text="${dto.cate}"></li>
+                        <li class="cate_title2" th:if="${dto.cate=='초등'}" th:text="${dto.cate}"></li>
+                        <li class="cate_title3" th:if="${dto.cate=='중등'}" th:text="${dto.cate}"></li>
+                        <li class="cate_title4" th:if="${dto.cate=='고등'}" th:text="${dto.cate}"></li>
+                        <li class="cate_title5" th:if="${dto.cate=='학원추천'}" th:text="${dto.cate}"></li>
+                        <li th:id="title"><h3 th:text="${dto.title}"/></li>
+                        <li th:id="writer" th:text="${dto.writer}"></li>
+                    </th:block>
+                    <th:block th:if="${dto.kind=='c'}">
+                        <li class="cate_title1" th:if="${dto.cate=='아이'}" th:text="${dto.cate}"></li>
+                        <li class="cate_title2" th:if="${dto.cate=='맛집'}" th:text="${dto.cate}"></li>
+                        <li class="cate_title3" th:if="${dto.cate=='체험'}" th:text="${dto.cate}"></li>
+                        <li class="cate_title4" th:if="${dto.cate=='일상'}" th:text="${dto.cate}"></li>
+                        <li class="cate_title5" th:if="${dto.cate=='기타'}" th:text="${dto.cate}"></li>
+                        <li th:id="title"><h3 th:text="${dto.title}"/></li>
+                        <li th:id="writer" th:text="${dto.writer}"></li>
+                    </th:block>
+
                 </ul>
 
                 <div id="option_toggle">
@@ -59,6 +75,10 @@
         </section>
 
         <section id="replySection">
+
+            <div th:id="reply_count" th:text="|댓글수: ${repCount}|"></div>
+            <div th:id="replyList" class="scrollBar"></div>
+
             <ul th:id="reply_insert">
                 <li>
                     <input type="text" name="rep_content" id="rep_content">
@@ -68,9 +88,6 @@
                     <button type="button" id="append">댓글 작성</button>
                 </li>
             </ul>
-
-            <div th:id="reply_count" th:text="|댓글수: ${repCount}|"></div>
-            <div th:id="replyList" class="scrollBar"></div>
 
         </section>
 

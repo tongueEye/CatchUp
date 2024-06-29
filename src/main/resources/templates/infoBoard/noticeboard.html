@@ -37,6 +37,12 @@
                     <span class="content5">작성자</span>
                     <span class="content4">작성일</span>
                 </li>
+
+                <th:block th:if="${noticeList == null || noticeList.isEmpty()}">
+                    <div class="info_msg">검색 결과가 없습니다.</div>
+                </th:block>
+
+
                 <th:block th:each="item: ${noticeList}">
                     <li>
                         <span class="content1" th:text="${item.iid}"></span>
