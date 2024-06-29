@@ -7,6 +7,7 @@
     <link rel="stylesheet" th:href="@{/css/mypage/modal.css}">
     <link rel="stylesheet" th:href="@{/css/mypage/repboard.css}">
     <script defer th:src="@{/js/mypage/modal.js}"></script>
+    <script defer th:src="@{/js/mypage/repboard.js}"></script>
 </head>
 <body>
     <div id="mypage-main">
@@ -29,7 +30,15 @@
             <article id="content">
                 <h2> 댓글 내역 보기 </h2>
                 <ul th:each="item:${list}">
-                    <li th:text="${item.frcontent}"></li>
+                    <li>
+                        <span th:text="${item.frcontent}" class="span-1"></span>
+                        <span th:text="${#temporals.format(item.frUpdateDate,'yy.MM.dd HH:mm')}" class="span-2"></span> <br>
+                        <img src="/img/mypage/rep_board.png" alt="rep_board" class="img-1">
+                        <span th:text="|(${item.cate})|" class="span-3"></span>
+                        <a th:href="@{|/edudetail/${item.fid}|}">
+                        <span th:text="${item.title}" class="span-4"></span>
+                        </a>
+                    </li>
                 </ul>
             </article>
         </div>

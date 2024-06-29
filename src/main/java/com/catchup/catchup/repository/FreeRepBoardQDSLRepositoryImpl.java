@@ -32,9 +32,12 @@ public class FreeRepBoardQDSLRepositoryImpl implements FreeRepBoardQDSLRepositor
                         RepBoardDTO.class
                         , freeRepBoard.frcontent
                         , freeRepBoard.frUpdateDate
+                        , freeBoard.title
+                        , freeBoard.cate
+                        , freeBoard.fid
                 )).from(freeRepBoard)
                 .join(freeRepBoard.user, user)
-                //.join(freeRepBoard.freeBoard, freeBoard)
+                .join(freeRepBoard.freeBoard, freeBoard)
                 .where(user.uid.eq(id))
                 .fetch();
 

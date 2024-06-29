@@ -18,6 +18,9 @@ public class RepBoardDTO {
   private LocalDateTime frCreateDate;
   private LocalDateTime frUpdateDate;
 
+  private String title;
+  private String cate;
+
 
 
 }
