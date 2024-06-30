@@ -277,10 +277,19 @@
                         school_input.value = a;
                         SDSCHULCODE = data.schoolInfo[1].row.map(school => school.SD_SCHUL_CODE);
                     })
+
+                    document.addEventListener('click', handleOutsideClick);
                 })
             }).catch(error => {
                 console.error('Error:', error);
             });
+        }
+
+        function handleOutsideClick(event) {
+            // school_name 영역 외부를 클릭했을 때 실행
+            if (!event.target.closest('#school_name')) {
+                school_name.innerHTML = '';
+            }
         }
 
 

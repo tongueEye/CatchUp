@@ -103,14 +103,15 @@ public class MyPageController {
             /* 성공했을 떄 */
             long id = service.modifyInfo(dto, uid);
             model.addAttribute("dto", dto);
-            return "redirect:/mypage/home";
+            model.addAttribute("view", "mypage/info_success");
+            return "index";
         }
     }
 
     /** 내가 쓴 글 보기*/
     @GetMapping("/wlist")
     public String writeList(HttpServletRequest request
-            , @PageableDefault(size = 10, page = 0, sort = "boardId", direction = Sort.Direction.ASC) Pageable pageable
+            , @PageableDefault(size = 5, page = 0, sort = "boardId", direction = Sort.Direction.ASC) Pageable pageable
             , Model model) {
         /* 프로필 사진 보여주는 곳 */
 

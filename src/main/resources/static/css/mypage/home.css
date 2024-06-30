@@ -45,6 +45,11 @@
     padding: 10px 20px 20px;
 }
 
+.article-content::-webkit-scrollbar {
+    display: none;
+}
+
+
 #mypage-main .bap-article-content {
     background-image: url("../../img/mypage/ttttest.png");
     background-repeat: no-repeat;

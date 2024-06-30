@@ -49,3 +49,29 @@
     height: 200px;
     margin: 0 auto;
 }
+
+#modalContainer .modal-li-4 {
+    margin: 25px 0 10px;
+}
+
+#modalContainer .modal-li-5 {
+    margin-bottom: 38px;
+}
+
+#modalContainer .modal-li-6 button  {
+    border: 1px solid;
+    background-color: white;
+    padding: 5px 50px;
+    border-radius: 30px;
+}
+
+#modalContainer input {
+    font-size: 15px;
+    color: #222222;
+    width: 237px;
+    border: none;
+    border-bottom: solid #aaaaaa 1px;
+    padding-bottom: 5px;
+    padding-left: 10px;
+    background: none;
+}
