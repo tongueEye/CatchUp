@@ -43,4 +43,9 @@
 
 #modalContainer .modal-li-3 {
     text-align: center;
+    background-image: url(../../img/mypage/profile.png);
+    background-size: cover;
+    width: 200px;
+    height: 200px;
+    margin: 0 auto;
 }

@@ -43,16 +43,26 @@
 
             <article id="content">
                 <div class="article-1 article-2-content">
-                    <p class="bap-p"> 급식 확인하기 </p>
+                    <h3 class="bap-p"> 급식 확인하기 </h3>
                     <div class="bap-article-content ">
-                        <!--<img class="bap-img" src="/img/mypage/spring.png" alt="스프링">-->
-                        <div class="bap-content">
-                            <!-- 급식 정보 없는 애들 -->
+
+                        <th:block th:if="${bap.sidoCode == null}">
+                            <p class="schoolOpenButton noschool"> </p>
+                        </th:block>
+
+                        <th:block th:if="${bap.sidoCode != null}">
+                            <h6 th:text="${#calendars.format(#calendars.createNow(), 'yyyy년 MM월 dd일')}" class="today-css"> </h6>
+                            <h6 class="school_name today-css2" th:text="${bap.schoolName}"></h6>
+                            <div id="today-bap">
+                            </div>
+                        </th:block>
+                        <!--<div class="bap-content">
+                            &lt;!&ndash; 급식 정보 없는 애들 &ndash;&gt;
                             <th:block th:if="${bap.sidoCode == null}">
                                 <p class="schoolOpenButton noschool"> </p>
                             </th:block>
 
-                            <!-- 급식 정보 있는 애들 => 급식 정보 뜸 -->
+                            &lt;!&ndash; 급식 정보 있는 애들 => 급식 정보 뜸 &ndash;&gt;
                             <th:block th:if="${bap.sidoCode != null}">
                                 <div class="bap-list-div">
                                     <span th:text="${#calendars.format(#calendars.createNow(), 'yyyy년 MM월 dd일')}"> </span>
@@ -60,19 +70,19 @@
                                 </div>
                                 <span class="today-bap-p">오늘의 급식</span>
                                 <div id="today-bap">
-                                    <!-- ajax이 알아서 해 줄 거야 >< -->
+                                    &lt;!&ndash; ajax이 알아서 해 줄 거야 >< &ndash;&gt;
                                 </div>
                             </th:block>
-                            <th:block th:if="${bap.sidoCode != null}">
-                                <p class="schoolOpenButton yesschool"></p>
-                            </th:block>
-                        </div>
+                        </div>-->
                     </div>
                 </div>
+                <th:block th:if="${bap.sidoCode != null}">
+                    <div class="schoolOpenButton yesschool"></div>
+                </th:block>
 
                 <div class="article-2">
                     <section class="fav article-2-content">
-                        <p> 좋아요 </p>
+                        <h3> 좋아요 </h3>
                         <div class="article-content article-content-2">
                             <ul>
                                 <li class="qna-menu">
@@ -80,19 +90,23 @@
                                     <span class="qna-content">제목</span>
                                     <span class="qna-content">카테고리</span>
                                 </li>
-                                <li th:each="item, stat : ${love}" class="qna-list">
+                                <li th:each="item, stat : ${love}" class="qna-list" th:if="${item != null}">
                                     <span class="qna-content" th:text="${stat.count}"></span>
                                     <a th:href="@{|/edudetail/${item.fid}|}">
                                         <span class="nowrap" th:text="${item.title}"></span>
                                     </a>
                                     <span class="qna-content yes" th:text="${item.cate}"></span>
                                 </li>
+                                <li th:each="item, stat : ${love}" class="qna-list" th:if="${item.title == ''}">
+                                    aaaa
+                                    <img src="img/mypage/nolove.png">
+                                </li>
                             </ul>
                         </div>
                     </section>
 
                     <section class="qna article-2-content">
-                        <p> 문의내역 </p>
+                        <h3> 문의내역 </h3>
                         <div class="article-content article-content-2">
                             <ul>
                                 <li class="qna-menu">
@@ -309,15 +323,14 @@
                 .then(response => {
                     if (response.status == 200) {
                         console.log('호출완료');
-                        alert("등록되었습니다.")
-                        modal.classList.add('school-hidden');
                         return response.json(); // 응답을 JSON 형식으로 파싱
                     } else if (response.status == 403) {
                         console.log("403 에러 발생");
                         return response.json();
                     }
-                }).then(() => {
-            }).finally(() => {
+                }).finally(() => {
+                alert("등록되었습니다.")
+                location.reload();
 
             })
         }
