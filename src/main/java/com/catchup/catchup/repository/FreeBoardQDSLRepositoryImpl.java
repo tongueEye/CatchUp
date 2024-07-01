@@ -63,7 +63,7 @@ public class FreeBoardQDSLRepositoryImpl implements FreeBoardQDSLRepository {
                 ))
                 .from(freeBoard)
                 .where(builder.and(freeBoard.kind.eq(condition.getKind())))
-                .orderBy(freeBoard.createDate.desc())
+                .orderBy(freeBoard.fid.desc())
                 .offset(pageable.getOffset())
                 .limit(pageable.getPageSize())
                 .fetch();
