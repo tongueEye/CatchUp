@@ -81,7 +81,7 @@
 
             <ul th:id="reply_insert">
                 <li>
-                    <input type="text" name="rep_content" id="rep_content">
+                    <input type="text" name="rep_content" id="rep_content" required>
                     <input type="hidden" name="fid" id="fid" th:value="${dto.fid}">
                     <input type="hidden" name="kind" id="kind" th:value="${dto.kind}">
                     <input type="hidden" name="sessionId" id="sessionId" th:value="${sessionId}">

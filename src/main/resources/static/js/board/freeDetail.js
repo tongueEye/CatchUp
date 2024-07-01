@@ -227,23 +227,6 @@ window.onload = function () {
     });
 
     /** 좋아요 **/
-
-    // let hasLiked = localStorage.getItem('hasLiked_' + sessionId + '_' + fid) === 'true'; // 로컬 스토리지에서 좋아요 상태 불러오기
-
-    // /** 좋아요 여부 확인 **/
-    // updateButton();
-    //
-    // function updateButton() {
-    //     if (hasLiked) {
-    //         likeBtn.innerText = '취소';
-    //         likeBtn.style.border = '2px solid pink';
-    //         likeImg.style.backgroundImage = 'url("../../img/freeboard/heart.png")';
-    //     } else {
-    //         likeBtn.innerText = '좋아요';
-    //         likeBtn.style.border = '2px solid silver';
-    //         likeImg.style.backgroundImage = 'url("../../img/freeboard/unheart.png")';
-    //     }
-    // }
     toggleLike();
 
     function toggleLike() {
@@ -265,10 +248,9 @@ window.onload = function () {
                 if (!response.ok) {
                     throw new Error('Failed to update Love');
                 }
-                return response.json(); // Parse response as JSON
+                return response.json();
             })
             .then(data => {
-                // 'data' will now be a boolean value (true or false)
                 if (data) {
                     likeBtn.innerText = '취소';
                     likeBtn.style.border = '2px solid pink';
@@ -285,7 +267,6 @@ window.onload = function () {
 
     }
 
-    // likeBtn.addEventListener('click', actionLike);
     document.getElementById('like_btn').onclick = function() {
         const likeBtn = document.getElementById('like_btn');
         const likeImg = document.getElementById('like_img');
@@ -305,16 +286,14 @@ window.onload = function () {
                 if (!response.ok) {
                     throw new Error('Failed to update Love');
                 }
-                // Check if response is empty
                 if (response.status === 204) { // No Content
-                    return {}; // Return an empty object
+                    return {};
                 } else {
-                    return response.json(); // Parse JSON if response is not empty
+                    return response.json();
                 }
             })
             .then(data => {
                 if (data.length > 0) {
-                    // Handle response data accordingly
                     if (data) {
                         likeBtn.innerText = '취소';
                         likeBtn.style.border = '2px solid pink';
