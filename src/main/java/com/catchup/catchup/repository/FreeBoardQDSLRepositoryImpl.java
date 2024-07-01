@@ -234,7 +234,7 @@ public class FreeBoardQDSLRepositoryImpl implements FreeBoardQDSLRepository {
                 )).from(freeBoard)
                 .join(freeBoard.user, user)
                 .where(user.uid.eq(id))
-                .orderBy(freeBoard.createDate.desc())
+                .orderBy(freeBoard.fid.desc())
                 .fetch();
 
         Long totalCount = queryFactory.select(freeBoard.count())
