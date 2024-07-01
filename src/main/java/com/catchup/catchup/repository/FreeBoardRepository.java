@@ -22,7 +22,7 @@ public interface FreeBoardRepository extends JpaRepository<FreeBoard, Long>
            " FROM FreeRepBoard r " +
            " INNER JOIN r.user u " +
            " WHERE r.freeBoard.fid = :fid " +
-           " ORDER BY r.frCreateDate DESC" )
+           " ORDER BY r.frid DESC" )
     List<Object[]> repList(Long fid);
 
     @Override
