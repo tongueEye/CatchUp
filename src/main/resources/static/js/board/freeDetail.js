@@ -78,7 +78,6 @@ const deleteRep = function (frid) {
 }
 
 
-
 window.onload = function () {
 
     replyList();
@@ -184,9 +183,9 @@ window.onload = function () {
                 }
                 document.getElementById('replyList').appendChild(ele_ul);
             })
-            document.getElementById('rep_content').value='';
+            document.getElementById('rep_content').value = '';
 
-    /** 댓글 수 fetch 처리 **/
+            /** 댓글 수 fetch 처리 **/
             fetch('/repcount/' + num, {
                 method: 'GET'
             }).then((response) => {
@@ -198,7 +197,7 @@ window.onload = function () {
             }).then((data) => {
 
                 let ele_p = document.createElement('p');
-                let repCount = document.createTextNode('댓글수: '+data);
+                let repCount = document.createTextNode('댓글수: ' + data);
 
                 ele_p.appendChild(repCount);
 
@@ -228,28 +227,31 @@ window.onload = function () {
     });
 
     /** 좋아요 **/
-    const likeBtn = document.getElementById('like_btn');
-    const likeImg = document.getElementById('like_img');
-    const sessionId = document.getElementById('sessionId').value;
-    const fid = document.getElementById('fid').value;
-    let hasLiked = localStorage.getItem('hasLiked_' + sessionId + '_' + fid) === 'true'; // 로컬 스토리지에서 좋아요 상태 불러오기
 
-    /** 좋아요 여부 확인 **/
-    updateButton();
+    // let hasLiked = localStorage.getItem('hasLiked_' + sessionId + '_' + fid) === 'true'; // 로컬 스토리지에서 좋아요 상태 불러오기
 
-    function updateButton() {
-        if (hasLiked) {
-            likeBtn.innerText = '취소';
-            likeBtn.style.border = '2px solid pink';
-            likeImg.style.backgroundImage = 'url("../../img/freeboard/heart.png")';
-        } else {
-            likeBtn.innerText = '좋아요';
-            likeBtn.style.border = '2px solid silver';
-            likeImg.style.backgroundImage = 'url("../../img/freeboard/unheart.png")';
-        }
-    }
+    // /** 좋아요 여부 확인 **/
+    // updateButton();
+    //
+    // function updateButton() {
+    //     if (hasLiked) {
+    //         likeBtn.innerText = '취소';
+    //         likeBtn.style.border = '2px solid pink';
+    //         likeImg.style.backgroundImage = 'url("../../img/freeboard/heart.png")';
+    //     } else {
+    //         likeBtn.innerText = '좋아요';
+    //         likeBtn.style.border = '2px solid silver';
+    //         likeImg.style.backgroundImage = 'url("../../img/freeboard/unheart.png")';
+    //     }
+    // }
+    toggleLike();
 
     function toggleLike() {
+        const likeBtn = document.getElementById('like_btn');
+        const likeImg = document.getElementById('like_img');
+        const sessionId = document.getElementById('sessionId').value;
+        const fid = document.getElementById('fid').value;
+
         const dto = {'uid': sessionId, 'fid': fid};
 
         fetch('/love', {
@@ -260,25 +262,77 @@ window.onload = function () {
             body   : JSON.stringify(dto)
         })
             .then(response => {
-                if (response.ok) {
-                    if (!hasLiked) {
-                        console.log('Like successfully');
-                        hasLiked = true;
-                    } else {
-                        console.log('Like Cancel successfully');
-                        hasLiked = false;
-                    }
-                    localStorage.setItem('hasLiked_' + sessionId + '_' + fid, hasLiked); // 좋아요 상태 로컬 스토리지에 저장
-                    updateButton();
+                if (!response.ok) {
+                    throw new Error('Failed to update Love');
+                }
+                return response.json(); // Parse response as JSON
+            })
+            .then(data => {
+                // 'data' will now be a boolean value (true or false)
+                if (data) {
+                    likeBtn.innerText = '취소';
+                    likeBtn.style.border = '2px solid pink';
+                    likeImg.style.backgroundImage = 'url("../../img/freeboard/heart.png")';
                 } else {
-                    console.error('Failed to update Love');
+                    likeBtn.innerText = '좋아요';
+                    likeBtn.style.border = '2px solid silver';
+                    likeImg.style.backgroundImage = 'url("../../img/freeboard/unheart.png")';
                 }
             })
             .catch(error => {
                 console.error('Error updating Love:', error);
             });
+
     }
 
-    likeBtn.addEventListener('click', toggleLike);
+    // likeBtn.addEventListener('click', actionLike);
+    document.getElementById('like_btn').onclick = function() {
+        const likeBtn = document.getElementById('like_btn');
+        const likeImg = document.getElementById('like_img');
+        const sessionId = document.getElementById('sessionId').value;
+        const fid = document.getElementById('fid').value;
+
+        const dto = {'uid': sessionId, 'fid': fid};
+
+        fetch('/loveupdate', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(dto)
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Failed to update Love');
+                }
+                // Check if response is empty
+                if (response.status === 204) { // No Content
+                    return {}; // Return an empty object
+                } else {
+                    return response.json(); // Parse JSON if response is not empty
+                }
+            })
+            .then(data => {
+                if (data.length > 0) {
+                    // Handle response data accordingly
+                    if (data) {
+                        likeBtn.innerText = '취소';
+                        likeBtn.style.border = '2px solid pink';
+                        likeImg.style.backgroundImage = 'url("../../img/freeboard/heart.png")';
+                    } else {
+                        likeBtn.innerText = '좋아요';
+                        likeBtn.style.border = '2px solid silver';
+                        likeImg.style.backgroundImage = 'url("../../img/freeboard/unheart.png")';
+                    }
+
+                } else {
+                    console.log('Empty response received');
+                }
+            })
+            .catch(error => {
+                console.error('Error updating Love:', error);
+            });
+        window.location.reload();
+    };
 };
 
