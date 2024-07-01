@@ -30,7 +30,6 @@
             <h2>작성 글 보기</h2>
             <div th:if="${#lists.isEmpty(boardlist)}">
                 <p>작성된 글이 없습니다.</p>
-                ㅇㄴㄹㄴ이ㅏ룬아룬아ㅣ룬이ㅏ루나우린아ㅜ릐나믈니아ㅡ린아ㅡ린,으리느핀ㅇㄹ
             </div>
 
             <ul th:unless="${#lists.isEmpty(boardlist)}">
@@ -49,7 +48,7 @@
                     </div>
                 </li>
 
-                <li th:if="${item == '' || item == null || item.isEmpty()}">
+                <li th:if="${boardlist == '' || boardlist == null || boardlist.isEmpty()}">
                     <p>작성한 글이 없습니다.</p>
                 </li>
             </ul>

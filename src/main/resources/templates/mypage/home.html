@@ -99,7 +99,7 @@
                                     <span class="qna-content yes" th:text="${item.cate}"></span>
                                 </li>
 
-                                <li th:if="${item == '' || item == null || item.isEmpty()}">
+                                <li th:if="${love == '' || love == null || love.isEmpty()}">
                                     <a th:href="@{/eduboard}"> <img src="/img/mypage/nolove.png" class="love-img"> </a>
                                 </li>
                             </ul>
@@ -116,19 +116,24 @@
                                     <span class="qna-content">처리여부</span>
                                 </li>
 
-                                <li th:each="item, stat :${qna}" class="qna-list">
-                                    <!-- 구현할까 말까 => 답변 완료 안 뜬 애들은 밑으로 밀어버리고 안 된 애들만 상위에 뜨기 -->
-                                    <span class="qna-content" th:text="${stat.count}"> </span>
-                                    <span class="qna-content nowrap">
+
+                                <th:block th:if="${qna != null && qna.size != 0}">
+                                    <li th:each="item, stat :${qna}" class="qna-list">
+                                        <!-- 구현할까 말까 => 답변 완료 안 뜬 애들은 밑으로 밀어버리고 안 된 애들만 상위에 뜨기 -->
+                                        <span class="qna-content" th:text="${stat.count}"> </span>
+                                        <span class="qna-content nowrap">
                                         <a th:text="${item.title}" th:href="@{|/qnaDetail/${item.iid}|}"></a>
                                     </span>
-                                    <span class="qna-content yes" th:if="${item.repContent != null and !item.repContent.isEmpty()}" th:text="답변완료"></span>
-                                    <span class="qna-content no" th:unless="${item.repContent != null and !item.repContent.isEmpty()}" th:text="미답변"></span>
-                                </li>
+                                        <span class="qna-content yes" th:if="${item.repContent != null and !item.repContent.isEmpty()}" th:text="답변완료"></span>
+                                        <span class="qna-content no" th:unless="${item.repContent != null and !item.repContent.isEmpty()}" th:text="미답변"></span>
+                                    </li>
+                                </th:block>
 
-                                <li th:if="${item == '' || item == null || item.isEmpty()}">
+
+                                <li th:if="${qna == null || qna == '' || qna.isEmpty() || qna.size == 0}">
                                     <a th:href="@{/qna}"> <img src="/img/mypage/noqna.png" class="love-img"> </a>
                                 </li>
+
                             </ul>
                         </div>
                     </section>
