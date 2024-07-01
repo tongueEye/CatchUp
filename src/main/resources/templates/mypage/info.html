@@ -6,6 +6,7 @@
     <link rel="stylesheet" th:href="@{/css/mypage/modal.css}">
     <link rel="stylesheet" th:href="@{/css/mypage/info.css}">
     <script defer th:src="@{/js/mypage/modal.js}"></script>
+
 </head>
 <body>
 <div id="mypage-main">
@@ -29,7 +30,6 @@
             <div class="join_wrap">
                 <form method="post" th:action="@{/mypage/info}" th:object="${dto}">
                     <ul>
-                        바꿀거임
                         <li class="id_info info_board">
                             <label class="join_title">아이디</label>
                             <input type="text" th:value="${dto.id}" class="join_input" name="id" readonly>
@@ -65,25 +65,25 @@
                             <span><th:block th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}"></th:block></span>
                         </li>
 
-                        <li class="join_box">
-                            <label class="addr">주소</label>
+                        <li class="join_box info_board">
+                            <label class="addr join_title">주소</label>
                             <input type="button" onclick="sample6_execDaumPostcode()" value="주소 찾기" class="find_post not_input">
                             <div id="info-addr">
                                 <!-- 아래 있는 거 풀어도 되는 건가...? ㅋㅋ -->
                                 <div class="juso_input">
-                                    <input type="text" id="sample6_postcode" name="addr" placeholder="우편번호" class="juso_input1 not_input"><br>
+                                    <input type="text" id="sample6_postcode" name="addr" placeholder="우편번호" class="juso_input1 join_input"><br>
                                 </div>
-                                <input type="text" id="sample6_address" name="addr" th:value="${dto.addr}" placeholder="주소" class="juso_input2 not_input"><br>
+                                <input type="text" id="sample6_address" name="addr" th:value="${dto.addr}" placeholder="주소" class="juso_input2 join_input"><br>
                                 <div class="juso_input3">
-                                    <input type="text" id="sample6_detailAddress" name="addr" placeholder="상세주소" class="juso_input33 not_input"><br>
-                                    <input type="text" id="sample6_extraAddress" name="addr" placeholder="참고항목" class="juso_input33 not_input">
+                                    <input type="text" id="sample6_detailAddress" name="addr" placeholder="상세주소" class="juso_input33 join_input">
+                                    <input type="text" id="sample6_extraAddress" name="addr" placeholder="참고항목" class="juso_input33 join_input">
                                 </div>
                             </div>
 
                         </li>
-                        <!--<li>
+                        <li>
                             <input type="submit" class="join_btn" value="수정하기">
-                        </li>-->
+                        </li>
                     </ul>
                 </form>
             </div>

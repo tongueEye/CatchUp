@@ -1,16 +1,20 @@
 
 
 #mypage-main #content {
+    border-radius: 10px;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    width: 85%;
+    /*width: 82%;*/
+    width: 1100px;
     margin: 30px auto 0;
     height: 600px;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.7);
 }
 
+
 #mypage-main .article-1 {
-    background-color: #d9d9d9;
     border-radius: 15px;
     width: 45%;
 }
@@ -23,7 +27,6 @@
 }
 
 #mypage-main .article-2 section {
-    background-color: #d9d9d9;
     border-radius: 15px;
     height: 39%;
 }
@@ -42,10 +45,22 @@
     padding: 10px 20px 20px;
 }
 
+.article-content::-webkit-scrollbar {
+    display: none;
+}
+
+
 #mypage-main .bap-article-content {
-    background-color: #FDBFC4;
+    background-image: url("../../img/mypage/ttttest.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+    height: 492px;
+    width: 492px;
+    padding-top: 13px;
+
+    /*background-color: #FDBFC4;
     height: calc(100% - 70px);
-    padding: 30px;
+    padding: 30px;*/
 }
 
 .mymain .qna-menu, .qna-list {
@@ -98,14 +113,21 @@
 }
 
 .bap-content {
-    background-color: #F9F2E7;
+
+    background-repeat: no-repeat;
+    background-size: contain;
+    height: 492px;
+    width: 492px;
+    padding: 11px 30px;
+
+    /*background-color: #F9F2E7;
     height: calc(100% - 40px);
     padding: 20px;
     background-image: url(../../img/mypage/backbap.png);
     background-position: bottom;
     background-size: contain;
     background-repeat: no-repeat;
-    background-position-y: 16px;
+    background-position-y: 79px;*/
 }
 
 .bap-list-div {
@@ -118,6 +140,7 @@
     font-size: 20px;
 }
 
+/* 지움 */
 .today-bap-p {
     font-family: bmjua;
     font-size: 40px;
@@ -135,15 +158,43 @@
     background-image: url(../../img/mypage/change_school.png);
     background-repeat: no-repeat;
     background-size: cover;
-    width: 115px;
-    height: 115px;
+    width: 92px;
+    height: 92px;
     position: relative;
-    top: -14px;
-    left: 266px;
+    top: 134px;
+    left: -526px;
 }
 
+
 .noschool {
-    background-image: url(../../img/mypage/bap-info.png);
+    background-image: url(../../img/mypage/noschool.png);
+    background-size: contain;
     width: 300px;
     height: 300px;
+    position: relative;
+    top: 140px;
+    left: 100px;
+}
+
+
+h3 {
+    font-family: bmjua;
+    font-size: 28px;
+    font-weight: 200;
+    padding-bottom: 17px;
+}
+
+.today-css {
+    font-size: 30px;
+    color: white;
+}
+
+.today-css2 {
+    padding-top: 74px;
+    font-size: 30px;
+}
+
+.love-img {
+    width: 100%;
+    height: 100%;
 }

@@ -18,19 +18,30 @@ ul li {
     list-style: none;
 }
 
+.top-profile {
+    background-image: url("../../img/mypage/profile.png");
+    background-size: cover;
+}
 
 #mypage-main p, #mypage-main  a {
     font-size: 20px;
 }
 
 #mypage-main {
-    background-image: url("../../img/mypage/cats_bg4.png");
-    background-size: cover;
+    background-color: #D8DEF7;
     padding-top: 100px;
     text-align: center;
     display: flex;
     flex-direction: column;
     position: relative;
+
+    /*background-image: url("../../img/mypage/cats_bg4.png");
+    background-size: cover;
+    padding-top: 100px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    position: relative;*/
 }
 /* 프로필 부분 */
 #mypage-main  #profile_top {
@@ -47,7 +58,7 @@ ul li {
 #mypage-main #container {
     border-radius: 15px;
     margin: 0 auto;
-    background-color: rgba(255, 255, 255, 0.7);
+    /*background-color: rgba(255, 255, 255, 0.7);*/
     width: 60%;
     padding-top: 130px;
     padding-bottom: 30px;
@@ -58,16 +69,22 @@ ul li {
 /* 전체 컨테이너 - 메뉴 */
 #mypage-main nav {
     margin: 0 auto;
+    /*width: 85%;*/
+    width: 1140px;
+    background-color: rgba(255, 255, 255, 0.7);
+    border-radius: 10px;
+
+    /*margin: 0 auto;
     width: 85%;
     background-color: #B6BEED;
-    border-radius: 40px;
+    border-radius: 40px;*/
 
 }
 
 #mypage-main nav ul {
     display: flex;
     justify-content: center;
-    padding: 18px 0;
+    padding: 10px 0;
 }
 
 #mypage-main nav ul li:not(:last-child) {

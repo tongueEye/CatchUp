@@ -27,7 +27,7 @@ public class FreeRepBoardQDSLRepositoryImpl implements FreeRepBoardQDSLRepositor
 
     @Override
     public Page<RepBoardDTO> mypageList(Pageable pageable, Long id) {
-        /** 마이페이지 내가 쓴 게시글 조회하기 */
+        /** 마이페이지 내가 쓴 댓글 조회하기 */
         List<RepBoardDTO> list = queryFactory.select(Projections.fields(
                         RepBoardDTO.class
                         , freeRepBoard.frcontent
@@ -39,6 +39,7 @@ public class FreeRepBoardQDSLRepositoryImpl implements FreeRepBoardQDSLRepositor
                 .join(freeRepBoard.user, user)
                 .join(freeRepBoard.freeBoard, freeBoard)
                 .where(user.uid.eq(id))
+                .orderBy(freeBoard.createDate.desc())
                 .fetch();
 
         Long totalCount = queryFactory.select(freeRepBoard.count())
