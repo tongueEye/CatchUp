@@ -155,6 +155,7 @@ public class MyPageController {
         /** 댓글 DTO 생기면 수정하기 */
         Page<RepBoardDTO> list = service.getRepList(pageable, uid);
         model.addAttribute("list", list);
+        model.addAttribute("uid", uid);
 
         model.addAttribute("view", "mypage/repboardlist");
         return "index";

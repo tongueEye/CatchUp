@@ -72,7 +72,7 @@ public class InfoBoardQDSLRepositoryImpl implements InfoBoardQDSLRepository{
                 , infoBoard.repContent
         )).from(infoBoard)
                 .join(infoBoard.user, user)
-                .where(user.uid.eq(id))
+                .where(user.uid.eq(id).and(infoBoard.kind.eq("q")))
                 .fetch();
 
         return mypagelist;
