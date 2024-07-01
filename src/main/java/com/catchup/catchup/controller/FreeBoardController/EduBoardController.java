@@ -111,6 +111,7 @@ public class EduBoardController {
 
         model.addAttribute("dto", new FreeBoardDTO());
         model.addAttribute("user", userDTO);
+        model.addAttribute("sessionId", sessionId);
         model.addAttribute("view", "freeBoard/eduBoardInsert");
         return "index";
     }
