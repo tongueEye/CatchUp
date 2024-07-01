@@ -39,6 +39,10 @@
                         <span th:text="${item.title}" class="span-4"></span>
                         </a>
                     </li>
+
+                    <li th:if="${item == '' || item == null || item.isEmpty()}">
+                        <p>작성한 댓글이 없습니다.</p>
+                    </li>
                 </ul>
             </article>
         </div>

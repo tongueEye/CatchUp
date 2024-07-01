@@ -40,9 +40,6 @@ public class ModalController {
         HttpSession session = request.getSession(false);
         Long uid = (Long) session.getAttribute("sessionId");
 
-        log.info("nickname >>>>>>>>>>>>>>> {}", dto.getNickname());
-        log.info("profile >>>>>>>>>>>> {} ", dto.getProfile());
-
         String profile = service.updateNickname(uid, dto.getNickname(), dto.getProfile());
         return ResponseEntity.ok(profile);
     }

@@ -84,6 +84,7 @@
                     <section class="fav article-2-content">
                         <h3> 좋아요 </h3>
                         <div class="article-content article-content-2">
+
                             <ul>
                                 <li class="qna-menu">
                                     <span class="qna-content"> 번호 </span>
@@ -97,9 +98,9 @@
                                     </a>
                                     <span class="qna-content yes" th:text="${item.cate}"></span>
                                 </li>
-                                <li th:each="item, stat : ${love}" class="qna-list" th:if="${item.title == ''}">
-                                    aaaa
-                                    <img src="img/mypage/nolove.png">
+
+                                <li th:if="${item == '' || item == null || item.isEmpty()}">
+                                    <a th:href="@{/eduboard}"> <img src="/img/mypage/nolove.png" class="love-img"> </a>
                                 </li>
                             </ul>
                         </div>
@@ -123,7 +124,10 @@
                                     </span>
                                     <span class="qna-content yes" th:if="${item.repContent != null and !item.repContent.isEmpty()}" th:text="답변완료"></span>
                                     <span class="qna-content no" th:unless="${item.repContent != null and !item.repContent.isEmpty()}" th:text="미답변"></span>
+                                </li>
 
+                                <li th:if="${item == '' || item == null || item.isEmpty()}">
+                                    <a th:href="@{/qna}"> <img src="/img/mypage/noqna.png" class="love-img"> </a>
                                 </li>
                             </ul>
                         </div>

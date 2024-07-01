@@ -48,6 +48,10 @@
                         <span th:text="${#temporals.format(item.updateDate,'yy.MM.dd HH:mm')}"></span>
                     </div>
                 </li>
+
+                <li th:if="${item == '' || item == null || item.isEmpty()}">
+                    <p>작성한 글이 없습니다.</p>
+                </li>
             </ul>
         </article>
     </div>

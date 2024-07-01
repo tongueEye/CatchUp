@@ -51,8 +51,7 @@ profileInput.onchange = function uploadImageFile() {
                 modalImg.src = uploadedFileKey
                 return imageUrl;
             } else {
-                console.error('파일 업로드가 안 됨 ', data);
-            }
+                alert('업로드 실패');            }
         })
         .catch(error => {
             console.error('파일 업로드 실패함 왜 ㅠㅠ ??', error);
@@ -100,4 +99,33 @@ saveButton.addEventListener('click', (event) => {
         .catch(error => {
             console.error('에러 에러 에러 에러 에러 ', error);
         });
+});
+
+function deleteSummernoteImageFile(imageUrl) {
+    const fileName = imageUrl.split('/').pop();
+    console.log(fileName)
+
+    fetch(`/file/deleteImageFile?fileName=${fileName}`, {
+        method: 'DELETE'
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('삭제 실패');
+            }
+            return response.text();
+        })
+        .then(data => {
+            console.log(`Deleted: ${data}`);
+        })
+        .catch(error => {
+            console.error("삭제 실패", error);
+        });
+}
+
+window.addEventListener('beforeunload', function (e) { //페이지 이동 시 이벤트
+    if (!isFormSubmitting) { // 폼 제출 시에는 실행하지 않음
+        uploadedImages.forEach(imageUrl => {
+            deleteSummernoteImageFile(imageUrl); //페이지 떠나면 기존에 업로드 했던 사진들 삭제
+        });
+    }
 });
