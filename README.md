@@ -101,4 +101,4 @@
 사진
 
 ## 🧶 시연영상
-[[![Watch the video](http://img.youtube.com/vi/rkmx_l5Oku0/0.jpg)](https://www.youtube.com/watch?v=rkmx_l5Oku0)](https://youtu.be/htCxOrBJ_y4)
+[![Watch the video](https://img.youtube.com/vi/htCxOrBJ_y4/0.jpg)](https://youtu.be/htCxOrBJ_y4)
