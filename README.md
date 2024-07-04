@@ -98,16 +98,16 @@
 
 ## 🧶 클래스 다이어그램
 
-### Controller
+### - Controller
 ![클래스-컨트롤러](https://github.com/tongueEye/CatchUp/assets/109783402/f95b01a7-2d50-49b1-bc78-44bf989666ea)
 
-### Service
+### - Service
 ![클래스-서비스](https://github.com/tongueEye/CatchUp/assets/109783402/d4951993-099b-4cff-9a78-32f64f374023)
 
-### Repository
+### - Repository
 ![클래스-리포지토리](https://github.com/tongueEye/CatchUp/assets/109783402/aa67809a-3607-4af0-9837-69899905f6b4)
 
-### DTO
+### - DTO
 ![클래스-디티오](https://github.com/tongueEye/CatchUp/assets/109783402/e9a5d956-e1b2-400e-a001-1118e067e831)
 
 
@@ -118,13 +118,13 @@
 
 ## 🧶 시퀀스 다이어그램
 
-### 회원가입
+### - 회원가입
 ![회원가입 시퀀스](https://github.com/tongueEye/CatchUp/assets/109783402/5bb3ce20-3ac8-424e-82d5-0fe2056e9aaa)
 
-### 게시글 등록
+### - 게시글 등록
 ![게시글 등록 시퀀스](https://github.com/tongueEye/CatchUp/assets/109783402/9990c9a4-5c20-48cb-ad63-fd7eca67dcbc)
 
-### 급식 확인
+### - 급식 확인
 ![급식 시퀀스](https://github.com/tongueEye/CatchUp/assets/109783402/3ed63030-5b9b-4dd1-85f7-c6fda627d144)
 
 
