@@ -55,13 +55,21 @@
 ![Figma](https://img.shields.io/badge/Figma-F24E1E?style=for-the-badge&logo=figma&logoColor=white)
 ![GitHub](https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white)
 
-## 🧶 브랜드 및 컨셉
+## 🧶 브랜드
 <img src="https://github.com/tongueEye/CatchUp/assets/109783402/ff2e3cc4-c35f-4988-9078-aa2abd593865" alt="컨셉">
 
 ### CAT;CH UP
 
  - 캐치업(CATCH UP)은 "따라잡다", "밀린 이야기를 나누다", "보충하다", "현 상황을 파악하다" 라는 뜻으로,
  학부모들이 자녀 교육과 관련된 경험을 서로 공유하고, 최신 정보 트렌드를 빠르게 따라 잡을 수 있도록 돕는 커뮤니티 웹서비스입니다. 
+
+## 🧶 UI 컨셉
+![ui컨셉](https://github.com/tongueEye/CatchUp/assets/109783402/f45fd9bb-0841-403f-baa9-77ec6ce96073)
+- 고양이: 고양이는 종을 초월해 세상의 모든 아기를 품는 것은 물론, 친한 엄마 고양이들끼리는 공동 육아를 할 정도로 강한 모성애 가지고 있다. 이러한 고양이의 특성이 브랜드와 잘 어울린다고 생각하여 메인 캐릭터로 결정
+- 창문/화분: 고양이가 바라보는 창은 웹사이트를 상징하며, 포근하고 편안한 느낌을 더해주기 위해 화분을 배치
+- 실타래: 이야기를 풀어나가는 것을 실타래가 풀리는 것으로 표현
+- 주요 색상: #B6BEED, #D7DDF7, #FFFFFF
+
          
 ## 🧶 주요 기능
 
@@ -109,10 +117,6 @@
 
 ### - DTO
 ![클래스-디티오](https://github.com/tongueEye/CatchUp/assets/109783402/e9a5d956-e1b2-400e-a001-1118e067e831)
-
-
-
-
 
 
 
