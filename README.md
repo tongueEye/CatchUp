@@ -80,25 +80,74 @@
 
 
 ## 🧶 WBS
-
+![WBS](https://github.com/tongueEye/CatchUp/assets/109783402/4031fe79-0a4e-43d9-8690-075890ae8470)
 
 ## 🧶 ERD
+
+![ERD](https://github.com/tongueEye/CatchUp/assets/109783402/b09cb6ad-c13a-4c59-9aa0-e7de7985199f)
+
+## 🧶 엔티티 다이어그램
+
+![엔티티](https://github.com/tongueEye/CatchUp/assets/109783402/841c33c7-8ea8-4478-ac91-36adceeb9882)
 
 
 ## 🧶 유스케이스 다이어그램
 
+![유스케이스](https://github.com/tongueEye/CatchUp/assets/109783402/0efbb2d2-7069-4d16-b15d-d977d57de41a)
+
 
 ## 🧶 클래스 다이어그램
-사진
+
+### Controller
+![클래스-컨트롤러](https://github.com/tongueEye/CatchUp/assets/109783402/f95b01a7-2d50-49b1-bc78-44bf989666ea)
+
+### Service
+![클래스-서비스](https://github.com/tongueEye/CatchUp/assets/109783402/d4951993-099b-4cff-9a78-32f64f374023)
+
+### Repository
+![클래스-리포지토리](https://github.com/tongueEye/CatchUp/assets/109783402/aa67809a-3607-4af0-9837-69899905f6b4)
+
+### DTO
+![클래스-디티오](https://github.com/tongueEye/CatchUp/assets/109783402/e9a5d956-e1b2-400e-a001-1118e067e831)
+
+
+
+
+
+
 
 ## 🧶 시퀀스 다이어그램
 
-### 제목
-사진
+### 회원가입
+![회원가입 시퀀스](https://github.com/tongueEye/CatchUp/assets/109783402/5bb3ce20-3ac8-424e-82d5-0fe2056e9aaa)
+
+### 게시글 등록
+![게시글 등록 시퀀스](https://github.com/tongueEye/CatchUp/assets/109783402/9990c9a4-5c20-48cb-ad63-fd7eca67dcbc)
+
+### 급식 확인
+![급식 시퀀스](https://github.com/tongueEye/CatchUp/assets/109783402/3ed63030-5b9b-4dd1-85f7-c6fda627d144)
 
 
 ## 🧶 스토리보드
-사진
+
+![스토리보드1](https://github.com/tongueEye/CatchUp/assets/109783402/88c69710-2bb8-433f-8e30-d4dd57508c6b)
+![스토리보드2](https://github.com/tongueEye/CatchUp/assets/109783402/4036b4d9-529c-480c-b491-fb1ddb1ca49b)
+![스토리보드3](https://github.com/tongueEye/CatchUp/assets/109783402/b0bb3f85-39b7-48fb-a88f-062e4d6c7c16)
+![스토리보드4](https://github.com/tongueEye/CatchUp/assets/109783402/3b09b2e6-03ea-445c-bf99-7aff8521cdcd)
+![스토리보드5](https://github.com/tongueEye/CatchUp/assets/109783402/e72af57c-5b17-430f-a206-cb74717e98be)
+![스토리보드6](https://github.com/tongueEye/CatchUp/assets/109783402/a9ebe406-64bf-4034-9ec8-f19c9bd6f277)
+![스토리보드7](https://github.com/tongueEye/CatchUp/assets/109783402/6560c44c-6ff4-462b-947c-881280d86015)
+![스토리보드8](https://github.com/tongueEye/CatchUp/assets/109783402/20bb6997-55e5-4c56-9688-a0763006e07b)
+![스토리보드9](https://github.com/tongueEye/CatchUp/assets/109783402/3b844db7-01a7-49ba-b65e-7f8c8193fdce)
+![스토리보드10](https://github.com/tongueEye/CatchUp/assets/109783402/dea4c927-ae79-4883-82ba-9f76ae7c9f70)
+![스토리보드11](https://github.com/tongueEye/CatchUp/assets/109783402/5d2cc89e-5b77-4ca9-b33f-fa110279908c)
+![스토리보드12](https://github.com/tongueEye/CatchUp/assets/109783402/35f2daa3-c618-4b7a-b202-c90383b9012f)
+![스토리보드13](https://github.com/tongueEye/CatchUp/assets/109783402/2495f8bb-0ce5-4bb6-9f00-e71dfcce7160)
+![스토리보드14](https://github.com/tongueEye/CatchUp/assets/109783402/67c1925a-9243-4936-89d0-12f3e395c041)
+![스토리보드15](https://github.com/tongueEye/CatchUp/assets/109783402/52d64ee1-05ed-4e54-aafd-bce79001aa9b)
+![스토리보드16](https://github.com/tongueEye/CatchUp/assets/109783402/28b2420d-e201-4382-ab0d-0761271c885d)
+
 
 ## 🧶 시연영상
+
 [![Watch the video](https://img.youtube.com/vi/htCxOrBJ_y4/0.jpg)](https://youtu.be/htCxOrBJ_y4)
