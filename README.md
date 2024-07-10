@@ -151,6 +151,36 @@
 ![스토리보드15](https://github.com/tongueEye/CatchUp/assets/109783402/52d64ee1-05ed-4e54-aafd-bce79001aa9b)
 ![스토리보드16](https://github.com/tongueEye/CatchUp/assets/109783402/28b2420d-e201-4382-ab0d-0761271c885d)
 
+## 시연 예시
+1. 회원가입 / 로그인
+
+| ![img](https://imgur.com/VEUEMVF.gif) | ![img](https://imgur.com/Ymi8mdk.gif) |
+| --- | --- |
+
+2. CRUD (s3)
+
+| ![title](https://imgur.com/WgZwFQe.gif) | ![img](https://imgur.com/YGcGfW4.gif) |
+| --- | --- | 
+| - 게시판 등록 (s3 파일 비교) <br> - 게시판 비교 후 s3 비교  | - 글 작성하다 나갔을 경우 s3 비교 |
+
+3. 게시판 / 에러 페이지
+
+| ![title](https://imgur.com/B3rZSxN.gif)  | ![img](https://imgur.com/VuLGBok.gif) |
+| --- | --- | 
+| - 경로 잘못 입력했을 때 나오는 에러페이지 <br> - 홈으로 버튼 클릭 시 메인 페이지 이  | - 전체 메뉴 |
+
+4. 댓글 / 좋아요
+
+| ![title](https://imgur.com/0RaH2qS.gif)  | ![img](https://imgur.com/UgUHjhE.gif) |
+| --- | --- | 
+| - 게시글 삭  | - 게시글 좋아요 <br> - 댓글 등록 / 삭제 |
+
+5.  회원 / 관리자 마이페이지
+
+| ![title](https://imgur.com/dyxRDvw.gif)  | ![img](https://imgur.com/cehj9Bj.gif) |
+| --- | --- | 
+| - 프로필 수정 (사진 s3 저장) <br> - 급식 변경 (api 이용)  | - 관리자 로그인 시 마이페이지 <br> - 회원 관리 가능 |
+
 
 ## 🧶 시연영상
 
