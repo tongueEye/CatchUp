@@ -173,7 +173,7 @@
 
 | ![title](https://imgur.com/0RaH2qS.gif)  | ![img](https://imgur.com/UgUHjhE.gif) |
 | --- | --- | 
-| - 게시글 삭  | - 게시글 좋아요 <br> - 댓글 등록 / 삭제 |
+| - 게시글 삭제  | - 게시글 좋아요 <br> - 댓글 등록 / 삭제 |
 
 5.  회원 / 관리자 마이페이지
 
