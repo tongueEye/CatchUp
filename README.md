@@ -154,9 +154,10 @@
 ## 시연 예시
 
 0. 메인 페이지
+   
   ![main](https://github.com/tongueEye/CatchUp/assets/109783402/cc6f7224-75a9-4bbc-b3c2-a70380ef9921)
 
-2. 회원가입 / 로그인
+1. 회원가입 / 로그인
 
 | ![img](https://imgur.com/VEUEMVF.gif) | ![img](https://imgur.com/Ymi8mdk.gif) |
 | --- | --- |
